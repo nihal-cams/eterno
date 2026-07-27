@@ -11540,9 +11540,9 @@ body.sidebar-toggled footer.sticky-footer {
     border-radius: 10px;
     padding: 10px;
     position: absolute;
-    right: 80px;
+    right: 84px;
     z-index: 9;
-    top: -7px;
+    top: 25px;
 }
 #uploaded_thumbnail_img{
     width: 60px;

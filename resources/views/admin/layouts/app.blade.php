@@ -69,6 +69,12 @@
                     <span>Webinars</span></a>
             </li>
 
+            <li class="nav-item {{ request()->is('admin/resorts') || request()->is('admin/resorts/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('admin.resorts.index')}}">
+                    <i class="fa fa-list"></i>
+                    <span>Resorts</span></a>
+            </li>
+
             {{-- <li class="nav-item {{ request()->is('admin/quick_enquiry') || request()->is('admin/quick_enquiry/*') || request()->is('admin/contact_enquiry') || request()->is('admin/contact_enquiry/*') || request()->is('admin/career_enquiry') || request()->is('admin/career_enquiry/*') || request()->is('admin/contact') || request()->is('admin/contact/*') || request()->is('admin/application') || request()->is('admin/application/*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEnquiry" aria-expanded="false" aria-controls="collapseEnquiry">
                     <i class="fa fa-envelope"></i>

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\ResortStatus;
 
 return new class extends Migration
 {
@@ -13,7 +14,16 @@ return new class extends Migration
     {
         Schema::create('resorts', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('location');
+            $table->string('title');
+            $table->text('description');
+            $table->text('image');
+            $table->string('button_text');
+            $table->string('button_url');
+            $table->string('status')->default(ResortStatus::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

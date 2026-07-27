@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\WebinarController;
+use App\Http\Controllers\Admin\ResortController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('webinars', WebinarController::class);
-
+    Route::resource('resorts', ResortController::class);
 });
