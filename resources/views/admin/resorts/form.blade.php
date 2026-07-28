@@ -63,7 +63,7 @@
                                 name="image"
                                 accept="image/*"
                                 onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="customFile">
+                            <label class="custom-file-label" for="image">
                                 {{ $resort->image ?: 'Choose file' }}
                             </label>
                         </div>

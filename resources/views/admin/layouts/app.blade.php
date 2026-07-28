@@ -75,6 +75,12 @@
                     <span>Resorts</span></a>
             </li>
 
+            <li class="nav-item {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('admin.testimonials.index')}}">
+                    <i class="fa fa-list"></i>
+                    <span>Testimonials</span></a>
+            </li>
+
             {{-- <li class="nav-item {{ request()->is('admin/quick_enquiry') || request()->is('admin/quick_enquiry/*') || request()->is('admin/contact_enquiry') || request()->is('admin/contact_enquiry/*') || request()->is('admin/career_enquiry') || request()->is('admin/career_enquiry/*') || request()->is('admin/contact') || request()->is('admin/contact/*') || request()->is('admin/application') || request()->is('admin/application/*') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEnquiry" aria-expanded="false" aria-controls="collapseEnquiry">
                     <i class="fa fa-envelope"></i>

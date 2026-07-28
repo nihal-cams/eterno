@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\WebinarController;
 use App\Http\Controllers\Admin\ResortController;
+use App\Http\Controllers\Admin\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('webinars', WebinarController::class);
     Route::resource('resorts', ResortController::class);
+    Route::resource('testimonials', TestimonialController::class);
 });
