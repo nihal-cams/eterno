@@ -66,8 +66,8 @@
                 <div class="col-md-9">
                     @php
                         $class = match ($resort->status) {
-                            \App\Enums\ResortStatus::ACTIVE => 'success',
-                            \App\Enums\ResortStatus::INACTIVE => 'danger',
+                            \App\Enums\Status::ACTIVE => 'success',
+                            \App\Enums\Status::INACTIVE => 'danger',
                         };
                     @endphp
 

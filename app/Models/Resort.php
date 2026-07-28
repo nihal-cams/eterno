@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\ResortStatus;
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Resort extends Model
@@ -24,7 +24,7 @@ class Resort extends Model
     protected function casts(): array
     {
         return [
-            'status' => ResortStatus::class,
+            'status' => Status::class,
         ];
     }
 }

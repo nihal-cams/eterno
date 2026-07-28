@@ -63,12 +63,6 @@
             
             <!-- Nav Item - Tables -->
 
-            <li class="nav-item {{ request()->is('admin/webinars') || request()->is('admin/webinars/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('admin.webinars.index')}}">
-                    <i class="fa fa-list"></i>
-                    <span>Webinars</span></a>
-            </li>
-
             <li class="nav-item {{ request()->is('admin/resorts') || request()->is('admin/resorts/*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.resorts.index')}}">
                     <i class="fa fa-list"></i>

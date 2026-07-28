@@ -55,8 +55,8 @@
                 <div class="col-md-9">
                     @php
                         $class = match ($testimonial->status) {
-                            \App\Enums\TestimonialStatus::ACTIVE => 'success',
-                            \App\Enums\TestimonialStatus::INACTIVE => 'danger',
+                            \App\Enums\Status::ACTIVE => 'success',
+                            \App\Enums\Status::INACTIVE => 'danger',
                         };
                     @endphp
 

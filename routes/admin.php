@@ -33,7 +33,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::resource('webinars', WebinarController::class);
     Route::resource('resorts', ResortController::class);
     Route::resource('testimonials', TestimonialController::class);
 });

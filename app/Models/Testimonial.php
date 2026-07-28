@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\TestimonialStatus;
+use App\Enums\Status;
 
 class Testimonial extends Model
 {
@@ -20,7 +20,7 @@ class Testimonial extends Model
     protected function casts(): array
     {
         return [
-            'status' => TestimonialStatus::class,
+            'status' => Status::class,
         ];
     }
 

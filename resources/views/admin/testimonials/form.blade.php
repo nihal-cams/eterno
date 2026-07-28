@@ -2,7 +2,7 @@
 @section('title', ($testimonial->id ? 'Edit ' : 'Add ') . 'Testimonial')
 @section("content")
 
-@use(App\Enums\TestimonialStatus)
+@use(App\Enums\Status)
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -102,19 +102,19 @@
 
                     <div class="form-group col-6">
                         <label><strong>Status</strong></label>
-                        <input type="hidden" name="status" value="{{ TestimonialStatus::INACTIVE->value }}">
+                        <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
                         <div class="custom-control custom-switch">
                             <input
                                 type="checkbox"
                                 class="custom-control-input"
                                 id="status"
                                 name="status"
-                                value="{{ TestimonialStatus::ACTIVE->value }}"
-                                {{ old('status', $testimonial->status?->value ?? TestimonialStatus::ACTIVE->value) == TestimonialStatus::ACTIVE->value ? 'checked' : '' }}
+                                value="{{ Status::ACTIVE->value }}"
+                                {{ old('status', $testimonial->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
                             >
                             <label class="custom-control-label" for="status">
                                 <span id="status-text">
-                                    {{ old('status', $testimonial->status?->value ?? TestimonialStatus::ACTIVE->value) == TestimonialStatus::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    {{ old('status', $testimonial->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
                                 </span>
                             </label>
                         </div>

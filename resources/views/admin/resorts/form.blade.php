@@ -2,7 +2,7 @@
 @section('title', ($resort->id ? 'Edit ' : 'Add ') . 'Resort')
 @section("content")
 
-@use(App\Enums\ResortStatus)
+@use(App\Enums\Status)
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -108,19 +108,19 @@
 
                     <div class="form-group col-6">
                         <label><strong>Status</strong></label>
-                        <input type="hidden" name="status" value="{{ ResortStatus::INACTIVE->value }}">
+                        <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
                         <div class="custom-control custom-switch">
                             <input
                                 type="checkbox"
                                 class="custom-control-input"
                                 id="status"
                                 name="status"
-                                value="{{ ResortStatus::ACTIVE->value }}"
-                                {{ old('status', $resort->status?->value ?? ResortStatus::ACTIVE->value) == ResortStatus::ACTIVE->value ? 'checked' : '' }}
+                                value="{{ Status::ACTIVE->value }}"
+                                {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
                             >
                             <label class="custom-control-label" for="status">
                                 <span id="status-text">
-                                    {{ old('status', $resort->status?->value ?? ResortStatus::ACTIVE->value) == ResortStatus::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
                                 </span>
                             </label>
                         </div>

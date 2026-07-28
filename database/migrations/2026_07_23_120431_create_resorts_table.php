@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ResortStatus;
+use App\Enums\Status;
 
 return new class extends Migration
 {
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('image');
             $table->string('button_text');
             $table->string('button_url');
-            $table->string('status')->default(ResortStatus::ACTIVE->value);
+            $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
             $table->softDeletes();
         });

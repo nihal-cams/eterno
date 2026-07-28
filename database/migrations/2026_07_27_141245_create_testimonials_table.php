@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\TestimonialStatus;
+use App\Enums\Status;
 
 return new class extends Migration
 {
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('customer_place');
             $table->string('customer_image');
-            $table->string('status')->default(TestimonialStatus::ACTIVE->value);
+            $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Resort;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Enums\ResortStatus;
+use App\Enums\Status;
 use Illuminate\Validation\Rule;
 
 class ResortController extends Controller
@@ -29,8 +29,8 @@ class ResortController extends Controller
             })
             ->editColumn('status', function (Resort $resort) {
                 $class = match ($resort->status) {
-                    ResortStatus::ACTIVE => 'success',
-                    ResortStatus::INACTIVE => 'danger',
+                    Status::ACTIVE => 'success',
+                    Status::INACTIVE => 'danger',
                 };
 
                 return '<span class="badge badge-' . $class . '">'
@@ -83,7 +83,7 @@ class ResortController extends Controller
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(ResortStatus::class)],
+            'status' => ['required', Rule::enum(Status::class)],
         ]);
 
         $fileName = null;
@@ -129,7 +129,7 @@ class ResortController extends Controller
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(ResortStatus::class)],
+            'status' => ['required', Rule::enum(Status::class)],
         ]);
 
         $fileName = $resort->image;

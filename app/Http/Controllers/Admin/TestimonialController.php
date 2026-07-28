@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\ResortStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Testimonial;
 use App\Models\Resort;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Enums\TestimonialStatus;
+use App\Enums\Status;
 use Illuminate\Validation\Rule;
 
 class TestimonialController extends Controller
@@ -47,8 +46,8 @@ class TestimonialController extends Controller
             })
             ->editColumn('status', function (Testimonial $testimonial) {
                 $class = match ($testimonial->status) {
-                    TestimonialStatus::ACTIVE => 'success',
-                    TestimonialStatus::INACTIVE => 'danger',
+                    Status::ACTIVE => 'success',
+                    Status::INACTIVE => 'danger',
                 };
 
                 return '<span class="badge badge-' . $class . '">'
@@ -85,7 +84,7 @@ class TestimonialController extends Controller
     public function create()
     {
         $testimonial = new Testimonial();
-        $resorts = Resort::where('status', ResortStatus::ACTIVE)
+        $resorts = Resort::where('status', Status::ACTIVE)
         ->orderBy('id', 'DESC')
         ->pluck('name', 'id');
 
@@ -104,7 +103,7 @@ class TestimonialController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
             'customer_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(TestimonialStatus::class)],
+            'status' => ['required', Rule::enum(Status::class)],
         ],
         [
             'resort_id' => ['The resort field is required.'],
@@ -137,7 +136,7 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
-        $resorts = Resort::where('status', ResortStatus::ACTIVE)
+        $resorts = Resort::where('status', Status::ACTIVE)
         ->orderBy('id', 'DESC')
         ->pluck('name', 'id');
 
@@ -156,7 +155,7 @@ class TestimonialController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
             'customer_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(TestimonialStatus::class)],
+            'status' => ['required', Rule::enum(Status::class)],
         ]);
 
         $fileName = $testimonial->customer_image;
