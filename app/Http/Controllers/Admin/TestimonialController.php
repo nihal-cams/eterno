@@ -136,8 +136,7 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
-        $resorts = Resort::where('status', Status::ACTIVE)
-        ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('id', 'DESC')
         ->pluck('name', 'id');
 
         return view('admin.testimonials.form', compact('testimonial', 'resorts'));

@@ -155,6 +155,16 @@ class ResortController extends Controller
      */
     public function destroy(Resort $resort)
     {
+        if (
+            $resort->testimonials()->exists() ||
+            $resort->galleries()->exists()
+        ) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This resort cannot be deleted because it contains related data.',
+            ], 422);
+        }
+        
         $resort->delete();
 
         return response()->json(['status'=>'success', 'message'=>'Data deleted successfully!']);

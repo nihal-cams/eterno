@@ -65,14 +65,27 @@
 
             <li class="nav-item {{ request()->is('admin/resorts') || request()->is('admin/resorts/*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.resorts.index')}}">
-                    <i class="fa fa-list"></i>
+                    <i class="fa fa-building"></i>
                     <span>Resorts</span></a>
             </li>
 
             <li class="nav-item {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('admin.testimonials.index')}}">
-                    <i class="fa fa-list"></i>
+                    <i class="fa fa-quote-left"></i>
                     <span>Testimonials</span></a>
+            </li>
+
+            <li class="nav-item {{ request()->is('admin/gallery-categories') || request()->is('admin/gallery-categories/*') || request()->is('admin/galleries') || request()->is('admin/galleries/*') ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGallery" aria-expanded="false" aria-controls="collapseGallery">
+                    <i class="fa fa-image"></i>
+                    <span>Manage Gallery</span>
+                </a>
+                <div id="collapseGallery" class="collapse" aria-labelledby="headingGallery" data-parent="#accordionSidebar" style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('admin/gallery-categories') || request()->is('admin/gallery-categories/*') ? 'active' : '' }}" href="{{route('admin.gallery-categories.index')}}">Category</a>
+                        <a class="collapse-item {{ request()->is('admin/galleries') || request()->is('admin/galleries/*') ? 'active' : '' }}" href="{{route('admin.galleries.index')}}">Gallery</a>
+                    </div>
+                </div>
             </li>
 
             {{-- <li class="nav-item {{ request()->is('admin/quick_enquiry') || request()->is('admin/quick_enquiry/*') || request()->is('admin/contact_enquiry') || request()->is('admin/contact_enquiry/*') || request()->is('admin/career_enquiry') || request()->is('admin/career_enquiry/*') || request()->is('admin/contact') || request()->is('admin/contact/*') || request()->is('admin/application') || request()->is('admin/application/*') ? 'active' : '' }}">

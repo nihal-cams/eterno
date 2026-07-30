@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\WebinarController;
 use App\Http\Controllers\Admin\ResortController;
 use App\Http\Controllers\Admin\TestimonialController;
 
@@ -35,4 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('resorts', ResortController::class);
     Route::resource('testimonials', TestimonialController::class);
+    Route::resource('gallery-categories', GalleryCategoryController::class);
+    Route::resource('galleries', GalleryController::class);
 });

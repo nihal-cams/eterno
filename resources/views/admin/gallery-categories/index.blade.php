@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', 'Testimonials')
+@section('title', 'Gallery Categories')
 @section("content")
 
     <!-- Begin Page Content -->
@@ -8,11 +8,11 @@
             <!-- Page Heading -->
             <div class="col-6">
             <h1 class="h3 mb-2 text-gray-800">
-                Testimonials
+                Gallery Categories
             </h1>
             </div>
             <div class="col-6 text-right">
-                <a href="{{route('admin.testimonials.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
+                <a href="{{route('admin.gallery-categories.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
             </div>
         </div>
         <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
@@ -26,13 +26,10 @@
             <!--</div>-->
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="testimonial-table" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="gallery-category-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Resort</th>
-                                <th>Title</th>
-                                <th>Customer Image</th>
-                                <th>Customer Name</th>
+                                <th>Name</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -52,7 +49,7 @@
 @push('modal')      
 
     <!-- Delete Modal-->
-    <div class="modal fade" id="delete-testimonial-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="delete-gallery-category-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -64,7 +61,7 @@
                 </div>
                 <div class="modal-body">Are you sure you want to delete this data?</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-delete-testimonial "><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete-gallery-category "><i class="fa fa-trash"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
                 </div>
             </div>
@@ -113,18 +110,15 @@
 
    $(function() {
 
-    $('#testimonial-table').DataTable({
+    $('#gallery-category-table').DataTable({
 
          processing: true,
          serverSide: true,
 
-         ajax: '{{ route("admin.testimonials.index") }}',
+         ajax: '{{ route("admin.gallery-categories.index") }}',
 
          columns: [
-            { data: 'resort_name', name: 'resort_name' },
-            { data: 'title', name: 'title' },
-            { data: 'customer_image', name: 'customer_image' },
-            { data: 'customer_name', name: 'customer_name' },
+            { data: 'name', name: 'name' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 
@@ -134,9 +128,9 @@
      });
  
 
-     $('table').on('click','.testimonial-delete', function(e){
+     $('table').on('click','.gallery-category-delete', function(e){
         var href=$(this).data('href');
-            $('.btn-delete-testimonial').off().click(function() {
+            $('.btn-delete-gallery-category').off().click(function() {
 		      $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
                     type: 'DELETE',
@@ -144,12 +138,12 @@
                     dataType : 'JSON', 
                     url : href,
                     success: function(response){
-                        $('#delete-testimonial-modal').modal('hide');
-                        $('#testimonial-table').DataTable().ajax.reload();
+                        $('#delete-gallery-category-modal').modal('hide');
+                        $('#gallery-category-table').DataTable().ajax.reload();
                         toastr.success(response.message);
                     },
                     error: function (xhr) {
-                        $('#delete-testimonial-modal').modal('hide');
+                        $('#delete-gallery-category-modal').modal('hide');
                         toastr.error('Something went wrong.', 'Error');
                     }
               });

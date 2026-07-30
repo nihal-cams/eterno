@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal-body">Are you sure you want to delete this data?</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn_delete_resort "><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete-resort "><i class="fa fa-trash"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
                 </div>
             </div>
@@ -134,7 +134,7 @@
 
      $('table').on('click','.resort-delete', function(e){
         var href=$(this).data('href');
-            $('.btn_delete_resort').off().click(function() {
+            $('.btn-delete-resort').off().click(function() {
 		      $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
                     type: 'DELETE',

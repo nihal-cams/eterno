@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+use App\Enums\Status;
+
+use Illuminate\Database\Eloquent\Model;
+
+class GalleryCategory extends Model
+{
+    protected $fillable = [
+        'name',
+        'status',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => Status::class,
+        ];
+    }
+}
