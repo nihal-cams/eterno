@@ -28,6 +28,6 @@ class Gallery extends Model
 
     public function resort()
     {
-        return $this->belongsTo(Resort::class, 'gallery_category_id');
+        return $this->belongsTo(Resort::class, 'resort_id');
     }
 }

@@ -22,8 +22,8 @@
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Customer Image:</div>
                 <div class="col-md-9">
-                    @if($gallery->customer_image)
-                        <img src="{{ asset('uploads/galleries/' . $gallery->customer_image) }}"
+                    @if($gallery->image)
+                        <img src="{{ asset('uploads/galleries/' . $gallery->image) }}"
                             alt="{{ $gallery->name }}"
                             class="img-thumbnail"
                             width="250">

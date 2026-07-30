@@ -18,4 +18,9 @@ class GalleryCategory extends Model
             'status' => Status::class,
         ];
     }
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class);
+    }
 }

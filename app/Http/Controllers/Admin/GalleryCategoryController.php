@@ -115,6 +115,15 @@ class GalleryCategoryController extends Controller
      */
     public function destroy(GalleryCategory $galleryCategory)
     {
+        if (
+            $galleryCategory->galleries()->exists()
+        ) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This category cannot be deleted because it contains related data.',
+            ], 422);
+        }
+
         $galleryCategory->delete();
 
         return response()->json(['status'=>'success', 'message'=>'Data deleted successfully!']);
