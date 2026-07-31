@@ -10,10 +10,10 @@
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="{{ config('app.name', 'Laravel') }}">
     <meta name="description" content="">
-    
-    <title>@yield('title','') | Admin | {{ config('app.name', 'Laravel') }}</title>
+
+    <title>@yield('title', '') | Admin | {{ config('app.name', 'Laravel') }}</title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/favicon.ico') }}" />
     <meta property="og:image" content="{{ asset('img/kopan-logo.png') }}">
     <meta property="og:site_name" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,7 +22,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        
+
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -38,14 +38,16 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #fff;">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
+            style="background: #fff;">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
                 <!--<div class="sidebar-brand-icon rotate-n-15">-->
                 <!--    <i class="fas fa-laugh-wink"></i>-->
                 <!--</div>-->
-                <div class="sidebar-brand-text mx-3"><img class="" src="{{ asset('img/kopan-logo.png') }}" style="width: 150px;height: 30px;margin-left: 35px;margin-top: 20px;"></div>
+                <div class="sidebar-brand-text mx-3"><img class="" src="{{ asset('img/kopan-logo.png') }}"
+                        style="width: 150px;height: 30px;margin-left: 35px;margin-top: 20px;"></div>
             </a>
 
             <!-- Divider -->
@@ -53,56 +55,144 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('admin.home')}}">
+                <a class="nav-link" href="{{ route('admin.home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-            
+
             <!-- Nav Item - Tables -->
 
-            <li class="nav-item {{ request()->is('admin/webinars') || request()->is('admin/webinars/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('admin.webinars.index')}}">
+            <li
+                class="nav-item {{ request()->is('admin/webinars') || request()->is('admin/webinars/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.webinars.index') }}">
                     <i class="fa fa-list"></i>
                     <span>Webinars</span></a>
             </li>
 
-            {{-- <li class="nav-item {{ request()->is('admin/quick_enquiry') || request()->is('admin/quick_enquiry/*') || request()->is('admin/contact_enquiry') || request()->is('admin/contact_enquiry/*') || request()->is('admin/career_enquiry') || request()->is('admin/career_enquiry/*') || request()->is('admin/contact') || request()->is('admin/contact/*') || request()->is('admin/application') || request()->is('admin/application/*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEnquiry" aria-expanded="false" aria-controls="collapseEnquiry">
-                    <i class="fa fa-envelope"></i>
-                    <span>Enquiry</span>
+
+
+            <li
+                class="nav-item {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'active' : '' }}">
+
+                <a class="nav-link {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? '' : 'collapsed' }}"
+                    href="#" data-toggle="collapse" data-target="#collapseAbout"
+                    aria-expanded="{{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'true' : 'false' }}"
+                    aria-controls="collapseAbout">
+
+                    <i class="fa fa-info-circle"></i>
+                    <span>About</span>
                 </a>
-                <div id="collapseEnquiry" class="collapse" aria-labelledby="headingEnquiry" data-parent="#accordionSidebar" style="">
+
+                <div id="collapseAbout"
+                    class="collapse {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'show' : '' }}"
+                    data-parent="#accordionSidebar">
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/quick_enquiry') || request()->is('admin/quick_enquiry/*') ? 'active' : '' }}" href="{{route('admin.quick_enquiry')}}">Quick Enquiry</a>
-                        <a class="collapse-item {{ request()->is('admin/contact_enquiry') || request()->is('admin/contact_enquiry/*') ? 'active' : '' }}" href="{{route('admin.contact_enquiry')}}">Contact Enquiry</a>
-                        <a class="collapse-item {{ request()->is('admin/career_enquiry') || request()->is('admin/career_enquiry/*') ? 'active' : '' }}" href="{{route('admin.career_enquiry')}}">Career Enquiry</a>
+
+                        <a class="collapse-item {{ request()->is('admin/about') ? 'active' : '' }}"
+                            href="{{ route('admin.about.edit') }}">
+                            Banner / About / CTA
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/philosophies*') ? 'active' : '' }}"
+                            href="{{ route('admin.philosophies.index') }}">
+                            Philosophy
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/core-values*') ? 'active' : '' }}"
+                            href="{{ route('admin.core-values.index') }}">
+                            Core Values
+                        </a>
+
                     </div>
+
                 </div>
-            </li> --}}
-            
-            {{-- <li class="nav-item {{ request()->is('admin/contact') || request()->is('admin/contact/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('contact.index')}}">
-                    <i class="fa fa-envelope"></i>
-                    <span>Contact Enquiry</span></a>
+
             </li>
-             Nav Item - Pages Collapse Menu 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+
+
+            <li
+                class="nav-item {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'active' : '' }}">
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExperience">
+
+                    <i class="fa fa-map"></i>
+
+                    <span>Experiences</span>
+
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+
+                <div id="collapseExperience"
+                    class="collapse {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'show' : '' }}"
+                    data-parent="#accordionSidebar">
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+
+                        <a class="collapse-item" href="{{ route('admin.experiences.edit') }}">
+
+                            Experience Page
+
+                        </a>
+
+                        <a class="collapse-item" href="{{ route('admin.experience-items.index') }}">
+
+                            Experience Items
+
+                        </a>
+
+
+
                     </div>
+
                 </div>
-            </li> --}}
+
+            </li>
+
+            {{--  <li class="nav-item {{ request()->is('admin/contact-page*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.contact-page.edit') }}"> <i class="fa fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li>  --}}
+
+
+            <li
+                class="nav-item {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'active' : '' }}">
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contactMenu"
+                    aria-expanded="{{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'true' : 'false' }}">
+
+                    <i class="fa fa-envelope"></i>
+                    <span>Contact</span>
+
+                </a>
+
+                <div id="contactMenu"
+                    class="collapse {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'show' : '' }}">
+
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item {{ request()->is('admin/contact') ? 'active' : '' }}"
+                            href="{{ route('admin.contact-page.edit') }}">
+                            Contact Page
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/contact-enquiry*') ? 'active' : '' }}"
+                            href="{{ route('admin.contact-enquiry.index') }}">
+                            Contact enquiries
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -165,14 +255,15 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('img/undraw_profile.svg') }}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -185,7 +276,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                @yield("content")
+                @yield('content')
                 <!-- /.container-fluid -->
 
             </div>
@@ -226,20 +317,21 @@
                 <div class="modal-body">Are you sure you want to logout?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#" onclick="event.preventDefault();
+                    <a class="btn btn-primary" href="#"
+                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
-                    
+
                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
-                                    
+
                 </div>
             </div>
         </div>
     </div>
-    
+
     @stack('modal')
-    
+
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
@@ -253,7 +345,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-    
+
     @stack('script')
 
 </body>
