@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', ($resort->id ? 'Edit ' : 'Add ') . 'Resort')
+@section('title', ($welcomeSection->id ? 'Edit ' : 'Add ') . 'Welcome')
 @section("content")
 
 @use(App\Enums\Status)
@@ -9,67 +9,75 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $resort->id ? 'Edit ' : 'Add ' }} Resort
+            Welcome
         </h1>
         
-        <form method="POST" action="{{ $resort->id ? route('admin.resorts.update', $resort) : route('admin.resorts.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.welcome-section.update') }}" enctype="multipart/form-data">
         @csrf
-        {{ $resort->id ? method_field('PUT') : '' }}
+        {{ method_field('PUT') }}
         <div class="card shadow mb-4">
             <div class="card-body">
                 
-                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Resort</h3> -->
+                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Welcome</h3> -->
                 <div class="row">
-
-                    <div class="form-group col-md-6">
-                        <label><strong>Name <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="name"
-                            class="form-control"
-                            value="{{ old('name', $resort->name) }}">
-                        @error('name')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label><strong>Location <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="location"
-                            class="form-control"
-                            value="{{ old('location', $resort->location) }}">
-                        @error('location')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
 
                     <div class="form-group col-md-6">
                         <label><strong>Title <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="title"
                             class="form-control"
-                            value="{{ old('title', $resort->title) }}">
+                            value="{{ old('title', $welcomeSection->title) }}">
                         @error('title')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Description <span class="text-danger">*</span></strong></label>
+                        <textarea name="description"
+                                rows="3"
+                                class="form-control">{{ old('description', $welcomeSection->description) }}</textarea>
+                        @error('description')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label><strong>Left Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"
-                                id="image"
-                                name="image"
+                                id="left_image"
+                                name="left_image"
                                 accept="image/*"
-                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="image">
-                                {{ $resort->image ?: 'Choose file' }}
+                                onchange="document.getElementById('left_uploaded_img').src = window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="left_image">
+                                {{ $welcomeSection->left_image ?: 'Choose file' }}
                             </label>
                         </div>
-                        <img id="uploaded_img"
-                            src="{{ $resort->image ? asset('uploads/resorts/'.$resort->image) : asset('img/upload_image.png') }}">
-                        @error('image')
+                        <img id="left_uploaded_img" class="uploaded-img"
+                            src="{{ $welcomeSection->left_image ? asset('uploads/welcome-sections/'.$welcomeSection->left_image) : asset('img/upload_image.png') }}">
+                        @error('left_image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label><strong>Right Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <div class="custom-file mb-3">
+                            <input type="file"
+                                class="custom-file-input"
+                                id="right_image"
+                                name="right_image"
+                                accept="image/*"
+                                onchange="document.getElementById('right_uploaded_img').src = window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="right_image">
+                                {{ $welcomeSection->right_image ?: 'Choose file' }}
+                            </label>
+                        </div>
+                        <img id="right_uploaded_img" class="uploaded-img"
+                            src="{{ $welcomeSection->right_image ? asset('uploads/welcome-sections/'.$welcomeSection->right_image) : asset('img/upload_image.png') }}">
+                        @error('right_image')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -79,7 +87,7 @@
                         <input type="text"
                             name="button_text"
                             class="form-control"
-                            value="{{ old('button_text', $resort->button_text) }}">
+                            value="{{ old('button_text', $welcomeSection->button_text) }}">
                         @error('button_text')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -90,18 +98,8 @@
                         <input type="text"
                             name="button_url"
                             class="form-control"
-                            value="{{ old('button_url', $resort->button_url) }}">
+                            value="{{ old('button_url', $welcomeSection->button_url) }}">
                         @error('button_url')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label><strong>Description <span class="text-danger">*</span></strong></label>
-                        <textarea name="description"
-                                rows="3"
-                                class="form-control">{{ old('description', $resort->description) }}</textarea>
-                        @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -116,11 +114,11 @@
                                 id="status"
                                 name="status"
                                 value="{{ Status::ACTIVE->value }}"
-                                {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                {{ old('status', $welcomeSection->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
                             >
                             <label class="custom-control-label" for="status">
                                 <span id="status-text">
-                                    {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    {{ old('status', $welcomeSection->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
                                 </span>
                             </label>
                         </div>
@@ -132,8 +130,8 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="form-group col-6">
-                    <button type="submit" class="btn btn-success mr-3">{{ $resort->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.resorts.index') }}">Cancel</a>
+                    <button type="submit" class="btn btn-success mr-3">Update</button>
+                    <a class="btn btn-secondary ml-3" href="{{ route('admin.welcome-section.edit') }}">Cancel</a>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ResortController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\WelcomeSectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
     Route::resource('galleries', GalleryController::class);
+    Route::resource('offers', OfferController::class);
+    Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
+            ->name('welcome-section.edit');
+    Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
+        ->name('welcome-section.update');
 });

@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', ($testimonial->id ? 'Edit ' : 'Add ') . 'Testimonial')
+@section('title', ($offer->id ? 'Edit ' : 'Add ') . 'Offer')
 @section("content")
 
 @use(App\Enums\Status)
@@ -9,16 +9,16 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $testimonial->id ? 'Edit ' : 'Add ' }} Testimonial
+            {{ $offer->id ? 'Edit ' : 'Add ' }} Offer
         </h1>
         
-        <form method="POST" action="{{ $testimonial->id ? route('admin.testimonials.update', $testimonial) : route('admin.testimonials.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ $offer->id ? route('admin.offers.update', $offer) : route('admin.offers.store') }}" enctype="multipart/form-data">
         @csrf
-        {{ $testimonial->id ? method_field('PUT') : '' }}
+        {{ $offer->id ? method_field('PUT') : '' }}
         <div class="card shadow mb-4">
             <div class="card-body">
                 
-                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Testimonial</h3> -->
+                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Offer</h3> -->
                 <div class="row">
 
                     <div class="form-group col-md-6">
@@ -27,7 +27,7 @@
                             <option value="">-- Select Resort --</option>
                             @foreach ($resorts as $id => $name)
                                 <option value="{{ $id }}"
-                                    {{ old('resort_id', $testimonial->resort_id ?? '') == $id ? 'selected' : '' }}>
+                                    {{ old('resort_id', $offer->resort_id ?? '') == $id ? 'selected' : '' }}>
                                     {{ $name }}
                                 </option>
                             @endforeach
@@ -38,68 +38,68 @@
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <div class="custom-file mb-3">
+                            <input type="file"
+                                class="custom-file-input"
+                                id="image"
+                                name="image"
+                                accept="image/*"
+                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="image">
+                                {{ $offer->image ?: 'Choose file' }}
+                            </label>
+                        </div>
+                        <img id="uploaded_img"
+                            src="{{ $offer->image ? asset('uploads/offers/'.$offer->image) : asset('img/upload_image.png') }}">
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <label><strong>Title <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="title"
                             class="form-control"
-                            value="{{ old('title', $testimonial->title) }}">
+                            value="{{ old('title', $offer->title) }}">
                         @error('title')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Content <span class="text-danger">*</span></strong></label>
-                        <textarea name="content"
+                        <label><strong>Description <span class="text-danger">*</span></strong></label>
+                        <textarea name="description"
                                 rows="3"
-                                class="form-control">{{ old('content', $testimonial->content) }}</textarea>
-                        @error('content')
+                                class="form-control">{{ old('description', $offer->description) }}</textarea>
+                        @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Customer Name <span class="text-danger">*</span></strong></label>
+                        <label><strong>Button Text <span class="text-danger">*</span></strong></label>
                         <input type="text"
-                            name="customer_name"
+                            name="button_text"
                             class="form-control"
-                            value="{{ old('customer_name', $testimonial->customer_name) }}">
-                        @error('customer_name')
+                            value="{{ old('button_text', $offer->button_text) }}">
+                        @error('button_text')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Customer Place <span class="text-danger">*</span></strong></label>
+                        <label><strong>Button URL <span class="text-danger">*</span></strong></label>
                         <input type="text"
-                            name="customer_place"
+                            name="button_url"
                             class="form-control"
-                            value="{{ old('customer_place', $testimonial->customer_place) }}">
-                        @error('customer_place')
+                            value="{{ old('button_url', $offer->button_url) }}">
+                        @error('button_url')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-
-                    <div class="form-group col-md-6">
-                        <label><strong>Customer Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
-                        <div class="custom-file mb-3">
-                            <input type="file"
-                                class="custom-file-input"
-                                id="customer_image"
-                                name="customer_image"
-                                accept="image/*"
-                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="customer_image">
-                                {{ $testimonial->customer_image ?: 'Choose file' }}
-                            </label>
-                        </div>
-                        <img id="uploaded_img"
-                            src="{{ $testimonial->customer_image ? asset('uploads/testimonials/'.$testimonial->customer_image) : asset('img/upload_image.png') }}">
-                        @error('customer_image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
+                    
                     <div class="form-group col-6">
                         <label><strong>Status</strong></label>
                         <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
@@ -110,11 +110,11 @@
                                 id="status"
                                 name="status"
                                 value="{{ Status::ACTIVE->value }}"
-                                {{ old('status', $testimonial->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                {{ old('status', $offer->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
                             >
                             <label class="custom-control-label" for="status">
                                 <span id="status-text">
-                                    {{ old('status', $testimonial->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    {{ old('status', $offer->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
                                 </span>
                             </label>
                         </div>
@@ -126,8 +126,8 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="form-group col-6">
-                    <button type="submit" class="btn btn-success mr-3">{{ $testimonial->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.testimonials.index') }}">Cancel</a>
+                    <button type="submit" class="btn btn-success mr-3">{{ $offer->id ? 'Update' : 'Save' }}</button>
+                    <a class="btn btn-secondary ml-3" href="{{ route('admin.offers.index') }}">Cancel</a>
                     </div>
                 </div>
             </div>
