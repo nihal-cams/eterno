@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', 'Webinars')
+@section('title', 'Gallery Categories')
 @section("content")
 
     <!-- Begin Page Content -->
@@ -8,11 +8,11 @@
             <!-- Page Heading -->
             <div class="col-6">
             <h1 class="h3 mb-2 text-gray-800">
-                Webinars
+                Gallery Categories
             </h1>
             </div>
             <div class="col-6 text-right">
-                <a href="{{route('admin.webinars.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
+                <a href="{{route('admin.gallery-categories.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
             </div>
         </div>
         <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
@@ -26,14 +26,10 @@
             <!--</div>-->
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="webinar-table" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="gallery-category-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Duration</th>
-                                <th>Capacity</th>
+                                <th>Name</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -53,7 +49,7 @@
 @push('modal')      
 
     <!-- Delete Modal-->
-    <div class="modal fade" id="delete-webinar-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="delete-gallery-category-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -65,7 +61,7 @@
                 </div>
                 <div class="modal-body">Are you sure you want to delete this data?</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn_delete_webinar "><i class="fa fa-trash"></i> Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete-gallery-category "><i class="fa fa-trash"></i> Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                
                 </div>
             </div>
@@ -114,20 +110,15 @@
 
    $(function() {
 
-    $('#webinar-table').DataTable({
+    $('#gallery-category-table').DataTable({
 
          processing: true,
          serverSide: true,
 
-         ajax: '{{ route("admin.webinars.index") }}',
+         ajax: '{{ route("admin.gallery-categories.index") }}',
 
          columns: [
-
-            { data: 'title', name: 'title' },
-            { data: 'date', name: 'date' },
-            { data: 'time', name: 'time' },
-            { data: 'duration', name: 'duration' },
-            { data: 'capacity', name: 'capacity' },
+            { data: 'name', name: 'name' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 
@@ -137,9 +128,9 @@
      });
  
 
-     $('table').on('click','.webinar-delete', function(e){
+     $('table').on('click','.gallery-category-delete', function(e){
         var href=$(this).data('href');
-            $('.btn_delete_webinar').off().click(function() {
+            $('.btn-delete-gallery-category').off().click(function() {
 		      $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}, 
                     type: 'DELETE',
@@ -147,12 +138,12 @@
                     dataType : 'JSON', 
                     url : href,
                     success: function(response){
-                        $('#delete-webinar-modal').modal('hide');
-                        $('#webinar-table').DataTable().ajax.reload();
+                        $('#delete-gallery-category-modal').modal('hide');
+                        $('#gallery-category-table').DataTable().ajax.reload();
                         toastr.success(response.message);
                     },
                     error: function (xhr) {
-                        $('#delete-webinar-modal').modal('hide');
+                        $('#delete-gallery-category-modal').modal('hide');
                         toastr.error('Something went wrong.', 'Error');
                     }
               });

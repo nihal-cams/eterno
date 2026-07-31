@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\WebinarStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,18 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resorts', function (Blueprint $table) {
+        Schema::create('gallery_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('location');
-            $table->string('title');
-            $table->text('description');
-            $table->text('image');
-            $table->string('button_text');
-            $table->string('button_url');
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resorts');
+        Schema::dropIfExists('gallery_categories');
     }
 };

@@ -4,15 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\Status;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Resort extends Model
+class Offer extends Model
 {
-    use SoftDeletes;
-    
     protected $fillable = [
-        'name',
-        'location',
+        'resort_id',
         'title',
         'description',
         'image',
@@ -28,13 +24,8 @@ class Resort extends Model
         ];
     }
 
-    public function testimonials()
+    public function resort()
     {
-        return $this->hasMany(Testimonial::class);
-    }
-
-    public function galleries()
-    {
-        return $this->hasMany(Gallery::class);
+        return $this->belongsTo(Resort::class);
     }
 }

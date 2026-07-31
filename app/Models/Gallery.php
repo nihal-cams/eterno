@@ -1,19 +1,16 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
 use App\Enums\Status;
 
-class Testimonial extends Model
+use Illuminate\Database\Eloquent\Model;
+
+class Gallery extends Model
 {
     protected $fillable = [
         'resort_id',
-        'customer_name',
-        'customer_place',
-        'customer_image',
-        'title',
-        'content',
+        'gallery_category_id',
+        'image',
         'status',
     ];
 
@@ -24,8 +21,13 @@ class Testimonial extends Model
         ];
     }
 
+    public function galleryCategory()
+    {
+        return $this->belongsTo(GalleryCategory::class, 'gallery_category_id');
+    }
+
     public function resort()
     {
-        return $this->belongsTo(Resort::class);
+        return $this->belongsTo(Resort::class, 'resort_id');
     }
 }

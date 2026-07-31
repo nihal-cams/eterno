@@ -1,23 +1,14 @@
 <?php
 
 namespace App\Models;
+use App\Enums\Status;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Status;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Resort extends Model
+class GalleryCategory extends Model
 {
-    use SoftDeletes;
-    
     protected $fillable = [
         'name',
-        'location',
-        'title',
-        'description',
-        'image',
-        'button_text',
-        'button_url',
         'status',
     ];
 
@@ -26,11 +17,6 @@ class Resort extends Model
         return [
             'status' => Status::class,
         ];
-    }
-
-    public function testimonials()
-    {
-        return $this->hasMany(Testimonial::class);
     }
 
     public function galleries()

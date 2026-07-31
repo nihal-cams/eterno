@@ -4,12 +4,20 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ContactEnquiryController;
 use App\Http\Controllers\Admin\ContactPageController;
 use App\Http\Controllers\Admin\CoreValueController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ExperiencePageController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ResortController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\WelcomeSectionController;
+use App\Http\Controllers\Admin\VideoSectionController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PhilosophyController;
 use App\Http\Controllers\Admin\WebinarController;
 
@@ -38,12 +46,22 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::resource('resorts', ResortController::class);
+    Route::resource('testimonials', TestimonialController::class);
+    Route::resource('gallery-categories', GalleryCategoryController::class);
+    Route::resource('galleries', GalleryController::class);
+    Route::resource('offers', OfferController::class);
+    Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
+        ->name('welcome-section.edit');
+    Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
+        ->name('welcome-section.update');
+    Route::get('video-section', [VideoSectionController::class, 'edit'])
+        ->name('video-section.edit');
+    Route::put('video-section', [VideoSectionController::class, 'update'])
+        ->name('video-section.update');
+    Route::resource('banners', BannerController::class);
+
     Route::resource('webinars', WebinarController::class);
-
-
-
-
-
 
 
     /*
@@ -112,26 +130,26 @@ Route::middleware('auth')->group(function () {
         'experience-items',
         ExperienceController::class
     );
-});
 
-/*
+
+    /*
 |--------------------------------------------------------------------------
 | Contact Page (Singleton)
 |--------------------------------------------------------------------------
 */
 
-Route::get(
-    'contact-page',
-    [ContactPageController::class, 'edit']
-)->name('contact-page.edit');
+    Route::get(
+        'contact-page',
+        [ContactPageController::class, 'edit']
+    )->name('contact-page.edit');
 
-Route::put(
-    'contact-page',
-    [ContactPageController::class, 'update']
-)->name('contact-page.update');
+    Route::put(
+        'contact-page',
+        [ContactPageController::class, 'update']
+    )->name('contact-page.update');
 
-
-Route::resource(
-    'contact-enquiry',
-    ContactEnquiryController::class
-)->only(['index', 'show', 'destroy']);
+    Route::resource(
+        'contact-enquiry',
+        ContactEnquiryController::class
+    )->only(['index', 'show', 'destroy']);
+});
