@@ -19,7 +19,6 @@ use App\Http\Controllers\Admin\WelcomeSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PhilosophyController;
-use App\Http\Controllers\Admin\WebinarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::put('video-section', [VideoSectionController::class, 'update'])
         ->name('video-section.update');
     Route::resource('banners', BannerController::class);
-
-    Route::resource('webinars', WebinarController::class);
 
 
     /*
