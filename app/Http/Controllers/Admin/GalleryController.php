@@ -58,7 +58,7 @@ class GalleryController extends Controller
             ->editColumn('image', function (Gallery $gallery) {
                 $image_url = $gallery->image 
                     ? asset('uploads/galleries/' . $gallery->image) 
-                    : asset('img/blank-profile-pic.png');
+                    : asset('img/blank-pic.png');
                 return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
             })
             ->editColumn('status', function (Gallery $gallery) {

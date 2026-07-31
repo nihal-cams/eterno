@@ -41,7 +41,7 @@ class TestimonialController extends Controller
             ->editColumn('customer_image', function (Testimonial $testimonial) {
                 $customer_image_url = $testimonial->customer_image 
                     ? asset('uploads/testimonials/' . $testimonial->customer_image) 
-                    : asset('img/blank-profile-pic.png');
+                    : asset('img/blank-pic.png');
                 return '<img src="' . $customer_image_url . '" width="100" height="90" class="img-thumbnail" />';
             })
             ->editColumn('status', function (Testimonial $testimonial) {

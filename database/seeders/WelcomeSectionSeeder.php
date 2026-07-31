@@ -19,8 +19,8 @@ class WelcomeSectionSeeder extends Seeder
             [
                 'title' => 'Eterno',
                 'description' => 'At Eterno Hotels & Resorts, we believe that every destination has a story waiting to be experienced. Our properties are thoughtfully designed to blend luxury with the natural beauty of their surroundings, offering guests immersive stays that create lasting memories.',
-                'left_image'  => 'welcome-left.jpg',
-                'right_image' => 'welcome-right.jpg',
+                'left_image'  => 'home-welcome-left.jpg',
+                'right_image' => 'home-welcome-right.jpg',
                 'button_text' => 'Learn More',
                 'button_url'  => 'https://eterno.com/about',
                 'status' => Status::ACTIVE->value,

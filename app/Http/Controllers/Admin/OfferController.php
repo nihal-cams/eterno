@@ -41,7 +41,7 @@ class OfferController extends Controller
             ->editColumn('image', function (Offer $offer) {
                 $image_url = $offer->image 
                     ? asset('uploads/offers/' . $offer->image) 
-                    : asset('img/blank-profile-pic.png');
+                    : asset('img/blank-pic.png');
                 return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
             })
             ->editColumn('status', function (Offer $offer) {

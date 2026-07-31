@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Resort;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,9 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $learnerCount = 0;
-        $trainerCount = 0;
+        $resortCount = Resort::count();
 
-        return view('admin.home')->with(['learnerCount'=>$learnerCount, 'trainerCount'=>$trainerCount]);
+        return view('admin.home')->with(['resortCount'=>$resortCount]);
     }
 }

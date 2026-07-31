@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ResortController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\WelcomeSectionController;
+use App\Http\Controllers\Admin\VideoSectionController;
+use App\Http\Controllers\Admin\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +47,9 @@ Route::middleware('auth')->group(function () {
             ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
         ->name('welcome-section.update');
+    Route::get('video-section', [VideoSectionController::class, 'edit'])
+            ->name('video-section.edit');
+    Route::put('video-section', [VideoSectionController::class, 'update'])
+        ->name('video-section.update');
+    Route::resource('banners', BannerController::class);
 });
