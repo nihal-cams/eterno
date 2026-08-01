@@ -7,7 +7,7 @@ use App\Models\Banner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class GalleryBannerSeerder extends Seeder
+class OfferBannerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,12 @@ class GalleryBannerSeerder extends Seeder
     public function run(): void
     {
         Banner::updateOrCreate(
-            ['id' => 2],
+            ['id' => 1],
             [
-                'type' => 3,
-                'title' => 'Every Picture Tells a Story',
-                'description' => 'Explore breathtaking moments from our resorts through carefully curated imagery',
-                'image'  => 'gallery-banner.jpg',
+                'type' => 2,
+                'title' => 'Exclusive Offers Await',
+                'description' => 'Discover limited-time offers designed to make your getaway even more memorable',
+                'image'  => 'offer-banner.jpg',
                 'status' => Status::ACTIVE->value,
             ]
         );

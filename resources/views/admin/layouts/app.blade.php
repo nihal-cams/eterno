@@ -73,6 +73,7 @@
                                 request()->is('admin/experience-items/1*') ||
                                 request()->is('admin/video-section*') ||
                                 request()->is('admin/offers/1*') ||
+                                request()->is('admin/offer-intro*') ||
                                 request()->is('admin/galleries/1*') ||
                                 request()->is('admin/testimonials*');
             @endphp
@@ -110,10 +111,35 @@
                             Video
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/offers/1*') ? 'active' : '' }}"
-                            href="{{ route('admin.offers.index', 1) }}">
-                            Offers
+                        @php
+                            $homeOfferMenuOpen =
+                                request()->is('admin/offers/1*') ||
+                                request()->is('admin/offer-intro*');
+                        @endphp
+
+                        <a class="collapse-item {{ $homeOfferMenuOpen ? 'active' : '' }}"
+                            href="#" data-toggle="collapse" data-target="#collapseOffers"
+                            aria-expanded="{{ $homeOfferMenuOpen ? 'true' : 'false' }}"
+                            aria-controls="collapseOffers">
+                            Manage Offers
                         </a>
+
+                        <div id="collapseOffers"
+                            class="collapse {{ $homeOfferMenuOpen ? 'show' : '' }}">
+
+                            <div class="bg-light py-2 collapse-inner rounded">
+                                <a class="collapse-item {{ request()->is('admin/offer-intro*') ? 'active' : '' }}"
+                                    href="{{ route('admin.offer-intro.edit') }}">
+                                    Intro
+                                </a>
+                                
+                                <a class="collapse-item {{ request()->is('admin/offers/1*') ? 'active' : '' }}"
+                                    href="{{ route('admin.offers.index', 1) }}">
+                                    Offers
+                                </a>
+                            </div>
+                        </div>
+
                         {{--
                         <a class="collapse-item {{ request()->is('admin/experiences/1*') ? 'active' : '' }}"
                             href="{{ route('admin.experiences.edit', 1) }}">
@@ -128,7 +154,7 @@
 
 
                         {{-- Experiences Dropdown --}}
-                        <a class="collapse-item {{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'active' : 'collapsed' }}"
+                        <a class="collapse-item {{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'active' : '' }}"
                             href="#" data-toggle="collapse" data-target="#collapseExperiences"
                             aria-expanded="{{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'true' : 'false' }}"
                             aria-controls="collapseExperiences">

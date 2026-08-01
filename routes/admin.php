@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\WelcomeSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\OfferIntroController;
 use App\Http\Controllers\Admin\PhilosophyController;
 
 /*
@@ -70,7 +71,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
         Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
     });
-    Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
+    Route::get('offer-intro', [OfferIntroController::class, 'edit'])
+        ->name('offer-intro.edit');
+    Route::put('offer-intro', [OfferIntroController::class, 'update'])
+        ->name('offer-intro.update');
+    Route::get('welcome-section', [OfferIntroController::class, 'edit'])
         ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
         ->name('welcome-section.update');
