@@ -68,7 +68,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -81,6 +81,45 @@
                             @if ($page->banner_image)
                                 <img src="{{ asset($page->banner_image) }}" width="180" class="img-thumbnail">
                             @endif
+
+                        </div>  --}}
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Banner Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
+                                    accept="image/*"
+                                    onchange="
+                                        document.getElementById('uploaded_banner_img').src =
+                                        window.URL.createObjectURL(this.files[0]);
+
+                                        document.getElementById('banner-image-label').innerHTML =
+                                        this.files[0].name;
+                                    ">
+
+                                <label class="custom-file-label" id="banner-image-label" for="banner_image">
+                                    {{ $page->banner_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_banner_img"
+                                src="{{ $page->banner_image ? asset($page->banner_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('banner_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -171,7 +210,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -184,6 +223,45 @@
                             @if ($page->form_image)
                                 <img src="{{ asset($page->form_image) }}" width="180" class="img-thumbnail">
                             @endif
+
+                        </div>  --}}
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Form Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="form_image" name="form_image"
+                                    accept="image/*"
+                                    onchange="
+                                    document.getElementById('uploaded_form_img').src =
+                                    window.URL.createObjectURL(this.files[0]);
+
+                                    document.getElementById('form-image-label').innerHTML =
+                                    this.files[0].name;
+                                ">
+
+                                <label class="custom-file-label" id="form-image-label" for="form_image">
+                                    {{ $page->form_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_form_img"
+                                src="{{ $page->form_image ? asset($page->form_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('form_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -290,3 +368,12 @@
     </div>
 
 @endsection
+@push('script')
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+@endpush

@@ -59,7 +59,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -77,6 +77,45 @@
                                 @endif
 
                             </div>
+
+                        </div>  --}}
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Banner Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
+                                    accept="image/*"
+                                    onchange="
+                document.getElementById('uploaded_banner_img').src =
+                window.URL.createObjectURL(this.files[0]);
+
+                document.getElementById('banner-image-label').innerHTML =
+                this.files[0].name;
+            ">
+
+                                <label class="custom-file-label" id="banner-image-label" for="banner_image">
+                                    {{ $experiencePage->banner_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_banner_img"
+                                src="{{ $experiencePage->banner_image ? asset($experiencePage->banner_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('banner_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -177,3 +216,14 @@
     </div>
 
 @endsection
+
+
+@push('script')
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+@endpush

@@ -31,6 +31,33 @@ class PhilosophyController extends Controller
 
             return $dataTables->eloquent($query)
 
+                // ->editColumn('icon_image', function (AboutPhilosophy $philosophy) {
+
+                //     if (!$philosophy->icon_image) {
+                //         return '-';
+                //     }
+
+                //     return '<img src="' . asset($philosophy->icon_image) . '"
+                //                  width="50"
+                //                  height="50"
+                //                  class="img-thumbnail">';
+                // })
+
+                // ->editColumn('status', function (AboutPhilosophy $philosophy) {
+
+                //     $class = match ($philosophy->status) {
+
+                //         AboutStatus::ACTIVE => 'success',
+
+                //         AboutStatus::INACTIVE => 'secondary',
+                //     };
+
+                //     return '<span class="badge badge-' . $class . '">'
+                //         . $philosophy->status->label()
+                //         . '</span>';
+                // })
+
+
                 ->editColumn('icon_image', function (AboutPhilosophy $philosophy) {
 
                     if (!$philosophy->icon_image) {
@@ -38,9 +65,10 @@ class PhilosophyController extends Controller
                     }
 
                     return '<img src="' . asset($philosophy->icon_image) . '"
-                                 width="50"
-                                 height="50"
-                                 class="img-thumbnail">';
+                width="50"
+                height="50"
+                class="img-thumbnail"
+                style="object-fit: contain;">';
                 })
 
                 ->editColumn('status', function (AboutPhilosophy $philosophy) {

@@ -4,6 +4,8 @@
 
 @section('content')
 
+    @use(App\Enums\AboutStatus)
+
     <div class="container-fluid">
 
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -106,7 +108,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -124,9 +126,51 @@
                                 <img src="{{ asset($philosophy->icon_image) }}" class="img-thumbnail" width="120">
                             @endif
 
+                        </div>  --}}
+
+
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Icon Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="icon_image" name="icon_image"
+                                    accept="image/*"
+                                    onchange="
+                                        document.getElementById('uploaded_icon_img').src =
+                                        window.URL.createObjectURL(this.files[0]);
+
+                                        document.getElementById('icon-image-label').innerHTML =
+                                        this.files[0].name;
+                                    ">
+
+                                <label class="custom-file-label" id="icon-image-label" for="icon_image">
+                                    {{ $philosophy->icon_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_icon_img"
+                                src="{{ $philosophy->icon_image ? asset($philosophy->icon_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('icon_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+
                         </div>
 
-                        <div class="col-md-6">
+
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -153,6 +197,36 @@
                                     </option>
 
                                 </select>
+
+                            </div>
+
+                        </div>  --}}
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>Status</strong>
+                            </label>
+
+                            {{-- Hidden value for Inactive --}}
+                            <input type="hidden" name="status" value="{{ AboutStatus::INACTIVE->value }}">
+
+                            <div class="custom-control custom-switch">
+
+                                <input type="checkbox" class="custom-control-input" id="status" name="status"
+                                    value="{{ AboutStatus::ACTIVE->value }}"
+                                    {{ old('status', $philosophy->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value
+                                        ? 'checked'
+                                        : '' }}>
+
+                                <label class="custom-control-label" for="status">
+                                    <span id="status-text">
+                                        {{ old('status', $philosophy->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value
+                                            ? 'Active'
+                                            : 'Inactive' }}
+                                    </span>
+                                </label>
 
                             </div>
 
@@ -185,3 +259,19 @@
     </div>
 
 @endsection
+@push('script')
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+    <script>
+        document.getElementById('status').addEventListener('change', function() {
+            document.getElementById('status-text').textContent =
+                this.checked ? 'Active' : 'Inactive';
+        });
+    </script>
+@endpush

@@ -35,16 +35,41 @@ class ExperienceController extends Controller
 
                 ->addIndexColumn()
 
+                // ->editColumn('image', function (Experience $experience) {
+
+                //     if (!$experience->image) {
+                //         return '-';
+                //     }
+
+                //     return '<img src="' . asset($experience->image) . '"
+                //                 width="60"
+                //                 height="60"
+                //                 class="img-thumbnail">';
+                // })
+
+
                 ->editColumn('image', function (Experience $experience) {
 
-                    if (!$experience->image) {
-                        return '-';
-                    }
+                    $image_url = $experience->image
+                        ? asset($experience->image)
+                        : asset('img/blank-pic.png');
 
-                    return '<img src="' . asset($experience->image) . '"
-                                width="60"
-                                height="60"
-                                class="img-thumbnail">';
+                    return '<img src="' . $image_url . '"
+                width="100"
+                height="90"
+                class="img-thumbnail" />';
+                })
+
+                ->editColumn('status', function (Experience $experience) {
+
+                    $class = match ($experience->status) {
+                        ExperienceStatus::ACTIVE => 'success',
+                        ExperienceStatus::INACTIVE => 'danger',
+                    };
+
+                    return '<span class="badge badge-' . $class . '">'
+                        . $experience->status->label()
+                        . '</span>';
                 })
 
                 ->editColumn('layout', function (Experience $experience) {
@@ -52,19 +77,19 @@ class ExperienceController extends Controller
                     return ucfirst($experience->layout);
                 })
 
-                ->editColumn('status', function (Experience $experience) {
+                // ->editColumn('status', function (Experience $experience) {
 
-                    $class = match ($experience->status) {
+                //     $class = match ($experience->status) {
 
-                        ExperienceStatus::ACTIVE => 'success',
+                //         ExperienceStatus::ACTIVE => 'success',
 
-                        ExperienceStatus::INACTIVE => 'secondary',
-                    };
+                //         ExperienceStatus::INACTIVE => 'secondary',
+                //     };
 
-                    return '<span class="badge badge-' . $class . '">'
-                        . $experience->status->label()
-                        . '</span>';
-                })
+                //     return '<span class="badge badge-' . $class . '">'
+                //         . $experience->status->label()
+                //         . '</span>';
+                // })
 
                 ->editColumn('created_at', function (Experience $experience) {
 

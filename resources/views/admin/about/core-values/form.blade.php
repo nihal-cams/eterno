@@ -3,6 +3,7 @@
 @section('title', $coreValue->exists ? 'Edit Core Value' : 'Add Core Value')
 
 @section('content')
+    @use(App\Enums\AboutStatus)
 
     <div class="container-fluid">
 
@@ -115,7 +116,7 @@
 
 
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <div class="form-group">
 
@@ -142,6 +143,36 @@
                                     </option>
 
                                 </select>
+
+                            </div>
+
+                        </div>  --}}
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>Status</strong>
+                            </label>
+
+                            {{-- Hidden value for Inactive --}}
+                            <input type="hidden" name="status" value="{{ AboutStatus::INACTIVE->value }}">
+
+                            <div class="custom-control custom-switch">
+
+                                <input type="checkbox" class="custom-control-input" id="status" name="status"
+                                    value="{{ AboutStatus::ACTIVE->value }}"
+                                    {{ old('status', $philosophy->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value
+                                        ? 'checked'
+                                        : '' }}>
+
+                                <label class="custom-control-label" for="status">
+                                    <span id="status-text">
+                                        {{ old('status', $philosophy->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value
+                                            ? 'Active'
+                                            : 'Inactive' }}
+                                    </span>
+                                </label>
 
                             </div>
 

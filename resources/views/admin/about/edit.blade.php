@@ -67,7 +67,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <label>Banner Image</label>
 
@@ -76,6 +76,44 @@
                             @if ($about->banner_image)
                                 <img src="{{ asset($about->banner_image) }}" width="150" class="mt-2 border">
                             @endif
+
+                        </div>  --}}
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Banner Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
+                                    accept="image/*"
+                                    onchange="
+                document.getElementById('uploaded_banner_img').src =
+                window.URL.createObjectURL(this.files[0]);
+
+                document.getElementById('banner-image-label').innerHTML =
+                this.files[0].name;
+            ">
+
+                                <label class="custom-file-label" id="banner-image-label" for="banner_image">
+                                    {{ $about->banner_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_banner_img"
+                                src="{{ $about->banner_image ? asset($about->banner_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('banner_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -118,7 +156,7 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
 
                             <label>Image</label>
 
@@ -127,6 +165,44 @@
                             @if ($about->intro_image)
                                 <img src="{{ asset($about->intro_image) }}" width="150" class="mt-2 border">
                             @endif
+
+                        </div>  --}}
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Intro Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="intro_image" name="intro_image"
+                                    accept="image/*"
+                                    onchange="
+                                        document.getElementById('uploaded_intro_img').src =
+                                        window.URL.createObjectURL(this.files[0]);
+
+                                        document.getElementById('intro-image-label').innerHTML =
+                                        this.files[0].name;
+                                    ">
+
+                                <label class="custom-file-label" id="intro-image-label" for="intro_image">
+                                    {{ $about->intro_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_intro_img"
+                                src="{{ $about->intro_image ? asset($about->intro_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('intro_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -186,7 +262,7 @@
                                 value="{{ old('cta_button_link', $about->cta_button_link) }}">
 
                         </div>
-
+                        {{--
                         <div class="col-md-6 mt-3">
 
                             <label>Background Image</label>
@@ -196,6 +272,47 @@
                             @if ($about->cta_background_image)
                                 <img src="{{ asset($about->cta_background_image) }}" width="150" class="mt-2 border">
                             @endif
+
+                        </div>  --}}
+
+
+
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    CTA Background Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="cta_background_image"
+                                    name="cta_background_image" accept="image/*"
+                                    onchange="
+                                    document.getElementById('uploaded_cta_background_img').src =
+                                    window.URL.createObjectURL(this.files[0]);
+
+                                    document.getElementById('cta-background-image-label').innerHTML =
+                                    this.files[0].name;
+                                ">
+
+                                <label class="custom-file-label" id="cta-background-image-label"
+                                    for="cta_background_image">
+                                    {{ $about->cta_background_image ?: 'Choose file' }}
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_cta_background_img"
+                                src="{{ $about->cta_background_image ? asset($about->cta_background_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100" class="img-thumbnail">
+
+                            @error('cta_background_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
 
                         </div>
 
@@ -250,3 +367,19 @@
     </div>
 
 @endsection
+@push('script')
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+    <script>
+        document.getElementById('status').addEventListener('change', function() {
+            document.getElementById('status-text').textContent =
+                this.checked ? 'Active' : 'Inactive';
+        });
+    </script>
+@endpush
