@@ -15,7 +15,7 @@ class ExperienceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, DataTables $dataTables)
+    public function index(Request $request, DataTables $dataTables, $type)
     {
         if ($request->ajax()) {
 
@@ -28,37 +28,34 @@ class ExperienceController extends Controller
                 'sort_order',
                 'status',
                 'created_at'
-            )->orderBy('sort_order')
+            )->where('type', $type)
+                ->orderBy('sort_order')
                 ->orderByDesc('id');
 
             return $dataTables->eloquent($query)
 
                 ->addIndexColumn()
 
+
+
+
                 ->editColumn('image', function (Experience $experience) {
 
-                    if (!$experience->image) {
-                        return '-';
-                    }
+                    $image_url = $experience->image
+                        ? asset($experience->image)
+                        : asset('img/blank-pic.png');
 
-                    return '<img src="' . asset($experience->image) . '"
-                                width="60"
-                                height="60"
-                                class="img-thumbnail">';
-                })
-
-                ->editColumn('layout', function (Experience $experience) {
-
-                    return ucfirst($experience->layout);
+                    return '<img src="' . $image_url . '"
+                width="100"
+                height="90"
+                class="img-thumbnail" />';
                 })
 
                 ->editColumn('status', function (Experience $experience) {
 
                     $class = match ($experience->status) {
-
                         ExperienceStatus::ACTIVE => 'success',
-
-                        ExperienceStatus::INACTIVE => 'secondary',
+                        ExperienceStatus::INACTIVE => 'danger',
                     };
 
                     return '<span class="badge badge-' . $class . '">'
@@ -66,16 +63,22 @@ class ExperienceController extends Controller
                         . '</span>';
                 })
 
+                ->editColumn('layout', function (Experience $experience) {
+
+                    return ucfirst($experience->layout);
+                })
+
+
                 ->editColumn('created_at', function (Experience $experience) {
 
                     return $experience->created_at->format('d-m-Y');
                 })
 
-                ->addColumn('actions', function (Experience $experience) {
+                ->addColumn('actions', function (Experience $experience) use ($type) {
 
                     return '
 
-                    <a href="' . route('admin.experience-items.edit', $experience) . '"
+                    <a href="' . route('admin.experience-items.edit', ['type' => $type, 'experience' => $experience]) . '"
                         class="btn btn-sm"
                         title="Edit">
 
@@ -87,7 +90,7 @@ class ExperienceController extends Controller
                         href="#delete-experience-modal"
                         class="btn btn-sm experience-delete"
                         data-toggle="modal"
-                        data-href="' . route('admin.experience-items.destroy', $experience) . '"
+                        data-href="' . route('admin.experience-items.destroy', ['type' => $type, 'experience' => $experience]) . '"
                         title="Delete">
 
                         <i class="fa fa-trash"></i>
@@ -106,22 +109,22 @@ class ExperienceController extends Controller
                 ->make(true);
         }
 
-        return view('admin.experience.items.index');
+        return view('admin.experience.items.index', compact('type'));
     }
 
 
-    public function create()
+    public function create($type)
     {
         $experience = new Experience();
 
         return view(
             'admin.experience.items.form',
-            compact('experience')
+            compact('experience', 'type')
         );
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, $type)
     {
 
         $validated = $request->validate([
@@ -161,10 +164,12 @@ class ExperienceController extends Controller
                 'img/experience/items/' . $imageName;
         }
 
+        $validated['type'] = $type;
+
         Experience::create($validated);
 
         return redirect()
-            ->route('admin.experience-items.index')
+            ->route('admin.experience-items.index', $type)
             ->with(
                 'success',
                 'Experience added successfully.'
@@ -174,7 +179,7 @@ class ExperienceController extends Controller
 
 
 
-    public function edit($id)
+    public function edit($type, $id)
     {
         // dd($id);
 
@@ -182,7 +187,7 @@ class ExperienceController extends Controller
 
         return view(
             'admin.experience.items.form',
-            compact('experience')
+            compact('experience', 'type')
         );
     }
 
@@ -190,7 +195,7 @@ class ExperienceController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $type, $id)
     {
         $experience = Experience::findOrFail($id);
 
@@ -242,12 +247,12 @@ class ExperienceController extends Controller
         $experience->update($validated);
 
         return redirect()
-            ->route('admin.experience-items.index')
+            ->route('admin.experience-items.index', $type)
             ->with('success', 'Updated Successfully');
     }
 
 
-    public function destroy($id)
+    public function destroy($type, $id)
     {
         $experience = Experience::findOrFail($id);
 

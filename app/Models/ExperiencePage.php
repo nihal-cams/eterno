@@ -12,6 +12,8 @@ class ExperiencePage extends Model
 
     protected $fillable = [
 
+        'type',
+
         'banner_image',
 
         'banner_title',
@@ -23,6 +25,10 @@ class ExperiencePage extends Model
         'intro_title',
 
         'intro_description',
+
+        'button_text',
+
+        'button_url',
 
         'status'
 

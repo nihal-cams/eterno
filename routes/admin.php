@@ -136,15 +136,12 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-    Route::get(
-        'experiences',
-        [ExperiencePageController::class, 'edit']
-    )->name('experiences.edit');
-
-    Route::put(
-        'experiences',
-        [ExperiencePageController::class, 'update']
-    )->name('experiences.update');
+    Route::prefix('experiences/{type}')
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [ExperiencePageController::class, 'edit'])->name('experiences.edit');
+            Route::put('/', [ExperiencePageController::class, 'update'])->name('experiences.update');
+        });
 
 
     /*
@@ -153,10 +150,16 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-    Route::resource(
-        'experience-items',
-        ExperienceController::class
-    );
+    Route::prefix('experience-items/{type}')
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [ExperienceController::class, 'index'])->name('experience-items.index');
+            Route::get('/create', [ExperienceController::class, 'create'])->name('experience-items.create');
+            Route::post('/', [ExperienceController::class, 'store'])->name('experience-items.store');
+            Route::get('/{experience}/edit', [ExperienceController::class, 'edit'])->name('experience-items.edit');
+            Route::put('/{experience}', [ExperienceController::class, 'update'])->name('experience-items.update');
+            Route::delete('/{experience}', [ExperienceController::class, 'destroy'])->name('experience-items.destroy');
+        });
 
 
     /*
