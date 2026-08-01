@@ -12,7 +12,7 @@
             {{ $offer->id ? 'Edit ' : 'Add ' }} Offer
         </h1>
         
-        <form method="POST" action="{{ $offer->id ? route('admin.offers.update', $offer) : route('admin.offers.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ $offer->id ? route('admin.offers.update', ['type' => $type, 'offer' => $offer]) : route('admin.offers.store', ['type' => $type]) }}" enctype="multipart/form-data">
         @csrf
         {{ $offer->id ? method_field('PUT') : '' }}
         <div class="card shadow mb-4">
@@ -20,7 +20,7 @@
                 
                 <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Offer</h3> -->
                 <div class="row">
-
+                @if($type === '2')
                     <div class="form-group col-md-6">
                         <label><strong>Resort <span class="text-danger">*</span></strong></label>
                         <select name="resort_id" id="resort_id" class="form-control">
@@ -33,26 +33,6 @@
                             @endforeach
                         </select>
                         @error('resort_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
-                        <div class="custom-file mb-3">
-                            <input type="file"
-                                class="custom-file-input"
-                                id="image"
-                                name="image"
-                                accept="image/*"
-                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="image">
-                                {{ $offer->image ?: 'Choose file' }}
-                            </label>
-                        </div>
-                        <img id="uploaded_img"
-                            src="{{ $offer->image ? asset('uploads/offers/'.$offer->image) : asset('img/upload_image.png') }}">
-                        @error('image')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -74,6 +54,27 @@
                                 rows="3"
                                 class="form-control">{{ old('description', $offer->description) }}</textarea>
                         @error('description')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @endif
+
+                    <div class="form-group col-md-6">
+                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <div class="custom-file mb-3">
+                            <input type="file"
+                                class="custom-file-input"
+                                id="image"
+                                name="image"
+                                accept="image/*"
+                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
+                            <label class="custom-file-label" for="image">
+                                {{ $offer->image ?: 'Choose file' }}
+                            </label>
+                        </div>
+                        <img id="uploaded_img"
+                            src="{{ $offer->image ? asset('uploads/offers/'.$offer->image) : asset('img/upload_image.png') }}">
+                        @error('image')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -127,7 +128,7 @@
                 <div class="row">
                     <div class="form-group col-6">
                     <button type="submit" class="btn btn-success mr-3">{{ $offer->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.offers.index') }}">Cancel</a>
+                    <a class="btn btn-secondary ml-3" href="{{ route('admin.offers.index', ['type' => $type]) }}">Cancel</a>
                     </div>
                 </div>
             </div>

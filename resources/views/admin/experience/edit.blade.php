@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Experience Page')
+@section('title', 'Experience Page ' . ($type == 1 ? '(Home Page)' : '(Inner Page)'))
 
 @section('content')
 
@@ -12,7 +12,7 @@
 
                 <h4>
 
-                    Experience Page
+                    Experience Page {{ $type == 1 ? '(Home Page)' : '(Inner Page)' }}
 
                 </h4>
 
@@ -28,114 +28,96 @@
                     </div>
                 @endif
 
-                <form action="{{ route('admin.experiences.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.experiences.update', $type) }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
 
                     @method('PUT')
 
-                    <h5 class="mb-3">
+                    @if ($type == 1)
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><strong>Experience Title <span class="text-danger">*</span></strong></label>
+                                    <input type="text" name="banner_title" class="form-control"
+                                        value="{{ old('banner_title', $experiencePage->banner_title) }}" required>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <h5 class="mb-3">
+                            Banner Section
+                        </h5>
 
-                        Banner Section
+                        <div class="row">
 
-                    </h5>
+                            <div class="col-md-6">
 
-                    <div class="row">
+                                <div class="form-group">
 
-                        <div class="col-md-6">
+                                    <label>
+                                        Banner Title <span class="text-danger">*</span>
+                                    </label>
 
-                            <div class="form-group">
+                                    <input type="text" name="banner_title" class="form-control"
+                                        value="{{ old('banner_title', $experiencePage->banner_title) }}" required>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
 
                                 <label>
-
-                                    Banner Title
-
+                                    <strong>Banner Image</strong>
                                 </label>
 
-                                <input type="text" name="banner_title" class="form-control"
-                                    value="{{ old('banner_title', $experiencePage->banner_title) }}">
+                                <div class="custom-file mb-3">
+
+                                    <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
+                                        accept="image/*"
+                                        onchange="
+                        document.getElementById('uploaded_img').src =
+                        window.URL.createObjectURL(this.files[0]);
+
+                        document.getElementById('banner-image-label').innerHTML =
+                        this.files[0].name;
+                    ">
+
+                                    <label class="custom-file-label" id="banner-image-label" for="banner_image">
+                                        {{ $experiencePage->banner_image ?: 'Choose file' }}
+                                    </label>
+
+                                </div>
+
+                                <img id="uploaded_img"
+                                    src="{{ $experiencePage->banner_image ? asset($experiencePage->banner_image) : asset('img/upload_image.png') }}"
+                                    width="150" height="100" alt="Banner Image">
+
+                                @error('banner_image')
+                                    <small class="text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Banner Description
+                                    </label>
+
+                                    <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $experiencePage->banner_description) }}</textarea>
+
+                                </div>
 
                             </div>
 
                         </div>
-
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Banner Image
-
-                                </label>
-
-                                <input type="file" name="banner_image" class="form-control">
-
-                                @if ($experiencePage->banner_image)
-                                    <img src="{{ asset($experiencePage->banner_image) }}" width="150"
-                                        class="mt-2 img-thumbnail">
-                                @endif
-
-                            </div>
-
-                        </div>  --}}
-
-
-                        <div class="form-group col-md-6">
-
-                            <label>
-                                <strong>
-                                    Banner Image
-                                </strong>
-                            </label>
-
-                            <div class="custom-file mb-3">
-
-                                <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
-                                    accept="image/*"
-                                    onchange="
-                document.getElementById('uploaded_banner_img').src =
-                window.URL.createObjectURL(this.files[0]);
-
-                document.getElementById('banner-image-label').innerHTML =
-                this.files[0].name;
-            ">
-
-                                <label class="custom-file-label" id="banner-image-label" for="banner_image">
-                                    {{ $experiencePage->banner_image ?: 'Choose file' }}
-                                </label>
-
-                            </div>
-
-                            <img id="uploaded_banner_img"
-                                src="{{ $experiencePage->banner_image ? asset($experiencePage->banner_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" class="img-thumbnail">
-
-                            @error('banner_image')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
-                            @enderror
-
-                        </div>
-
-                        <div class="col-md-12">
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Banner Description
-
-                                </label>
-
-                                <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $experiencePage->banner_description) }}</textarea>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    @endif
 
                     <hr>
 
@@ -196,6 +178,42 @@
                             </div>
 
                         </div>
+
+                        @if ($type == 1)
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Button Text
+
+                                    </label>
+
+                                    <input type="text" name="button_text" class="form-control"
+                                        value="{{ old('button_text', $experiencePage->button_text) }}">
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        Button URL
+
+                                    </label>
+
+                                    <input type="text" name="button_url" class="form-control"
+                                        value="{{ old('button_url', $experiencePage->button_url) }}">
+
+                                </div>
+
+                            </div>
+                        @endif
 
                     </div>
 

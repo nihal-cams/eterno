@@ -108,29 +108,6 @@
 
                         </div>
 
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Icon Image
-
-                                </label>
-
-                                <input type="file" name="icon_image" class="form-control">
-
-                            </div>
-
-                            @if ($philosophy->icon_image)
-                                <img src="{{ asset($philosophy->icon_image) }}" class="img-thumbnail" width="120">
-                            @endif
-
-                        </div>  --}}
-
-
-
-
                         <div class="form-group col-md-6">
 
                             <label>
@@ -138,69 +115,24 @@
                                     Icon Image
                                 </strong>
                             </label>
-
                             <div class="custom-file mb-3">
-
                                 <input type="file" class="custom-file-input" id="icon_image" name="icon_image"
                                     accept="image/*"
-                                    onchange="
-                                        document.getElementById('uploaded_icon_img').src =
-                                        window.URL.createObjectURL(this.files[0]);
-
-                                        document.getElementById('icon-image-label').innerHTML =
-                                        this.files[0].name;
-                                    ">
-
-                                <label class="custom-file-label" id="icon-image-label" for="icon_image">
+                                    onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
+                                <label class="custom-file-label" for="icon_image">
                                     {{ $philosophy->icon_image ?: 'Choose file' }}
                                 </label>
-
                             </div>
-
-                            <img id="uploaded_icon_img"
-                                src="{{ $philosophy->icon_image ? asset($philosophy->icon_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" class="img-thumbnail">
-
+                            <img id="uploaded_img"
+                                src="{{ $philosophy->icon_image ? asset($philosophy->icon_image) : asset('img/upload_image.png') }}">
                             @error('icon_image')
-                                <small class="text-danger">
-                                    {{ $message }}
-                                </small>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
-
                         </div>
 
 
-                        {{--  <div class="col-md-6">
 
-                            <div class="form-group">
 
-                                <label>
-
-                                    Status
-
-                                </label>
-
-                                <select name="status" class="form-control">
-
-                                    <option value="active"
-                                        {{ old('status', $philosophy->status?->value) == 'active' ? 'selected' : '' }}>
-
-                                        Active
-
-                                    </option>
-
-                                    <option value="inactive"
-                                        {{ old('status', $philosophy->status?->value) == 'inactive' ? 'selected' : '' }}>
-
-                                        Inactive
-
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>  --}}
 
 
                         <div class="form-group col-md-6">

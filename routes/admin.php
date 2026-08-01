@@ -19,7 +19,6 @@ use App\Http\Controllers\Admin\WelcomeSectionController;
 use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PhilosophyController;
-use App\Http\Controllers\Admin\WebinarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +49,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
     Route::resource('galleries', GalleryController::class);
-    Route::resource('offers', OfferController::class);
+    Route::prefix('offers/{type}')
+    ->where(['type' => '1|2'])
+    ->group(function () {
+        Route::get('/', [OfferController::class, 'index'])->name('offers.index');
+        Route::get('/create', [OfferController::class, 'create'])->name('offers.create');
+        Route::post('/', [OfferController::class, 'store'])->name('offers.store');
+        Route::get('/{offer}', [OfferController::class, 'show'])->name('offers.show');
+        Route::get('/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+        Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
+        Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
+    });
     Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
         ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
@@ -60,8 +69,6 @@ Route::middleware('auth')->group(function () {
     Route::put('video-section', [VideoSectionController::class, 'update'])
         ->name('video-section.update');
     Route::resource('banners', BannerController::class);
-
-    Route::resource('webinars', WebinarController::class);
 
 
     /*
@@ -109,15 +116,12 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-    Route::get(
-        'experiences',
-        [ExperiencePageController::class, 'edit']
-    )->name('experiences.edit');
-
-    Route::put(
-        'experiences',
-        [ExperiencePageController::class, 'update']
-    )->name('experiences.update');
+    Route::prefix('experiences/{type}')
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [ExperiencePageController::class, 'edit'])->name('experiences.edit');
+            Route::put('/', [ExperiencePageController::class, 'update'])->name('experiences.update');
+        });
 
 
     /*
@@ -126,10 +130,16 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-    Route::resource(
-        'experience-items',
-        ExperienceController::class
-    );
+    Route::prefix('experience-items/{type}')
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [ExperienceController::class, 'index'])->name('experience-items.index');
+            Route::get('/create', [ExperienceController::class, 'create'])->name('experience-items.create');
+            Route::post('/', [ExperienceController::class, 'store'])->name('experience-items.store');
+            Route::get('/{experience}/edit', [ExperienceController::class, 'edit'])->name('experience-items.edit');
+            Route::put('/{experience}', [ExperienceController::class, 'update'])->name('experience-items.update');
+            Route::delete('/{experience}', [ExperienceController::class, 'destroy'])->name('experience-items.destroy');
+        });
 
 
     /*

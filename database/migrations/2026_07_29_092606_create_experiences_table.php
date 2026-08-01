@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('type');
 
             $table->string('subtitle')->nullable();
 

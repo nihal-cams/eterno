@@ -11,6 +11,7 @@ class Experience extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'type',
         'subtitle',
         'title',
         'description',

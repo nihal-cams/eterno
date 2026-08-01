@@ -8,6 +8,7 @@ use App\Enums\Status;
 class Offer extends Model
 {
     protected $fillable = [
+        'type',
         'resort_id',
         'title',
         'description',

@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', $experience->exists ? 'Edit Experience' : 'Add Experience')
+@section('title', ($experience->exists ? 'Edit' : 'Add') . ' Experience ' . ($type == 1 ? '(Home Page)' : '(Inner
+    Page)'))
 
 @section('content')
 
@@ -11,11 +12,11 @@
 
             <h1 class="h3 mb-0 text-gray-800">
 
-                {{ $experience->exists ? 'Edit Experience' : 'Add Experience' }}
+                {{ $experience->exists ? 'Edit' : 'Add' }} Experience {{ $type == 1 ? '(Home Page)' : '(Inner Page)' }}
 
             </h1>
 
-            <a href="{{ route('admin.experience-items.index') }}" class="btn btn-secondary btn-sm">
+            <a href="{{ route('admin.experience-items.index', $type) }}" class="btn btn-secondary btn-sm">
 
                 <i class="fa fa-arrow-left"></i>
 
@@ -47,7 +48,7 @@
             <div class="card-body">
 
                 <form
-                    action="{{ $experience->exists ? route('admin.experience-items.update', $experience) : route('admin.experience-items.store') }}"
+                    action="{{ $experience->exists ? route('admin.experience-items.update', ['type' => $type, 'experience' => $experience]) : route('admin.experience-items.store', $type) }}"
                     method="POST" enctype="multipart/form-data">
 
                     @csrf
@@ -57,21 +58,22 @@
                     @endif
 
                     <div class="row">
+                        @if ($type == 2)
+                            <div class="col-md-6">
 
-                        <div class="col-md-6">
+                                <div class="form-group">
 
-                            <div class="form-group">
+                                    <label>Subtitle</label>
 
-                                <label>Subtitle</label>
+                                    <input type="text" name="subtitle" class="form-control"
+                                        value="{{ old('subtitle', $experience->subtitle) }}">
 
-                                <input type="text" name="subtitle" class="form-control"
-                                    value="{{ old('subtitle', $experience->subtitle) }}">
+                                </div>
 
                             </div>
+                        @endif
 
-                        </div>
-
-                        <div class="col-md-6">
+                        <div class="{{ $type == 2 ? 'col-md-6' : 'col-md-12' }}">
 
                             <div class="form-group">
 
@@ -94,49 +96,39 @@
 
                     </div>
 
-                    <div class="form-group">
+                    @if ($type == 2)
+                        <div class="form-group">
 
-                        <label>
+                            <label>
 
-                            Experience List
+                                Experience List
 
-                        </label>
+                            </label>
 
-                        <small class="text-muted d-block mb-2">
+                            <small class="text-muted d-block mb-2">
 
-                            Enter one item per line.
+                                Enter one item per line.
 
-                        </small>
+                            </small>
 
-                        <textarea name="experience_list" rows="6" class="form-control">{{ old('experience_list', $experience->experience_list) }}</textarea>
+                            <textarea name="experience_list" rows="6" class="form-control">{{ old('experience_list', $experience->experience_list) }}</textarea>
 
-                    </div>
+                        </div>
+                    @endif
 
                     <div class="row">
 
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>Image</label>
-
-                                <input type="file" name="image" class="form-control">
-
-                            </div>
-
-                            @if ($experience->image)
-                                <img src="{{ asset($experience->image) }}" class="img-thumbnail" width="150">
-                            @endif
-
-                        </div>  --}}
 
 
-                        <div class="form-group col-md-6">
+
+                        <div class="form-group {{ $type == 2 ? 'col-md-6' : 'col-md-12' }}">
 
                             <label>
                                 <strong>
                                     Image
-                                    <span class="text-danger">*</span>
+                                    @if ($type == 2)
+                                        <span class="text-danger">*</span>
+                                    @endif
                                 </strong>
                             </label>
 
@@ -160,7 +152,7 @@
 
                             <img id="uploaded_img"
                                 src="{{ $experience->image ? asset($experience->image) : asset('img/upload_image.png') }}"
-                                width="150" height="150" class="img-thumbnail">
+                                width="150" height="150" class="">
 
                             @error('image')
                                 <small class="text-danger">
@@ -170,111 +162,92 @@
 
                         </div>
 
-                        <div class="col-md-6">
+                        @if ($type == 2)
+                            <div class="col-md-6">
 
-                            <div class="form-group">
+                                <div class="form-group">
 
-                                <label>Layout</label>
+                                    <label>Layout</label>
 
-                                <select name="layout" class="form-control">
+                                    <select name="layout" class="form-control">
 
-                                    <option value="left"
-                                        {{ old('layout', $experience->layout) == 'left' ? 'selected' : '' }}>
+                                        <option value="left"
+                                            {{ old('layout', $experience->layout) == 'left' ? 'selected' : '' }}>
 
-                                        Left Image
+                                            Left Image
 
-                                    </option>
+                                        </option>
 
-                                    <option value="right"
-                                        {{ old('layout', $experience->layout) == 'right' ? 'selected' : '' }}>
+                                        <option value="right"
+                                            {{ old('layout', $experience->layout) == 'right' ? 'selected' : '' }}>
 
-                                        Right Image
+                                            Right Image
 
-                                    </option>
+                                        </option>
 
-                                </select>
+                                    </select>
+
+                                </div>
 
                             </div>
-
-                        </div>
+                        @endif
 
                     </div>
 
-                    <div class="row">
+                    @if ($type == 2)
+                        <div class="row">
 
-                        <div class="col-md-6">
+                            <div class="col-md-6">
 
-                            <div class="form-group">
+                                <div class="form-group">
 
-                                <label>Sort Order</label>
+                                    <label>Sort Order</label>
 
-                                <input type="number" name="sort_order" class="form-control"
-                                    value="{{ old('sort_order', $experience->sort_order ?? 0) }}">
+                                    <input type="number" name="sort_order" class="form-control"
+                                        value="{{ old('sort_order', $experience->sort_order ?? 0) }}">
+
+                                </div>
 
                             </div>
 
-                        </div>
+                            <div class="form-group col-md-6">
 
-                        <div class="form-group col-md-6">
-
-                            <label>
-                                <strong>Status</strong>
-                            </label>
-
-                            {{-- Hidden value for Inactive --}}
-                            <input type="hidden" name="status" value="{{ ExperienceStatus::INACTIVE->value }}">
-
-                            <div class="custom-control custom-switch">
-
-                                <input type="checkbox" class="custom-control-input" id="status" name="status"
-                                    value="{{ ExperienceStatus::ACTIVE->value }}"
-                                    {{ old('status', $experience->status?->value ?? ExperienceStatus::ACTIVE->value) ==
-                                    ExperienceStatus::ACTIVE->value
-                                        ? 'checked'
-                                        : '' }}>
-
-                                <label class="custom-control-label" for="status">
-                                    <span id="status-text">
-                                        {{ old('status', $experience->status?->value ?? ExperienceStatus::ACTIVE->value) ==
-                                        ExperienceStatus::ACTIVE->value
-                                            ? 'Active'
-                                            : 'Inactive' }}
-                                    </span>
+                                <label>
+                                    <strong>Status</strong>
                                 </label>
 
+                                {{-- Hidden value for Inactive --}}
+                                <input type="hidden" name="status" value="{{ ExperienceStatus::INACTIVE->value }}">
+
+                                <div class="custom-control custom-switch">
+
+                                    <input type="checkbox" class="custom-control-input" id="status" name="status"
+                                        value="{{ ExperienceStatus::ACTIVE->value }}"
+                                        {{ old('status', $experience->status?->value ?? ExperienceStatus::ACTIVE->value) ==
+                                        ExperienceStatus::ACTIVE->value
+                                            ? 'checked'
+                                            : '' }}>
+
+                                    <label class="custom-control-label" for="status">
+                                        <span id="status-text">
+                                            {{ old('status', $experience->status?->value ?? ExperienceStatus::ACTIVE->value) ==
+                                            ExperienceStatus::ACTIVE->value
+                                                ? 'Active'
+                                                : 'Inactive' }}
+                                        </span>
+                                    </label>
+
+                                </div>
+
                             </div>
 
                         </div>
-
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>Status</label>
-
-                                <select name="status" class="form-control">
-
-                                    <option value="active"
-                                        {{ old('status', $experience->status?->value) == 'active' ? 'selected' : '' }}>
-
-                                        Active
-
-                                    </option>
-
-                                    <option value="inactive"
-                                        {{ old('status', $experience->status?->value) == 'inactive' ? 'selected' : '' }}>
-
-                                        Inactive
-
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>  --}}
-
-                    </div>
+                    @else
+                        <input type="hidden" name="layout" value="{{ $experience->layout ?? 'right' }}">
+                        <input type="hidden" name="sort_order" value="{{ $experience->sort_order ?? 0 }}">
+                        <input type="hidden" name="status"
+                            value="{{ $experience->status?->value ?? ExperienceStatus::ACTIVE->value }}">
+                    @endif
 
                     <hr>
 
@@ -286,7 +259,7 @@
 
                     </button>
 
-                    <a href="{{ route('admin.experience-items.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('admin.experience-items.index', $type) }}" class="btn btn-secondary">
 
                         Cancel
 

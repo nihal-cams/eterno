@@ -65,51 +65,136 @@
 
             <!-- Nav Item - Tables -->
 
-            <li
-                class="nav-item {{ request()->is('admin/welcome-section') || request()->is('admin/welcome-section/*') || request()->is('admin/banners') || request()->is('admin/banners/*') || request()->is('admin/resorts') || request()->is('admin/resorts/*') || request()->is('admin/video-section') || request()->is('admin/video-section/*') || request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHome"
-                    aria-expanded="false" aria-controls="collapseHome">
+            @php
+                $homeMenuOpen =
+                    request()->is('admin/banners*') ||
+                    request()->is('admin/welcome-section*') ||
+                    request()->is('admin/resorts*') ||
+                    request()->is('admin/video-section*') ||
+                    request()->is('admin/offers/1*') ||
+                    request()->is('admin/experiences/1*') ||
+                    request()->is('admin/experience-items/1*') ||
+                    request()->is('admin/testimonials*');
+            @endphp
+
+            <li class="nav-item {{ $homeMenuOpen ? 'active' : '' }}">
+                <a class="nav-link {{ $homeMenuOpen ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
+                    data-target="#collapseHome" aria-expanded="{{ $homeMenuOpen ? 'true' : 'false' }}"
+                    aria-controls="collapseHome">
+
                     <i class="fa fa-home"></i>
                     <span>Home Page</span>
                 </a>
-                <div id="collapseHome" class="collapse" aria-labelledby="headingHome" data-parent="#accordionSidebar"
-                    style="">
+
+                <div id="collapseHome" class="collapse {{ $homeMenuOpen ? 'show' : '' }}" aria-labelledby="headingHome"
+                    data-parent="#accordionSidebar">
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/banners') || request()->is('admin/banners/*') ? 'active' : '' }}"
-                            href="{{ route('admin.banners.index') }}">Banners</a>
-                        <a class="collapse-item {{ request()->is('admin/welcome-section') || request()->is('admin/welcome-section/*') ? 'active' : '' }}"
-                            href="{{ route('admin.welcome-section.edit') }}">Welcome</a>
-                        <a class="collapse-item {{ request()->is('admin/resorts') || request()->is('admin/resorts/*') ? 'active' : '' }}"
-                            href="{{ route('admin.resorts.index') }}">Resorts</a>
-                        <a class="collapse-item {{ request()->is('admin/video-section') || request()->is('admin/video-section/*') ? 'active' : '' }}"
-                            href="{{ route('admin.video-section.edit') }}">Video</a>
-                        <a class="collapse-item {{ request()->is('admin/testimonials') || request()->is('admin/testimonials/*') ? 'active' : '' }}"
-                            href="{{ route('admin.testimonials.index') }}">Testimonials</a>
+                        <a class="collapse-item {{ request()->is('admin/banners*') ? 'active' : '' }}"
+                            href="{{ route('admin.banners.index') }}">
+                            Banners
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/welcome-section*') ? 'active' : '' }}"
+                            href="{{ route('admin.welcome-section.edit') }}">
+                            Welcome
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/resorts*') ? 'active' : '' }}"
+                            href="{{ route('admin.resorts.index') }}">
+                            Resorts
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/video-section*') ? 'active' : '' }}"
+                            href="{{ route('admin.video-section.edit') }}">
+                            Video
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/offers/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.offers.index', 1) }}">
+                            Offers
+                        </a>
+                        {{--
+                        <a class="collapse-item {{ request()->is('admin/experiences/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.experiences.edit', 1) }}">
+                            Experiences
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/experience-items/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.experience-items.index', 1) }}">
+                            Experience Items
+                        </a>  --}}
+
+
+
+                        {{-- Experiences Dropdown --}}
+                        <a class="collapse-item {{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'active' : 'collapsed' }}"
+                            href="#" data-toggle="collapse" data-target="#collapseExperiences"
+                            aria-expanded="{{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'true' : 'false' }}"
+                            aria-controls="collapseExperiences">
+
+                            Experiences
+                        </a>
+
+                        <div id="collapseExperiences"
+                            class="collapse {{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'show' : '' }}">
+
+                            <div class="bg-light py-2 collapse-inner rounded">
+
+                                <a class="collapse-item {{ request()->is('admin/experiences/1*') ? 'active' : '' }}"
+                                    href="{{ route('admin.experiences.edit', 1) }}">
+                                    Experience
+                                </a>
+
+                                <a class="collapse-item {{ request()->is('admin/experience-items/1*') ? 'active' : '' }}"
+                                    href="{{ route('admin.experience-items.index', 1) }}">
+                                    Experience Items
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <a class="collapse-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"
+                            href="{{ route('admin.testimonials.index') }}">
+                            Testimonials
+                        </a>
                     </div>
                 </div>
             </li>
 
             <li
-                class="nav-item {{ request()->is('admin/offers') || request()->is('admin/offers/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.offers.index') }}">
+                class="nav-item {{ request()->is('admin/offers/2') || request()->is('admin/offers/2/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.offers.index', 2) }}">
                     <i class="fa fa-tag"></i>
                     <span>Offers</span></a>
             </li>
 
-            <li
-                class="nav-item {{ request()->is('admin/gallery-categories') || request()->is('admin/gallery-categories/*') || request()->is('admin/galleries') || request()->is('admin/galleries/*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGallery"
-                    aria-expanded="false" aria-controls="collapseGallery">
+            @php
+                $galleryMenuOpen = request()->is('admin/gallery-categories*') || request()->is('admin/galleries*');
+            @endphp
+
+            <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">
+                <a class="nav-link {{ $galleryMenuOpen ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
+                    data-target="#collapseGallery" aria-expanded="{{ $galleryMenuOpen ? 'true' : 'false' }}"
+                    aria-controls="collapseGallery">
+
                     <i class="fa fa-image"></i>
                     <span>Manage Gallery</span>
                 </a>
-                <div id="collapseGallery" class="collapse" aria-labelledby="headingGallery"
-                    data-parent="#accordionSidebar" style="">
+
+                <div id="collapseGallery" class="collapse {{ $galleryMenuOpen ? 'show' : '' }}"
+                    aria-labelledby="headingGallery" data-parent="#accordionSidebar">
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/gallery-categories') || request()->is('admin/gallery-categories/*') ? 'active' : '' }}"
-                            href="{{ route('admin.gallery-categories.index') }}">Category</a>
-                        <a class="collapse-item {{ request()->is('admin/galleries') || request()->is('admin/galleries/*') ? 'active' : '' }}"
-                            href="{{ route('admin.galleries.index') }}">Gallery</a>
+                        <a class="collapse-item {{ request()->is('admin/gallery-categories*') ? 'active' : '' }}"
+                            href="{{ route('admin.gallery-categories.index') }}">
+                            Category
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/galleries*') ? 'active' : '' }}"
+                            href="{{ route('admin.galleries.index') }}">
+                            Gallery
+                        </a>
                     </div>
                 </div>
             </li>
@@ -157,7 +242,7 @@
 
 
             <li
-                class="nav-item {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'active' : '' }}">
+                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/experience-gallery*') ? 'active' : '' }}">
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseExperience">
@@ -169,18 +254,20 @@
                 </a>
 
                 <div id="collapseExperience"
-                    class="collapse {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/experience-gallery*') ? 'show' : '' }}"
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="{{ route('admin.experiences.edit') }}">
+                        <a class="collapse-item {{ request()->is('admin/experiences/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.experiences.edit', 2) }}">
 
                             Experience Page
 
                         </a>
 
-                        <a class="collapse-item" href="{{ route('admin.experience-items.index') }}">
+                        <a class="collapse-item {{ request()->is('admin/experience-items/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.experience-items.index', 2) }}">
 
                             Experience Items
 

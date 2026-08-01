@@ -11,13 +11,15 @@ class ExperiencePageController extends Controller
     /**
      * Edit Experience Page
      */
-    public function edit()
+    public function edit($type)
     {
-        $experiencePage = ExperiencePage::first();
+        $experiencePage = ExperiencePage::where('type', $type)->first();
 
         if (!$experiencePage) {
 
             $experiencePage = ExperiencePage::create([
+
+                'type'               => $type,
 
                 'banner_title'       => 'Experience',
 
@@ -34,7 +36,7 @@ class ExperiencePageController extends Controller
 
         return view(
             'admin.experience.edit',
-            compact('experiencePage')
+            compact('experiencePage', 'type')
         );
     }
 
@@ -42,23 +44,25 @@ class ExperiencePageController extends Controller
     /**
      * Update Experience Page
      */
-    public function update(Request $request)
+    public function update(Request $request, $type)
     {
-        $experiencePage = ExperiencePage::first();
+        $experiencePage = ExperiencePage::where('type', $type)->firstOrFail();
 
-        $data = $request->validate([
-
+        $rules = [
             'banner_title' => 'required|max:255',
-
-            'banner_description' => 'nullable',
-
             'intro_subtitle' => 'nullable|max:255',
-
             'intro_title' => 'required|max:255',
-
             'intro_description' => 'nullable',
+        ];
 
-        ]);
+        if ($type == 1) {
+            $rules['button_text'] = 'nullable|max:255';
+            $rules['button_url'] = 'nullable|max:255';
+        } else {
+            $rules['banner_description'] = 'nullable';
+        }
+
+        $data = $request->validate($rules);
 
         /*
         |--------------------------------------------------------------------------

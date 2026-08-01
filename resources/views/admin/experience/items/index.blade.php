@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Experience Items')
+@section('title', 'Experience Items ' . ($type == 1 ? '(Home Page)' : '(Inner Page)'))
 
 @section('content')
 
@@ -9,10 +9,10 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
             <h1 class="h3 mb-0 text-gray-800">
-                Experience Items
+                Experience Items {{ $type == 1 ? '(Home Page)' : '(Inner Page)' }}
             </h1>
 
-            <a href="{{ route('admin.experience-items.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('admin.experience-items.create', $type) }}" class="btn btn-primary btn-sm">
 
                 <i class="fa fa-plus"></i>
 
@@ -145,7 +145,7 @@
 
                 serverSide: true,
 
-                ajax: "{{ route('admin.experience-items.index') }}",
+                ajax: "{{ route('admin.experience-items.index', $type) }}",
 
                 columns: [
 

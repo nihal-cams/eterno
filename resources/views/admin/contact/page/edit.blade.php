@@ -98,12 +98,9 @@
                                 <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
                                     accept="image/*"
                                     onchange="
-                                        document.getElementById('uploaded_banner_img').src =
-                                        window.URL.createObjectURL(this.files[0]);
-
-                                        document.getElementById('banner-image-label').innerHTML =
-                                        this.files[0].name;
-                                    ">
+        this.closest('.form-group').querySelector('#uploaded_img').src =
+        window.URL.createObjectURL(this.files[0]);
+    ">
 
                                 <label class="custom-file-label" id="banner-image-label" for="banner_image">
                                     {{ $page->banner_image ?: 'Choose file' }}
@@ -111,9 +108,9 @@
 
                             </div>
 
-                            <img id="uploaded_banner_img"
+                            <img id="uploaded_img"
                                 src="{{ $page->banner_image ? asset($page->banner_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" class="img-thumbnail">
+                                width="150" height="100">
 
                             @error('banner_image')
                                 <small class="text-danger">
@@ -210,22 +207,6 @@
 
                         </div>
 
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>Form Image</label>
-
-                                <input type="file" name="form_image" class="form-control">
-
-                            </div>
-
-                            @if ($page->form_image)
-                                <img src="{{ asset($page->form_image) }}" width="180" class="img-thumbnail">
-                            @endif
-
-                        </div>  --}}
-
 
                         <div class="form-group col-md-6">
 
@@ -240,7 +221,47 @@
                                 <input type="file" class="custom-file-input" id="form_image" name="form_image"
                                     accept="image/*"
                                     onchange="
-                                    document.getElementById('uploaded_form_img').src =
+        this.closest('.form-group').querySelector('#uploaded_img').src =
+        window.URL.createObjectURL(this.files[0]);
+    ">
+
+                                <label class="custom-file-label" id="form-image-label" for="form_image">
+
+                                    {{ $page->form_image ?: 'Choose file' }}
+
+                                </label>
+
+                            </div>
+
+                            <img id="uploaded_img"
+                                src="{{ $page->form_image ? asset($page->form_image) : asset('img/upload_image.png') }}"
+                                width="150" height="100">
+
+                            @error('form_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+
+                        </div>
+
+
+
+
+                        {{--  <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>
+                                    Form Image
+                                </strong>
+                            </label>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="form_image" name="form_image"
+                                    accept="image/*"
+                                    onchange="
+                                    document.getElementById('uploaded_img').src =
                                     window.URL.createObjectURL(this.files[0]);
 
                                     document.getElementById('form-image-label').innerHTML =
@@ -253,9 +274,9 @@
 
                             </div>
 
-                            <img id="uploaded_form_img"
+                            <img id="uploaded_img"
                                 src="{{ $page->form_image ? asset($page->form_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" class="img-thumbnail">
+                                width="150" height="100">
 
                             @error('form_image')
                                 <small class="text-danger">
@@ -263,7 +284,7 @@
                                 </small>
                             @enderror
 
-                        </div>
+                        </div>  --}}
 
                         <div class="col-md-12">
 
