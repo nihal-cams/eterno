@@ -15,11 +15,11 @@ class OfferController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, DataTables $dataTables)
+    public function index(Request $request, DataTables $dataTables, $type)
     {
         if($request->ajax()){
         
-            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->orderBy('id','DESC');
+            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->addColumn('resort_name', function (Offer $offer) {
@@ -54,19 +54,19 @@ class OfferController extends Controller
                     . $offer->status->label()
                     . '</span>';
             })
-            ->addColumn('actions', function (Offer $offer) {
+            ->addColumn('actions', function (Offer $offer) use($type) {
                 return
-                    '<a href="' . route('admin.offers.show', $offer) . '" 
+                    '<a href="' . route('admin.offers.show', ['type' => $type, 'offer' => $offer]) . '" 
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
                     </a> 
-                    <a href="' . route('admin.offers.edit', $offer) . '" 
+                    <a href="' . route('admin.offers.edit', ['type' => $type, 'offer' => $offer]) . '" 
                         class="btn btn-sm" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
                     <a data-toggle="modal"
                         href="#delete-offer-modal"
-                        data-href="' . route('admin.offers.destroy', $offer) . '"
+                        data-href="' . route('admin.offers.destroy', ['type' => $type, 'offer' => $offer]) . '"
                         class="btn btn-sm offer-delete"
                         title="Delete">
                         <i class="fa fa-trash"></i>
@@ -75,31 +75,40 @@ class OfferController extends Controller
            ->rawColumns(['image', 'status', 'actions'])
            ->make(true);
         }
-        return view('admin.offers.index');
+        return view('admin.offers.index', compact('type'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($type)
     {
         $offer = new Offer();
         $resorts = Resort::where('status', Status::ACTIVE)
         ->orderBy('id', 'DESC')
         ->pluck('name', 'id');
 
-        return view('admin.offers.form', compact('offer', 'resorts'));
+        return view('admin.offers.form', compact('type', 'offer', 'resorts'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $type)
     {
         $validated = $request->validate([
-            'resort_id' => ['required', 'exists:resorts,id'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required'],
+            'resort_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:resorts,id',
+            ],
+            'title' => [
+                $type == 2 ? 'required' : 'nullable',
+                'string',
+                'max:255',
+            ],
+            'description' => [
+                $type == 2 ? 'required' : 'nullable',
+            ],
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
@@ -114,35 +123,36 @@ class OfferController extends Controller
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         Offer::create($validated);
 
-        return redirect()->route('admin.offers.index')->with('success', 'Data added successfully');
+        return redirect()->route('admin.offers.index', ['type' => $type])->with('success', 'Data added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Offer $offer)
+    public function show($type, Offer $offer)
     {
-        return view('admin.offers.show', compact('offer'));
+        return view('admin.offers.show', compact('type', 'offer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Offer $offer)
+    public function edit($type, Offer $offer)
     {
         $resorts = Resort::orderBy('id', 'DESC')
             ->pluck('name', 'id');
 
-        return view('admin.offers.form', compact('offer', 'resorts'));
+        return view('admin.offers.form', compact('type', 'offer', 'resorts'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Offer $offer)
+    public function update(Request $request, $type, Offer $offer)
     {
         $validated = $request->validate([
             'resort_id' => ['required', 'exists:resorts,id'],
@@ -169,13 +179,13 @@ class OfferController extends Controller
 
         $offer->update($validated);
 
-        return redirect()->route('admin.offers.index')->with('success', 'Data updated successfully');
+        return redirect()->route('admin.offers.index', ['type' => $type])->with('success', 'Data updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Offer $offer)
+    public function destroy($type, Offer $offer)
     {
         $offer->delete();
 

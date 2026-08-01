@@ -70,6 +70,7 @@
                                 request()->is('admin/welcome-section*') ||
                                 request()->is('admin/resorts*') ||
                                 request()->is('admin/video-section*') ||
+                                request()->is('admin/offers/1*') ||
                                 request()->is('admin/testimonials*');
             @endphp
 
@@ -111,6 +112,11 @@
                             Video
                         </a>
 
+                        <a class="collapse-item {{ request()->is('admin/offers/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.offers.index', 1) }}">
+                            Offers
+                        </a>
+
                         <a class="collapse-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"
                             href="{{ route('admin.testimonials.index') }}">
                             Testimonials
@@ -120,8 +126,8 @@
             </li>
 
             <li
-                class="nav-item {{ request()->is('admin/offers') || request()->is('admin/offers/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.offers.index') }}">
+                class="nav-item {{ request()->is('admin/offers/2') || request()->is('admin/offers/2/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.offers.index', 2) }}">
                     <i class="fa fa-tag"></i>
                     <span>Offers</span></a>
             </li>

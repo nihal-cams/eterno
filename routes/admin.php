@@ -49,7 +49,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
     Route::resource('galleries', GalleryController::class);
-    Route::resource('offers', OfferController::class);
+    Route::prefix('offers/{type}')
+    ->where(['type' => '1|2'])
+    ->group(function () {
+        Route::get('/', [OfferController::class, 'index'])->name('offers.index');
+        Route::get('/create', [OfferController::class, 'create'])->name('offers.create');
+        Route::post('/', [OfferController::class, 'store'])->name('offers.store');
+        Route::get('/{offer}', [OfferController::class, 'show'])->name('offers.show');
+        Route::get('/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+        Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
+        Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
+    });
     Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
         ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
