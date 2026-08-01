@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gallery extends Model
 {
     protected $fillable = [
+        'type',
         'resort_id',
         'gallery_category_id',
         'image',

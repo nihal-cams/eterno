@@ -8,7 +8,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-
+        @if($type !== '1')
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Title:</div>
                 <div class="col-md-9">{{ $banner->title }}</div>
@@ -20,7 +20,8 @@
                     {!! nl2br(e($banner->description)) !!}
                 </div>
             </div>
-
+        @endif
+        
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Image:</div>
                 <div class="col-md-9">
@@ -63,8 +64,8 @@
         </div>
 
         <div class="card-footer">
-            <a href="{{ route('admin.banners.index') }}" class="btn btn-secondary">Back</a>
-            <a href="{{ route('admin.banners.edit', $banner) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('admin.banners.index', ['type' => $type]) }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('admin.banners.edit', ['type' => $type, 'banner' => $banner]) }}" class="btn btn-primary">Edit</a>
         </div>
     </div>
 </div>

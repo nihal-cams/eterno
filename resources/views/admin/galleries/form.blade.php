@@ -12,7 +12,7 @@
             {{ $gallery->id ? 'Edit ' : 'Add ' }} Gallery
         </h1>
         
-        <form method="POST" action="{{ $gallery->id ? route('admin.galleries.update', $gallery) : route('admin.galleries.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ $gallery->id ? route('admin.galleries.update', ['type' => $type, 'gallery' => $gallery]) : route('admin.galleries.store', ['type' => $type]) }}" enctype="multipart/form-data">
         @csrf
         {{ $gallery->id ? method_field('PUT') : '' }}
         <div class="card shadow mb-4">
@@ -20,7 +20,7 @@
                 
                 <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Gallery</h3> -->
                 <div class="row">
-
+                @if($type === '2')
                     <div class="form-group col-md-6">
                         <label><strong>Resort <span class="text-danger">*</span></strong></label>
                         <select name="resort_id" id="resort_id" class="form-control">
@@ -52,6 +52,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                @endif
 
                     <div class="form-group col-md-6">
                         <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
@@ -100,7 +101,7 @@
                 <div class="row">
                     <div class="form-group col-6">
                     <button type="submit" class="btn btn-success mr-3">{{ $gallery->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.galleries.index') }}">Cancel</a>
+                    <a class="btn btn-secondary ml-3" href="{{ route('admin.galleries.index', ['type' => $type]) }}">Cancel</a>
                     </div>
                 </div>
             </div>

@@ -106,7 +106,7 @@ class TestimonialController extends Controller
             'status' => ['required', Rule::enum(Status::class)],
         ],
         [
-            'resort_id' => ['The resort field is required.'],
+            'resort_id.required' => ['The resort field is required.'],
         ]);
 
         $fileName = null;

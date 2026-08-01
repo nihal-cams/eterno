@@ -66,11 +66,12 @@
             <!-- Nav Item - Tables -->
 
             @php
-                $homeMenuOpen = request()->is('admin/banners*') ||
+                $homeMenuOpen = request()->is('admin/banners/1*') ||
                                 request()->is('admin/welcome-section*') ||
                                 request()->is('admin/resorts*') ||
                                 request()->is('admin/video-section*') ||
                                 request()->is('admin/offers/1*') ||
+                                request()->is('admin/galleries/1*') ||
                                 request()->is('admin/testimonials*');
             @endphp
 
@@ -92,8 +93,8 @@
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/banners*') ? 'active' : '' }}"
-                            href="{{ route('admin.banners.index') }}">
+                        <a class="collapse-item {{ request()->is('admin/banners/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.banners.index', 1) }}">
                             Banners
                         </a>
 
@@ -117,6 +118,11 @@
                             Offers
                         </a>
 
+                        <a class="collapse-item {{ request()->is('admin/galleries/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.galleries.index', 1) }}">
+                            Gallery
+                        </a>
+
                         <a class="collapse-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"
                             href="{{ route('admin.testimonials.index') }}">
                             Testimonials
@@ -125,15 +131,43 @@
                 </div>
             </li>
 
-            <li
-                class="nav-item {{ request()->is('admin/offers/2') || request()->is('admin/offers/2/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.offers.index', 2) }}">
+            @php
+                $offerMenuOpen = request()->is('admin/banners/2/1*') || request()->is('admin/offers/2*');
+            @endphp
+
+            <li class="nav-item {{ $offerMenuOpen ? 'active' : '' }}">
+                <a class="nav-link {{ $offerMenuOpen ? '' : 'collapsed' }}"
+                    href="#"
+                    data-toggle="collapse"
+                    data-target="#collapseOffer"
+                    aria-expanded="{{ $offerMenuOpen ? 'true' : 'false' }}"
+                    aria-controls="collapseOffer">
+
                     <i class="fa fa-tag"></i>
-                    <span>Offers</span></a>
+                    <span>Manage Offers</span>
+                </a>
+
+                <div id="collapseOffer"
+                    class="collapse {{ $offerMenuOpen ? 'show' : '' }}"
+                    aria-labelledby="headingOffer"
+                    data-parent="#accordionSidebar">
+
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('admin/banners/2/1*') ? 'active' : '' }}"
+                            href="{{ route('admin.banners.edit', ['type' => 2, 'banner' => 1]) }}">
+                            Banner
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/offers/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.offers.index', 2) }}">
+                            Offers
+                        </a>
+                    </div>
+                </div>
             </li>
 
             @php
-                $galleryMenuOpen = request()->is('admin/gallery-categories*') || request()->is('admin/galleries*');
+                $galleryMenuOpen = request()->is('admin/banners/3/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/galleries/2*');
             @endphp
 
             <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">
@@ -154,13 +188,18 @@
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('admin/banners/3/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.banners.edit', ['type' => 3, 'banner' => 2]) }}">
+                            Banner
+                        </a>
+
                         <a class="collapse-item {{ request()->is('admin/gallery-categories*') ? 'active' : '' }}"
                             href="{{ route('admin.gallery-categories.index') }}">
                             Category
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/galleries*') ? 'active' : '' }}"
-                            href="{{ route('admin.galleries.index') }}">
+                        <a class="collapse-item {{ request()->is('admin/galleries/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.galleries.index', 2) }}">
                             Gallery
                         </a>
                     </div>
@@ -210,7 +249,7 @@
 
 
             <li
-                class="nav-item {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'active' : '' }}">
+                class="nav-item {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/galleries/3*') ? 'active' : '' }}">
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseExperience">
@@ -222,21 +261,21 @@
                 </a>
 
                 <div id="collapseExperience"
-                    class="collapse {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/experience-gallery*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('admin/experiences*') || request()->is('admin/experience-items*') || request()->is('admin/galleries/3*') ? 'show' : '' }}"
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <a class="collapse-item" href="{{ route('admin.experiences.edit') }}">
-
                             Experience Page
-
                         </a>
 
                         <a class="collapse-item" href="{{ route('admin.experience-items.index') }}">
-
                             Experience Items
+                        </a>
 
+                        <a class="collapse-item" href="{{ route('admin.galleries.index', 3) }}">
+                            Gallery
                         </a>
 
 

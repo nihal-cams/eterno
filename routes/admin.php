@@ -48,7 +48,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('resorts', ResortController::class);
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
-    Route::resource('galleries', GalleryController::class);
+    Route::prefix('galleries/{type}')
+    ->where(['type' => '1|2|3'])
+    ->group(function () {
+        Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');
+        Route::get('/create', [GalleryController::class, 'create'])->name('galleries.create');
+        Route::post('/', [GalleryController::class, 'store'])->name('galleries.store');
+        Route::get('/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
+        Route::get('/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
+        Route::put('/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
+        Route::delete('/{gallery}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+    });
     Route::prefix('offers/{type}')
     ->where(['type' => '1|2'])
     ->group(function () {
@@ -68,7 +78,17 @@ Route::middleware('auth')->group(function () {
         ->name('video-section.edit');
     Route::put('video-section', [VideoSectionController::class, 'update'])
         ->name('video-section.update');
-    Route::resource('banners', BannerController::class);
+    Route::prefix('banners/{type}')
+    ->where(['type' => '1|2|3'])
+    ->group(function () {
+        Route::get('/', [BannerController::class, 'index'])->name('banners.index');
+        Route::get('/create', [BannerController::class, 'create'])->name('banners.create');
+        Route::post('/', [BannerController::class, 'store'])->name('banners.store');
+        Route::get('/{banner}', [BannerController::class, 'show'])->name('banners.show');
+        Route::get('/{banner}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+        Route::put('/{banner}', [BannerController::class, 'update'])->name('banners.update');
+        Route::delete('/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy');
+    });
 
 
     /*

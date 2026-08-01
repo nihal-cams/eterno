@@ -14,12 +14,13 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('type');
             $table->foreignId('resort_id')
-                ->constrained('resorts')
-                ->cascadeOnDelete();
+                ->nullable()
+                ->constrained('resorts');
             $table->foreignId('gallery_category_id')
-                ->constrained('gallery_categories')
-                ->cascadeOnDelete();
+                ->nullable()
+                ->constrained('gallery_categories');
             $table->string('image');
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();

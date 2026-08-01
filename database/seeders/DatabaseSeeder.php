@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             WelcomeSectionSeeder::class,
             VideoSectionSeeder::class,
+            OfferBannerSeerder::class,
+            GalleryBannerSeerder::class,
         ]);
     }
 }

@@ -12,7 +12,7 @@
             {{ $banner->id ? 'Edit ' : 'Add ' }} Banner
         </h1>
         
-        <form method="POST" action="{{ $banner->id ? route('admin.banners.update', $banner) : route('admin.banners.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ $banner->id ? route('admin.banners.update', ['type' => $type, 'banner' => $banner]) : route('admin.banners.store', ['type' => $type]) }}" enctype="multipart/form-data">
         @csrf
         {{ $banner->id ? method_field('PUT') : '' }}
         <div class="card shadow mb-4">
@@ -20,7 +20,7 @@
                 
                 <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Banner</h3> -->
                 <div class="row">
-
+                @if($type !== '1')
                     <div class="form-group col-md-6">
                         <label><strong>Title <span class="text-danger">*</span></strong></label>
                         <input type="text"
@@ -41,6 +41,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                @endif
 
                     <div class="form-group col-md-6">
                         <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
@@ -89,7 +90,7 @@
                 <div class="row">
                     <div class="form-group col-6">
                     <button type="submit" class="btn btn-success mr-3">{{ $banner->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.banners.index') }}">Cancel</a>
+                    <a class="btn btn-secondary ml-3" href="{{ route('admin.banners.index', ['type' => $type]) }}">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -102,22 +103,44 @@
 @endsection
 
 @push('style')
-
+<!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endpush
 
 @push('script')
-    <script type="text/javascript">
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function() {
-          var fileName = $(this).val().split("\\").pop();
-          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script>
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script>
-        document.getElementById('status').addEventListener('change', function () {
-            document.getElementById('status-text').textContent =
-                this.checked ? 'Active' : 'Inactive';
-        });
-    </script>
+<script>
+    @if(session('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
+    @if(session('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(session('warning'))
+        toastr.warning("{{ session('warning') }}");
+    @endif
+
+    @if(session('info'))
+        toastr.info("{{ session('info') }}");
+    @endif
+</script>
+
+<script type="text/javascript">
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+<script>
+    document.getElementById('status').addEventListener('change', function () {
+        document.getElementById('status-text').textContent =
+            this.checked ? 'Active' : 'Inactive';
+    });
+</script>
 @endpush

@@ -155,14 +155,27 @@ class OfferController extends Controller
     public function update(Request $request, $type, Offer $offer)
     {
         $validated = $request->validate([
-            'resort_id' => ['required', 'exists:resorts,id'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required'],
-            'button_text' => ['required', 'string'],
+            'resort_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:resorts,id',
+            ],
+            'title' => [
+                $type == 2 ? 'required' : 'nullable',
+                'string',
+                'max:255',
+            ],
+            'description' => [
+                $type == 2 ? 'required' : 'nullable',
+            ],
+            'button_text' => ['required', 'string', 'max:255'],
             'button_url' => ['required', 'url'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
+        ],
+        [
+            'resort_id.required' => ['The resort field is required.'],
         ]);
+
 
         $fileName = $offer->image;
         if ($request->hasFile('image')) {
@@ -176,6 +189,7 @@ class OfferController extends Controller
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         $offer->update($validated);
 

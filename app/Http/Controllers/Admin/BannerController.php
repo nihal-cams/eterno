@@ -14,11 +14,11 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, DataTables $dataTables)
+    public function index(Request $request, DataTables $dataTables, $type)
     {
         if($request->ajax()){
         
-            $query = Banner::select('title', 'image', 'status', 'created_at', 'id')->orderBy('id','DESC');
+            $query = Banner::select('title', 'image', 'status', 'created_at', 'id')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->editColumn('image', function (Banner $banner) {
@@ -37,47 +37,53 @@ class BannerController extends Controller
                     . $banner->status->label()
                     . '</span>';
             })
-            ->addColumn('actions', function (Banner $banner) {
+            ->addColumn('actions', function (Banner $banner) use ($type) {
                 return
-                    '<a href="' . route('admin.banners.show', $banner) . '" 
+                    '<a href="' . route('admin.banners.show', ['type' => $type, 'banner' => $banner]) . '" 
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
                     </a> 
-                    <a href="' . route('admin.banners.edit', $banner) . '" 
+                    <a href="' . route('admin.banners.edit', ['type' => $type, 'banner' => $banner]) . '" 
                         class="btn btn-sm" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
                     <a data-toggle="modal"
                         href="#delete-banner-modal"
-                        data-href="' . route('admin.banners.destroy', $banner) . '"
+                        data-href="' . route('admin.banners.destroy', ['type' => $type, 'banner' => $banner]) . '"
                         class="btn btn-sm banner-delete"
                         title="Delete">
                         <i class="fa fa-trash"></i>
                     </a>';
             })      
-           ->rawColumns(['image', 'status','actions'])
+           ->rawColumns(['image', 'status', 'actions'])
            ->make(true);
         }
-        return view('admin.banners.index');
+        return view('admin.banners.index', compact('type'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($type)
     {
         $banner = new Banner();
-        return view('admin.banners.form', compact('banner'));
+        return view('admin.banners.form', compact('type', 'banner'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $type)
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required'],
+             'title' => [
+                $type === '1' ? 'nullable' : 'required',
+                'string', 'max:255'
+            ],
+            'description' => [
+                $type === '1' ? 'nullable' : 'required',
+                'string'
+            ],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
@@ -90,39 +96,51 @@ class BannerController extends Controller
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         Banner::create($validated);
 
-        return redirect()->route('admin.banners.index')->with('success', 'Data added successfully');
+        return redirect()->route('admin.banners.index', ['type' => $type])->with('success', 'Data added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner)
+    public function show($type, Banner $banner)
     {
-        return view('admin.banners.show', compact('banner'));
+        return view('admin.banners.show', compact('type', 'banner'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Banner $banner)
+    public function edit($type, Banner $banner)
     {
-        return view('admin.banners.form', compact('banner'));
+        return view('admin.banners.form', compact('type', 'banner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update(Request $request, $type, Banner $banner)
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required'],
+            'title' => [
+                $type === '1' ? 'nullable' : 'required',
+                'string', 'max:255'
+            ],
+            'description' => [
+                $type === '1' ? 'nullable' : 'required',
+                'string'
+            ],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
+
+        $defaultImages = [
+            'offer-banner.jpg',
+            'gallery-banner.jpg',
+        ];
 
         $fileName = $banner->image;
         if ($request->hasFile('image')) {
@@ -130,22 +148,29 @@ class BannerController extends Controller
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/banners'), $fileName);
             
-            if ($banner->image && file_exists(public_path('uploads/banners/' . $banner->image))) {
+            if ($banner->image && !in_array($banner->image, $defaultImages) && file_exists(public_path('uploads/banners/' . $banner->image))) {
                 unlink(public_path('uploads/banners/' . $banner->image));
             }
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         $banner->update($validated);
 
-        return redirect()->route('admin.banners.index')->with('success', 'Data updated successfully');
+        if ($type === '2') {
+            return redirect()->route('admin.banners.edit', ['type' => $type, 'banner' => $banner])->with('success', 'Data updated successfully');
+        }
+        elseif ($type === '3') {
+            return redirect()->route('admin.banners.edit', ['type' => $type, 'banner' => $banner])->with('success', 'Data updated successfully');
+        }
+        return redirect()->route('admin.banners.index', ['type' => $type])->with('success', 'Data updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Banner $banner)
+    public function destroy($type, Banner $banner)
     {
         $banner->delete();
 

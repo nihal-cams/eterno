@@ -12,7 +12,7 @@
             </h1>
             </div>
             <div class="col-6 text-right">
-                <a href="{{route('admin.galleries.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
+                <a href="{{route('admin.galleries.create', ['type' => $type])}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
             </div>
         </div>
         <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
@@ -29,8 +29,10 @@
                     <table class="table table-bordered" id="gallery-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                            @if($type === '2')
                                 <th>Resort</th>
                                 <th>Category</th>
+                            @endif
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -117,11 +119,13 @@
          processing: true,
          serverSide: true,
 
-         ajax: '{{ route("admin.galleries.index") }}',
+         ajax: '{{ route("admin.galleries.index", ["type"=>$type]) }}',
 
          columns: [
+            @if($type === '2')
             { data: 'resort_name', name: 'resort_name' },
             { data: 'gallery_category_name', name: 'gallery_category_name' },
+            @endif
             { data: 'image', name: 'image' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}

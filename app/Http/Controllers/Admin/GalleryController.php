@@ -16,11 +16,11 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, DataTables $dataTables)
+    public function index(Request $request, DataTables $dataTables, $type)
     {
         if($request->ajax()){
         
-            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->orderBy('id','DESC');
+            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->addColumn('resort_name', function (Gallery $gallery) {
@@ -71,19 +71,19 @@ class GalleryController extends Controller
                     . $gallery->status->label()
                     . '</span>';
             })
-            ->addColumn('actions', function (Gallery $gallery) {
+            ->addColumn('actions', function (Gallery $gallery) use ($type) {
                 return
-                    '<a href="' . route('admin.galleries.show', $gallery) . '" 
+                    '<a href="' . route('admin.galleries.show', ['type' => $type, 'gallery' => $gallery]) . '" 
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
                     </a> 
-                    <a href="' . route('admin.galleries.edit', $gallery) . '" 
+                    <a href="' . route('admin.galleries.edit', ['type' => $type, 'gallery' => $gallery]) . '" 
                         class="btn btn-sm" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
                     <a data-toggle="modal"
                         href="#delete-gallery-modal"
-                        data-href="' . route('admin.galleries.destroy', $gallery) . '"
+                        data-href="' . route('admin.galleries.destroy', ['type' => $type, 'gallery' => $gallery]) . '"
                         class="btn btn-sm gallery-delete"
                         title="Delete">
                         <i class="fa fa-trash"></i>
@@ -92,13 +92,13 @@ class GalleryController extends Controller
            ->rawColumns(['image', 'status', 'actions'])
            ->make(true);
         }
-        return view('admin.galleries.index');
+        return view('admin.galleries.index', compact('type'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($type)
     {
         $gallery = new Gallery();
         
@@ -108,23 +108,29 @@ class GalleryController extends Controller
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
         ->pluck('name', 'id');
         
-        return view('admin.galleries.form', compact('gallery', 'resorts', 'galleryCategories'));
+        return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $type)
     {
         $validated = $request->validate([
-            'resort_id' => ['required', 'exists:resorts,id'],
-            'gallery_category_id' => ['required', 'exists:gallery_categories,id'],
+            'resort_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:resorts,id',
+            ],
+            'gallery_category_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:gallery_categories,id',
+            ],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ],
         [
-            'resort_id' => ['The resort field is required.'],
-            'gallery_category_id' => ['The category field is required.'],
+            'resort_id.required' => ['The resort field is required.'],
+            'gallery_category_id.required' => ['The category field is required.'],
         ]);
 
         $fileName = null;
@@ -135,24 +141,25 @@ class GalleryController extends Controller
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         Gallery::create($validated);
 
-        return redirect()->route('admin.galleries.index')->with('success', 'Data added successfully');
+        return redirect()->route('admin.galleries.index', ['type' => $type])->with('success', 'Data added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Gallery $gallery)
+    public function show($type, Gallery $gallery)
     {
-        return view('admin.galleries.show', compact('gallery'));
+        return view('admin.galleries.show', compact('type', 'gallery'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gallery $gallery)
+    public function edit($type, Gallery $gallery)
     {
         $resorts = Resort::where('status', Status::ACTIVE)
             ->orderBy('id', 'DESC')
@@ -161,17 +168,23 @@ class GalleryController extends Controller
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
             ->pluck('name', 'id');
         
-        return view('admin.galleries.form', compact('gallery', 'resorts', 'galleryCategories'));
+        return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, $type, Gallery $gallery)
     {
         $validated = $request->validate([
-            'resort_id' => ['required', 'exists:resorts,id'],
-            'gallery_category_id' => ['required', 'exists:gallery_categories,id'],
+            'resort_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:resorts,id',
+            ],
+            'gallery_category_id' => [
+                $type == 2 ? 'required' : 'nullable',
+                'exists:gallery_categories,id',
+            ],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
@@ -188,16 +201,17 @@ class GalleryController extends Controller
         }
 
         $validated['image'] = $fileName;
+        $validated['type'] = $type;
 
         $gallery->update($validated);
 
-        return redirect()->route('admin.galleries.index')->with('success', 'Data updated successfully');
+        return redirect()->route('admin.galleries.index', ['type' => $type])->with('success', 'Data updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gallery $gallery)
+    public function destroy($type, Gallery $gallery)
     {
         $gallery->delete();
 
