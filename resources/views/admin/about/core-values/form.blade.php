@@ -26,7 +26,7 @@
         </div>
 
 
-        @if ($errors->any())
+        {{--  @if ($errors->any())
 
             <div class="alert alert-danger">
 
@@ -40,7 +40,7 @@
 
             </div>
 
-        @endif
+        @endif  --}}
 
 
         <div class="card shadow mb-4">
@@ -73,6 +73,10 @@
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $coreValue->title) }}" required>
 
+                                @error('title')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
                             </div>
 
                         </div>
@@ -91,6 +95,10 @@
                                 <input type="number" name="sort_order" class="form-control"
                                     value="{{ old('sort_order', $coreValue->sort_order ?? 0) }}">
 
+                                @error('sort_order')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
                             </div>
 
                         </div>
@@ -106,47 +114,14 @@
 
                                 </label>
 
-                                <textarea name="description" rows="5" class="form-control">{{ old('description', $coreValue->description) }}</textarea>
-
+                                <textarea name="description" rows="5" class="form-control" required>{{ old('description', $coreValue->description) }}</textarea>
+                                @error('description')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                         </div>
 
-
-
-
-
-                        {{--  <div class="col-md-6">
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Status
-
-                                </label>
-
-                                <select name="status" class="form-control">
-
-                                    <option value="active"
-                                        {{ old('status', $coreValue->status?->value) == 'active' ? 'selected' : '' }}>
-
-                                        Active
-
-                                    </option>
-
-                                    <option value="inactive"
-                                        {{ old('status', $coreValue->status?->value) == 'inactive' ? 'selected' : '' }}>
-
-                                        Inactive
-
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>  --}}
 
 
                         <div class="form-group col-md-6">
@@ -208,3 +183,31 @@
     </div>
 
 @endsection
+
+@push('style')
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endpush
+
+@push('script')
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+@endpush

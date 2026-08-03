@@ -71,6 +71,10 @@
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $philosophy->title) }}" required>
 
+                                @error('title')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
                             </div>
 
                         </div>
@@ -88,6 +92,10 @@
                                 <input type="number" name="sort_order" class="form-control"
                                     value="{{ old('sort_order', $philosophy->sort_order ?? 0) }}">
 
+                                @error('sort_order')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
                             </div>
 
                         </div>
@@ -103,6 +111,10 @@
                                 </label>
 
                                 <textarea name="description" rows="5" class="form-control">{{ old('description', $philosophy->description) }}</textarea>
+
+                                @error('description')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
 
                             </div>
 
@@ -160,6 +172,7 @@
                                     </span>
                                 </label>
 
+
                             </div>
 
                         </div>
@@ -191,7 +204,34 @@
     </div>
 
 @endsection
+
+@push('style')
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endpush
+
 @push('script')
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+
     <script type="text/javascript">
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {

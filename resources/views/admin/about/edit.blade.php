@@ -17,14 +17,6 @@
         </div>
 
 
-        {{-- Success Message --}}
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-
         {{-- Validation Errors --}}
         @if ($errors->any())
 
@@ -42,14 +34,12 @@
 
         @endif
 
-
         {{-- Main Form --}}
         <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
             @method('PUT')
-
 
             {{-- =========================================================
                  BANNER SECTION
@@ -64,11 +54,9 @@
 
                 </div>
 
-
                 <div class="card-body">
 
                     <div class="row">
-
                         {{-- Banner Title --}}
                         <div class="col-md-6">
 
@@ -78,33 +66,28 @@
 
                             <input type="text" name="banner_title" class="form-control"
                                 value="{{ old('banner_title', $about->banner_title) }}">
-
+                            @error('banner_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
 
                         {{-- Banner Image --}}
                         <div class="form-group col-md-6">
-
                             <label>
                                 <strong>
                                     Banner Image
                                 </strong>
                             </label>
-
-
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
                                     accept="image/*">
-
                                 <label class="custom-file-label" id="banner-image-label" for="banner_image">
 
                                     {{ $about->banner_image ? basename($about->banner_image) : 'Choose file' }}
-
                                 </label>
-
                             </div>
-
 
                             <img id="uploaded_img"
                                 src="{{ $about->banner_image ? asset($about->banner_image) : asset('img/upload_image.png') }}"
@@ -128,7 +111,9 @@
                             </label>
 
                             <textarea name="banner_description" rows="5" class="form-control">{{ old('banner_description', $about->banner_description) }}</textarea>
-
+                            @error('banner_description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
                     </div>
@@ -136,7 +121,6 @@
                 </div>
 
             </div>
-
 
 
             {{-- =========================================================
@@ -154,31 +138,29 @@
 
 
                 <div class="card-body">
-
                     <div class="row">
-
                         {{-- Intro Title --}}
                         <div class="col-md-6">
-
                             <label>
                                 Title
                             </label>
-
                             <input type="text" name="intro_title" class="form-control"
                                 value="{{ old('intro_title', $about->intro_title) }}">
+
+                            @error('intro_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
 
                         {{-- Intro Image --}}
                         <div class="form-group col-md-6">
-
                             <label>
                                 <strong>
                                     Intro Image
                                 </strong>
                             </label>
-
 
                             <div class="custom-file mb-3">
 
@@ -186,9 +168,7 @@
                                     accept="image/*">
 
                                 <label class="custom-file-label" id="intro-image-label" for="intro_image">
-
                                     {{ $about->intro_image ? basename($about->intro_image) : 'Choose file' }}
-
                                 </label>
 
                             </div>
@@ -197,7 +177,6 @@
                             <img id="uploaded_img"
                                 src="{{ $about->intro_image ? asset($about->intro_image) : asset('img/upload_image.png') }}"
                                 width="150" height="100" alt="Intro Image">
-
 
                             @error('intro_image')
                                 <small class="text-danger">
@@ -216,7 +195,9 @@
                             </label>
 
                             <textarea name="intro_description" rows="6" class="form-control">{{ old('intro_description', $about->intro_description) }}</textarea>
-
+                            @error('intro_description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
                     </div>
@@ -255,6 +236,10 @@
                             <input type="text" name="cta_title" class="form-control"
                                 value="{{ old('cta_title', $about->cta_title) }}">
 
+                            @error('cta_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+
                         </div>
 
 
@@ -268,6 +253,10 @@
                             <input type="text" name="cta_button_text" class="form-control"
                                 value="{{ old('cta_button_text', $about->cta_button_text) }}">
 
+                            @error('cta_button_text')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+
                         </div>
 
 
@@ -280,6 +269,10 @@
 
                             <input type="text" name="cta_button_link" class="form-control"
                                 value="{{ old('cta_button_link', $about->cta_button_link) }}">
+
+                            @error('cta_button_link')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
 
                         </div>
 
@@ -299,7 +292,8 @@
                                 <input type="file" class="custom-file-input" id="cta_background_image"
                                     name="cta_background_image" accept="image/*">
 
-                                <label class="custom-file-label" id="cta-background-image-label" for="cta_background_image">
+                                <label class="custom-file-label" id="cta-background-image-label"
+                                    for="cta_background_image">
 
                                     {{ $about->cta_background_image ? basename($about->cta_background_image) : 'Choose file' }}
 
@@ -330,7 +324,9 @@
                             </label>
 
                             <textarea name="cta_description" rows="5" class="form-control">{{ old('cta_description', $about->cta_description) }}</textarea>
-
+                            @error('cta_description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
 
@@ -393,7 +389,34 @@
 
 
 
+
+
+@push('style')
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endpush
+
 @push('script')
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
     <script>
         // Banner Image
         $('#banner_image').on('change', function() {
