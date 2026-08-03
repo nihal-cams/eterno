@@ -148,7 +148,7 @@ sup {
 }
 
 a {
-    color: #0c4e97;
+    color: #8e734b;
     text-decoration: none;
     background-color: transparent
 }
@@ -2432,8 +2432,8 @@ a.btn.disabled,fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #0c4e97;
-    border-color: #0c4e97;
+    background-color: #8e734b;
+    border-color: #8e734b;
 }
 
 .btn-primary:hover {
@@ -4763,8 +4763,8 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #0c4e97;
-    border-color: #0c4e97;
+    background-color: #8e734b;
+    border-color: #8e734b;
 }
 
 .page-item.disabled .page-link {
@@ -9737,7 +9737,7 @@ a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover {
 }
 
 .text-primary {
-    color: #0c4da2!important;
+    color: #8e734b!important;
 }
 
 a.text-primary:focus,a.text-primary:hover {
@@ -10155,7 +10155,7 @@ a:focus {
 }
 
 .text-gray-300 {
-    color: #0c4e97!important;
+    color: #8e734b!important;
 }
 
 .text-gray-400 {
@@ -10193,7 +10193,7 @@ a:focus {
 }
 
 .border-left-primary {
-    border-left: .25rem solid #0c4da2!important;
+    border-left: .25rem solid #8e734b!important;
 }
 
 .border-bottom-primary {
@@ -10551,7 +10551,7 @@ a:focus {
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,.sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-    color: #4e73df;
+    color: #8e734b;
     font-weight: 700
 }
 
@@ -10873,7 +10873,7 @@ a:focus {
 
 .sidebar-dark .nav-item .nav-link:active,.sidebar-dark .nav-item .nav-link:focus,.sidebar-dark .nav-item .nav-link:hover {
     color: #0e0e0e;
-    background: #0c4e97;
+    background: #8e734b;
 }
 
 .sidebar-dark .nav-item .nav-link:active i,.sidebar-dark .nav-item .nav-link:focus i,.sidebar-dark .nav-item .nav-link:hover i {
@@ -11577,7 +11577,7 @@ body.sidebar-toggled footer.sticky-footer {
     top: -7px;
 }
 .nav-item.active{
-        background: #0C4DA2;
+        background: #8e734b;
 }
 .sidebar-dark .nav-item.active .nav-link span{
     color:#ffffff !important;

@@ -7,7 +7,7 @@ use App\Models\Banner;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class OfferBannerSeeder extends Seeder
+class BannerHomeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,10 +17,10 @@ class OfferBannerSeeder extends Seeder
         Banner::updateOrCreate(
             ['id' => 1],
             [
-                'type' => 2,
-                'title' => 'Exclusive Offers Await',
-                'description' => 'Discover limited-time offers designed to make your getaway even more memorable',
-                'image'  => 'offer-banner.jpg',
+                'type' => 1,
+                'title' => 'An Invitation to the new world',
+                'description' => 'Eterno Hotels & Resorts brings together exceptional destinations where nature, comfort and unforgettable experiences come together.',
+                'image' => null,
                 'status' => Status::ACTIVE->value,
             ]
         );

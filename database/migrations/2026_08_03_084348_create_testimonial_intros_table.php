@@ -12,15 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer_intros', function (Blueprint $table) {
+        Schema::create('testimonial_intros', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('type');
             $table->string('sub_title')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->string('banner_title')->nullable();
-            $table->text('banner_description')->nullable();
-            $table->string('banner_image')->nullable();
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offer_intros');
+        Schema::dropIfExists('testimonial_intros');
     }
 };

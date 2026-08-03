@@ -3,26 +3,26 @@
 namespace Database\Seeders;
 
 use App\Enums\Status;
-use App\Models\OfferIntro;
+use App\Models\GalleryIntro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class OfferIntroSeeder extends Seeder
+class GalleryIntroSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        OfferIntro::updateOrCreate(
+        GalleryIntro::updateOrCreate(
             ['type' => 2],
             [
                 'sub_title' => null,
                 'title' => null,
                 'description' => null,
-                'banner_title' => 'Exclusive Offers Await',
-                'banner_description' => 'Discover limited-time offers designed to make your getaway even more memorable',
-                'banner_image'  => 'offer-banner.jpg',
+                'banner_title' => 'Every Picture Tells a Story',
+                'banner_description' => 'Explore breathtaking moments from our resorts through carefully curated imagery',
+                'banner_image'  => 'gallery-banner.jpg',
                 'status' => Status::ACTIVE->value,
             ]
         );

@@ -76,15 +76,9 @@ class BannerController extends Controller
     public function store(Request $request, $type)
     {
         $validated = $request->validate([
-             'title' => [
-                $type === '1' ? 'nullable' : 'required',
-                'string', 'max:255'
-            ],
-            'description' => [
-                $type === '1' ? 'nullable' : 'required',
-                'string'
-            ],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'image' => [$type === '2' ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -116,6 +110,13 @@ class BannerController extends Controller
      */
     public function edit($type, Banner $banner)
     {
+        if (
+            ($type === '1' && $banner->id !== 1) ||
+            ($type === '2' && $banner->id === 1)
+        ) {
+            abort(404);
+        }
+
         return view('admin.banners.form', compact('type', 'banner'));
     }
 
@@ -124,23 +125,25 @@ class BannerController extends Controller
      */
     public function update(Request $request, $type, Banner $banner)
     {
+        if (
+            ($type === '1' && $banner->id !== 1) ||
+            ($type === '2' && $banner->id === 1)
+        ) {
+            abort(404);
+        }
+        
         $validated = $request->validate([
             'title' => [
-                $type === '1' ? 'nullable' : 'required',
+                $type === '1' ? 'required' : 'nullable',
                 'string', 'max:255'
             ],
             'description' => [
-                $type === '1' ? 'nullable' : 'required',
+                $type === '1' ? 'required' : 'nullable',
                 'string'
             ],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
-
-        $defaultImages = [
-            'offer-banner.jpg',
-            'gallery-banner.jpg',
-        ];
 
         $fileName = $banner->image;
         if ($request->hasFile('image')) {
@@ -148,7 +151,7 @@ class BannerController extends Controller
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/banners'), $fileName);
             
-            if ($banner->image && !in_array($banner->image, $defaultImages) && file_exists(public_path('uploads/banners/' . $banner->image))) {
+            if ($banner->image && file_exists(public_path('uploads/banners/' . $banner->image))) {
                 unlink(public_path('uploads/banners/' . $banner->image));
             }
         }
@@ -158,10 +161,7 @@ class BannerController extends Controller
 
         $banner->update($validated);
 
-        if ($type === '2') {
-            return redirect()->route('admin.banners.edit', ['type' => $type, 'banner' => $banner])->with('success', 'Data updated successfully');
-        }
-        elseif ($type === '3') {
+        if ($type === '1') {
             return redirect()->route('admin.banners.edit', ['type' => $type, 'banner' => $banner])->with('success', 'Data updated successfully');
         }
         return redirect()->route('admin.banners.index', ['type' => $type])->with('success', 'Data updated successfully');

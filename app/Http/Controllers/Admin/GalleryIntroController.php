@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OfferIntro;
+use App\Models\GalleryIntro;
 use Illuminate\Http\Request;
 
-class OfferIntroController extends Controller
+class GalleryIntroController extends Controller
 {
     public function edit($type)
     {
-        $offerIntro = OfferIntro::where('type', $type)->firstOrFail();
+        $galleryIntro = GalleryIntro::where('type', $type)->firstOrFail();
 
-        return view('admin.offer-intro.form', compact('type', 'offerIntro'));
+        return view('admin.gallery-intro.form', compact('type', 'galleryIntro'));
     }
 
     public function update(Request $request, $type)
     {
-        $offerIntro = OfferIntro::firstOrFail();
+        $galleryIntro = GalleryIntro::firstOrFail();
 
         $validated = $request->validate([
             'sub_title' => [
@@ -52,23 +52,23 @@ class OfferIntroController extends Controller
             'status' => ['required'],
         ]);
 
-        $fileName = $offerIntro->banner_image;
+        $fileName = $galleryIntro->banner_image;
         if ($request->hasFile('banner_image')) {
             $file = $request->file('banner_image');
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/offer-intros'), $fileName);
+            $file->move(public_path('uploads/gallery-intros'), $fileName);
             
-            if ($offerIntro->banner_image && $offerIntro->banner_image !== 'offer-banner.jpg' && file_exists(public_path('uploads/offer-intros/' . $offerIntro->banner_image))) {
-                unlink(public_path('uploads/offer-intros/' . $offerIntro->banner_image));
+            if ($galleryIntro->banner_image && $galleryIntro->banner_image !== 'gallery-banner.jpg' && file_exists(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image))) {
+                unlink(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image));
             }
         }
 
         $validated['banner_image'] = $fileName;
         $validated['type'] = $type;
-        $offerIntro->update($validated);
+        $galleryIntro->update($validated);
 
         return redirect()
-            ->route('admin.offer-intro.edit', $type)
+            ->route('admin.gallery-intro.edit', $type)
             ->with('success', 'Data updated successfully.');
     }
 }

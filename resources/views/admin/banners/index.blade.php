@@ -12,7 +12,7 @@
             </h1>
             </div>
             <div class="col-6 text-right">
-                <a href="{{route('admin.banners.create', ['type' => $type])}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
+                <a href="{{route('admin.banners.create', ['type' => $type])}}" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i> Add</a>
             </div>
         </div>
         <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
@@ -30,7 +30,6 @@
                         <thead>
                             <tr>
                                 <th>Image</th>
-                                @if($type !== '1') <th>Title</th> @endif
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -120,7 +119,6 @@
 
          columns: [
             { data: 'image', name: 'image' },
-            @if($type !== '1'){ data: 'title', name: 'title' }, @endif
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 
