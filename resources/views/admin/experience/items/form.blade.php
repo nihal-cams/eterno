@@ -1,6 +1,11 @@
 @extends('admin.layouts.app')
 
-@section('title', ($experience->exists ? 'Edit' : 'Add') . ' Experience ' . ($type == 1 ? '(Home Page)' : '(Inner
+@section('title',
+    ($experience->exists ? 'Edit' : 'Add') .
+    ' Experience ' .
+    ($type == 1
+    ? '(Home Page)'
+    : '(Inner
     Page)'))
 
 @section('content')
@@ -26,7 +31,7 @@
 
         </div>
 
-        @if ($errors->any())
+        {{--  @if ($errors->any())
 
             <div class="alert alert-danger">
 
@@ -40,7 +45,7 @@
 
             </div>
 
-        @endif
+        @endif  --}}
 
 
         <div class="card shadow mb-4">
@@ -68,6 +73,10 @@
                                     <input type="text" name="subtitle" class="form-control"
                                         value="{{ old('subtitle', $experience->subtitle) }}">
 
+                                    @error('subtitle')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+
                                 </div>
 
                             </div>
@@ -82,6 +91,10 @@
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $experience->title) }}" required>
 
+                                @error('title')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
                             </div>
 
                         </div>
@@ -93,7 +106,9 @@
                         <label>Description</label>
 
                         <textarea name="description" rows="5" class="form-control">{{ old('description', $experience->description) }}</textarea>
-
+                        @error('description')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     @if ($type == 2)
@@ -112,7 +127,9 @@
                             </small>
 
                             <textarea name="experience_list" rows="6" class="form-control">{{ old('experience_list', $experience->experience_list) }}</textarea>
-
+                            @error('experience_list')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     @endif
 
@@ -206,6 +223,10 @@
                                     <input type="number" name="sort_order" class="form-control"
                                         value="{{ old('sort_order', $experience->sort_order ?? 0) }}">
 
+                                    @error('sort_order')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+
                                 </div>
 
                             </div>
@@ -274,7 +295,34 @@
     </div>
 
 @endsection
+
+@push('style')
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+@endpush
+
 @push('script')
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
+
+        @if (session('info'))
+            toastr.info("{{ session('info') }}");
+        @endif
+    </script>
+
     <script type="text/javascript">
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
