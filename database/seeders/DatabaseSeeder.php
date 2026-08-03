@@ -16,11 +16,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
+            BannerHomeSeeder::class,
             WelcomeSectionSeeder::class,
             VideoSectionSeeder::class,
-            OfferBannerSeeder::class,
-            GalleryBannerSeeder::class,
+            OfferIntroHomeSeeder::class,
             OfferIntroSeeder::class,
+            GalleryIntroHomeSeeder::class,
+            GalleryIntroSeeder::class,
+            TestimonialIntroHomeSeeder::class,
         ]);
     }
 }

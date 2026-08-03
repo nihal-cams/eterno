@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer_intros', function (Blueprint $table) {
+        Schema::create('gallery_intros', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('type');
             $table->string('sub_title')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offer_intros');
+        Schema::dropIfExists('gallery_intros');
     }
 };

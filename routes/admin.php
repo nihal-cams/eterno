@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\VideoSectionController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OfferIntroController;
 use App\Http\Controllers\Admin\PhilosophyController;
+use App\Http\Controllers\Admin\GalleryIntroController;
+use App\Http\Controllers\Admin\TestimonialIntroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,11 +73,30 @@ Route::middleware('auth')->group(function () {
         Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
         Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
     });
-    Route::get('offer-intro', [OfferIntroController::class, 'edit'])
-        ->name('offer-intro.edit');
-    Route::put('offer-intro', [OfferIntroController::class, 'update'])
-        ->name('offer-intro.update');
-    Route::get('welcome-section', [OfferIntroController::class, 'edit'])
+    Route::prefix('offer-intro/{type}')
+    ->where(['type' => '1|2'])
+    ->group(function () {
+        Route::get('/', [OfferIntroController::class, 'edit'])
+            ->name('offer-intro.edit');
+
+        Route::put('/', [OfferIntroController::class, 'update'])
+            ->name('offer-intro.update');
+    });
+    Route::prefix('gallery-intro/{type}')
+    ->where(['type' => '1|2'])
+    ->group(function () {
+        Route::get('/', [GalleryIntroController::class, 'edit'])
+            ->name('gallery-intro.edit');
+
+        Route::put('/', [GalleryIntroController::class, 'update'])
+            ->name('gallery-intro.update');
+    });
+    Route::get('testimonial-intro', [TestimonialIntroController::class, 'edit'])
+            ->name('testimonial-intro.edit');
+
+        Route::put('testimonial-intro', [TestimonialIntroController::class, 'update'])
+            ->name('testimonial-intro.update');
+    Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
         ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
         ->name('welcome-section.update');
@@ -84,15 +105,14 @@ Route::middleware('auth')->group(function () {
     Route::put('video-section', [VideoSectionController::class, 'update'])
         ->name('video-section.update');
     Route::prefix('banners/{type}')
-    ->where(['type' => '1|2|3'])
     ->group(function () {
-        Route::get('/', [BannerController::class, 'index'])->name('banners.index');
-        Route::get('/create', [BannerController::class, 'create'])->name('banners.create');
-        Route::post('/', [BannerController::class, 'store'])->name('banners.store');
-        Route::get('/{banner}', [BannerController::class, 'show'])->name('banners.show');
-        Route::get('/{banner}/edit', [BannerController::class, 'edit'])->name('banners.edit');
-        Route::put('/{banner}', [BannerController::class, 'update'])->name('banners.update');
-        Route::delete('/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy');
+        Route::get('/', [BannerController::class, 'index'])->where('type', '2')->name('banners.index');
+        Route::get('/create', [BannerController::class, 'create'])->where('type', '2')->name('banners.create');
+        Route::post('/', [BannerController::class, 'store'])->where('type', '2')->name('banners.store');
+        Route::get('/{banner}', [BannerController::class, 'show'])->where('type', '2')->name('banners.show');
+        Route::get('/{banner}/edit', [BannerController::class, 'edit'])->where(['type' => '1|2'])->name('banners.edit');
+        Route::put('/{banner}', [BannerController::class, 'update'])->where(['type' => '1|2'])->name('banners.update');
+        Route::delete('/{banner}', [BannerController::class, 'destroy'])->where('type', '2')->name('banners.destroy');
     });
 
 

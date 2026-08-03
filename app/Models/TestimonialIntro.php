@@ -5,16 +5,12 @@ namespace App\Models;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
-class OfferIntro extends Model
+class TestimonialIntro extends Model
 {
     protected $fillable = [
-        'type',
         'sub_title',
         'title',
         'description',
-        'banner_title',
-        'banner_description',
-        'banner_image',
         'status',
     ];
 

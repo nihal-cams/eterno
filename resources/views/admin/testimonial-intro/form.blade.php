@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', ($banner->id ? 'Edit ' : 'Add ') . 'Banner')
+@section('title', ($testimonialIntro->id ? 'Edit ' : 'Add ') . 'Testimonial Intro')
 @section("content")
 
 @use(App\Enums\Status)
@@ -9,24 +9,35 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $banner->id ? 'Edit ' : 'Add ' }} Banner
+            Testimonial Intro
         </h1>
         
-        <form method="POST" action="{{ $banner->id ? route('admin.banners.update', ['type' => $type, 'banner' => $banner]) : route('admin.banners.store', ['type' => $type]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.testimonial-intro.update') }}" enctype="multipart/form-data">
         @csrf
-        {{ $banner->id ? method_field('PUT') : '' }}
+        {{ method_field('PUT') }}
         <div class="card shadow mb-4">
             <div class="card-body">
                 
-                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Banner</h3> -->
+                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Testimonial Intro</h3> -->
                 <div class="row">
-                @if($type === '1')
+                    <div class="form-group col-md-6">
+                        <label><strong>Sub Title <span class="text-danger">*</span></strong></label>
+                        <input type="text"
+                            name="sub_title"
+                            class="form-control"
+                            placeholder="Special Testimonials"
+                            value="{{ old('sub_title', $testimonialIntro->sub_title) }}">
+                        @error('sub_title')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
                     <div class="form-group col-md-6">
                         <label><strong>Title <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="title"
                             class="form-control"
-                            value="{{ old('title', $banner->title) }}">
+                            value="{{ old('title', $testimonialIntro->title) }}">
                         @error('title')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -36,32 +47,12 @@
                         <label><strong>Description <span class="text-danger">*</span></strong></label>
                         <textarea name="description"
                                 rows="3"
-                                class="form-control">{{ old('description', $banner->description) }}</textarea>
+                                class="form-control">{{ old('description', $testimonialIntro->description) }}</textarea>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                @else
-                    <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
-                        <div class="custom-file mb-3">
-                            <input type="file"
-                                class="custom-file-input"
-                                id="image"
-                                name="image"
-                                accept="image/*"
-                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="image">
-                                {{ $banner->image ?: 'Choose file' }}
-                            </label>
-                        </div>
-                        <img id="uploaded_img"
-                            src="{{ $banner->image ? asset('uploads/banners/'.$banner->image) : asset('img/upload_image.png') }}">
-                        @error('image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                @endif
+
                     <div class="form-group col-6">
                         <label><strong>Status</strong></label>
                         <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
@@ -72,11 +63,11 @@
                                 id="status"
                                 name="status"
                                 value="{{ Status::ACTIVE->value }}"
-                                {{ old('status', $banner->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                {{ old('status', $testimonialIntro->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
                             >
                             <label class="custom-control-label" for="status">
                                 <span id="status-text">
-                                    {{ old('status', $banner->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    {{ old('status', $testimonialIntro->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
                                 </span>
                             </label>
                         </div>
@@ -88,14 +79,13 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="form-group col-6">
-                    <button type="submit" class="btn btn-success mr-3">{{ $banner->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.banners.index', ['type' => $type]) }}">Cancel</a>
+                    <button type="submit" class="btn btn-success mr-3">Update</button>
+                    {{-- <a class="btn btn-secondary ml-3" href="{{ route('admin.testimonial-intro.edit') }}">Cancel</a> --}}
                     </div>
                 </div>
             </div>
         </div>
         </form>
-        
         
     </div>
     <!-- /.container-fluid -->
