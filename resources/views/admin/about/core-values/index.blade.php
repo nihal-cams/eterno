@@ -14,11 +14,11 @@
 
             </h1>
 
-            <a href="{{ route('admin.core-values.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('admin.core-values.create') }}" class="btn btn-primary">
 
                 <i class="fa fa-plus"></i>
 
-                Add Core Value
+                Add
 
             </a>
 

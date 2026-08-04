@@ -12,11 +12,11 @@
                 Experience Items {{ $type == 1 ? '(Home Page)' : '(Inner Page)' }}
             </h1>
 
-            <a href="{{ route('admin.experience-items.create', $type) }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('admin.experience-items.create', $type) }}" class="btn btn-primary">
 
                 <i class="fa fa-plus"></i>
 
-                Add Experience
+                Add
 
             </a>
 

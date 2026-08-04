@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
         using: function () {
             // Web routes
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+                ->group(base_path('routes/front.php'));
 
             // Admin routes
             Route::middleware('web')

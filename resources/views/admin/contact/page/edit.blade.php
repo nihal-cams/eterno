@@ -346,7 +346,7 @@
 
                         <i class="fa fa-save"></i>
 
-                        Update Contact Page
+                        Update
 
                     </button>
 

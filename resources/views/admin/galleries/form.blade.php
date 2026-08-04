@@ -100,7 +100,7 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="form-group col-6">
-                    <button type="submit" class="btn btn-success mr-3">{{ $gallery->id ? 'Update' : 'Save' }}</button>
+                    <button type="submit" class="btn btn-primary mr-3">{{ $gallery->id ? 'Update' : 'Save' }}</button>
                     <a class="btn btn-secondary ml-3" href="{{ route('admin.galleries.index', ['type' => $type]) }}">Cancel</a>
                     </div>
                 </div>

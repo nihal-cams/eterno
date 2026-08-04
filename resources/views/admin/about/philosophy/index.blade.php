@@ -12,11 +12,11 @@
                 Philosophy
             </h1>
 
-            <a href="{{ route('admin.philosophies.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('admin.philosophies.create') }}" class="btn btn-primary">
 
                 <i class="fa fa-plus"></i>
 
-                Add Philosophy
+                Add
 
             </a>
 

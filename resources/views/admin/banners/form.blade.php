@@ -88,8 +88,10 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="form-group col-6">
-                    <button type="submit" class="btn btn-success mr-3">{{ $banner->id ? 'Update' : 'Save' }}</button>
+                    <button type="submit" class="btn btn-primary mr-3">{{ $banner->id ? 'Update' : 'Save' }}</button>
+                    @if($type === '2')
                     <a class="btn btn-secondary ml-3" href="{{ route('admin.banners.index', ['type' => $type]) }}">Cancel</a>
+                    @endif    
                     </div>
                 </div>
             </div>

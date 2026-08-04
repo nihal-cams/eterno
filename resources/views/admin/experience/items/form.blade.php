@@ -276,7 +276,7 @@
 
                         <i class="fa fa-save"></i>
 
-                        {{ $experience->exists ? 'Update Experience' : 'Save Experience' }}
+                        {{ $experience->exists ? 'Update' : 'Save' }}
 
                     </button>
 
