@@ -71,77 +71,62 @@
                                 <p class="subhead"> {!! nl2br(e($page->form_description)) !!} </p>
                             @endif
 
-                            {{--  <form id="contactForm">
-                                <div class="form-group">
-                                    <input type="text" class="form-control-custom" placeholder="Your Name" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="email" class="form-control-custom" placeholder="Email" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="tel" class="form-control-custom" placeholder="Phone Number">
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control-custom" required>
-                                        <option value="" disabled selected>Interested Resort</option>
-                                        <option value="resort1">Camellia & Elettaria</option>
-                                        <option value="resort2">Capithans Dale</option>
-                                        <option value="resort3">Amber Paradise</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="form-control-custom" placeholder="Your Message" required></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary-custom btn-custom w-100">Send Your
-                                    Message</button>
-                            </form>  --}}
 
 
-                            <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST"> @csrf
+
+                            <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
+                                @csrf
+
                                 <!-- Name -->
-                                <div class="form-group"> <input type="text" name="name" class="form-control-custom"
-                                        placeholder="Your Name" value="{{ old('name') }}" required> @error('name')
-                                        <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div> <!-- Email -->
-                                <div class="form-group"> <input type="email" name="email" class="form-control-custom"
-                                        placeholder="Email" value="{{ old('email') }}" required> @error('email')
-                                        <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div> <!-- Phone -->
-                                <div class="form-group"> <input type="tel" name="phone" class="form-control-custom"
-                                        placeholder="Phone Number" value="{{ old('phone') }}" required> @error('phone')
-                                        <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div> <!-- Resort -->
-                                <div class="form-group"> <select name="resort" class="form-control-custom" required>
-                                        <option value="" disabled {{ old('resort') ? '' : 'selected' }}> Interested
-                                            Resort </option>
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control-custom" placeholder="Your Name"
+                                        value="{{ old('name') }}" required>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control-custom" placeholder="Email"
+                                        value="{{ old('email') }}" required>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <input type="tel" name="phone" class="form-control-custom"
+                                        placeholder="Phone Number" value="{{ old('phone') }}" required>
+                                </div>
+
+                                <!-- Resort -->
+                                <div class="form-group">
+                                    <select name="resort" class="form-control-custom" required>
+                                        <option value="" disabled {{ old('resort') ? '' : 'selected' }}>
+                                            Interested Resort
+                                        </option>
 
                                         @foreach ($resorts as $resort)
                                             <option value="{{ $resort->name }}"
                                                 {{ old('resort') == $resort->name ? 'selected' : '' }}>
-                                                {{ $resort->name }} </option>
+                                                {{ $resort->name }}
+                                            </option>
                                         @endforeach
-                                    </select> @error('resort')
-                                        <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
-                                </div> <!-- Message -->
+                                    </select>
+                                </div>
+
+                                <!-- Message -->
                                 <div class="form-group">
-                                    <textarea name="message" class="form-control-custom" placeholder="Your Message" required>{{ old('message') }}</textarea> @error('message')
-                                        <small class="text-danger"> {{ $message }} </small>
-                                    @enderror
+                                    <textarea name="message" class="form-control-custom" placeholder="Your Message" required>{{ old('message') }}</textarea>
                                 </div>
 
                                 <!-- Submit -->
-                                <button type="submit" class="btn btn-primary-custom btn-custom w-100"> Send Your Message
+                                <button type="submit" id="submitBtn" class="btn btn-primary-custom btn-custom w-100">
+                                    <span id="submitText">Send Your Message</span>
+                                    <span id="submitLoader" style="display: none;">
+                                        Sending...
+                                    </span>
                                 </button>
+
+
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -224,25 +209,123 @@
     </div>
 @endsection
 
-
 @push('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        .swal2-popup {
+            font-family: inherit;
+        }
+    </style>
 @endpush
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    @if (session('success'))
-        <script>
-            toastr.success(@json(session('success')));
-        </script>
-    @endif
+            const form = document.getElementById('contactForm');
 
-    @if (session('error'))
-        <script>
-            toastr.error(@json(session('error')));
-        </script>
-    @endif
+            if (!form) {
+                return;
+            }
 
+            form.addEventListener('submit', async function(e) {
+
+                e.preventDefault();
+
+                const submitBtn = document.getElementById('submitBtn');
+                const submitText = document.getElementById('submitText');
+                const submitLoader = document.getElementById('submitLoader');
+
+                submitBtn.disabled = true;
+                submitText.style.display = 'none';
+                submitLoader.style.display = 'inline';
+
+                try {
+
+                    const formData = new FormData(form);
+
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+
+                        await Swal.fire({
+                            icon: 'success',
+                            title: 'Thank You!',
+                            text: data.message,
+                            confirmButtonText: 'OK'
+                        });
+
+                        form.reset();
+
+                    } else if (response.status === 422) {
+
+                        let errorMessages = '';
+
+                        if (data.errors) {
+
+                            Object.values(data.errors).forEach(function(messages) {
+
+                                messages.forEach(function(message) {
+
+                                    errorMessages +=
+                                        '<div style="margin-bottom: 8px;">' +
+                                        message +
+                                        '</div>';
+
+                                });
+
+                            });
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Validation Error',
+                            html: errorMessages,
+                            confirmButtonText: 'OK'
+                        });
+
+                    } else {
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: data.message ||
+                                'Something went wrong. Please try again.',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+
+                } catch (error) {
+
+                    console.error('Contact form error:', error);
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Something Went Wrong',
+                        text: 'Unable to submit your enquiry. Please try again.',
+                        confirmButtonText: 'OK'
+                    });
+
+                } finally {
+
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitLoader.style.display = 'none';
+                }
+
+            });
+
+        });
+    </script>
 @endpush

@@ -127,8 +127,11 @@ class FrontController extends Controller
         // Send confirmation email to user
         Mail::to($enquiry->email)->send(new ContactEnquiryUserMail($enquiry));
 
-        return redirect()
-            ->route('contact')
-            ->with('success', 'Thank you for contacting us. We will get back to you shortly.');
+        // return redirect()
+        //     ->route('contact')
+        //     ->with('success', 'Thank you for contacting us. We will get back to you shortly.');
+
+
+        return response()->json(['success' => true, 'message' => 'Your enquiry has been submitted successfully. We will get back to you soon.',]);
     }
 }
