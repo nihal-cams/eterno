@@ -18,9 +18,21 @@ class ContactPage extends Model
         'form_title',
         'form_description',
         'form_image',
+        // Contact Details
         'phone',
+        'phone_1',
+        'phone_2',
+        'phone_3',
         'email',
+        'email_1',
+        'email_2',
         'address',
+        'address_1',
         'map_iframe',
+        // Social Media
+        'twitter_url',
+        'youtube_url',
+        'instagram_url',
+        'facebook_url',
     ];
 }

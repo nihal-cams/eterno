@@ -1,6 +1,7 @@
 /* ==========================================================================
    1. VARIABLES & BASE STYLES
    ========================================================================== */
+
 :root {
     --color-primary: #8e734b;
     --color-primary-dark: #5c4f40;
@@ -13,7 +14,6 @@
     --off-white: #f8f6ef;
     --font-heading: 'Libre Baskerville', serif;
     --font-body: 'Inter', sans-serif;
-
     /* Typography */
     --fs-h1: clamp(1.6rem, 1.2rem + 3vw, 4.375rem);
     --fs-h2: clamp(1.4rem, 1.12rem + 1.6vw, 3rem);
@@ -93,6 +93,7 @@ h3 {
 /* ==========================================================================
    2. UTILITIES & TYPOGRAPHY
    ========================================================================== */
+
 .color-primary {
     color: var(--color-primary) !important;
 }
@@ -138,7 +139,10 @@ h3 {
 /* ==========================================================================
    3. GLOBAL COMPONENTS
    ========================================================================== */
+
+
 /* Buttons */
+
 .btn-custom {
     padding: 14px 36px;
     border-radius: 25px;
@@ -183,8 +187,12 @@ h3 {
     border: 1px solid #fff;
 }
 
+
 /* Scroll Reveal Animations */
+
+
 /* Scroll Reveal Animations */
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -257,7 +265,10 @@ h3 {
 /* ==========================================================================
    4. NAVIGATION & MODALS
    ========================================================================== */
+
+
 /* Navbar */
+
 .navbar {
     padding: 1rem 0;
     transition: all 0.3s ease;
@@ -360,7 +371,9 @@ h3 {
     padding-top: 0 !important;
 }
 
+
 /* Mobile navbar when menu is opened */
+
 .navbar.menu-open {
     background: #fff;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -382,7 +395,9 @@ h3 {
     color: var(--color-primary);
 }
 
+
 /* mobile toggler css start here */
+
 .navbar-toggler {
     border: none;
     background: transparent;
@@ -392,6 +407,7 @@ h3 {
 
 
 /* Default = hamburger */
+
 .navbar-toggler-icon {
     background-image: none;
     position: relative;
@@ -402,7 +418,9 @@ h3 {
     transition: 0.3s;
 }
 
+
 /* create 3 lines */
+
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
     content: "";
@@ -422,7 +440,9 @@ h3 {
     top: 7px;
 }
 
+
 /* OPEN STATE → turn into X */
+
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -437,7 +457,9 @@ h3 {
     top: 0;
 }
 
+
 /* Default */
+
 .navbar .navbar-toggler-icon,
 .navbar .navbar-toggler-icon::before,
 .navbar .navbar-toggler-icon::after {
@@ -445,7 +467,9 @@ h3 {
     transition: all .3s ease;
 }
 
+
 /* Sticky */
+
 .navbar.scrolled .navbar-toggler-icon,
 .navbar.scrolled .navbar-toggler-icon::before,
 .navbar.scrolled .navbar-toggler-icon::after,
@@ -455,13 +479,18 @@ h3 {
     background: var(--color-primary);
 }
 
+
 /* Keep the X visible */
+
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
+
+
 /* ==========================================================================
    1. VARIABLES & BASE STYLES
    ========================================================================== */
+
 :root {
     --color-primary: #8e734b;
     --color-primary-dark: #5c4f40;
@@ -474,7 +503,6 @@ h3 {
     --off-white: #f8f6ef;
     --font-heading: 'Libre Baskerville', serif;
     --font-body: 'Inter', sans-serif;
-
     /* Typography */
     --fs-h1: clamp(1.6rem, 1.2rem + 3vw, 4.375rem);
     --fs-h2: clamp(1.4rem, 1.12rem + 1.6vw, 3rem);
@@ -554,6 +582,7 @@ h3 {
 /* ==========================================================================
    2. UTILITIES & TYPOGRAPHY
    ========================================================================== */
+
 .color-primary {
     color: var(--color-primary) !important;
 }
@@ -599,7 +628,10 @@ h3 {
 /* ==========================================================================
    3. GLOBAL COMPONENTS
    ========================================================================== */
+
+
 /* Buttons */
+
 .btn-custom {
     padding: 14px 36px;
     border-radius: 25px;
@@ -644,8 +676,12 @@ h3 {
     border: 1px solid #fff;
 }
 
+
 /* Scroll Reveal Animations */
+
+
 /* Scroll Reveal Animations */
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -718,7 +754,10 @@ h3 {
 /* ==========================================================================
    4. NAVIGATION & MODALS
    ========================================================================== */
+
+
 /* Navbar */
+
 .navbar {
     padding: 1rem 0;
     transition: all 0.3s ease;
@@ -821,7 +860,9 @@ h3 {
     padding-top: 0 !important;
 }
 
+
 /* Mobile navbar when menu is opened */
+
 .navbar.menu-open {
     background: #fff;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -843,7 +884,9 @@ h3 {
     color: var(--color-primary);
 }
 
+
 /* mobile toggler css start here */
+
 .navbar-toggler {
     border: none;
     background: transparent;
@@ -853,6 +896,7 @@ h3 {
 
 
 /* Default = hamburger */
+
 .navbar-toggler-icon {
     background-image: none;
     position: relative;
@@ -863,7 +907,9 @@ h3 {
     transition: 0.3s;
 }
 
+
 /* create 3 lines */
+
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
     content: "";
@@ -883,7 +929,9 @@ h3 {
     top: 7px;
 }
 
+
 /* OPEN STATE → turn into X */
+
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -898,7 +946,9 @@ h3 {
     top: 0;
 }
 
+
 /* Default */
+
 .navbar .navbar-toggler-icon,
 .navbar .navbar-toggler-icon::before,
 .navbar .navbar-toggler-icon::after {
@@ -906,7 +956,9 @@ h3 {
     transition: all .3s ease;
 }
 
+
 /* Sticky */
+
 .navbar.scrolled .navbar-toggler-icon,
 .navbar.scrolled .navbar-toggler-icon::before,
 .navbar.scrolled .navbar-toggler-icon::after,
@@ -916,7 +968,9 @@ h3 {
     background: var(--color-primary);
 }
 
+
 /* Keep the X visible */
+
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -926,7 +980,6 @@ h3 {
 
 .mega-dropdown {
     position: static;
-
 }
 
 .mega-menu {
@@ -943,7 +996,6 @@ h3 {
     transform: none;
     transition: opacity .2s ease, visibility .2s ease;
     transform-origin: top;
-
     z-index: 999;
 }
 
@@ -956,7 +1008,6 @@ h3 {
     left: 0;
     top: -55px;
     z-index: 1000;
-
 }
 
 .navbar.scrolled .mega-menu::after {
@@ -966,16 +1017,10 @@ h3 {
     width: 45%;
 }
 
-
 @media (min-width: 992px) {
-
-
     .mega-dropdown>.nav-link {
         position: relative;
     }
-
-
-
     .mega-dropdown:hover .mega-menu {
         opacity: 1;
         visibility: visible;
@@ -984,35 +1029,26 @@ h3 {
 }
 
 .mega-resort-list {
-
     list-style: none;
     padding: 0;
     margin: 0;
-
 }
 
 .mega-resort-list li {
-
     margin-bottom: 30px;
-
 }
 
 .mega-resort-list a {
-
     color: #fff;
     text-decoration: none;
     font-size: 26px;
     font-family: var(--font-heading);
-
     display: inline-block;
     position: relative;
-
     transition: .3s;
-
 }
 
 .mega-resort-list a::after {
-
     content: "";
     position: absolute;
     left: 0;
@@ -1021,61 +1057,48 @@ h3 {
     height: 2px;
     background: var(--color-primary);
     transition: .3s;
-
 }
 
 .mega-resort-list a:hover,
 .mega-resort-list a.active {
-
     color: var(--color-primary);
-
 }
 
 .mega-resort-list a:hover::after,
 .mega-resort-list a.active::after {
-
     width: 100%;
-
 }
 
 .mega-image img {
-
     width: 100%;
-     height: 330px;
+    height: 330px;
     object-fit: cover;
     object-position: center;
-
 }
 
 .mega-content {
-
     color: #fff;
-
 }
 
 .mega-content h2 {
-
     font-family: var(--font-heading);
     margin-bottom: 10px;
-
 }
 
 .mega-content h5 {
-
     color: var(--color-primary);
     margin-bottom: 25px;
-
 }
 
 .mega-content p {
-
     line-height: 1.8;
     color: var(--color-white);
     margin-bottom: 0px;
-
 }
 
+
 /* Book Now Modal */
+
 .book-modal-overlay {
     position: fixed;
     top: 0;
@@ -1188,7 +1211,10 @@ h3 {
 /* ==========================================================================
    5. PAGE: HOME
    ========================================================================== */
+
+
 /* Hero Section */
+
 .hero-section {
     position: relative;
     height: 100vh;
@@ -1245,7 +1271,9 @@ h3 {
     color: #fff;
 }
 
+
 /* Welcome Section */
+
 .welcome-section {
     padding: 120px 0 0 0;
     background-color: var(--color-white);
@@ -1310,7 +1338,6 @@ h3 {
 }
 
 
-
 /* ==========================================================
    Resorts Section
 ========================================================== */
@@ -1325,7 +1352,6 @@ h3 {
     }
 }
 
-
 .resort-tabs {
     display: flex;
     justify-content: space-between;
@@ -1333,7 +1359,6 @@ h3 {
     margin-bottom: 50px;
     padding-bottom: 15px;
     border-bottom: 1px solid #e5e5e5;
-
     /* Horizontal Scroll */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -1349,17 +1374,13 @@ h3 {
     background: none;
     border: none;
     cursor: pointer;
-
     color: var(--color-primary);
     font-size: 16px;
     font-weight: 500;
-
     padding-bottom: 15px;
     margin-bottom: -16px;
-
     border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
-
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -1376,14 +1397,12 @@ h3 {
 .resort-content .subtitle {
     display: block;
     margin-bottom: 2rem;
-
     color: var(--color-primary);
     font-size: 16px;
 }
 
 .resort-content p {
     margin-bottom: 3rem;
-
     color: var(--color-text-light);
     font-size: 16px;
     line-height: 1.6;
@@ -1416,14 +1435,15 @@ h3 {
         opacity: 0;
         transform: translateY(10px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+
 /* Mobile */
+
 @media (max-width: 767.98px) {
     .resort-tabs {
         justify-content: flex-start;
@@ -1433,15 +1453,15 @@ h3 {
     }
 }
 
+
 /* Tablet */
+
 @media (max-width: 991px) {
     .resort-tabs {
         justify-content: flex-start;
         gap: 24px;
     }
 }
-
-
 
 .resort-image {
     position: relative;
@@ -1469,7 +1489,9 @@ h3 {
     border: 1px solid #ccc;
 }
 
+
 /* Mobile only */
+
 @media (max-width: 991px) {
     .swipe-indicator {
         display: flex;
@@ -1485,12 +1507,10 @@ h3 {
         transform: translateX(-6px);
         opacity: .5;
     }
-
     50% {
         transform: translateX(6px);
         opacity: 1;
     }
-
     100% {
         transform: translateX(-6px);
         opacity: .5;
@@ -1499,6 +1519,7 @@ h3 {
 
 
 /* Experiences Section */
+
 .experience-main-card {
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -1508,7 +1529,6 @@ h3 {
     display: flex;
     flex-direction: column;
 }
-
 
 .experience-main-card p {
     font-size: 18px;
@@ -1558,7 +1578,9 @@ h3 {
     margin-bottom: 0;
 }
 
+
 /* Video Section */
+
 .video-section {
     position: relative;
     height: 740px;
@@ -1615,7 +1637,9 @@ h3 {
     backdrop-filter: blur(5px) !important;
 }
 
+
 /* Offers Section */
+
 .offer-card {
     position: relative;
     overflow: hidden;
@@ -1634,7 +1658,9 @@ h3 {
     left: 38px;
 }
 
+
 /* Gallery Section (Home) */
+
 .gallery-section {
     background-color: var(--color-white);
     overflow: hidden;
@@ -1695,7 +1721,9 @@ h3 {
     margin-top: 100px;
 }
 
+
 /* Testimonials Section */
+
 .testimonials-section {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/testimonial-bg-1.jpg) center / cover no-repeat;
     position: relative;
@@ -1771,8 +1799,6 @@ h3 {
     object-fit: cover;
 }
 
-
-
 .author-name {
     font-size: 18px;
     color: var(--color-primary);
@@ -1818,7 +1844,9 @@ h3 {
     will-change: transform;
 }
 
+
 /* Newsletter Section */
+
 .newsletter-section {
     padding: 60px 0;
     background-color: var(--color-cream);
@@ -1857,7 +1885,10 @@ h3 {
 /* ==========================================================================
    6. PAGE: ABOUT US
    ========================================================================== */
+
+
 /* Hero Banner */
+
 .hero-banner {
     position: relative;
     width: 100%;
@@ -1877,10 +1908,10 @@ h3 {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/offer-hero-bg.jpg) center/cover no-repeat;
 }
 
-.contact-banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/contact-hero-bg.jpg) center/cover no-repeat;
-}
 
+/* .contact-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/contact-hero-bg.jpg) center/cover no-repeat;
+} */
 
 .hero-banner::before {
     content: '';
@@ -1936,7 +1967,9 @@ h3 {
     color: var(--color-white);
 }
 
+
 /* Intro Section */
+
 .intro-section {
     max-width: 1320px;
     margin: 80px auto;
@@ -1964,7 +1997,9 @@ h3 {
     flex: 1;
 }
 
+
 /* Philosophy Section */
+
 .philosophy-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -2006,7 +2041,9 @@ h3 {
     color: var(--color-text);
 }
 
+
 /* Core Values Section */
+
 .core-values-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -2092,7 +2129,9 @@ h3 {
     line-height: 1.65;
 }
 
+
 /* CTA Section */
+
 .cta-section {
     position: relative;
     width: 100%;
@@ -2166,7 +2205,9 @@ h3 {
     transform: translateY(-2px);
 }
 
+
 /* SVG Mountain Edge */
+
 .mountain-edge {
     display: block;
     width: 100%;
@@ -2184,11 +2225,14 @@ h3 {
 /* ==========================================================================
    7. PAGE: GALLERY
    ========================================================================== */
+
 .gallery-section-space {
     padding: clamp(3.125rem, 2.2rem + 2vw, 4.375rem) 0 clamp(7.5rem, 5rem + 6vw, 12.5rem);
 }
 
+
 /* Resort Selector */
+
 .resort-selector {
     margin-bottom: 70px;
     max-width: 600px;
@@ -2219,7 +2263,9 @@ h3 {
     box-shadow: 0 0 0 0.2rem rgba(142, 115, 75, 0.25);
 }
 
+
 /* Category Filter */
+
 .category-filter {
     display: flex;
     flex-wrap: wrap;
@@ -2247,7 +2293,9 @@ h3 {
     color: var(--color-white);
 }
 
+
 /* Gallery Grid */
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2283,7 +2331,9 @@ h3 {
     display: none;
 }
 
+
 /* Lightbox */
+
 .lightbox {
     display: none;
     position: fixed;
@@ -2380,6 +2430,7 @@ h3 {
 /* ==========================================================================
    8. PAGE: CONTACT
    ========================================================================== */
+
 .contact-section {
     padding: 100px 0px 200px 0px;
 }
@@ -2478,7 +2529,9 @@ textarea.form-control-custom {
     resize: vertical;
 }
 
+
 /* Contact Info Styles */
+
 .contact-info-section {
     margin-bottom: 80px;
 }
@@ -2541,7 +2594,9 @@ textarea.form-control-custom {
     color: var(--color-primary);
 }
 
+
 /* Map Styles */
+
 .map-section {
     margin-top: 60px;
 }
@@ -2563,6 +2618,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    9. PAGE: EXPERIENCES
    ========================================================================== */
+
 .exp-list {
     list-style: inside;
     padding: 0;
@@ -2619,7 +2675,9 @@ textarea.form-control-custom {
     margin-left: -30px;
 }
 
+
 /* Mountain Background */
+
 .mountain-bg {
     position: relative;
     overflow: visible;
@@ -2636,7 +2694,9 @@ textarea.form-control-custom {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/exp-bg.png) center bottom / cover no-repeat;
 }
 
+
 /* Experience Gallery Section */
+
 .img-gallery {
     padding-bottom: clamp(80px, 18vw, 250px);
 }
@@ -2669,6 +2729,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    10. PAGE: OFFERS
    ========================================================================== */
+
 .offer-resort-select-wrapper {
     max-width: 520px;
     margin: 0 auto 60px;
@@ -2702,7 +2763,9 @@ textarea.form-control-custom {
     padding: 10px;
 }
 
+
 /* Package Cards */
+
 .package-col {
     margin-bottom: 54px;
     transition: all 0.4s ease;
@@ -2754,7 +2817,9 @@ textarea.form-control-custom {
     font-size: 13.5px;
 }
 
+
 /* No Results & Filter Info */
+
 .no-results {
     text-align: center;
     padding: 80px 20px;
@@ -2796,6 +2861,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    11. FOOTER
    ========================================================================== */
+
 .footer {
     background-color: var(--color-cream);
     color: var(--color-primary);
@@ -3016,6 +3082,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    12. GLOBAL OVERFLOW FIXES
    ========================================================================== */
+
 html,
 body {
     overflow-x: hidden !important;
@@ -3053,16 +3120,16 @@ section {
    13. RESPONSIVE STYLES
    ========================================================================== */
 
+
 /* Large Desktops */
+
 @media (max-width: 1399px) {
     .welcome-img-left {
         left: -46%;
     }
-
     .welcome-img-right {
         right: -46%;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         max-width: 327px;
@@ -3070,28 +3137,26 @@ section {
     .mega-image img {
         height: auto;
     }
-
     .mega-resort-list a {
         font-size: 20px;
     }
-
     .mega-content h3 {
         font-size: var(--fs-h4);
         margin-bottom: 1rem;
     }
 }
 
+
 /* Laptops / Small Desktops */
+
 @media (max-width: 1199px) {
     .mb-180 {
         margin-bottom: 140px;
     }
-
     .nav-link {
         font-size: 14px;
         margin: 0 12px;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -3103,7 +3168,6 @@ section {
         max-width: 300px;
         margin: 0 auto;
     }
-
     .welcome-card {
         padding: 60px 30px !important;
         min-height: auto;
@@ -3111,35 +3175,28 @@ section {
         gap: 30px;
         max-width: 88%;
     }
-
     .footer-bottom {
         justify-content: center;
     }
-
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
-
     .img-height {
         height: 450px;
     }
-
     .exp-section .row:nth-child(odd) .exp-card {
         margin-left: 0px;
     }
-
     .exp-section .row:nth-child(even) .exp-card {
         margin-right: 0px;
     }
-
     .exp-img-wrapper {
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-
     .exp-card {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
@@ -3148,171 +3205,142 @@ section {
     }
 }
 
+
 /* Tablets (Landscape) & Small Laptops */
+
 @media (max-width: 991px) {
     .mb-180 {
         margin-bottom: 100px;
     }
-
-
     .nav-link {
         padding-bottom: 0px;
         margin-bottom: 10px;
         display: inline-block;
     }
-
     .nav-link {
         font-size: 16px;
     }
-
     .hero-content h1 {
         font-size: 2.5rem;
     }
-
     .welcome-card {
         padding: 60px 180px;
         min-height: 420px;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         width: 180px;
     }
-
     .welcome-img-left img,
     .welcome-img-right img {
         height: 280px;
     }
-
     .welcome-img-left {
         left: -30px;
     }
-
     .welcome-img-right {
         right: -30px;
     }
-
     .welcome-content h2 {
         font-size: 2.5rem;
     }
-
     .experience-main-card {
         margin-bottom: 20px;
     }
-
     .resort-content p {
         margin-bottom: 22px;
     }
-
     .resort-content .subtitle {
         margin-bottom: 18px;
     }
-
     .resort-content-mt {
         margin-top: 26px;
     }
-
     .resort-img-mt {
         margin-top: 10px;
     }
-
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 300px;
     }
-
     .testimonials-section {
         padding-bottom: 135px !important;
     }
-
     .footer-logo-area {
         padding-right: 0;
         margin-bottom: 10px;
     }
-
     .footer-main-row {
         --bs-gutter-x: 1.5rem;
     }
-
     /* Merged from 992px */
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .contact-image-wrapper {
         min-height: 400px;
         margin-bottom: 30px;
     }
-
     .contact-info-col:not(:last-child)::after {
         display: none;
     }
-
     .exp-card-left,
     .exp-card-right {
         margin: 20px 0 0 0;
     }
-
     .img-height {
         height: 350px;
     }
-
     .hero-title {
         font-size: 1.8rem;
     }
-
     .section-title {
         font-size: 1.5rem;
     }
-
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
 }
 
+
 /* Tablets (Portrait) */
+
 @media (max-width: 900px) {
     .intro-section {
         flex-direction: column;
     }
-
     .intro-image img {
         height: 100%;
     }
-
     .philosophy-cards {
         grid-template-columns: 1fr;
     }
-
     .core-values-content {
         flex-direction: column;
     }
-
     .core-values-image img {
         height: 350px;
     }
-
     .hero-content h1 {
         font-size: 2.2rem;
     }
 }
 
+
 /* Mobile Devices (Large) */
+
 @media (max-width: 767px) {
     .mb-180 {
         margin-bottom: 70px;
     }
-
     .section-space {
         padding-bottom: 62px;
         padding-top: 62px;
     }
-
     .section-space-bottom {
         padding-bottom: 62px;
     }
-
     .welcome-card {
         max-width: 100%;
         padding: 40px 20px !important;
@@ -3320,11 +3348,9 @@ section {
         flex-direction: column;
         gap: 30px;
     }
-
     .welcome-section {
         padding: 40px 0 0 0;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -3335,312 +3361,249 @@ section {
         width: 100%;
         max-width: 300px;
     }
-
     .welcome-img-left img,
     .welcome-img-right img {
         height: 220px;
     }
-
     .welcome-content h2 {
         font-size: 2.2rem;
     }
-
     .experience-main-card p {
         font-size: 16px;
     }
-
     .experience-main-card h3 {
         margin-bottom: 15px;
     }
-
     .experience-main-card {
         padding: 40px 20px;
     }
-
     .experience-main-card p {
         margin-bottom: 27px;
     }
-
     .experience-main-card {
         margin-bottom: 0px;
     }
-
     .experience-card {
         padding: 20px;
     }
-
     .offer-card a {
         position: absolute;
         bottom: 40px;
         left: 30px;
     }
-
     .hero-content h1 {
         font-size: 2rem;
     }
-
     .hero-content {
         padding-bottom: 50px;
     }
-
     .navbar .navbar-brand img {
         max-width: 110px;
     }
-
     .resort-tabs {
         gap: 20px;
     }
-
     .resort-tab {
         padding-bottom: 6px;
         margin-bottom: -3px;
     }
-
     .newsletter-form {
         flex-direction: column;
     }
-
     .footer-bottom {
         flex-direction: column;
         text-align: center;
     }
-
     .testimonial-slide {
         width: 300px;
     }
-
     .testimonial-slider-wrapper::before,
     .testimonial-slider-wrapper::after {
         width: 40px;
     }
-
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 260px;
     }
-
     .gallery-slide-short {
         margin-top: 20px;
     }
-
-
     .book-modal {
         padding: 30px 20px;
     }
-
     .book-modal h3 {
         font-size: 1.4rem;
     }
-
     .book-modal-item img {
         height: 160px;
     }
-
     .testimonial-slide {
         max-width: 100%;
         width: 85vw;
     }
-
     .testimonial-slide .testimonial-card-offset {
         display: none !important;
     }
-
     .testimonial-card {
         margin-bottom: 0;
     }
-
     /* Merged from 768px */
     .contact-form-section {
         padding: 30px 20px;
     }
-
     .contact-header {
         margin-bottom: 50px;
     }
-
     .contact-section {
         padding-top: 80px;
         padding-bottom: 80px;
     }
-
     .contact-image-wrapper {
         min-height: 300px;
     }
-
     .contact-info-item {
         border-bottom: 1px solid #e0d5c7;
         padding-bottom: 30px;
         margin-bottom: 30px;
     }
-
     .contact-info-col:last-child .contact-info-item {
         border-bottom: none;
         margin-bottom: 0;
     }
-
     /* Merged from Experience page 767px */
     .hero-section {
         padding: 50px 0 40px;
     }
-
     .hero-title {
         font-size: 1.5rem;
     }
-
     .video-section {
         position: relative;
         height: 500px;
     }
-
     .exp-section {
         padding: 20px 0;
     }
-
     .exp-card {
         padding: 30px 25px;
     }
-
     .img-height {
         height: 280px;
     }
-
     .newsletter-form input {
         width: 100%;
     }
-
     .newsletter-form .btn-custom {
         width: 100%;
         text-align: center;
     }
-
     .footer-logo-img img {
         max-width: 120px;
     }
 }
 
-/* Mobile Devices (Small) */
-@media (max-width: 600px) {
 
+/* Mobile Devices (Small) */
+
+@media (max-width: 600px) {
     .book-modal-item img {
         height: 140px;
     }
-
     .book-modal-overlay {
         height: auto;
     }
-
     .book-modal-grid {
         flex-direction: column;
         gap: 15px;
     }
-
     .hero-banner {
         height: 380px;
     }
-
     .hero-content h1 {
         font-size: 1.8rem;
     }
-
     .breadcrumb {
         right: 20px;
         bottom: 15px;
     }
-
     .intro-section {
         margin: 50px auto;
     }
-
     .cta-section {
         padding: 80px 20px;
     }
-
     .video-section {
         position: relative;
         height: 400px;
     }
-
     .offer-card a {
         position: absolute;
         bottom: 20px;
         left: 22px;
     }
-
     .section-label {
         font-size: 14px;
     }
-
     h2 {
         line-height: 1.4;
     }
-
     .hero-content p {
         font-size: 16px;
     }
-
     .btn-custom {
         padding: 10px 26px;
         font-size: 15px;
     }
-
     .subhead {
         margin-bottom: 1.8rem;
     }
 }
 
+
 /* Mobile Devices (Extra Small) */
+
 @media (max-width: 575px) {
     .mb-180 {
         margin-bottom: 50px;
     }
-
     .gallery-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
     }
-
     .category-filter {
         gap: 8px;
     }
-
     .category-btn {
         padding: 8px 16px;
         font-size: 13px;
     }
-
     .lightbox-nav {
         font-size: 35px;
         padding: 10px;
     }
-
     .lightbox-prev {
         left: 5px;
     }
-
     .lightbox-next {
         right: 5px;
     }
-
     .img-height {
         height: 240px;
     }
-
     .exp-card {
         padding: 25px 20px;
     }
-
     .experience-main-card {
         padding: 30px 20px;
     }
-
     .experience-icon {
         margin-bottom: 2rem;
     }
-
-
 }
 
+
 /* Book Now Modal */
+
 .book-modal-overlay {
     position: fixed;
     top: 0;
@@ -3753,7 +3716,10 @@ section {
 /* ==========================================================================
    5. PAGE: HOME
    ========================================================================== */
+
+
 /* Hero Section */
+
 .hero-section {
     position: relative;
     height: 100vh;
@@ -3810,7 +3776,9 @@ section {
     color: #fff;
 }
 
+
 /* Welcome Section */
+
 .welcome-section {
     padding: 120px 0 0 0;
     background-color: var(--color-white);
@@ -3875,7 +3843,6 @@ section {
 }
 
 
-
 /* ==========================================================
    Resorts Section
 ========================================================== */
@@ -3890,7 +3857,6 @@ section {
     }
 }
 
-
 .resort-tabs {
     display: flex;
     justify-content: space-between;
@@ -3898,7 +3864,6 @@ section {
     margin-bottom: 50px;
     padding-bottom: 15px;
     border-bottom: 1px solid #e5e5e5;
-
     /* Horizontal Scroll */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -3914,17 +3879,13 @@ section {
     background: none;
     border: none;
     cursor: pointer;
-
     color: var(--color-primary);
     font-size: 16px;
     font-weight: 500;
-
     padding-bottom: 15px;
     margin-bottom: -16px;
-
     border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
-
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -3941,14 +3902,12 @@ section {
 .resort-content .subtitle {
     display: block;
     margin-bottom: 2rem;
-
     color: var(--color-primary);
     font-size: 16px;
 }
 
 .resort-content p {
     margin-bottom: 3rem;
-
     color: var(--color-text-light);
     font-size: 16px;
     line-height: 1.6;
@@ -3981,14 +3940,15 @@ section {
         opacity: 0;
         transform: translateY(10px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+
 /* Mobile */
+
 @media (max-width: 767.98px) {
     .resort-tabs {
         justify-content: flex-start;
@@ -3998,15 +3958,15 @@ section {
     }
 }
 
+
 /* Tablet */
+
 @media (max-width: 991px) {
     .resort-tabs {
         justify-content: flex-start;
         gap: 24px;
     }
 }
-
-
 
 .resort-image {
     position: relative;
@@ -4034,7 +3994,9 @@ section {
     border: 1px solid #ccc;
 }
 
+
 /* Mobile only */
+
 @media (max-width: 991px) {
     .swipe-indicator {
         display: flex;
@@ -4050,12 +4012,10 @@ section {
         transform: translateX(-6px);
         opacity: .5;
     }
-
     50% {
         transform: translateX(6px);
         opacity: 1;
     }
-
     100% {
         transform: translateX(-6px);
         opacity: .5;
@@ -4064,6 +4024,7 @@ section {
 
 
 /* Experiences Section */
+
 .experience-main-card {
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -4073,7 +4034,6 @@ section {
     display: flex;
     flex-direction: column;
 }
-
 
 .experience-main-card p {
     font-size: 18px;
@@ -4123,7 +4083,9 @@ section {
     margin-bottom: 0;
 }
 
+
 /* Video Section */
+
 .video-section {
     position: relative;
     height: 740px;
@@ -4180,7 +4142,9 @@ section {
     backdrop-filter: blur(5px) !important;
 }
 
+
 /* Offers Section */
+
 .offer-card {
     position: relative;
     overflow: hidden;
@@ -4199,7 +4163,9 @@ section {
     left: 38px;
 }
 
+
 /* Gallery Section (Home) */
+
 .gallery-section {
     background-color: var(--color-white);
     overflow: hidden;
@@ -4260,7 +4226,9 @@ section {
     margin-top: 100px;
 }
 
+
 /* Testimonials Section */
+
 .testimonials-section {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/testimonial-bg-1.jpg) center / cover no-repeat;
     position: relative;
@@ -4336,8 +4304,6 @@ section {
     object-fit: cover;
 }
 
-
-
 .author-name {
     font-size: 18px;
     color: var(--color-primary);
@@ -4383,7 +4349,9 @@ section {
     will-change: transform;
 }
 
+
 /* Newsletter Section */
+
 .newsletter-section {
     padding: 60px 0;
     background-color: var(--color-cream);
@@ -4422,7 +4390,10 @@ section {
 /* ==========================================================================
    6. PAGE: ABOUT US
    ========================================================================== */
+
+
 /* Hero Banner */
+
 .hero-banner {
     position: relative;
     width: 100%;
@@ -4442,10 +4413,10 @@ section {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/offer-hero-bg.jpg) center/cover no-repeat;
 }
 
-.contact-banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/contact-hero-bg.jpg) center/cover no-repeat;
-}
 
+/* .contact-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/contact-hero-bg.jpg) center/cover no-repeat;
+} */
 
 .hero-banner::before {
     content: '';
@@ -4501,7 +4472,9 @@ section {
     color: var(--color-white);
 }
 
+
 /* Intro Section */
+
 .intro-section {
     max-width: 1320px;
     margin: 80px auto;
@@ -4529,7 +4502,9 @@ section {
     flex: 1;
 }
 
+
 /* Philosophy Section */
+
 .philosophy-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -4571,7 +4546,9 @@ section {
     color: var(--color-text);
 }
 
+
 /* Core Values Section */
+
 .core-values-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -4657,7 +4634,9 @@ section {
     line-height: 1.65;
 }
 
+
 /* CTA Section */
+
 .cta-section {
     position: relative;
     width: 100%;
@@ -4731,7 +4710,9 @@ section {
     transform: translateY(-2px);
 }
 
+
 /* SVG Mountain Edge */
+
 .mountain-edge {
     display: block;
     width: 100%;
@@ -4749,11 +4730,14 @@ section {
 /* ==========================================================================
    7. PAGE: GALLERY
    ========================================================================== */
+
 .gallery-section-space {
     padding: clamp(3.125rem, 2.2rem + 2vw, 4.375rem) 0 clamp(7.5rem, 5rem + 6vw, 12.5rem);
 }
 
+
 /* Resort Selector */
+
 .resort-selector {
     margin-bottom: 70px;
     max-width: 600px;
@@ -4784,7 +4768,9 @@ section {
     box-shadow: 0 0 0 0.2rem rgba(142, 115, 75, 0.25);
 }
 
+
 /* Category Filter */
+
 .category-filter {
     display: flex;
     flex-wrap: wrap;
@@ -4812,7 +4798,9 @@ section {
     color: var(--color-white);
 }
 
+
 /* Gallery Grid */
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -4848,7 +4836,9 @@ section {
     display: none;
 }
 
+
 /* Lightbox */
+
 .lightbox {
     display: none;
     position: fixed;
@@ -4945,6 +4935,7 @@ section {
 /* ==========================================================================
    8. PAGE: CONTACT
    ========================================================================== */
+
 .contact-section {
     padding: 100px 0px 200px 0px;
 }
@@ -5043,7 +5034,9 @@ textarea.form-control-custom {
     resize: vertical;
 }
 
+
 /* Contact Info Styles */
+
 .contact-info-section {
     margin-bottom: 80px;
 }
@@ -5106,7 +5099,9 @@ textarea.form-control-custom {
     color: var(--color-primary);
 }
 
+
 /* Map Styles */
+
 .map-section {
     margin-top: 60px;
 }
@@ -5128,6 +5123,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    9. PAGE: EXPERIENCES
    ========================================================================== */
+
 .exp-list {
     list-style: inside;
     padding: 0;
@@ -5184,7 +5180,9 @@ textarea.form-control-custom {
     margin-left: -30px;
 }
 
+
 /* Mountain Background */
+
 .mountain-bg {
     position: relative;
     overflow: visible;
@@ -5201,7 +5199,9 @@ textarea.form-control-custom {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/exp-bg.png) center bottom / cover no-repeat;
 }
 
+
 /* Experience Gallery Section */
+
 .img-gallery {
     padding-bottom: clamp(80px, 18vw, 250px);
 }
@@ -5234,6 +5234,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    10. PAGE: OFFERS
    ========================================================================== */
+
 .offer-resort-select-wrapper {
     max-width: 520px;
     margin: 0 auto 60px;
@@ -5267,7 +5268,9 @@ textarea.form-control-custom {
     padding: 10px;
 }
 
+
 /* Package Cards */
+
 .package-col {
     margin-bottom: 54px;
     transition: all 0.4s ease;
@@ -5319,7 +5322,9 @@ textarea.form-control-custom {
     font-size: 13.5px;
 }
 
+
 /* No Results & Filter Info */
+
 .no-results {
     text-align: center;
     padding: 80px 20px;
@@ -5361,6 +5366,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    11. FOOTER
    ========================================================================== */
+
 .footer {
     background-color: var(--color-cream);
     color: var(--color-primary);
@@ -5581,6 +5587,7 @@ textarea.form-control-custom {
 /* ==========================================================================
    12. GLOBAL OVERFLOW FIXES
    ========================================================================== */
+
 html,
 body {
     overflow-x: hidden !important;
@@ -5618,33 +5625,33 @@ section {
    13. RESPONSIVE STYLES
    ========================================================================== */
 
+
 /* Large Desktops */
+
 @media (max-width: 1399px) {
     .welcome-img-left {
         left: -46%;
     }
-
     .welcome-img-right {
         right: -46%;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         max-width: 327px;
     }
 }
 
+
 /* Laptops / Small Desktops */
+
 @media (max-width: 1199px) {
     .mb-180 {
         margin-bottom: 140px;
     }
-
     .nav-link {
         font-size: 14px;
         margin: 0 12px;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -5656,7 +5663,6 @@ section {
         max-width: 300px;
         margin: 0 auto;
     }
-
     .welcome-card {
         padding: 60px 30px !important;
         min-height: auto;
@@ -5664,35 +5670,28 @@ section {
         gap: 30px;
         max-width: 88%;
     }
-
     .footer-bottom {
         justify-content: center;
     }
-
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
-
     .img-height {
         height: 450px;
     }
-
     .exp-section .row:nth-child(odd) .exp-card {
         margin-left: 0px;
     }
-
     .exp-section .row:nth-child(even) .exp-card {
         margin-right: 0px;
     }
-
     .exp-img-wrapper {
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-
     .exp-card {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
@@ -5701,132 +5700,104 @@ section {
     }
 }
 
+
 /* Tablets (Landscape) & Small Laptops */
+
 @media (max-width: 991px) {
     .mb-180 {
         margin-bottom: 100px;
     }
-
-
     .nav-link {
         padding-bottom: 0px;
         margin-bottom: 10px;
         display: inline-block;
     }
-
     .nav-link {
         font-size: 16px;
     }
-
     .hero-content h1 {
         font-size: 2.5rem;
     }
-
     .welcome-card {
         padding: 60px 180px;
         min-height: 420px;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         width: 180px;
     }
-
     .welcome-img-left img,
     .welcome-img-right img {
         height: 280px;
     }
-
     .welcome-img-left {
         left: -30px;
     }
-
     .welcome-img-right {
         right: -30px;
     }
-
     .welcome-content h2 {
         font-size: 2.5rem;
     }
-
     .experience-main-card {
         margin-bottom: 20px;
     }
-
     .resort-content p {
         margin-bottom: 22px;
     }
-
     .resort-content .subtitle {
         margin-bottom: 18px;
     }
-
     .resort-content-mt {
         margin-top: 26px;
     }
-
     .resort-img-mt {
         margin-top: 10px;
     }
-
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 300px;
     }
-
     .testimonials-section {
         padding-bottom: 135px !important;
     }
-
     .footer-logo-area {
         padding-right: 0;
         margin-bottom: 10px;
     }
-
     .footer-main-row {
         --bs-gutter-x: 1.5rem;
     }
-
     /* Merged from 992px */
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .contact-image-wrapper {
         min-height: 400px;
         margin-bottom: 30px;
     }
-
     .contact-info-col:not(:last-child)::after {
         display: none;
     }
-
     .exp-card-left,
     .exp-card-right {
         margin: 20px 0 0 0;
     }
-
     .img-height {
         height: 350px;
     }
-
     .hero-title {
         font-size: 1.8rem;
     }
-
     .section-title {
         font-size: 1.5rem;
     }
-
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
-
     /* megamenu css here */
-
-     .mega-menu {
-
+    .mega-menu {
         position: relative;
         left: auto;
         top: auto;
@@ -5838,91 +5809,70 @@ section {
         background: transparent;
         padding: 0;
         display: none;
-
     }
-
     .mega-dropdown.show .mega-menu {
-
         display: block;
-
     }
-
     .mega-image,
     .mega-content {
-
         display: none;
-
     }
-
     .mega-resort-list li {
-
         margin: 0;
-
     }
-
     .mega-resort-list a {
-
         display: block;
         padding: 12px 20px;
         font-size: 16px;
         color: var(--color-primary);
         font-family: var(--font-body);
-
     }
-
     .mega-resort-list a::after {
-
         display: none;
-
     }
-
     .nav-link {
         font-size: 16px !important;
     }
 }
 
+
 /* Tablets (Portrait) */
+
 @media (max-width: 900px) {
     .intro-section {
         flex-direction: column;
     }
-
     .intro-image img {
         height: 100%;
     }
-
     .philosophy-cards {
         grid-template-columns: 1fr;
     }
-
     .core-values-content {
         flex-direction: column;
     }
-
     .core-values-image img {
         height: 350px;
     }
-
     .hero-content h1 {
         font-size: 2.2rem;
     }
 }
 
+
 /* Mobile Devices (Large) */
+
 @media (max-width: 767px) {
     .mb-180 {
         margin-bottom: 70px;
     }
-
     .section-space {
         padding-bottom: 62px;
         padding-top: 62px;
     }
-
     .section-space-bottom {
         padding-bottom: 62px;
     }
-
     .welcome-card {
         max-width: 100%;
         padding: 40px 20px !important;
@@ -5930,11 +5880,9 @@ section {
         flex-direction: column;
         gap: 30px;
     }
-
     .welcome-section {
         padding: 40px 0 0 0;
     }
-
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -5945,306 +5893,242 @@ section {
         width: 100%;
         max-width: 300px;
     }
-
     .welcome-img-left img,
     .welcome-img-right img {
         height: 220px;
     }
-
     .welcome-content h2 {
         font-size: 2.2rem;
     }
-
     .experience-main-card p {
         font-size: 16px;
     }
-
     .experience-main-card h3 {
         margin-bottom: 15px;
     }
-
     .experience-main-card {
         padding: 40px 20px;
     }
-
     .experience-main-card p {
         margin-bottom: 27px;
     }
-
     .experience-main-card {
         margin-bottom: 0px;
     }
-
     .experience-card {
         padding: 20px;
     }
-
     .offer-card a {
         position: absolute;
         bottom: 40px;
         left: 30px;
     }
-
     .hero-content h1 {
         font-size: 2rem;
     }
-
     .hero-content {
         padding-bottom: 50px;
     }
-
     .navbar .navbar-brand img {
         max-width: 110px;
     }
-
     .resort-tabs {
         gap: 20px;
     }
-
     .resort-tab {
         padding-bottom: 6px;
         margin-bottom: -3px;
     }
-
     .newsletter-form {
         flex-direction: column;
     }
-
     .footer-bottom {
         flex-direction: column;
         text-align: center;
     }
-
     .testimonial-slide {
         width: 300px;
     }
-
     .testimonial-slider-wrapper::before,
     .testimonial-slider-wrapper::after {
         width: 40px;
     }
-
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 260px;
     }
-
     .gallery-slide-short {
         margin-top: 20px;
     }
-
     .book-modal {
         padding: 30px 20px;
     }
-
     .book-modal h3 {
         font-size: 1.4rem;
     }
-
     .book-modal-item img {
         height: 160px;
     }
-
     .testimonial-slide {
         max-width: 100%;
         width: 85vw;
     }
-
     .testimonial-slide .testimonial-card-offset {
         display: none !important;
     }
-
     .testimonial-card {
         margin-bottom: 0;
     }
-
     /* Merged from 768px */
     .contact-form-section {
         padding: 30px 20px;
     }
-
     .contact-header {
         margin-bottom: 50px;
     }
-
     .contact-section {
         padding-top: 80px;
         padding-bottom: 80px;
     }
-
     .contact-image-wrapper {
         min-height: 300px;
     }
-
     .contact-info-item {
         border-bottom: 1px solid #e0d5c7;
         padding-bottom: 30px;
         margin-bottom: 30px;
     }
-
     .contact-info-col:last-child .contact-info-item {
         border-bottom: none;
         margin-bottom: 0;
     }
-
     /* Merged from Experience page 767px */
     .hero-section {
         padding: 50px 0 40px;
     }
-
     .hero-title {
         font-size: 1.5rem;
     }
-
     .video-section {
         position: relative;
         height: 500px;
     }
-
     .exp-section {
         padding: 20px 0;
     }
-
     .exp-card {
         padding: 30px 25px;
     }
-
     .img-height {
         height: 280px;
     }
-
     .newsletter-form input {
         width: 100%;
     }
-
     .newsletter-form .btn-custom {
         width: 100%;
         text-align: center;
     }
-
     .footer-logo-img img {
         max-width: 120px;
     }
 }
 
-/* Mobile Devices (Small) */
-@media (max-width: 600px) {
 
+/* Mobile Devices (Small) */
+
+@media (max-width: 600px) {
     .book-modal-item img {
         height: 140px;
     }
-
     .book-modal-overlay {
         height: auto;
     }
-
     .book-modal-grid {
         flex-direction: column;
         gap: 15px;
     }
-
     .hero-banner {
         height: 380px;
     }
-
     .hero-content h1 {
         font-size: 1.8rem;
     }
-
     .breadcrumb {
         right: 20px;
         bottom: 15px;
     }
-
     .intro-section {
         margin: 50px auto;
     }
-
     .cta-section {
         padding: 80px 20px;
     }
-
     .video-section {
         position: relative;
         height: 400px;
     }
-
     .offer-card a {
         position: absolute;
         bottom: 20px;
         left: 22px;
     }
-
     .section-label {
         font-size: 14px;
     }
-
     h2 {
         line-height: 1.4;
     }
-
     .hero-content p {
         font-size: 16px;
     }
-
     .btn-custom {
         padding: 10px 26px;
         font-size: 15px;
     }
-
     .subhead {
         margin-bottom: 1.8rem;
     }
 }
 
+
 /* Mobile Devices (Extra Small) */
+
 @media (max-width: 575px) {
     .mb-180 {
         margin-bottom: 50px;
     }
-
     .gallery-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
     }
-
     .category-filter {
         gap: 8px;
     }
-
     .category-btn {
         padding: 8px 16px;
         font-size: 13px;
     }
-
     .lightbox-nav {
         font-size: 35px;
         padding: 10px;
     }
-
     .lightbox-prev {
         left: 5px;
     }
-
     .lightbox-next {
         right: 5px;
     }
-
     .img-height {
         height: 240px;
     }
-
     .exp-card {
         padding: 25px 20px;
     }
-
     .experience-main-card {
         padding: 30px 20px;
     }
-
     .experience-icon {
         margin-bottom: 2rem;
     }
-
-
 }

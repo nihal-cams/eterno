@@ -147,7 +147,8 @@ class PhilosophyController extends Controller
 
             'description' => ['nullable'],
 
-            'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg'],
+            'icon_image' => 'nullable|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
 
             'sort_order' => ['required', 'integer'],
 
@@ -207,7 +208,8 @@ class PhilosophyController extends Controller
 
             'description' => ['nullable'],
 
-            'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg'],
+            'icon_image' => 'nullable|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
 
             'sort_order' => ['required', 'integer'],
 

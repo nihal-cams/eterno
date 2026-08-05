@@ -37,10 +37,9 @@
                     </div>
                     <div class="footer-address">
                         <strong>Conglomerate of</strong>
-                        Kavumkal Dream Destination Pvt. Ltd.<br>
-                        Ltd. 2/288, Kavumkal Building,<br>
-                        Ranni P.O., Pathanamthitta,<br>
-                        Kerala, India - 689 672
+                        @if ($contactpage && $contactpage->address_1)
+                            {!! nl2br(e($contactpage->address_1)) !!}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -51,11 +50,12 @@
                     <div>
                         <h5 class="footer-heading">Quick Links</h5>
                         <ul class="footer-links">
-                            <li><a href="about-us.php">About Us</a></li>
-                            <li><a href="offers.php">Offers</a></li>
-                            <li><a href="experience.php">Experiences</a></li>
-                            <li><a href="gallery.php">Gallery</a></li>
-                            <li><a href="contact.php">Contact</a></li>
+                            <li> <a href="{{ url('/') }}"> Home </a> </li>
+                            <li> <a href="{{ url('/about') }}"> About Us </a> </li>
+                            <li> <a href="{{ url('/offers') }}"> Offers </a> </li>
+                            <li> <a href="{{ url('/experience') }}"> Experiences </a> </li>
+                            <li> <a href="{{ url('/gallery') }}"> Gallery </a> </li>
+                            <li> <a href="{{ url('/contact') }}"> Contact </a> </li>
                         </ul>
                     </div>
                 </div>
@@ -68,9 +68,12 @@
                     <div>
                         <h5 class="footer-heading">Our Resorts</h5>
                         <ul class="footer-links">
-                            <li><a href="#">Camellia & Elettaria</a></li>
-                            <li><a href="#">Capithans Dale</a></li>
-                            <li><a href="#">Amber Paradise</a></li>
+                            @forelse ($resorts as $resort)
+                                <li> <a href="{{ $resort->button_url }}"> {{ $resort->name }} </a>
+                                </li>
+                            @empty
+                                <li> <span>No resorts available</span> </li>
+                            @endforelse
                         </ul>
                     </div>
                 </div>
@@ -83,58 +86,75 @@
                     <div>
                         <h5 class="footer-heading">Contact Us</h5>
 
-                        <ul class="footer-contact-list">
-                            <li>
-                                <i class="bi bi-phone"></i>
-                                <a href="tel:+919744227000">+91 97 442 27 000</a>
-                            </li>
+                        @if ($contactpage)
+                            <ul class="footer-contact-list">
+                                {{-- Phone 1 --}}
+                                @if (!empty($contactpage->phone_1))
+                                    <li>
+                                        <i class="bi bi-phone"></i> <a
+                                            href="tel:{{ preg_replace('/[^0-9+]/', '', $contactpage->phone_1) }}">
+                                            {{ $contactpage->phone_1 }} </a>
+                                    </li>
+                                @endif
+                                {{-- Phone 2 --}}
+                                @if (!empty($contactpage->phone_2))
+                                    <li>
+                                        <i class="bi bi-phone"></i> <a
+                                            href="tel:{{ preg_replace('/[^0-9+]/', '', $contactpage->phone_2) }}">
+                                            {{ $contactpage->phone_2 }} </a>
+                                    </li>
+                                @endif
+                                {{-- Telephone --}}
+                                @if (!empty($contactpage->phone_3))
+                                    <li>
+                                        <i class="bi bi-telephone"></i> <a
+                                            href="tel:{{ preg_replace('/[^0-9+]/', '', $contactpage->phone_3) }}">
+                                            {{ $contactpage->phone_3 }} </a>
+                                    </li>
+                                @endif
+                                {{-- Email --}}
+                                @if (!empty($contactpage->email))
+                                    <li>
+                                        <i class="bi bi-envelope"></i> <a href="mailto:{{ $contactpage->email_1 }}">
+                                            {{ $contactpage->email_1 }} </a>
+                                    </li>
+                                @endif
+                                {{-- Reservation Email --}}
+                                @if (!empty($contactpage->email_2))
+                                    <li> <i class="bi bi-envelope"></i> <a href="mailto:{{ $contactpage->email_2 }}">
+                                            {{ $contactpage->email_2 }} </a>
+                                    </li>
+                                @endif
+                            </ul>
 
-                            <li>
-                                <i class="bi bi-phone"></i>
-                                <a href="tel:+919656362644">+91 96 563 62 644</a>
-                            </li>
+                            <div class="footer-follow">
+                                <span>Follow Us</span>
 
-                            <li>
-                                <i class="bi bi-telephone"></i>
-                                <a href="tel:+914865285101">+91 48 65 285 101</a>
-                            </li>
-
-                            <li>
-                                <i class="bi bi-envelope"></i>
-                                <a href="mailto:sales@eternohotelsresorts.com">
-                                    sales@eternohotelsresorts.com
-                                </a>
-                            </li>
-
-                            <li>
-                                <i class="bi bi-envelope"></i>
-                                <a href="mailto:reservation@eternohotelsresorts.com">
-                                    reservation@eternohotelsresorts.com
-                                </a>
-                            </li>
-                        </ul>
-
-                        <div class="footer-follow">
-                            <span>Follow Us</span>
-
-                            <div class="footer-social">
-                                <a href="#" target="_blank" rel="noopener" aria-label="X">
-                                    <i class="bi bi-twitter-x"></i>
-                                </a>
-
-                                <a href="#" target="_blank" rel="noopener" aria-label="YouTube">
-                                    <i class="bi bi-youtube"></i>
-                                </a>
-
-                                <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
-                                    <i class="bi bi-instagram"></i>
-                                </a>
-
-                                <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
+                                <div class="footer-social">
+                                    {{-- X / Twitter --}}
+                                    @if (!empty($contactpage->twitter_url))
+                                        <a href="{{ $contactpage->twitter_url }}" target="_blank" rel="noopener"
+                                            aria-label="X">
+                                            <i class="bi bi-twitter-x"></i> </a>
+                                    @endif
+                                    {{-- YouTube --}}
+                                    @if (!empty($contactpage->youtube_url))
+                                        <a href="{{ $contactpage->youtube_url }}" target="_blank" rel="noopener"
+                                            aria-label="YouTube"> <i class="bi bi-youtube"></i> </a>
+                                    @endif
+                                    {{-- Instagram --}}
+                                    @if (!empty($contactpage->instagram_url))
+                                        <a href="{{ $contactpage->instagram_url }}" target="_blank" rel="noopener"
+                                            aria-label="Instagram"> <i class="bi bi-instagram"></i> </a>
+                                    @endif
+                                    {{-- Facebook --}}
+                                    @if (!empty($contactpage->facebook_url))
+                                        <a href="{{ $contactpage->facebook_url }}" target="_blank" rel="noopener"
+                                            aria-label="Facebook"> <i class="bi bi-facebook"></i> </a>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

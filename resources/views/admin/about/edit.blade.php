@@ -1,10 +1,11 @@
-```blade
 @extends('admin.layouts.app')
 
 @section('title', 'About')
 
 @section('content')
+
     @use(App\Enums\AboutStatus)
+
     <div class="container-fluid">
 
         {{-- Page Header --}}
@@ -34,12 +35,14 @@
 
         @endif
 
+
         {{-- Main Form --}}
         <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
             @method('PUT')
+
 
             {{-- =========================================================
                  BANNER SECTION
@@ -54,44 +57,58 @@
 
                 </div>
 
+
                 <div class="card-body">
 
                     <div class="row">
+
                         {{-- Banner Title --}}
                         <div class="col-md-6">
 
-                            <label>
+                            <label for="banner_title">
                                 Banner Title
                             </label>
 
-                            <input type="text" name="banner_title" class="form-control"
+                            <input type="text" name="banner_title" id="banner_title" class="form-control"
                                 value="{{ old('banner_title', $about->banner_title) }}">
+
                             @error('banner_title')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
+
                         </div>
 
 
                         {{-- Banner Image --}}
                         <div class="form-group col-md-6">
-                            <label>
+
+                            <label for="banner_image">
                                 <strong>
                                     Banner Image
                                 </strong>
                             </label>
+
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
                                     accept="image/*">
-                                <label class="custom-file-label" id="banner-image-label" for="banner_image">
 
-                                    {{ $about->banner_image ? basename($about->banner_image) : 'Choose file' }}
+                                <label class="custom-file-label" for="banner_image">
+
+                                    <span class="file-name">
+                                        {{ $about->banner_image ? basename($about->banner_image) : 'Choose file' }}
+                                    </span>
+
+                                    @if ($about->banner_image)
+                                        <img id="banner_uploaded_img" src="{{ asset($about->banner_image) }}"
+                                            class="file-preview" alt="Banner Image">
+                                    @endif
+
                                 </label>
-                            </div>
 
-                            <img id="uploaded_img"
-                                src="{{ $about->banner_image ? asset($about->banner_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" alt="Banner Image">
+                            </div>
 
 
                             @error('banner_image')
@@ -106,14 +123,18 @@
                         {{-- Banner Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label>
+                            <label for="banner_description">
                                 Description
                             </label>
 
-                            <textarea name="banner_description" rows="5" class="form-control">{{ old('banner_description', $about->banner_description) }}</textarea>
+                            <textarea name="banner_description" id="banner_description" rows="5" class="form-control">{{ old('banner_description', $about->banner_description) }}</textarea>
+
                             @error('banner_description')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
+
                         </div>
 
                     </div>
@@ -138,17 +159,23 @@
 
 
                 <div class="card-body">
+
                     <div class="row">
+
                         {{-- Intro Title --}}
                         <div class="col-md-6">
-                            <label>
+
+                            <label for="intro_title">
                                 Title
                             </label>
-                            <input type="text" name="intro_title" class="form-control"
+
+                            <input type="text" name="intro_title" id="intro_title" class="form-control"
                                 value="{{ old('intro_title', $about->intro_title) }}">
 
                             @error('intro_title')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
 
                         </div>
@@ -156,7 +183,8 @@
 
                         {{-- Intro Image --}}
                         <div class="form-group col-md-6">
-                            <label>
+
+                            <label for="intro_image">
                                 <strong>
                                     Intro Image
                                 </strong>
@@ -167,16 +195,21 @@
                                 <input type="file" class="custom-file-input" id="intro_image" name="intro_image"
                                     accept="image/*">
 
-                                <label class="custom-file-label" id="intro-image-label" for="intro_image">
-                                    {{ $about->intro_image ? basename($about->intro_image) : 'Choose file' }}
+                                <label class="custom-file-label" for="intro_image">
+
+                                    <span class="file-name">
+                                        {{ $about->intro_image ? basename($about->intro_image) : 'Choose file' }}
+                                    </span>
+
+                                    @if ($about->intro_image)
+                                        <img id="intro_uploaded_img" src="{{ asset($about->intro_image) }}"
+                                            class="file-preview" alt="Intro Image">
+                                    @endif
+
                                 </label>
 
                             </div>
 
-
-                            <img id="uploaded_img"
-                                src="{{ $about->intro_image ? asset($about->intro_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" alt="Intro Image">
 
                             @error('intro_image')
                                 <small class="text-danger">
@@ -190,14 +223,18 @@
                         {{-- Intro Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label>
+                            <label for="intro_description">
                                 Description
                             </label>
 
-                            <textarea name="intro_description" rows="6" class="form-control">{{ old('intro_description', $about->intro_description) }}</textarea>
+                            <textarea name="intro_description" id="intro_description" rows="6" class="form-control">{{ old('intro_description', $about->intro_description) }}</textarea>
+
                             @error('intro_description')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
+
                         </div>
 
                     </div>
@@ -205,7 +242,6 @@
                 </div>
 
             </div>
-
 
 
             {{-- =========================================================
@@ -229,15 +265,17 @@
                         {{-- CTA Title --}}
                         <div class="col-md-6">
 
-                            <label>
+                            <label for="cta_title">
                                 CTA Title
                             </label>
 
-                            <input type="text" name="cta_title" class="form-control"
+                            <input type="text" name="cta_title" id="cta_title" class="form-control"
                                 value="{{ old('cta_title', $about->cta_title) }}">
 
                             @error('cta_title')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
 
                         </div>
@@ -246,15 +284,17 @@
                         {{-- CTA Button Text --}}
                         <div class="col-md-6">
 
-                            <label>
+                            <label for="cta_button_text">
                                 Button Text
                             </label>
 
-                            <input type="text" name="cta_button_text" class="form-control"
+                            <input type="text" name="cta_button_text" id="cta_button_text" class="form-control"
                                 value="{{ old('cta_button_text', $about->cta_button_text) }}">
 
                             @error('cta_button_text')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
 
                         </div>
@@ -263,48 +303,50 @@
                         {{-- CTA Button Link --}}
                         <div class="col-md-6 mt-3">
 
-                            <label>
+                            <label for="cta_button_link">
                                 Button Link
                             </label>
 
-                            <input type="text" name="cta_button_link" class="form-control"
+                            <input type="text" name="cta_button_link" id="cta_button_link" class="form-control"
                                 value="{{ old('cta_button_link', $about->cta_button_link) }}">
 
                             @error('cta_button_link')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
 
                         </div>
 
 
                         {{-- CTA Background Image --}}
-                        <div class="form-group col-md-6 py-3">
+                        <div class="form-group col-md-6 mt-3">
 
-                            <label>
+                            <label for="cta_background_image">
                                 <strong>
                                     CTA Background Image
                                 </strong>
                             </label>
-
 
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="cta_background_image"
                                     name="cta_background_image" accept="image/*">
 
-                                <label class="custom-file-label" id="cta-background-image-label"
-                                    for="cta_background_image">
+                                <label class="custom-file-label" for="cta_background_image">
 
-                                    {{ $about->cta_background_image ? basename($about->cta_background_image) : 'Choose file' }}
+                                    <span class="file-name">
+                                        {{ $about->cta_background_image ? basename($about->cta_background_image) : 'Choose file' }}
+                                    </span>
+
+                                    @if ($about->cta_background_image)
+                                        <img id="cta_uploaded_img" src="{{ asset($about->cta_background_image) }}"
+                                            class="file-preview" alt="CTA Background Image">
+                                    @endif
 
                                 </label>
 
                             </div>
-
-
-                            <img id="uploaded_img"
-                                src="{{ $about->cta_background_image ? asset($about->cta_background_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100" alt="CTA Background Image">
 
 
                             @error('cta_background_image')
@@ -319,14 +361,18 @@
                         {{-- CTA Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label>
+                            <label for="cta_description">
                                 Description
                             </label>
 
-                            <textarea name="cta_description" rows="5" class="form-control">{{ old('cta_description', $about->cta_description) }}</textarea>
+                            <textarea name="cta_description" id="cta_description" rows="5" class="form-control">{{ old('cta_description', $about->cta_description) }}</textarea>
+
                             @error('cta_description')
-                                <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
                             @enderror
+
                         </div>
 
 
@@ -335,28 +381,35 @@
 
                             <div class="form-group">
 
-                                <label>
+                                <label for="status">
                                     Status
                                 </label>
 
-                                <select name="status" class="form-control">
+                                <select name="status" id="status" class="form-control">
 
                                     <option value="{{ AboutStatus::ACTIVE->value }}"
-                                        {{ old('status', $about->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value ? 'selected' : '' }}>
+                                        {{ old('status', $about->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::ACTIVE->value
+                                            ? 'selected'
+                                            : '' }}>
                                         Active
                                     </option>
 
                                     <option value="{{ AboutStatus::INACTIVE->value }}"
-                                        {{ old('status', $about->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::INACTIVE->value ? 'selected' : '' }}>
+                                        {{ old('status', $about->status?->value ?? AboutStatus::ACTIVE->value) == AboutStatus::INACTIVE->value
+                                            ? 'selected'
+                                            : '' }}>
                                         Inactive
                                     </option>
 
                                 </select>
 
+                                @error('status')
+                                    <small class="text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+
                             </div>
-
-
-
 
                         </div>
 
@@ -364,21 +417,22 @@
 
                 </div>
 
+            </div>
 
 
-                {{-- =========================================================
+            {{-- =========================================================
                  UPDATE BUTTON
             ========================================================== --}}
-                <div class="text-right mb-4">
+            <div class="text-right mb-4">
 
-                    <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
 
-                        <i class="fa fa-save"></i>
-                        Update About
+                    <i class="fa fa-save"></i>
+                    Update About
 
-                    </button>
+                </button>
 
-                </div>
+            </div>
 
 
         </form>
@@ -388,111 +442,283 @@
 @endsection
 
 
-
-
-
+{{-- =========================================================
+     STYLE
+========================================================== --}}
 @push('style')
-    <!-- Toastr CSS -->
+    {{-- Toastr CSS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
+    <style>
+        /*
+                |--------------------------------------------------------------------------
+                | File Input Preview
+                |--------------------------------------------------------------------------
+                */
+
+        .custom-file {
+            position: relative;
+        }
+
+        .custom-file-label {
+            display: flex;
+            align-items: center;
+
+            padding-right: 110px;
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .custom-file-label .file-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            padding-right: 5px;
+        }
+
+        .custom-file-label .file-preview {
+            position: absolute;
+
+            right: 72px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 36px;
+            height: 30px;
+
+            object-fit: cover;
+
+            border-radius: 2px;
+
+            z-index: 10;
+
+            pointer-events: none;
+        }
+    </style>
 @endpush
 
+
+{{-- =========================================================
+     SCRIPT
+========================================================== --}}
 @push('script')
-    <!-- Toastr JS -->
+    {{-- Toastr JS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+
     <script>
-        @if (session('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
-
-        @if (session('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
-
-        @if (session('warning'))
-            toastr.warning("{{ session('warning') }}");
-        @endif
-
-        @if (session('info'))
-            toastr.info("{{ session('info') }}");
-        @endif
-    </script>
-    <script>
-        // Banner Image
-        $('#banner_image').on('change', function() {
-
-            if (this.files && this.files[0]) {
-
-                const file = this.files[0];
-
-                const formGroup = $(this).closest('.form-group');
-
-                formGroup.find('#uploaded_img')
-                    .attr('src', URL.createObjectURL(file));
-
-                formGroup.find('.custom-file-label')
-                    .addClass('selected')
-                    .html(file.name);
-            }
-
-        });
+        $(document).ready(function() {
 
 
-        // Intro Image
-        $('#intro_image').on('change', function() {
+            /*
+            |--------------------------------------------------------------------------
+            | Toastr Messages
+            |--------------------------------------------------------------------------
+            */
 
-            if (this.files && this.files[0]) {
+            @if (session('success'))
 
-                const file = this.files[0];
-
-                const formGroup = $(this).closest('.form-group');
-
-                formGroup.find('#uploaded_img')
-                    .attr('src', URL.createObjectURL(file));
-
-                formGroup.find('.custom-file-label')
-                    .addClass('selected')
-                    .html(file.name);
-            }
-
-        });
+                toastr.success(@json(session('success')));
+            @endif
 
 
-        // CTA Background Image
-        $('#cta_background_image').on('change', function() {
+            @if (session('error'))
 
-            if (this.files && this.files[0]) {
+                toastr.error(@json(session('error')));
+            @endif
+
+
+            @if (session('warning'))
+
+                toastr.warning(@json(session('warning')));
+            @endif
+
+
+            @if (session('info'))
+
+                toastr.info(@json(session('info')));
+            @endif
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Banner Image
+            |--------------------------------------------------------------------------
+            */
+
+            $('#banner_image').on('change', function() {
+
+                if (!this.files || !this.files[0]) {
+                    return;
+                }
 
                 const file = this.files[0];
 
-                const formGroup = $(this).closest('.form-group');
+                const label = $(this).siblings('.custom-file-label');
 
-                formGroup.find('#uploaded_img')
-                    .attr('src', URL.createObjectURL(file));
+                const fileName = label.find('.file-name');
 
-                formGroup.find('.custom-file-label')
-                    .addClass('selected')
-                    .html(file.name);
-            }
-
-        });
+                fileName.text(file.name);
 
 
+                let preview = $('#banner_uploaded_img');
 
 
-        $('.custom-file-input').on('change', function() {
+                /*
+                |--------------------------------------------------------------------------
+                | Create Preview If It Does Not Exist
+                |--------------------------------------------------------------------------
+                */
 
-            const fileName = $(this)
-                .val()
-                .split('\\')
-                .pop();
+                if (!preview.length) {
 
-            $(this)
-                .siblings('.custom-file-label')
-                .addClass('selected')
-                .html(fileName);
+                    preview = $('<img>', {
+                        id: 'banner_uploaded_img',
+                        class: 'file-preview',
+                        alt: 'Banner Image'
+                    });
+
+                    label.append(preview);
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Update Preview
+                |--------------------------------------------------------------------------
+                */
+
+                preview.attr(
+                    'src',
+                    URL.createObjectURL(file)
+                );
+
+            });
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Intro Image
+            |--------------------------------------------------------------------------
+            */
+
+            $('#intro_image').on('change', function() {
+
+                if (!this.files || !this.files[0]) {
+                    return;
+                }
+
+                const file = this.files[0];
+
+                const label = $(this).siblings('.custom-file-label');
+
+                const fileName = label.find('.file-name');
+
+                fileName.text(file.name);
+
+
+                let preview = $('#intro_uploaded_img');
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Create Preview If It Does Not Exist
+                |--------------------------------------------------------------------------
+                */
+
+                if (!preview.length) {
+
+                    preview = $('<img>', {
+                        id: 'intro_uploaded_img',
+                        class: 'file-preview',
+                        alt: 'Intro Image'
+                    });
+
+                    label.append(preview);
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Update Preview
+                |--------------------------------------------------------------------------
+                */
+
+                preview.attr(
+                    'src',
+                    URL.createObjectURL(file)
+                );
+
+            });
+
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CTA Background Image
+            |--------------------------------------------------------------------------
+            */
+
+            $('#cta_background_image').on('change', function() {
+
+                if (!this.files || !this.files[0]) {
+                    return;
+                }
+
+                const file = this.files[0];
+
+                const label = $(this).siblings('.custom-file-label');
+
+                const fileName = label.find('.file-name');
+
+                fileName.text(file.name);
+
+
+                let preview = $('#cta_uploaded_img');
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Create Preview If It Does Not Exist
+                |--------------------------------------------------------------------------
+                */
+
+                if (!preview.length) {
+
+                    preview = $('<img>', {
+                        id: 'cta_uploaded_img',
+                        class: 'file-preview',
+                        alt: 'CTA Background Image'
+                    });
+
+                    label.append(preview);
+
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Update Preview
+                |--------------------------------------------------------------------------
+                */
+
+                preview.attr(
+                    'src',
+                    URL.createObjectURL(file)
+                );
+
+            });
+
 
         });
     </script>
 @endpush
-```

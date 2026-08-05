@@ -61,7 +61,7 @@ class ContactEnquiryController extends Controller
     {
         return view(
             'admin.contact-enquiry.show',
-            compact('ContactEnquiry')
+            compact('contactEnquiry')
         );
     }
 

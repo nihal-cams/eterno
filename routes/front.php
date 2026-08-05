@@ -15,11 +15,24 @@ use App\Http\Controllers\FrontController;
 */
 
 Route::get('/', [FrontController::class, 'home'])->name('home');
-Route::view('about-us.php', 'front.about-us')->name('about-us');
-Route::view('contact.php', 'front.contact')->name('contact');
-Route::view('experience.php', 'front.experience')->name('experience');
-Route::view('gallery.php', 'front.gallery')->name('gallery');
-Route::view('offers.php', 'front.offers')->name('offers');
+// Route::view('about-us', 'front.about-us')->name('about-us');
+// Route::view('contact', 'front.contact')->name('contact');
+Route::view('experience', 'front.experience')->name('experience');
+Route::view('gallery', 'front.gallery')->name('gallery');
+Route::view('offers', 'front.offers')->name('offers');
+
+Route::get('/about-us', [FrontController::class, 'aboutUs'])
+    ->name('about-us');
+
+Route::get('/experience', [FrontController::class, 'experience'])
+    ->name('experience');
+
+Route::get('/contact', [FrontController::class, 'contact'])
+    ->name('contact');
+
+
+Route::post('/contact/enquiry', [FrontController::class, 'store'])
+    ->name('contact.enquiry.store');
 
 
 // View::Composer(['partials.header','partials.footer'], function($view){

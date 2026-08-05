@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OfferIntroController;
 use App\Http\Controllers\Admin\PhilosophyController;
 use App\Http\Controllers\Admin\GalleryIntroController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestimonialIntroController;
 
 /*
@@ -52,50 +53,50 @@ Route::middleware('auth')->group(function () {
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
     Route::prefix('galleries/{type}')
-    ->where(['type' => '1|2|3'])
-    ->group(function () {
-        Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');
-        Route::get('/create', [GalleryController::class, 'create'])->name('galleries.create');
-        Route::post('/', [GalleryController::class, 'store'])->name('galleries.store');
-        Route::get('/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
-        Route::get('/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
-        Route::put('/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
-        Route::delete('/{gallery}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
-    });
+        ->where(['type' => '1|2|3'])
+        ->group(function () {
+            Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');
+            Route::get('/create', [GalleryController::class, 'create'])->name('galleries.create');
+            Route::post('/', [GalleryController::class, 'store'])->name('galleries.store');
+            Route::get('/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
+            Route::get('/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
+            Route::put('/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
+            Route::delete('/{gallery}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+        });
     Route::prefix('offers/{type}')
-    ->where(['type' => '1|2'])
-    ->group(function () {
-        Route::get('/', [OfferController::class, 'index'])->name('offers.index');
-        Route::get('/create', [OfferController::class, 'create'])->name('offers.create');
-        Route::post('/', [OfferController::class, 'store'])->name('offers.store');
-        Route::get('/{offer}', [OfferController::class, 'show'])->name('offers.show');
-        Route::get('/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
-        Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
-        Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
-    });
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [OfferController::class, 'index'])->name('offers.index');
+            Route::get('/create', [OfferController::class, 'create'])->name('offers.create');
+            Route::post('/', [OfferController::class, 'store'])->name('offers.store');
+            Route::get('/{offer}', [OfferController::class, 'show'])->name('offers.show');
+            Route::get('/{offer}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+            Route::put('/{offer}', [OfferController::class, 'update'])->name('offers.update');
+            Route::delete('/{offer}', [OfferController::class, 'destroy'])->name('offers.destroy');
+        });
     Route::prefix('offer-intro/{type}')
-    ->where(['type' => '1|2'])
-    ->group(function () {
-        Route::get('/', [OfferIntroController::class, 'edit'])
-            ->name('offer-intro.edit');
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [OfferIntroController::class, 'edit'])
+                ->name('offer-intro.edit');
 
-        Route::put('/', [OfferIntroController::class, 'update'])
-            ->name('offer-intro.update');
-    });
+            Route::put('/', [OfferIntroController::class, 'update'])
+                ->name('offer-intro.update');
+        });
     Route::prefix('gallery-intro/{type}')
-    ->where(['type' => '1|2'])
-    ->group(function () {
-        Route::get('/', [GalleryIntroController::class, 'edit'])
-            ->name('gallery-intro.edit');
+        ->where(['type' => '1|2'])
+        ->group(function () {
+            Route::get('/', [GalleryIntroController::class, 'edit'])
+                ->name('gallery-intro.edit');
 
-        Route::put('/', [GalleryIntroController::class, 'update'])
-            ->name('gallery-intro.update');
-    });
+            Route::put('/', [GalleryIntroController::class, 'update'])
+                ->name('gallery-intro.update');
+        });
     Route::get('testimonial-intro', [TestimonialIntroController::class, 'edit'])
-            ->name('testimonial-intro.edit');
+        ->name('testimonial-intro.edit');
 
-        Route::put('testimonial-intro', [TestimonialIntroController::class, 'update'])
-            ->name('testimonial-intro.update');
+    Route::put('testimonial-intro', [TestimonialIntroController::class, 'update'])
+        ->name('testimonial-intro.update');
     Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])
         ->name('welcome-section.edit');
     Route::put('welcome-section', [WelcomeSectionController::class, 'update'])
@@ -105,15 +106,15 @@ Route::middleware('auth')->group(function () {
     Route::put('video-section', [VideoSectionController::class, 'update'])
         ->name('video-section.update');
     Route::prefix('banners/{type}')
-    ->group(function () {
-        Route::get('/', [BannerController::class, 'index'])->where('type', '2')->name('banners.index');
-        Route::get('/create', [BannerController::class, 'create'])->where('type', '2')->name('banners.create');
-        Route::post('/', [BannerController::class, 'store'])->where('type', '2')->name('banners.store');
-        Route::get('/{banner}', [BannerController::class, 'show'])->where('type', '2')->name('banners.show');
-        Route::get('/{banner}/edit', [BannerController::class, 'edit'])->where(['type' => '1|2'])->name('banners.edit');
-        Route::put('/{banner}', [BannerController::class, 'update'])->where(['type' => '1|2'])->name('banners.update');
-        Route::delete('/{banner}', [BannerController::class, 'destroy'])->where('type', '2')->name('banners.destroy');
-    });
+        ->group(function () {
+            Route::get('/', [BannerController::class, 'index'])->where('type', '2')->name('banners.index');
+            Route::get('/create', [BannerController::class, 'create'])->where('type', '2')->name('banners.create');
+            Route::post('/', [BannerController::class, 'store'])->where('type', '2')->name('banners.store');
+            Route::get('/{banner}', [BannerController::class, 'show'])->where('type', '2')->name('banners.show');
+            Route::get('/{banner}/edit', [BannerController::class, 'edit'])->where(['type' => '1|2'])->name('banners.edit');
+            Route::put('/{banner}', [BannerController::class, 'update'])->where(['type' => '1|2'])->name('banners.update');
+            Route::delete('/{banner}', [BannerController::class, 'destroy'])->where('type', '2')->name('banners.destroy');
+        });
 
 
     /*
@@ -207,4 +208,9 @@ Route::middleware('auth')->group(function () {
         'contact-enquiry',
         ContactEnquiryController::class
     )->only(['index', 'show', 'destroy']);
+
+
+    /* |-------------------------------------------------------------------------- | Settings |-------------------------------------------------------------------------- */
+    Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
 });

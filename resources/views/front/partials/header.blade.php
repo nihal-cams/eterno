@@ -38,19 +38,16 @@
                     ?>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'index.php') ? 'active' : ''; ?>"
-                            href="/demo">Home</a>
+                        <a class="nav-link <?php echo $currentPage == 'index.php' ? 'active' : ''; ?>" href="/demo">Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'about-us.php') ? 'active' : ''; ?>"
-                            href="about-us.php">About Us</a>
+                        <a class="nav-link <?php echo $currentPage == '/about-us' ? 'active' : ''; ?>" href="/about-us">About Us</a>
                     </li>
 
-                 <li class="nav-item mega-dropdown">
+                    <li class="nav-item mega-dropdown">
 
-                        <a class="nav-link <?php echo (in_array($currentPage, ['camellia-resort.php', 'capithans-dale.php', 'amber-paradise.php'])) ? 'active' : ''; ?>"
-                            href="#" id="megaTrigger">
+                        <a class="nav-link <?php echo in_array($currentPage, ['camellia-resort.php', 'capithans-dale.php', 'amber-paradise.php']) ? 'active' : ''; ?>" href="#" id="megaTrigger">
                             Our Resorts
                             <i class="bi bi-chevron-down" style="font-size:0.7rem; margin-left:3px;"></i>
                         </a>
@@ -67,8 +64,7 @@
 
                                             <li>
 
-                                                <a href="#" class="active"
-                                                    data-image="images/megamenu-r1.jpg"
+                                                <a href="#" class="active" data-image="images/megamenu-r1.jpg"
                                                     data-title="A Luxury Plantation Resort in Munnar"
                                                     data-subtitle="Luxury Plantation Resort"
                                                     data-description="Nestled within 22 acres of lush tea and cardamom plantations, Camellia & Elettaria offers elegant valley-view suites, wooden cottages, and luxury tree houses, blending breathtaking landscapes, comfort, and peaceful mountain serenity.">
@@ -81,9 +77,9 @@
 
                                             <li>
 
-                                                <a href="#"
-                                                    data-image="images/megamenu-r2.jpg"
-                                                    data-title="A Boutique Mountain Retreat in Munnar" data-subtitle="Hill Resort"
+                                                <a href="#" data-image="images/megamenu-r2.jpg"
+                                                    data-title="A Boutique Mountain Retreat in Munnar"
+                                                    data-subtitle="Hill Resort"
                                                     data-description="Nestled amidst Munnar's lush tea plantations and misty hills, Capithans Dale offers elegant accommodations, panoramic mountain views, and immersive nature experiences, creating a peaceful retreat for relaxation and exploration.">
 
                                                     Capithans Dale
@@ -94,9 +90,9 @@
 
                                             <li>
 
-                                                <a href="#"
-                                                    data-image="images/megamenu-r3.jpg"
-                                                    data-title="A Boutique Mountain Retreat in Vagamon" data-subtitle="Nature Resort"
+                                                <a href="#" data-image="images/megamenu-r3.jpg"
+                                                    data-title="A Boutique Mountain Retreat in Vagamon"
+                                                    data-subtitle="Nature Resort"
                                                     data-description="Perched amidst Vagamon's rolling hills, Capithans Dale offers private cottages, panoramic Western Ghats views, an infinity pool, and curated nature experiences, creating a refined mountain retreat for unforgettable escapes.">
 
                                                     Amber Paradise
@@ -113,8 +109,7 @@
 
                                         <div class="mega-image">
 
-                                            <img id="megaImage"
-                                                src="images/megamenu-r1.jpg">
+                                            <img id="megaImage" src="images/megamenu-r1.jpg">
 
                                         </div>
 
@@ -138,7 +133,10 @@
 
                                             <p id="megaDescription">
 
-                                                Nestled within 22 acres of lush tea and cardamom plantations, Camellia & Elettaria offers elegant valley-view suites, wooden cottages, and luxury tree houses, blending breathtaking landscapes, comfort, and peaceful mountain serenity.
+                                                Nestled within 22 acres of lush tea and cardamom plantations, Camellia &
+                                                Elettaria offers elegant valley-view suites, wooden cottages, and luxury
+                                                tree houses, blending breathtaking landscapes, comfort, and peaceful
+                                                mountain serenity.
 
                                             </p>
 
@@ -155,23 +153,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'offers.php') ? 'active' : ''; ?>"
-                            href="offers.php">Offers</a>
+                        <a class="nav-link <?php echo $currentPage == 'offers.php' ? 'active' : ''; ?>" href="offers.php">Offers</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'experience.php') ? 'active' : ''; ?>"
-                            href="experience.php">Experiences</a>
+                        <a class="nav-link <?php echo $currentPage == '/experience' ? 'active' : ''; ?>" href="/experience">Experiences</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'gallery.php') ? 'active' : ''; ?>"
-                            href="gallery.php">Gallery</a>
+                        <a class="nav-link <?php echo $currentPage == 'gallery.php' ? 'active' : ''; ?>" href="gallery.php">Gallery</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($currentPage == 'contact.php') ? 'active' : ''; ?>"
-                            href="contact.php">Contact</a>
+                        <a class="nav-link <?php echo $currentPage == '/contact' ? 'active' : ''; ?>" href="/contact">Contact</a>
                     </li>
                 </ul>
                 <a href="#" class="btn-custom  btn-primary-custom" id="bookNowBtn">Book Now</a>

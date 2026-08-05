@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Contact Message')
+@section('title', 'Contact Enquiry')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
             <h1 class="h3 mb-0 text-gray-800">
-                Contact Message Details
+                Contact Enquiry Details
             </h1>
 
             <a href="{{ route('admin.contact-enquiry.index') }}" class="btn btn-secondary btn-sm">
@@ -32,7 +32,7 @@
 
                         <th width="20%">Name</th>
 
-                        <td>{{ $contactMessage->name }}</td>
+                        <td>{{ $contactEnquiry->name }}</td>
 
                     </tr>
 
@@ -40,7 +40,7 @@
 
                         <th>Email</th>
 
-                        <td>{{ $contactMessage->email }}</td>
+                        <td>{{ $contactEnquiry->email }}</td>
 
                     </tr>
 
@@ -48,7 +48,7 @@
 
                         <th>Phone</th>
 
-                        <td>{{ $contactMessage->phone }}</td>
+                        <td>{{ $contactEnquiry->phone }}</td>
 
                     </tr>
 
@@ -56,7 +56,7 @@
 
                         <th>Interested Resort</th>
 
-                        <td>{{ $contactMessage->resort }}</td>
+                        <td>{{ $contactEnquiry->resort }}</td>
 
                     </tr>
 
@@ -64,7 +64,7 @@
 
                         <th>Submitted On</th>
 
-                        <td>{{ $contactMessage->created_at->format('d M Y h:i A') }}</td>
+                        <td>{{ $contactEnquiry->created_at->format('d M Y h:i A') }}</td>
 
                     </tr>
 
@@ -74,7 +74,7 @@
 
                         <td>
 
-                            {!! nl2br(e($contactMessage->message)) !!}
+                            {!! nl2br(e($contactEnquiry->message)) !!}
 
                         </td>
 

@@ -69,19 +69,20 @@
             <!-- Nav Item - Tables -->
 
             @php
-                $homeMenuOpen = request()->is('admin/banners/1/1*') ||
-                                request()->is('admin/banners/2*') ||
-                                request()->is('admin/welcome-section*') ||
-                                request()->is('admin/resorts*') ||
-                                request()->is('admin/experiences/1*') ||
-                                request()->is('admin/experience-items/1*') ||
-                                request()->is('admin/video-section*') ||
-                                request()->is('admin/offer-intro/1*') ||
-                                request()->is('admin/offers/1*') ||
-                                request()->is('admin/gallery-intro/1*') ||
-                                request()->is('admin/galleries/1*') ||
-                                request()->is('admin/testimonial-intro*') ||
-                                request()->is('admin/testimonials*');
+                $homeMenuOpen =
+                    request()->is('admin/banners/1/1*') ||
+                    request()->is('admin/banners/2*') ||
+                    request()->is('admin/welcome-section*') ||
+                    request()->is('admin/resorts*') ||
+                    request()->is('admin/experiences/1*') ||
+                    request()->is('admin/experience-items/1*') ||
+                    request()->is('admin/video-section*') ||
+                    request()->is('admin/offer-intro/1*') ||
+                    request()->is('admin/offers/1*') ||
+                    request()->is('admin/gallery-intro/1*') ||
+                    request()->is('admin/galleries/1*') ||
+                    request()->is('admin/testimonial-intro*') ||
+                    request()->is('admin/testimonials*');
             @endphp
 
             <li class="nav-item {{ $homeMenuOpen ? 'active' : '' }}">
@@ -100,26 +101,24 @@
 
                         @php
                             $homeBannerMenuOpen =
-                                request()->is('admin/banners/1/1*') ||
-                                request()->is('admin/banners/2*');
+                                request()->is('admin/banners/1/1*') || request()->is('admin/banners/2*');
                         @endphp
 
-                        <a class="collapse-item {{ $homeBannerMenuOpen ? 'active' : '' }}"
-                            href="#" data-toggle="collapse" data-target="#collapseHomeBanners"
+                        <a class="collapse-item {{ $homeBannerMenuOpen ? 'active' : '' }}" href="#"
+                            data-toggle="collapse" data-target="#collapseHomeBanners"
                             aria-expanded="{{ $homeBannerMenuOpen ? 'true' : 'false' }}"
                             aria-controls="collapseHomeBanners">
                             Manage Banners
                         </a>
 
-                        <div id="collapseHomeBanners"
-                            class="collapse {{ $homeBannerMenuOpen ? 'show' : '' }}">
+                        <div id="collapseHomeBanners" class="collapse {{ $homeBannerMenuOpen ? 'show' : '' }}">
 
                             <div class="bg-light py-2 collapse-inner rounded">
                                 <a class="collapse-item {{ request()->is('admin/banners/1/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.banners.edit', ['type' => 1, 'banner' => 1]) }}">
                                     Intro
                                 </a>
-                                
+
                                 <a class="collapse-item {{ request()->is('admin/banners/2*') ? 'active' : '' }}"
                                     href="{{ route('admin.banners.index', 2) }}">
                                     Images
@@ -183,26 +182,24 @@
 
                         @php
                             $homeOfferMenuOpen =
-                                request()->is('admin/offer-intro/1*') ||
-                                request()->is('admin/offers/1*');
+                                request()->is('admin/offer-intro/1*') || request()->is('admin/offers/1*');
                         @endphp
 
-                        <a class="collapse-item {{ $homeOfferMenuOpen ? 'active' : '' }}"
-                            href="#" data-toggle="collapse" data-target="#collapseHomeOffers"
+                        <a class="collapse-item {{ $homeOfferMenuOpen ? 'active' : '' }}" href="#"
+                            data-toggle="collapse" data-target="#collapseHomeOffers"
                             aria-expanded="{{ $homeOfferMenuOpen ? 'true' : 'false' }}"
                             aria-controls="collapseHomeOffers">
                             Manage Offers
                         </a>
 
-                        <div id="collapseHomeOffers"
-                            class="collapse {{ $homeOfferMenuOpen ? 'show' : '' }}">
+                        <div id="collapseHomeOffers" class="collapse {{ $homeOfferMenuOpen ? 'show' : '' }}">
 
                             <div class="bg-light py-2 collapse-inner rounded">
                                 <a class="collapse-item {{ request()->is('admin/offer-intro/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.offer-intro.edit', 1) }}">
                                     Intro
                                 </a>
-                                
+
                                 <a class="collapse-item {{ request()->is('admin/offers/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.offers.index', 1) }}">
                                     Offers
@@ -212,26 +209,24 @@
 
                         @php
                             $homeGalleryMenuOpen =
-                                request()->is('admin/gallery-intro/1*') ||
-                                request()->is('admin/galleries/1*');
+                                request()->is('admin/gallery-intro/1*') || request()->is('admin/galleries/1*');
                         @endphp
 
-                        <a class="collapse-item {{ $homeGalleryMenuOpen ? 'active' : '' }}"
-                            href="#" data-toggle="collapse" data-target="#collapseHomeGallery"
+                        <a class="collapse-item {{ $homeGalleryMenuOpen ? 'active' : '' }}" href="#"
+                            data-toggle="collapse" data-target="#collapseHomeGallery"
                             aria-expanded="{{ $homeGalleryMenuOpen ? 'true' : 'false' }}"
                             aria-controls="collapseHomeGallery">
                             Manage Gallery
                         </a>
 
-                        <div id="collapseHomeGallery"
-                            class="collapse {{ $homeGalleryMenuOpen ? 'show' : '' }}">
+                        <div id="collapseHomeGallery" class="collapse {{ $homeGalleryMenuOpen ? 'show' : '' }}">
 
                             <div class="bg-light py-2 collapse-inner rounded">
                                 <a class="collapse-item {{ request()->is('admin/gallery-intro/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.gallery-intro.edit', 1) }}">
                                     Intro
                                 </a>
-                                
+
                                 <a class="collapse-item {{ request()->is('admin/galleries/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.galleries.index', 1) }}">
                                     Galleries
@@ -241,12 +236,11 @@
 
                         @php
                             $homeTestimonialMenuOpen =
-                                request()->is('admin/testimonial-intro*') ||
-                                request()->is('admin/testimonials*');
+                                request()->is('admin/testimonial-intro*') || request()->is('admin/testimonials*');
                         @endphp
 
-                        <a class="collapse-item {{ $homeTestimonialMenuOpen ? 'active' : '' }}"
-                            href="#" data-toggle="collapse" data-target="#collapseHomeTestimonials"
+                        <a class="collapse-item {{ $homeTestimonialMenuOpen ? 'active' : '' }}" href="#"
+                            data-toggle="collapse" data-target="#collapseHomeTestimonials"
                             aria-expanded="{{ $homeTestimonialMenuOpen ? 'true' : 'false' }}"
                             aria-controls="collapseHomeTestimonials">
                             Manage Testimonials
@@ -260,7 +254,7 @@
                                     href="{{ route('admin.testimonial-intro.edit') }}">
                                     Intro
                                 </a>
-                                
+
                                 <a class="collapse-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"
                                     href="{{ route('admin.testimonials.index') }}">
                                     Testimonials
@@ -277,21 +271,16 @@
             @endphp
 
             <li class="nav-item {{ $offerMenuOpen ? 'active' : '' }}">
-                <a class="nav-link {{ $offerMenuOpen ? '' : 'collapsed' }}"
-                    href="#"
-                    data-toggle="collapse"
-                    data-target="#collapseOffer"
-                    aria-expanded="{{ $offerMenuOpen ? 'true' : 'false' }}"
+                <a class="nav-link {{ $offerMenuOpen ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
+                    data-target="#collapseOffer" aria-expanded="{{ $offerMenuOpen ? 'true' : 'false' }}"
                     aria-controls="collapseOffer">
 
                     <i class="fa fa-tag"></i>
                     <span>Manage Offers</span>
                 </a>
 
-                <div id="collapseOffer"
-                    class="collapse {{ $offerMenuOpen ? 'show' : '' }}"
-                    aria-labelledby="headingOffer"
-                    data-parent="#accordionSidebar">
+                <div id="collapseOffer" class="collapse {{ $offerMenuOpen ? 'show' : '' }}"
+                    aria-labelledby="headingOffer" data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('admin/offer-intro/2*') ? 'active' : '' }}"
@@ -308,7 +297,10 @@
             </li>
 
             @php
-                $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/galleries/2*');
+                $galleryMenuOpen =
+                    request()->is('admin/gallery-intro/2*') ||
+                    request()->is('admin/gallery-categories*') ||
+                    request()->is('admin/galleries/2*');
             @endphp
 
             <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">
@@ -451,6 +443,26 @@
                 </div>
 
             </li>
+
+
+
+
+            {{-- Settings --}}
+            <li class="nav-item {{ request()->routeIs('admin.settings.edit') ? 'active' : '' }}">
+
+                <a class="nav-link {{ request()->routeIs('admin.settings.edit') ? '' : 'collapsed' }}"
+                    href="{{ route('admin.settings.edit') }}">
+
+                    <i class="fa fa-cog"></i>
+                    <span>Settings</span>
+
+                </a>
+
+            </li>
+
+
+
+
 
 
 
