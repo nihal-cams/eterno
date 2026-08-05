@@ -17,7 +17,7 @@ class OfferIntroController extends Controller
 
     public function update(Request $request, $type)
     {
-        $offerIntro = OfferIntro::firstOrFail();
+        $offerIntro = OfferIntro::where('type', $type)->firstOrFail();
 
         $validated = $request->validate([
             'sub_title' => [

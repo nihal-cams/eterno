@@ -26,7 +26,7 @@
                         <input type="text"
                             name="sub_title"
                             class="form-control"
-                            placeholder="Special Offers"
+                            placeholder="SPECIAL OFFERS"
                             value="{{ old('sub_title', $offerIntro->sub_title) }}">
                         @error('sub_title')
                             <small class="text-danger">{{ $message }}</small>

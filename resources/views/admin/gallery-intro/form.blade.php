@@ -26,7 +26,7 @@
                         <input type="text"
                             name="sub_title"
                             class="form-control"
-                            placeholder="Special Gallerys"
+                            placeholder="GALLERY PREVIEW"
                             value="{{ old('sub_title', $galleryIntro->sub_title) }}">
                         @error('sub_title')
                             <small class="text-danger">{{ $message }}</small>

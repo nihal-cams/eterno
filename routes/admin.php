@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('resorts', ResortController::class);
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
-    Route::prefix('galleries/{type}')
+    Route::prefix('gallery/{type}')
     ->where(['type' => '1|2|3'])
     ->group(function () {
         Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');

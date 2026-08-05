@@ -17,7 +17,7 @@ class GalleryIntroController extends Controller
 
     public function update(Request $request, $type)
     {
-        $galleryIntro = GalleryIntro::firstOrFail();
+        $galleryIntro = GalleryIntro::where('type', $type)->firstOrFail();
 
         $validated = $request->validate([
             'sub_title' => [

@@ -17,7 +17,7 @@ class OfferIntroHomeSeeder extends Seeder
         OfferIntro::updateOrCreate(
             ['type' => 1],
             [
-                'sub_title' => 'Special Offers',
+                'sub_title' => 'SPECIAL OFFERS',
                 'title' => 'Exclusive Packages & Seasonal Deals',
                 'description' => 'Discover special offers crafted to make your stay even more memorable. Enjoy exclusive benefits, seasonal discounts and curated experiences available for a limited time.',
                 'banner_title' => null,

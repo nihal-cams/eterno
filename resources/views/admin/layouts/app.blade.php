@@ -79,7 +79,7 @@
                                 request()->is('admin/offer-intro/1*') ||
                                 request()->is('admin/offers/1*') ||
                                 request()->is('admin/gallery-intro/1*') ||
-                                request()->is('admin/galleries/1*') ||
+                                request()->is('admin/gallery/1*') ||
                                 request()->is('admin/testimonial-intro*') ||
                                 request()->is('admin/testimonials*');
             @endphp
@@ -213,7 +213,7 @@
                         @php
                             $homeGalleryMenuOpen =
                                 request()->is('admin/gallery-intro/1*') ||
-                                request()->is('admin/galleries/1*');
+                                request()->is('admin/gallery/1*');
                         @endphp
 
                         <a class="collapse-item {{ $homeGalleryMenuOpen ? 'active' : '' }}"
@@ -232,9 +232,9 @@
                                     Intro
                                 </a>
                                 
-                                <a class="collapse-item {{ request()->is('admin/galleries/1*') ? 'active' : '' }}"
+                                <a class="collapse-item {{ request()->is('admin/gallery/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.galleries.index', 1) }}">
-                                    Galleries
+                                    Gallery
                                 </a>
                             </div>
                         </div>
@@ -308,7 +308,7 @@
             </li>
 
             @php
-                $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/galleries/2*');
+                $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/gallery/2*');
             @endphp
 
             <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">
@@ -334,7 +334,7 @@
                             Category
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/galleries/2*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ request()->is('admin/gallery/2*') ? 'active' : '' }}"
                             href="{{ route('admin.galleries.index', 2) }}">
                             Gallery
                         </a>
@@ -381,7 +381,7 @@
 
 
             <li
-                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/galleries/3*') ? 'active' : '' }}">
+                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'active' : '' }}">
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseExperience">
@@ -390,7 +390,7 @@
                 </a>
 
                 <div id="collapseExperience"
-                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/galleries/3*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'show' : '' }}"
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -404,7 +404,7 @@
                             Experience Items
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/galleries/3*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ request()->is('admin/gallery/3*') ? 'active' : '' }}"
                             href="{{ route('admin.galleries.index', 3) }}">
                             Gallery
                         </a>

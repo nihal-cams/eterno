@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WelcomeSection extends Model
 {
     protected $fillable = [
+        'sub_title',
         'title',
         'description',
         'left_image',
