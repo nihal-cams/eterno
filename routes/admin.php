@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OfferIntroController;
 use App\Http\Controllers\Admin\PhilosophyController;
 use App\Http\Controllers\Admin\GalleryIntroController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestimonialIntroController;
 
@@ -117,50 +118,34 @@ Route::middleware('auth')->group(function () {
         });
 
 
-    /*
-        |--------------------------------------------------------------------------
-        | About Singleton
-        |--------------------------------------------------------------------------
-        */
-
+    // About Singleton
     Route::get(
         'about',
         [AboutController::class, 'edit']
     )->name('about.edit');
 
-
     Route::put(
         'about',
         [AboutController::class, 'update']
     )->name('about.update');
-    /*
-        |--------------------------------------------------------------------------
-        | Philosophy CRUD
-        |--------------------------------------------------------------------------
-        */
 
+
+    // Philosophy CRUD
     Route::resource(
         'philosophies',
         PhilosophyController::class
     );
 
-    /*
-        |--------------------------------------------------------------------------
-        | Core Values CRUD
-        |--------------------------------------------------------------------------
-        */
+
+    //   Core Values CRUD
 
     Route::resource(
         'core-values',
         CoreValueController::class
     );
 
+    // | Experience Page (Singleton)
 
-    /*
-|--------------------------------------------------------------------------
-| Experience Page (Singleton)
-|--------------------------------------------------------------------------
-*/
 
     Route::prefix('experiences/{type}')
         ->where(['type' => '1|2'])
@@ -169,13 +154,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/', [ExperiencePageController::class, 'update'])->name('experiences.update');
         });
 
-
-    /*
-|--------------------------------------------------------------------------
-| Experience Items
-|--------------------------------------------------------------------------
-*/
-
+    // | Experience Items
     Route::prefix('experience-items/{type}')
         ->where(['type' => '1|2'])
         ->group(function () {
@@ -187,13 +166,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{experience}', [ExperienceController::class, 'destroy'])->name('experience-items.destroy');
         });
 
-
-    /*
-|--------------------------------------------------------------------------
-| Contact Page (Singleton)
-|--------------------------------------------------------------------------
-*/
-
+    // Contact Page
     Route::get(
         'contact-page',
         [ContactPageController::class, 'edit']
@@ -210,7 +183,15 @@ Route::middleware('auth')->group(function () {
     )->only(['index', 'show', 'destroy']);
 
 
-    /* |-------------------------------------------------------------------------- | Settings |-------------------------------------------------------------------------- */
+    // Settings
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+
+
+    // Newsletter Enquiries
+    Route::get('newsletter-enquiries', [NewsletterController::class, 'index'])
+        ->name('newsletters.index');
+
+    Route::delete('newsletter-enquiries/{newsletter}', [NewsletterController::class, 'destroy'])
+        ->name('newsletters.destroy');
 });

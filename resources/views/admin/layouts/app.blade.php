@@ -459,6 +459,18 @@
                 </a>
 
             </li>
+            {{-- Newsletter Enquiries --}}
+            <li class="nav-item {{ request()->routeIs('admin.newsletters.*') ? 'active' : '' }}">
+
+                <a class="nav-link" href="{{ route('admin.newsletters.index') }}">
+
+                    <i class="fas fa-envelope"></i>
+
+                    <span>Newsletter Enquiries</span>
+
+                </a>
+
+            </li>
 
 
 

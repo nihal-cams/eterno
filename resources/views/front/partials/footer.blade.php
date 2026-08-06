@@ -18,12 +18,37 @@
                         more, please
                         register your interest.</p>
                 </div>
-                <div class="col-lg-6 reveal-right">
+                {{--  <div class="col-lg-6 reveal-right">
                     <form class="newsletter-form">
                         <input type="email" placeholder="Email Address">
                         <a href="#" class="btn-custom btn-primary-custom">Subscribe</a>
                     </form>
+                </div>  --}}
+                <div class="col-lg-6 reveal-right">
+                    <form id="newsletterForm" class="newsletter-form">
+                        @csrf
+                        <input id="username" type="text" class="hidden-input-field" name="username" value=""
+                            autocomplete="off" tabindex="-1" aria-hidden="true">
+                        <div class="newsletter-input-wrapper">
+                            {{-- Email --}}
+                            <input type="email" name="email" id="newsletterEmail" placeholder="Email Address"
+                                autocomplete="email">
+
+                            {{-- Subscribe Button --}}
+                            <button type="submit" id="newsletterSubmit" class="btn-custom btn-primary-custom">
+                                Subscribe
+                            </button>
+
+                            {{-- Email Validation Error --}}
+                            <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
+                            </div>
+
+                        </div>
+
+                    </form>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -174,13 +199,418 @@
     </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="js/main.js?v=9"></script>
 <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+
+
+@push('styles')
+@endpush
+
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Elements
+            |--------------------------------------------------------------------------
+            */
+
+            const newsletterForm = document.getElementById('newsletterForm');
+            const newsletterEmail = document.getElementById('newsletterEmail');
+            const newsletterEmailError = document.getElementById('newsletterEmailError');
+            const newsletterSubmit = document.getElementById('newsletterSubmit');
+            const honeypot = document.getElementById('username');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Check Elements
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                !newsletterForm ||
+                !newsletterEmail ||
+                !newsletterEmailError ||
+                !newsletterSubmit ||
+                !honeypot
+            ) {
+                return;
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Form Submit
+            |--------------------------------------------------------------------------
+            */
+
+            newsletterForm.addEventListener('submit', function(e) {
+
+                e.preventDefault();
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Clear Previous Error
+                |--------------------------------------------------------------------------
+                */
+
+                clearEmailError();
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Get Email
+                |--------------------------------------------------------------------------
+                */
+
+                const email = newsletterEmail.value.trim();
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Client-Side Required Validation
+                |--------------------------------------------------------------------------
+                */
+
+                if (email === '') {
+
+                    showEmailError('Email is required.');
+
+                    return;
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Client-Side Email Validation
+                |--------------------------------------------------------------------------
+                */
+
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(email)) {
+
+                    showEmailError(
+                        'The email field must be a valid email address.'
+                    );
+
+                    return;
+                }
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Disable Button
+                |--------------------------------------------------------------------------
+                */
+
+                newsletterSubmit.disabled = true;
+                newsletterSubmit.textContent = 'Subscribing...';
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | AJAX Request
+                |--------------------------------------------------------------------------
+                */
+
+                fetch("{{ route('newsletter.subscribe') }}", {
+
+                        method: 'POST',
+
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+
+                            'X-CSRF-TOKEN': document.querySelector(
+                                '#newsletterForm input[name="_token"]'
+                            ).value
+                        },
+
+                        body: JSON.stringify({
+
+                            /*
+                            |--------------------------------------------------------------
+                            | Email
+                            |--------------------------------------------------------------
+                            */
+
+                            email: email,
+
+                            /*
+                            |--------------------------------------------------------------
+                            | Honeypot
+                            |--------------------------------------------------------------
+                            */
+
+                            username: honeypot.value
+
+                        })
+
+                    })
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Process Response
+                    |--------------------------------------------------------------------------
+                    */
+
+                    .then(async response => {
+
+                        const data = await response.json();
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Laravel Validation Error - 422
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (response.status === 422) {
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Honeypot detected
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if (data.honeypot === true) {
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Unable to Subscribe',
+                                    text: data.message || 'Unable to process your request.',
+                                    confirmButtonText: 'OK'
+                                });
+
+                                throw new Error('honeypot');
+                            }
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Normal Email Validation
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if (
+                                data.errors &&
+                                data.errors.email &&
+                                data.errors.email.length > 0
+                            ) {
+
+                                showEmailError(data.errors.email[0]);
+                            }
+
+                            throw new Error('validation');
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Duplicate Email - 409
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (response.status === 409) {
+
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Already Subscribed',
+                                text: data.message,
+                                confirmButtonText: 'OK'
+                            });
+
+                            throw new Error('duplicate');
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Other Server Errors
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                data.message ||
+                                'Something went wrong. Please try again.'
+                            );
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Return Successful Response
+                        |--------------------------------------------------------------------------
+                        */
+
+                        return data;
+
+                    })
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Successful Subscription
+                    |--------------------------------------------------------------------------
+                    */
+
+                    .then(data => {
+
+                        if (data.success) {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Subscribed!',
+                                text: data.message,
+                                confirmButtonText: 'OK'
+                            });
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Reset Form
+                            |--------------------------------------------------------------------------
+                            */
+
+                            newsletterForm.reset();
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | Clear Error
+                            |--------------------------------------------------------------------------
+                            */
+
+                            clearEmailError();
+                        }
+
+                    })
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Error Handler
+                    |--------------------------------------------------------------------------
+                    */
+
+                    .catch(error => {
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Already handled errors
+                        |--------------------------------------------------------------------------
+                        */
+
+                        if (
+                            error.message === 'validation' ||
+                            error.message === 'honeypot' ||
+                            error.message === 'duplicate'
+                        ) {
+                            return;
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Unexpected Error
+                        |--------------------------------------------------------------------------
+                        */
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Something went wrong',
+                            text: error.message || 'Please try again later.',
+                            confirmButtonText: 'OK'
+                        });
+
+                    })
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Always Enable Button Again
+                    |--------------------------------------------------------------------------
+                    */
+
+                    .finally(() => {
+
+                        newsletterSubmit.disabled = false;
+                        newsletterSubmit.textContent = 'Subscribe';
+
+                    });
+
+            });
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Show Email Error
+            |--------------------------------------------------------------------------
+            */
+
+            function showEmailError(message) {
+
+                newsletterEmail.classList.add('is-invalid');
+
+                newsletterEmailError.textContent = message;
+
+                newsletterEmailError.style.display = 'block';
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Clear Email Error
+            |--------------------------------------------------------------------------
+            */
+
+            function clearEmailError() {
+
+                newsletterEmail.classList.remove('is-invalid');
+
+                newsletterEmailError.textContent = '';
+
+                newsletterEmailError.style.display = 'none';
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Clear Error When User Types
+            |--------------------------------------------------------------------------
+            */
+
+            newsletterEmail.addEventListener('input', function() {
+
+                clearEmailError();
+
+            });
+
+        });
+    </script>
+@endpush
+
 @stack('scripts')
+
+
+
 </body>
 
 </html>

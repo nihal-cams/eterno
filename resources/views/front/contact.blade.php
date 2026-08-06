@@ -74,7 +74,7 @@
 
 
 
-                            <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
+                            {{--  <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
                                 @csrf
 
                                 <!-- Name -->
@@ -124,6 +124,83 @@
                                     </span>
                                 </button>
 
+
+                            </form>  --}}
+
+
+
+                            <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
+                                @csrf
+
+                                {{-- Honeypot --}}
+                                <div class="honeypot-field" aria-hidden="true">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" value="" tabindex="-1"
+                                        autocomplete="off">
+                                </div>
+
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control-custom" placeholder="Your Name"
+                                        value="{{ old('name') }}">
+
+                                    <div class="field-error" data-error-for="name"></div>
+                                </div>
+
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control-custom" placeholder="Email"
+                                        value="{{ old('email') }}">
+
+                                    <div class="field-error" data-error-for="email"></div>
+                                </div>
+
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <input type="text" name="phone" class="form-control-custom"
+                                        placeholder="Phone Number" value="{{ old('phone') }}">
+
+                                    <div class="field-error" data-error-for="phone"></div>
+                                </div>
+
+
+                                <!-- Resort -->
+                                <div class="form-group">
+                                    <select name="resort" class="form-control-custom">
+                                        <option value="" disabled {{ old('resort') ? '' : 'selected' }}>
+                                            Interested Resort
+                                        </option>
+
+                                        @foreach ($resorts as $resort)
+                                            <option value="{{ $resort->name }}"
+                                                {{ old('resort') == $resort->name ? 'selected' : '' }}>
+                                                {{ $resort->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <div class="field-error" data-error-for="resort"></div>
+                                </div>
+
+
+                                <!-- Message -->
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control-custom" placeholder="Your Message">{{ old('message') }}</textarea>
+
+                                    <div class="field-error" data-error-for="message"></div>
+                                </div>
+
+
+                                <!-- Submit -->
+                                <button type="submit" id="submitBtn" class="btn btn-primary-custom btn-custom w-100">
+                                    <span id="submitText">Send Your Message</span>
+
+                                    <span id="submitLoader" style="display: none;">
+                                        Sending...
+                                    </span>
+                                </button>
 
                             </form>
 
@@ -209,7 +286,319 @@
     </div>
 @endsection
 
+
 @push('styles')
+    <style>
+        .swal2-popup {
+            font-family: inherit;
+        }
+
+        /*
+                     * Honeypot:
+                     * Invisible to normal users,
+                     * but still available to bots that fill forms automatically.
+                     */
+        .honeypot-field {
+            position: absolute !important;
+            left: -9999px !important;
+            top: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /*
+                     * Laravel validation messages
+                     */
+        .field-error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        .form-control-custom.input-error {
+            border-color: #dc3545 !important;
+        }
+    </style>
+@endpush
+
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const form = document.getElementById('contactForm');
+
+            if (!form) {
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
+
+
+
+            /*
+             * Remove all previous validation messages
+             */
+            function clearErrors() {
+
+                document.querySelectorAll('.field-error').forEach(function(element) {
+                    element.innerHTML = '';
+                    element.classList.remove('show');
+                });
+
+                form.querySelectorAll('.input-error').forEach(function(element) {
+                    element.classList.remove('input-error');
+                });
+            }
+
+
+            /*
+             * Show Laravel validation errors
+             * directly underneath each field.
+             */
+            function showErrors(errors) {
+
+                Object.keys(errors).forEach(function(field) {
+
+                    const errorElement = document.querySelector(
+                        '[data-error-for="' + field + '"]'
+                    );
+
+                    const inputElement = form.querySelector(
+                        '[name="' + field + '"]'
+                    );
+
+                    if (errorElement && errors[field].length > 0) {
+
+                        errorElement.textContent = errors[field][0];
+
+                        errorElement.classList.add('show');
+                    }
+
+                    if (inputElement) {
+                        inputElement.classList.add('input-error');
+                    }
+                });
+            }
+
+
+            /*
+             * Remove error when user starts editing
+             */
+            form.querySelectorAll('input, select, textarea').forEach(function(field) {
+
+                field.addEventListener('input', function() {
+
+                    const fieldName = this.name;
+
+                    const errorElement = document.querySelector(
+                        '[data-error-for="' + fieldName + '"]'
+                    );
+
+                    if (errorElement) {
+                        errorElement.innerHTML = '';
+                        errorElement.classList.remove('show');
+                    }
+
+                    this.classList.remove('input-error');
+                });
+
+
+                field.addEventListener('change', function() {
+
+                    const fieldName = this.name;
+
+                    const errorElement = document.querySelector(
+                        '[data-error-for="' + fieldName + '"]'
+                    );
+
+                    if (errorElement) {
+                        errorElement.innerHTML = '';
+                        errorElement.classList.remove('show');
+                    }
+
+                    this.classList.remove('input-error');
+                });
+
+            });
+
+
+            /*
+             * Form submit
+             */
+            form.addEventListener('submit', async function(e) {
+
+                e.preventDefault();
+
+                clearErrors();
+
+
+                /*
+                 * Check honeypot on frontend as well.
+                 *
+                 * If a bot fills username, don't submit.
+                 */
+                const honeypot = form.querySelector('[name="username"]');
+
+                if (honeypot && honeypot.value.trim() !== '') {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unable to Submit',
+                        text: 'Something went wrong. Please try again.',
+                        confirmButtonText: 'OK'
+                    });
+
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitLoader.style.display = 'none';
+
+                    return;
+                }
+
+
+                /*
+                 * Disable submit button
+                 */
+                submitBtn.disabled = true;
+
+                submitText.style.display = 'none';
+                submitLoader.style.display = 'inline';
+
+
+                try {
+
+                    const formData = new FormData(form);
+
+
+                    const response = await fetch(form.action, {
+
+                        method: 'POST',
+
+                        body: formData,
+
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
+                        }
+
+                    });
+
+
+                    const data = await response.json();
+
+
+                    /*
+                     * SUCCESS
+                     */
+                    if (response.ok && data.success) {
+
+                        await Swal.fire({
+
+                            icon: 'success',
+
+                            title: 'Thank You!',
+
+                            text: data.message,
+
+                            confirmButtonText: 'OK'
+
+                        });
+
+                        form.reset();
+
+                        clearErrors();
+
+                    }
+
+
+                    /*
+                     * VALIDATION ERROR
+                     *
+                     * No SweetAlert here.
+                     *
+                     * Errors will appear under
+                     * the corresponding fields.
+                     */
+                    else if (response.status === 422) {
+
+                        if (data.errors) {
+
+                            showErrors(data.errors);
+
+                        }
+
+                    }
+
+
+                    /*
+                     * OTHER SERVER ERROR
+                     */
+                    else {
+
+                        Swal.fire({
+
+                            icon: 'error',
+
+                            title: 'Oops!',
+
+                            text: data.message ||
+                                'Something went wrong. Please try again.',
+
+                            confirmButtonText: 'OK'
+
+                        });
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error('Contact form error:', error);
+
+
+                    Swal.fire({
+
+                        icon: 'error',
+
+                        title: 'Something Went Wrong',
+
+                        text: 'Unable to submit your enquiry. Please try again.',
+
+                        confirmButtonText: 'OK'
+
+                    });
+
+
+                } finally {
+
+                    submitBtn.disabled = false;
+
+                    submitText.style.display = 'inline';
+
+                    submitLoader.style.display = 'none';
+
+                }
+
+            });
+
+        });
+    </script>
+@endpush
+
+{{--  @push('styles')
     <style>
         .swal2-popup {
             font-family: inherit;
@@ -328,4 +717,4 @@
 
         });
     </script>
-@endpush
+@endpush  --}}

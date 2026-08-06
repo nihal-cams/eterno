@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NewsletterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FrontController;
@@ -33,6 +34,9 @@ Route::get('/contact', [FrontController::class, 'contact'])
 
 Route::post('/contact/enquiry', [FrontController::class, 'store'])
     ->name('contact.enquiry.store');
+
+Route::post('/newsletter/subscribe', [FrontController::class, 'subscribe'])
+    ->name('newsletter.subscribe');
 
 
 // View::Composer(['partials.header','partials.footer'], function($view){
