@@ -59,7 +59,7 @@ class AboutController extends Controller
             'cta_background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
 
             // Status
-            'status' => ['required', Rule::enum(AboutStatus::class)],
+            // 'status' => ['required', Rule::enum(AboutStatus::class)],
 
         ]);
 

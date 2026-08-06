@@ -26,21 +26,6 @@
 
         </div>
 
-        @if ($errors->any())
-
-            <div class="alert alert-danger">
-
-                <ul class="mb-0">
-
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-
-                </ul>
-
-            </div>
-
-        @endif
 
         <div class="card shadow">
 
@@ -69,7 +54,7 @@
                                 </label>
 
                                 <input type="text" name="title" class="form-control"
-                                    value="{{ old('title', $philosophy->title) }}" required>
+                                    value="{{ old('title', $philosophy->title) }}">
 
                                 @error('title')
                                     <small class="text-danger">{{ $message }}</small>

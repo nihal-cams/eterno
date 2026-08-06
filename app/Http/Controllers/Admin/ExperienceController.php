@@ -129,15 +129,15 @@ class ExperienceController extends Controller
 
         $validated = $request->validate([
 
-            'subtitle' => 'nullable|max:255',
+            'subtitle' => 'required|max:255',
 
             'title' => 'required|max:255',
 
-            'description' => 'nullable',
+            'description' => 'required',
 
-            'experience_list' => 'nullable',
+            'experience_list' => 'required',
 
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp',
 
             'layout' => 'required|in:left,right',
 
@@ -205,7 +205,7 @@ class ExperienceController extends Controller
 
             'title' => 'required|max:255',
 
-            'description' => 'nullable',
+            'description' => 'required',
 
             'experience_list' => 'nullable',
 

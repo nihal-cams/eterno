@@ -20,7 +20,7 @@
 
             <div class="card-body">
 
-                @if ($errors->any())
+                {{--  @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="mb-0">
                             @foreach ($errors->all() as $error)
@@ -28,7 +28,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif  --}}
                 <form action="{{ route('admin.experiences.update', $type) }}" method="POST" enctype="multipart/form-data">
 
                     @csrf
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label><strong>Experience Title <span class="text-danger">*</span></strong></label>
                                     <input type="text" name="banner_title" class="form-control"
-                                        value="{{ old('banner_title', $experiencePage->banner_title) }}" required>
+                                        value="{{ old('banner_title', $experiencePage->banner_title) }}">
                                     @error('banner_title')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -64,7 +64,7 @@
                                     </label>
 
                                     <input type="text" name="banner_title" class="form-control"
-                                        value="{{ old('banner_title', $experiencePage->banner_title) }}" required>
+                                        value="{{ old('banner_title', $experiencePage->banner_title) }}">
 
                                     @error('banner_title')
                                         <small class="text-danger">{{ $message }}</small>

@@ -26,23 +26,6 @@
         </div>
 
 
-        {{--  @if ($errors->any())
-
-            <div class="alert alert-danger">
-
-                <ul class="mb-0">
-
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-
-                </ul>
-
-            </div>
-
-        @endif  --}}
-
-
         <div class="card shadow mb-4">
 
             <div class="card-body">
@@ -71,7 +54,7 @@
                                 </label>
 
                                 <input type="text" name="title" class="form-control"
-                                    value="{{ old('title', $coreValue->title) }}" required>
+                                    value="{{ old('title', $coreValue->title) }}">
 
                                 @error('title')
                                     <small class="text-danger">{{ $message }}</small>
@@ -114,7 +97,7 @@
 
                                 </label>
 
-                                <textarea name="description" rows="5" class="form-control" required>{{ old('description', $coreValue->description) }}</textarea>
+                                <textarea name="description" rows="5" class="form-control">{{ old('description', $coreValue->description) }}</textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror

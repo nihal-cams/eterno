@@ -193,13 +193,35 @@
                                 </div>
 
 
-                                <!-- Submit -->
+                                {{--  <!-- Submit -->
                                 <button type="submit" id="submitBtn" class="btn btn-primary-custom btn-custom w-100">
                                     <span id="submitText">Send Your Message</span>
 
                                     <span id="submitLoader" style="display: none;">
                                         Sending...
                                     </span>
+                                </button>  --}}
+
+                                {{-- reCAPTCHA v3 token --}}
+                                <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
+
+                                {{-- reCAPTCHA error --}}
+                                <div class="field-error" data-error-for="recaptcha_token">
+                                </div>
+
+
+                                {{-- Submit --}}
+                                <button type="submit" id="submitBtn" class="btn btn-primary-custom btn-custom w-100">
+
+                                    <span id="submitText">
+                                        Send Your Message
+                                    </span>
+
+                                    <span id="submitLoader" style="display:none;">
+                                        Sending...
+                                    </span>
+
                                 </button>
 
                             </form>
@@ -286,18 +308,13 @@
     </div>
 @endsection
 
-
 @push('styles')
     <style>
         .swal2-popup {
             font-family: inherit;
         }
 
-        /*
-                     * Honeypot:
-                     * Invisible to normal users,
-                     * but still available to bots that fill forms automatically.
-                     */
+
         .honeypot-field {
             position: absolute !important;
             left: -9999px !important;
@@ -309,9 +326,7 @@
             pointer-events: none !important;
         }
 
-        /*
-                     * Laravel validation messages
-                     */
+
         .field-error {
             color: #dc3545;
             font-size: 14px;
@@ -319,18 +334,26 @@
             display: none;
         }
 
+
         .field-error.show {
             display: block;
         }
 
-        .form-control-custom.input-error {
+
+        .input-error {
             border-color: #dc3545 !important;
+        }
+
+        /* Hide Google reCAPTCHA floating badge */
+        .grecaptcha-badge {
+            visibility: hidden !important;
         }
     </style>
 @endpush
 
 
 @push('scripts')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -342,32 +365,46 @@
                 return;
             }
 
+
             const submitBtn = document.getElementById('submitBtn');
+
             const submitText = document.getElementById('submitText');
+
             const submitLoader = document.getElementById('submitLoader');
 
 
-
             /*
-             * Remove all previous validation messages
-             */
+            |--------------------------------------------------------------------------
+            | Clear errors
+            |--------------------------------------------------------------------------
+            */
+
             function clearErrors() {
 
                 document.querySelectorAll('.field-error').forEach(function(element) {
+
                     element.innerHTML = '';
+
                     element.classList.remove('show');
+
                 });
 
+
                 form.querySelectorAll('.input-error').forEach(function(element) {
+
                     element.classList.remove('input-error');
+
                 });
+
             }
 
 
             /*
-             * Show Laravel validation errors
-             * directly underneath each field.
-             */
+            |--------------------------------------------------------------------------
+            | Show Laravel errors
+            |--------------------------------------------------------------------------
+            */
+
             function showErrors(errors) {
 
                 Object.keys(errors).forEach(function(field) {
@@ -376,68 +413,90 @@
                         '[data-error-for="' + field + '"]'
                     );
 
+
                     const inputElement = form.querySelector(
                         '[name="' + field + '"]'
                     );
+
 
                     if (errorElement && errors[field].length > 0) {
 
                         errorElement.textContent = errors[field][0];
 
                         errorElement.classList.add('show');
+
                     }
 
+
                     if (inputElement) {
+
                         inputElement.classList.add('input-error');
+
                     }
+
                 });
+
             }
 
 
             /*
-             * Remove error when user starts editing
-             */
+            |--------------------------------------------------------------------------
+            | Remove field error while typing
+            |--------------------------------------------------------------------------
+            */
+
             form.querySelectorAll('input, select, textarea').forEach(function(field) {
 
                 field.addEventListener('input', function() {
 
-                    const fieldName = this.name;
-
                     const errorElement = document.querySelector(
-                        '[data-error-for="' + fieldName + '"]'
+                        '[data-error-for="' + this.name + '"]'
                     );
 
+
                     if (errorElement) {
+
                         errorElement.innerHTML = '';
+
                         errorElement.classList.remove('show');
+
                     }
 
+
                     this.classList.remove('input-error');
+
                 });
 
 
                 field.addEventListener('change', function() {
 
-                    const fieldName = this.name;
-
                     const errorElement = document.querySelector(
-                        '[data-error-for="' + fieldName + '"]'
+                        '[data-error-for="' + this.name + '"]'
                     );
 
+
                     if (errorElement) {
+
                         errorElement.innerHTML = '';
+
                         errorElement.classList.remove('show');
+
                     }
 
+
                     this.classList.remove('input-error');
+
                 });
 
             });
 
 
             /*
-             * Form submit
-             */
+            |--------------------------------------------------------------------------
+            | Submit
+            |--------------------------------------------------------------------------
+            */
+
             form.addEventListener('submit', async function(e) {
 
                 e.preventDefault();
@@ -446,39 +505,74 @@
 
 
                 /*
-                 * Check honeypot on frontend as well.
-                 *
-                 * If a bot fills username, don't submit.
-                 */
+                |--------------------------------------------------------------------------
+                | Honeypot
+                |--------------------------------------------------------------------------
+                */
+
                 const honeypot = form.querySelector('[name="username"]');
+
 
                 if (honeypot && honeypot.value.trim() !== '') {
 
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Unable to Submit',
-                        text: 'Something went wrong. Please try again.',
-                        confirmButtonText: 'OK'
-                    });
 
-                    submitBtn.disabled = false;
-                    submitText.style.display = 'inline';
-                    submitLoader.style.display = 'none';
+                        icon: 'error',
+
+                        title: 'Oops!',
+
+                        text: 'Unable to submit your enquiry. Please try again.',
+
+                        confirmButtonText: 'OK'
+
+                    });
 
                     return;
                 }
 
 
                 /*
-                 * Disable submit button
-                 */
+                |--------------------------------------------------------------------------
+                | Loading
+                |--------------------------------------------------------------------------
+                */
+
                 submitBtn.disabled = true;
 
                 submitText.style.display = 'none';
+
                 submitLoader.style.display = 'inline';
 
 
                 try {
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Generate reCAPTCHA v3 token
+                    |--------------------------------------------------------------------------
+                    */
+
+                    const token = await grecaptcha.execute(
+                        '{{ env('RECAPTCHA_SITE_KEY') }}', {
+                            action: 'contact_form'
+                        }
+                    );
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Put token into hidden input
+                    |--------------------------------------------------------------------------
+                    */
+
+                    document.getElementById('recaptcha_token').value = token;
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Send form
+                    |--------------------------------------------------------------------------
+                    */
 
                     const formData = new FormData(form);
 
@@ -490,8 +584,11 @@
                         body: formData,
 
                         headers: {
+
                             'X-Requested-With': 'XMLHttpRequest',
+
                             'Accept': 'application/json'
+
                         }
 
                     });
@@ -501,8 +598,11 @@
 
 
                     /*
-                     * SUCCESS
-                     */
+                    |--------------------------------------------------------------------------
+                    | Success
+                    |--------------------------------------------------------------------------
+                    */
+
                     if (response.ok && data.success) {
 
                         await Swal.fire({
@@ -517,26 +617,41 @@
 
                         });
 
+
                         form.reset();
 
                         clearErrors();
+
+                        document.getElementById('recaptcha_token').value = '';
 
                     }
 
 
                     /*
-                     * VALIDATION ERROR
-                     *
-                     * No SweetAlert here.
-                     *
-                     * Errors will appear under
-                     * the corresponding fields.
-                     */
+                    |--------------------------------------------------------------------------
+                    | Validation / reCAPTCHA error
+                    |--------------------------------------------------------------------------
+                    */
                     else if (response.status === 422) {
 
                         if (data.errors) {
 
                             showErrors(data.errors);
+
+                        } else {
+
+                            Swal.fire({
+
+                                icon: 'error',
+
+                                title: 'Oops!',
+
+                                text: data.message ||
+                                    'Security verification failed. Please try again.',
+
+                                confirmButtonText: 'OK'
+
+                            });
 
                         }
 
@@ -544,8 +659,10 @@
 
 
                     /*
-                     * OTHER SERVER ERROR
-                     */
+                    |--------------------------------------------------------------------------
+                    | Other server errors
+                    |--------------------------------------------------------------------------
+                    */
                     else {
 
                         Swal.fire({
@@ -597,124 +714,3 @@
         });
     </script>
 @endpush
-
-{{--  @push('styles')
-    <style>
-        .swal2-popup {
-            font-family: inherit;
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            const form = document.getElementById('contactForm');
-
-            if (!form) {
-                return;
-            }
-
-            form.addEventListener('submit', async function(e) {
-
-                e.preventDefault();
-
-                const submitBtn = document.getElementById('submitBtn');
-                const submitText = document.getElementById('submitText');
-                const submitLoader = document.getElementById('submitLoader');
-
-                submitBtn.disabled = true;
-                submitText.style.display = 'none';
-                submitLoader.style.display = 'inline';
-
-                try {
-
-                    const formData = new FormData(form);
-
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Accept': 'application/json'
-                        }
-                    });
-
-                    const data = await response.json();
-
-                    if (response.ok && data.success) {
-
-                        await Swal.fire({
-                            icon: 'success',
-                            title: 'Thank You!',
-                            text: data.message,
-                            confirmButtonText: 'OK'
-                        });
-
-                        form.reset();
-
-                    } else if (response.status === 422) {
-
-                        let errorMessages = '';
-
-                        if (data.errors) {
-
-                            Object.values(data.errors).forEach(function(messages) {
-
-                                messages.forEach(function(message) {
-
-                                    errorMessages +=
-                                        '<div style="margin-bottom: 8px;">' +
-                                        message +
-                                        '</div>';
-
-                                });
-
-                            });
-                        }
-
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Validation Error',
-                            html: errorMessages,
-                            confirmButtonText: 'OK'
-                        });
-
-                    } else {
-
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops!',
-                            text: data.message ||
-                                'Something went wrong. Please try again.',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-
-                } catch (error) {
-
-                    console.error('Contact form error:', error);
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Something Went Wrong',
-                        text: 'Unable to submit your enquiry. Please try again.',
-                        confirmButtonText: 'OK'
-                    });
-
-                } finally {
-
-                    submitBtn.disabled = false;
-                    submitText.style.display = 'inline';
-                    submitLoader.style.display = 'none';
-                }
-
-            });
-
-        });
-    </script>
-@endpush  --}}

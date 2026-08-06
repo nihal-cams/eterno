@@ -123,7 +123,7 @@ class CoreValueController extends Controller
 
             'title' => ['required', 'string', 'max:255'],
 
-            'description' => ['nullable'],
+            'description' => ['required'],
 
             // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
 
@@ -182,7 +182,7 @@ class CoreValueController extends Controller
 
             'title' => ['required', 'string', 'max:255'],
 
-            'description' => ['nullable'],
+            'description' => ['required'],
 
             // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
 

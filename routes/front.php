@@ -39,6 +39,18 @@ Route::post('/newsletter/subscribe', [FrontController::class, 'subscribe'])
     ->name('newsletter.subscribe');
 
 
+// use Illuminate\Support\Facades\Http;
+
+// Route::get('/test-google', function () {
+//     $response = Http::get('https://www.google.com');
+
+//     return response()->json([
+//         'success' => $response->successful(),
+//         'status' => $response->status(),
+//     ]);
+// });
+
+
 // View::Composer(['partials.header','partials.footer'], function($view){
 //     $view->with([
 //         'settings'=>Setting::get(),

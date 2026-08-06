@@ -185,7 +185,9 @@
             </div>
         </div>
 
-        <div class="footer-bottom">
+
+
+        {{--  <div class="footer-bottom">
             <p>©2026. All rights reserved. Kavumkal Dream Destination Pvt. Ltd. <span class="footer-divider">|</span>
                 Designed By <a href="https://camstech.com/" class="color-primary text-decoration-none" target="_blank">
                     CAMS</a>
@@ -195,6 +197,38 @@
                 <span class="footer-divider">|</span>
                 <a href="#">Privacy Policy</a>
             </div>
+        </div>  --}}
+
+        <div class="footer-bottom">
+
+            <p>
+                ©2026. All rights reserved. Kavumkal Dream Destination Pvt. Ltd.
+                <span class="footer-divider">|</span>
+                Designed By
+                <a href="https://camstech.com/" class="color-primary text-decoration-none" target="_blank">
+                    CAMS
+                </a>
+            </p>
+
+            {{-- Google reCAPTCHA Notice --}}
+            <div class="recaptcha-notice">
+                This site is protected by reCAPTCHA and the Google
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+                    Privacy Policy
+                </a>
+                and
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+                    Terms of Service
+                </a>
+                apply.
+            </div>
+
+            <div class="footer-legal">
+                <a href="#">Terms & Conditions</a>
+                <span class="footer-divider">|</span>
+                <a href="#">Privacy Policy</a>
+            </div>
+
         </div>
     </div>
 </footer>
@@ -212,6 +246,21 @@
 
 
 @push('styles')
+    <style>
+        .recaptcha-notice {
+            width: 100%;
+            flex-basis: 100%;
+            text-align: center;
+            font-size: 11px;
+            line-height: 1.5;
+            margin: 8px 0;
+            opacity: 0.75;
+        }
+
+        .recaptcha-notice a {
+            text-decoration: underline;
+        }
+    </style>
 @endpush
 
 
@@ -219,24 +268,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            /*
-            |--------------------------------------------------------------------------
-            | Elements
-            |--------------------------------------------------------------------------
-            */
 
             const newsletterForm = document.getElementById('newsletterForm');
             const newsletterEmail = document.getElementById('newsletterEmail');
             const newsletterEmailError = document.getElementById('newsletterEmailError');
             const newsletterSubmit = document.getElementById('newsletterSubmit');
             const honeypot = document.getElementById('username');
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Check Elements
-            |--------------------------------------------------------------------------
-            */
 
             if (
                 !newsletterForm ||
@@ -248,41 +285,19 @@
                 return;
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Form Submit
-            |--------------------------------------------------------------------------
-            */
-
             newsletterForm.addEventListener('submit', function(e) {
 
                 e.preventDefault();
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | Clear Previous Error
-                |--------------------------------------------------------------------------
-                */
 
                 clearEmailError();
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | Get Email
-                |--------------------------------------------------------------------------
-                */
-
                 const email = newsletterEmail.value.trim();
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | Client-Side Required Validation
-                |--------------------------------------------------------------------------
-                */
+
 
                 if (email === '') {
 
@@ -292,11 +307,6 @@
                 }
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | Client-Side Email Validation
-                |--------------------------------------------------------------------------
-                */
 
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -310,21 +320,10 @@
                 }
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | Disable Button
-                |--------------------------------------------------------------------------
-                */
-
                 newsletterSubmit.disabled = true;
                 newsletterSubmit.textContent = 'Subscribing...';
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | AJAX Request
-                |--------------------------------------------------------------------------
-                */
 
                 fetch("{{ route('newsletter.subscribe') }}", {
 
@@ -341,19 +340,10 @@
 
                         body: JSON.stringify({
 
-                            /*
-                            |--------------------------------------------------------------
-                            | Email
-                            |--------------------------------------------------------------
-                            */
+
 
                             email: email,
 
-                            /*
-                            |--------------------------------------------------------------
-                            | Honeypot
-                            |--------------------------------------------------------------
-                            */
 
                             username: honeypot.value
 
@@ -361,30 +351,16 @@
 
                     })
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Process Response
-                    |--------------------------------------------------------------------------
-                    */
+
 
                     .then(async response => {
 
                         const data = await response.json();
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Laravel Validation Error - 422
-                        |--------------------------------------------------------------------------
-                        */
-
                         if (response.status === 422) {
 
-                            /*
-                            |--------------------------------------------------------------------------
-                            | Honeypot detected
-                            |--------------------------------------------------------------------------
-                            */
+
 
                             if (data.honeypot === true) {
 
@@ -399,11 +375,6 @@
                             }
 
 
-                            /*
-                            |--------------------------------------------------------------------------
-                            | Normal Email Validation
-                            |--------------------------------------------------------------------------
-                            */
 
                             if (
                                 data.errors &&
@@ -418,11 +389,7 @@
                         }
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Duplicate Email - 409
-                        |--------------------------------------------------------------------------
-                        */
+
 
                         if (response.status === 409) {
 
@@ -437,11 +404,7 @@
                         }
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Other Server Errors
-                        |--------------------------------------------------------------------------
-                        */
+
 
                         if (!response.ok) {
 
@@ -452,22 +415,14 @@
                         }
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Return Successful Response
-                        |--------------------------------------------------------------------------
-                        */
+
 
                         return data;
 
                     })
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Successful Subscription
-                    |--------------------------------------------------------------------------
-                    */
+
 
                     .then(data => {
 
@@ -481,20 +436,11 @@
                             });
 
 
-                            /*
-                            |--------------------------------------------------------------------------
-                            | Reset Form
-                            |--------------------------------------------------------------------------
-                            */
 
                             newsletterForm.reset();
 
 
-                            /*
-                            |--------------------------------------------------------------------------
-                            | Clear Error
-                            |--------------------------------------------------------------------------
-                            */
+
 
                             clearEmailError();
                         }
@@ -502,11 +448,6 @@
                     })
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Error Handler
-                    |--------------------------------------------------------------------------
-                    */
 
                     .catch(error => {
 
@@ -525,11 +466,6 @@
                         }
 
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Unexpected Error
-                        |--------------------------------------------------------------------------
-                        */
 
                         Swal.fire({
                             icon: 'error',
@@ -541,11 +477,7 @@
                     })
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Always Enable Button Again
-                    |--------------------------------------------------------------------------
-                    */
+
 
                     .finally(() => {
 
@@ -557,11 +489,6 @@
             });
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | Show Email Error
-            |--------------------------------------------------------------------------
-            */
 
             function showEmailError(message) {
 
@@ -574,11 +501,7 @@
             }
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | Clear Email Error
-            |--------------------------------------------------------------------------
-            */
+
 
             function clearEmailError() {
 
@@ -591,11 +514,6 @@
             }
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | Clear Error When User Types
-            |--------------------------------------------------------------------------
-            */
 
             newsletterEmail.addEventListener('input', function() {
 

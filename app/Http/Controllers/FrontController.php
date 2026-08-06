@@ -16,6 +16,8 @@ use App\Models\Gallery;
 use App\Models\Newsletter;
 use App\Models\Resort;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -105,90 +107,161 @@ class FrontController extends Controller
         return view('front.contact', compact('page', 'resorts'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|max:255',
-    //         'phone' => 'nullable|string|max:255',
-    //         'resort' => 'required|string|max:255',
-    //         'message' => 'required|string',
-    //     ]);
-
-    //     // Save enquiry
-    //     $enquiry = ContactEnquiry::create($data);
-
-    //     // Send email to admin
-
-    //     Mail::to(env('MAIL_ADMIN_ADDRESS'))
-    //         ->send(new ContactEnquiryAdminMail($enquiry));
-
-    //     // Mail::to('shymicams@gmail.com')
-    //     //     ->send(new ContactEnquiryAdminMail($enquiry));
-
-    //     // Send confirmation email to user
-    //     Mail::to($enquiry->email)->send(new ContactEnquiryUserMail($enquiry));
-
-    //     // return redirect()
-    //     //     ->route('contact')
-    //     //     ->with('success', 'Thank you for contacting us. We will get back to you shortly.');
-
-
-    //     return response()->json(['success' => true, 'message' => 'Your enquiry has been submitted successfully. We will get back to you soon.',]);
-    // }
-
 
 
     public function store(Request $request)
     {
-        // Honeypot validation
-        // Bots usually fill hidden fields, normal users won't.
+
         if ($request->filled('username')) {
+
             return response()->json([
                 'success' => false,
-                'message' => 'Unable to process your request.',
+                'message' => 'Unable to submit your enquiry. Please try again.',
             ], 422);
         }
 
-        // Normal Laravel validation
         $validator = validator($request->all(), [
+
             'name' => 'required|string|max:255',
+
             'email' => 'required|email|max:255',
+
             'phone' => 'required|string|max:255',
+
             'resort' => 'required|string|max:255',
+
             'message' => 'required|string',
+
+            'recaptcha_token' => 'required|string',
+
         ], [
+
             'name.required' => 'Please enter your name.',
+
             'email.required' => 'Please enter your email address.',
+
             'email.email' => 'Please enter a valid email address.',
+
             'phone.required' => 'Please enter your phone number.',
+
             'resort.required' => 'Please select a resort.',
+
             'message.required' => 'Please enter your message.',
+
+            'recaptcha_token.required' =>
+            'Please complete the security verification.',
+
         ]);
 
+
+
         if ($validator->fails()) {
+
             return response()->json([
                 'success' => false,
                 'errors' => $validator->errors(),
             ], 422);
         }
 
+        // Google reCAPTCHA v3 verification
+        try {
+
+            $recaptcha = Http::asForm()->post(
+                'https://www.google.com/recaptcha/api/siteverify',
+                [
+                    'secret' => config('services.recaptcha.secret_key'),
+
+                    'response' => $request->input('recaptcha_token'),
+
+                    'remoteip' => $request->ip(),
+                ]
+            );
+        } catch (\Throwable $e) {
+
+            \Log::error('reCAPTCHA connection error', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Security verification is currently unavailable. Please try again.',
+            ], 500);
+        }
+
+
+        $recaptchaData = $recaptcha->json();
+
+
+
+        \Log::info('reCAPTCHA response', [
+            'status' => $recaptcha->status(),
+            'response' => $recaptchaData,
+        ]);
+
+
+
+        if (!$recaptcha->successful()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Security verification failed. Please try again.',
+            ], 422);
+        }
+
+        if (!($recaptchaData['success'] ?? false)) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Security verification failed. Please try again.',
+            ], 422);
+        }
+
+
+
+        if (($recaptchaData['action'] ?? '') !== 'contact_form') {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Security verification failed. Please try again.',
+            ], 422);
+        }
+
+
+        $score = (float) ($recaptchaData['score'] ?? 0);
+
+
+        if ($score < 0.5) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Security verification failed. Please try again.',
+            ], 422);
+        }
+
+
+
         $data = $validator->validated();
 
-        // Save enquiry
+        unset($data['recaptcha_token']);
+
+
         $enquiry = ContactEnquiry::create($data);
 
-        // Send email to admin
+
+
         Mail::to(env('MAIL_ADMIN_ADDRESS'))
             ->send(new ContactEnquiryAdminMail($enquiry));
 
-        // Send confirmation email to user
+
+
         Mail::to($enquiry->email)
             ->send(new ContactEnquiryUserMail($enquiry));
 
+
         return response()->json([
             'success' => true,
-            'message' => 'Your enquiry has been submitted successfully. We will get back to you soon.',
+            'message' =>
+            'Your enquiry has been submitted successfully. We will get back to you soon.',
         ]);
     }
 
@@ -220,19 +293,9 @@ class FrontController extends Controller
             ]
         );
 
-        /*
-    |--------------------------------------------------------------------------
-    | Validation Failed
-    |--------------------------------------------------------------------------
-    */
 
         if ($validator->fails()) {
 
-            /*
-        |--------------------------------------------------------------------------
-        | Honeypot detected
-        |--------------------------------------------------------------------------
-        */
 
             if ($request->filled('username')) {
 
@@ -243,11 +306,7 @@ class FrontController extends Controller
                 ], 422);
             }
 
-            /*
-        |--------------------------------------------------------------------------
-        | Normal Email Validation
-        |--------------------------------------------------------------------------
-        */
+
 
             return response()->json([
                 'success' => false,
@@ -255,11 +314,7 @@ class FrontController extends Controller
             ], 422);
         }
 
-        /*
-    |--------------------------------------------------------------------------
-    | Check Duplicate Email
-    |--------------------------------------------------------------------------
-    */
+
 
         $existing = Newsletter::where('email', $request->email)->first();
 
@@ -271,21 +326,11 @@ class FrontController extends Controller
             ], 409);
         }
 
-        /*
-    |--------------------------------------------------------------------------
-    | Save Newsletter
-    |--------------------------------------------------------------------------
-    */
 
         Newsletter::create([
             'email' => $request->email,
         ]);
 
-        /*
-    |--------------------------------------------------------------------------
-    | Success
-    |--------------------------------------------------------------------------
-    */
 
         return response()->json([
             'success' => true,
