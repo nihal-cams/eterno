@@ -75,22 +75,6 @@
             </li>
 
             @php
-<<<<<<< HEAD
-                $homeMenuOpen =
-                    request()->is('admin/banners/1/1*') ||
-                    request()->is('admin/banners/2*') ||
-                    request()->is('admin/welcome-section*') ||
-                    request()->is('admin/resorts*') ||
-                    request()->is('admin/experiences/1*') ||
-                    request()->is('admin/experience-items/1*') ||
-                    request()->is('admin/video-section*') ||
-                    request()->is('admin/offer-intro/1*') ||
-                    request()->is('admin/offers/1*') ||
-                    request()->is('admin/gallery-intro/1*') ||
-                    request()->is('admin/galleries/1*') ||
-                    request()->is('admin/testimonial-intro*') ||
-                    request()->is('admin/testimonials*');
-=======
                 $homeMenuOpen = request()->is('admin/banners/1/1*') ||
                                 request()->is('admin/banners/2*') ||
                                 request()->is('admin/welcome-section*') ||
@@ -105,7 +89,6 @@
                                 request()->is('admin/gallery/1*') ||
                                 request()->is('admin/testimonial-intro*') ||
                                 request()->is('admin/testimonials*');
->>>>>>> front-04-08
             @endphp
 
             <li class="nav-item {{ $homeMenuOpen ? 'active' : '' }}">
@@ -256,12 +239,8 @@
 
                         @php
                             $homeGalleryMenuOpen =
-<<<<<<< HEAD
-                                request()->is('admin/gallery-intro/1*') || request()->is('admin/galleries/1*');
-=======
                                 request()->is('admin/gallery-intro/1*') ||
                                 request()->is('admin/gallery/1*');
->>>>>>> front-04-08
                         @endphp
 
                         <a class="collapse-item {{ $homeGalleryMenuOpen ? 'active' : '' }}" href="#"
@@ -278,13 +257,8 @@
                                     href="{{ route('admin.gallery-intro.edit', 1) }}">
                                     Intro
                                 </a>
-<<<<<<< HEAD
-
-                                <a class="collapse-item {{ request()->is('admin/galleries/1*') ? 'active' : '' }}"
-=======
                                 
                                 <a class="collapse-item {{ request()->is('admin/gallery/1*') ? 'active' : '' }}"
->>>>>>> front-04-08
                                     href="{{ route('admin.galleries.index', 1) }}">
                                     Gallery
                                 </a>
@@ -360,14 +334,7 @@
             </li>
 
             @php
-<<<<<<< HEAD
-                $galleryMenuOpen =
-                    request()->is('admin/gallery-intro/2*') ||
-                    request()->is('admin/gallery-categories*') ||
-                    request()->is('admin/galleries/2*');
-=======
                 $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/gallery/2*');
->>>>>>> front-04-08
             @endphp
 
             <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">

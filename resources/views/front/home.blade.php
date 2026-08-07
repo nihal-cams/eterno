@@ -64,75 +64,79 @@
                 <button class="resort-tab {{ $loop->first ? 'active' : '' }}" data-target="resort-{{ $resort->id }}">{{ $resort->name }}</button>
                 @endforeach
             </div>
-        </div>
 
-        <!-- Wrapper for swipeable panels on mobile/tablet -->
-        <div class="resort-panels-wrapper">
-            @foreach($resorts as $resort)
-            <div class="resort-panel {{ $loop->first ? 'active' : '' }}" id="resort-{{ $resort->id }}">
-                <div class="row align-items-center g-5 ">
-                    <div class="col-lg-6 order-2 order-lg-1 resort-content-mt">
-                        <div class="resort-content">
-                            <h3>{{ $resort->name }} - {{ $resort->home_place }}</h3>
-                            <span class="subtitle">{{ $resort->home_title }}</span>
-                            <p>{{ $resort->home_description }}</p>
-                            <a href="{{ $resort->home_button_url }}" class="btn-custom btn-outline-custom">{{ $resort->home_button_text }}</a>
+            <!-- Wrapper for swipeable panels on mobile/tablet -->
+            <div class="resort-panels-wrapper">
+                @foreach($resorts as $resort)
+                <div class="resort-panel {{ $loop->first ? 'active' : '' }}" id="resort-{{ $resort->id }}">
+                    <div class="row align-items-center g-5 ">
+                        <div class="col-lg-6 order-2 order-lg-1 resort-content-mt">
+                            <div class="resort-content">
+                                <h3>{{ $resort->name }} - {{ $resort->home_place }}</h3>
+                                <span class="subtitle">{{ $resort->home_title }}</span>
+                                <p>{{ $resort->home_description }}</p>
+                                <a href="{{ $resort->home_button_url }}" class="btn-custom btn-outline-custom">{{ $resort->home_button_text }}</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2 resort-img-mt">
-                        <div class="resort-image">
-                            <img src="{{ asset('uploads/resorts/'.$resort->home_image) }}" alt="{{ $resort->name }}" class="img-fluid">
-                            <div class="swipe-indicator">
-                                <span>Swipe</span>
-                                <i class="bi bi-arrow-right-short"></i>
+                        <div class="col-lg-6 order-1 order-lg-2 resort-img-mt">
+                            <div class="resort-image">
+                                <img src="{{ asset('uploads/resorts/'.$resort->home_image) }}" alt="{{ $resort->name }}" class="img-fluid">
+                                <div class="swipe-indicator">
+                                    <span>Swipe</span>
+                                    <i class="bi bi-arrow-right-short"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
 </section>
 @endif
 
-    <!-- Experiences Section -->
-    <section class="experiences-section section-space-bottom">
-        <div class="container">
-            <div class="reveal">
-                <div class="section-label">{{ $homeexperiencepage->banner_title }}</div>
-                <h2>{{ $homeexperiencepage->intro_subtitle }}</h2>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="experience-main-card reveal-left">
-                        <h3>{{ $homeexperiencepage->intro_title }}</h3>
-                        <p>{{ $homeexperiencepage->intro_description }}</p>
-                        <a href="{{ $homeexperiencepage->button_url }}"
-                            class="btn-custom btn-custom-white">{{ $homeexperiencepage->button_text }}</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row g-4">
-                        @foreach ($homeexperiences as $key => $experience)
-                            <div class="col-md-6">
-                                <div class="experience-card reveal reveal-delay-{{ ($key % 2) + 1 }}">
-                                    <div class="experience-icon">
-                                        @if ($experience->image)
-                                            <img src="{{ asset($experience->image) }}" alt="{{ $experience->title }}">
-                                        @endif
-                                    </div>
-                                    <h4>{{ $experience->title }}</h4>
-                                    <p>{{ $experience->description }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+<!-- Experiences Section -->
+@if($homeexperiencepage || $homeexperiences->count())
+<section class="experiences-section section-space-bottom">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">{{ $homeexperiencepage?->banner_title }}</div>
+            <h2>{{ $homeexperiencepage?->intro_subtitle }}</h2>
         </div>
-    </section>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="experience-main-card reveal-left">
+                    <h3>{{ $homeexperiencepage?->intro_title }}</h3>
+                    <p>{{ $homeexperiencepage?->intro_description }}</p>
+                    <a href="{{ $homeexperiencepage->button_url }}"
+                        class="btn-custom btn-custom-white">{{ $homeexperiencepage?->button_text }}</a>
+                </div>
+            </div>
+            @if($homeexperiences->count())
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    @foreach ($homeexperiences as $key => $experience)
+                        <div class="col-md-6">
+                            <div class="experience-card reveal reveal-delay-{{ ($key % 2) + 1 }}">
+                                <div class="experience-icon">
+                                    @if ($experience->image)
+                                        <img src="{{ asset($experience->image) }}" alt="{{ $experience->title }}">
+                                    @endif
+                                </div>
+                                <h4>{{ $experience->title }}</h4>
+                                <p>{{ $experience->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</section>
+@endif
 
 <!-- Video Section -->
 @if($video)
@@ -163,6 +167,7 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+
             </div>
         </div>
     </div>
@@ -191,36 +196,6 @@
                     <img src="{{ asset('uploads/offers/'.$offer->image) }}" class="img-fluid w-100" alt="Offer">
                     <a href="{{ $offer->button_url }}" class="btn-custom btn-custom-white">{{ $offer->button_text }}</a>
                 </div>
-                <div class="gallery-slide gallery-slide-short">
-                    <img src="images/gallery-1.jpg" alt="Gallery 2">
-                </div>
-                <div class="gallery-slide gallery-slide-tall">
-                    <img src="images/gallery-3.jpg" alt="Gallery 3">
-                </div>
-                <div class="gallery-slide gallery-slide-short">
-                    <img src="images/gallery-4.jpg" alt="Gallery 4">
-                </div>
-                <div class="gallery-slide gallery-slide-tall">
-                    <img src="images/gallery-5.jpg" alt="Gallery 5">
-                </div>
-
-                <!-- Duplicate Set for seamless loop -->
-                <div class="gallery-slide gallery-slide-short">
-                    <img src="images/gallery-2.jpg" alt="Gallery 1">
-                </div>
-                <div class="gallery-slide gallery-slide-tall">
-                    <img src="images/gallery-1.jpg" alt="Gallery 2">
-                </div>
-                <div class="gallery-slide gallery-slide-short">
-                    <img src="images/gallery-3.jpg" alt="Gallery 3">
-                </div>
-                <div class="gallery-slide gallery-slide-tall">
-                    <img src="images/gallery-4.jpg" alt="Gallery 4">
-                </div>
-                <div class="gallery-slide gallery-slide-short">
-                    <img src="images/gallery-5.jpg" alt="Gallery 5">
-                </div>
-
             </div>
             @endforeach
         </div>

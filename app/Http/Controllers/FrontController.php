@@ -147,8 +147,7 @@ class FrontController extends Controller
             ->where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+        $resorts = Resort::orderByDesc('id')
             ->get();
 
         $categories = GalleryCategory::where('status', Status::ACTIVE)
@@ -174,8 +173,7 @@ class FrontController extends Controller
             ->where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+        $resorts = Resort::orderByDesc('id')
             ->get();
 
         $offers = Offer::where('status', Status::ACTIVE)
@@ -232,8 +230,7 @@ class FrontController extends Controller
 
         $page = ContactPage::first();
 
-        $resorts = Resort::where('status', 'active')
-            ->orderBy('name')
+        $resorts = Resort::orderBy('name')
             ->get();
 
         // dd($resorts);
