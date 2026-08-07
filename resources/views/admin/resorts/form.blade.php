@@ -9,134 +9,296 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $resort->id ? 'Edit ' : 'Add ' }} Resort
+            Resort
         </h1>
         
-        <form method="POST" action="{{ $resort->id ? route('admin.resorts.update', $resort) : route('admin.resorts.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ $resort->id ? route('admin.resorts.update', ['type' => $type, 'resort' => $resort]) : route('admin.resorts.store', ['type' => $type]) }}" enctype="multipart/form-data">
         @csrf
         {{ $resort->id ? method_field('PUT') : '' }}
         <div class="card shadow mb-4">
+
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    {{ $resort->exists ? 'Edit ' : 'Add ' }} Resort
+                </h6>
+            </div>
+
             <div class="card-body">
-                
-                <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Resort</h3> -->
+
                 <div class="row">
 
+                    {{-- ===================================================== --}}
+                    {{-- TYPE 1 : Resort Name --}}
+                    {{-- ===================================================== --}}
                     <div class="form-group col-md-6">
-                        <label><strong>Name <span class="text-danger">*</span></strong></label>
+                        <label><strong>Name {{ $type === '1' ? '*' : '' }}</strong></label>
+
                         <input type="text"
                             name="name"
                             class="form-control"
-                            value="{{ old('name', $resort->name) }}">
+                            value="{{ old('name', $resort->name) }}"
+                            {{ $type !== '1' ? 'readonly' : '' }}>
+
                         @error('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Location <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="location"
-                            class="form-control"
-                            value="{{ old('location', $resort->location) }}">
-                        @error('location')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                    {{-- ===================================================== --}}
+                    {{-- TYPE 2 : Home Section --}}
+                    {{-- ===================================================== --}}
+                    @if($type === '2')
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Title <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="title"
-                            class="form-control"
-                            value="{{ old('title', $resort->title) }}">
-                        @error('title')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label><strong>Place <span class="text-danger">*</span></strong></label>
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
-                        <div class="custom-file mb-3">
-                            <input type="file"
-                                class="custom-file-input"
-                                id="image"
-                                name="image"
-                                accept="image/*"
-                                onchange="document.getElementById('uploaded_img').src = window.URL.createObjectURL(this.files[0])">
-                            <label class="custom-file-label" for="image">
-                                {{ $resort->image ?: 'Choose file' }}
-                            </label>
+                            <input type="text"
+                                name="home_place"
+                                class="form-control"
+                                value="{{ old('home_place', $resort->home_place) }}">
+
+                            @error('home_place')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <img id="uploaded_img"
-                            src="{{ $resort->image ? asset('uploads/resorts/'.$resort->image) : asset('img/upload_image.png') }}">
-                        @error('image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Button Text <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="button_text"
-                            class="form-control"
-                            value="{{ old('button_text', $resort->button_text) }}">
-                        @error('button_text')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label><strong>Title <span class="text-danger">*</span></strong></label>
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Button URL <span class="text-danger">*</span></strong></label>
-                        <input type="text"
-                            name="button_url"
-                            class="form-control"
-                            value="{{ old('button_url', $resort->button_url) }}">
-                        @error('button_url')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                            <input type="text"
+                                name="home_title"
+                                class="form-control"
+                                value="{{ old('home_title', $resort->home_title) }}">
 
-                    <div class="form-group col-md-6">
-                        <label><strong>Description <span class="text-danger">*</span></strong></label>
-                        <textarea name="description"
+                            @error('home_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Description <span class="text-danger">*</span></strong></label>
+
+                            <textarea
+                                name="home_description"
                                 rows="3"
-                                class="form-control">{{ old('description', $resort->description) }}</textarea>
-                        @error('description')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                                class="form-control">{{ old('home_description', $resort->home_description) }}</textarea>
 
-                    <div class="form-group col-6">
-                        <label><strong>Status</strong></label>
-                        <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
-                        <div class="custom-control custom-switch">
-                            <input
-                                type="checkbox"
-                                class="custom-control-input"
-                                id="status"
-                                name="status"
-                                value="{{ Status::ACTIVE->value }}"
-                                {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
-                            >
-                            <label class="custom-control-label" for="status">
-                                <span id="status-text">
-                                    {{ old('status', $resort->status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
-                                </span>
-                            </label>
+                            @error('home_description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
-                    </div>
 
-                </div>   
-            </div>
-            
-            <div class="card-footer">
-                <div class="row">
-                    <div class="form-group col-6">
-                    <button type="submit" class="btn btn-primary mr-3">{{ $resort->id ? 'Update' : 'Save' }}</button>
-                    <a class="btn btn-secondary ml-3" href="{{ route('admin.resorts.index') }}">Cancel</a>
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label><strong>Button Text <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="home_button_text"
+                                class="form-control"
+                                value="{{ old('home_button_text', $resort->home_button_text) }}">
+
+                            @error('home_button_text')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Button URL <span class="text-danger">*</span></strong></label>
+
+                            <input type="url"
+                                name="home_button_url"
+                                class="form-control"
+                                value="{{ old('home_button_url', $resort->home_button_url) }}">
+
+                            @error('home_button_url')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                            <div class="custom-file mb-3">
+                                <input type="file"
+                                    class="custom-file-input"
+                                    id="home_image"
+                                    name="home_image"
+                                    accept="image/*"
+                                    onchange="document.getElementById('uploaded_home_img').src = window.URL.createObjectURL(this.files[0])">
+                                <label class="custom-file-label" for="home_image">
+                                    {{ $resort->home_image ?: 'Choose file' }}
+                                </label>
+                            </div>
+                            <img id="uploaded_home_img" class="uploaded-img"
+                                src="{{ $resort->home_image ? asset('uploads/resorts/'.$resort->home_image) : asset('img/upload_image.png') }}">
+                            @error('home_image')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Status</strong></label>
+                            <input type="hidden" name="home_status" value="{{ Status::INACTIVE->value }}">
+                            <div class="custom-control custom-switch">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="home_status"
+                                    name="home_status"
+                                    value="{{ Status::ACTIVE->value }}"
+                                    {{ old('home_status', $resort->home_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                >
+                                <label class="custom-control-label" for="home_status">
+                                    <span id="home_status_text">
+                                        {{ old('home_status', $resort->home_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    {{-- ===================================================== --}}
+                    {{-- TYPE 3 : Mega Menu --}}
+                    {{-- ===================================================== --}}
+                    @elseif($type === '3')
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="mega_menu_sub_title"
+                                class="form-control"
+                                value="{{ old('mega_menu_sub_title', $resort->mega_menu_sub_title) }}">
+
+                            @error('mega_menu_sub_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Title <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="mega_menu_title"
+                                class="form-control"
+                                value="{{ old('mega_menu_title', $resort->mega_menu_title) }}">
+
+                            @error('mega_menu_title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Description <span class="text-danger">*</span></strong></label>
+
+                            <textarea
+                                name="mega_menu_description"
+                                rows="3"
+                                class="form-control">{{ old('mega_menu_description', $resort->mega_menu_description) }}</textarea>
+
+                            @error('mega_menu_description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                            <div class="custom-file mb-3">
+                                <input type="file"
+                                    class="custom-file-input"
+                                    id="mega_menu_image"
+                                    name="mega_menu_image"
+                                    accept="image/*"
+                                    onchange="document.getElementById('uploaded_mega_menu_img').src = window.URL.createObjectURL(this.files[0])">
+                                <label class="custom-file-label" for="mega_menu_image">
+                                    {{ $resort->mega_menu_image ?: 'Choose file' }}
+                                </label>
+                            </div>
+                            <img id="uploaded_mega_menu_img" class="uploaded-img"
+                                src="{{ $resort->mega_menu_image ? asset('uploads/resorts/'.$resort->mega_menu_image) : asset('img/upload_image.png') }}">
+                            @error('mega_menu_image')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Status</strong></label>
+                            <input type="hidden" name="mega_menu_status" value="{{ Status::INACTIVE->value }}">
+                            <div class="custom-control custom-switch">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="mega_menu_status"
+                                    name="mega_menu_status"
+                                    value="{{ Status::ACTIVE->value }}"
+                                    {{ old('mega_menu_status', $resort->mega_menu_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                >
+                                <label class="custom-control-label" for="mega_menu_status">
+                                    <span id="mega_menu_status_text">
+                                        {{ old('mega_menu_status', $resort->mega_menu_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    {{-- ===================================================== --}}
+                    {{-- TYPE 4 : Book Now --}}
+                    {{-- ===================================================== --}}
+                    @elseif($type === '4')
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                            <div class="custom-file mb-3">
+                                <input type="file"
+                                    class="custom-file-input"
+                                    id="book_now_image"
+                                    name="book_now_image"
+                                    accept="image/*"
+                                    onchange="document.getElementById('uploaded_book_now_img').src = window.URL.createObjectURL(this.files[0])">
+                                <label class="custom-file-label" for="book_now_image">
+                                    {{ $resort->book_now_image ?: 'Choose file' }}
+                                </label>
+                            </div>
+                            <img id="uploaded_book_now_img" class="uploaded-img"
+                                src="{{ $resort->book_now_image ? asset('uploads/resorts/'.$resort->book_now_image) : asset('img/upload_image.png') }}">
+                            @error('book_now_image')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Status</strong></label>
+                            <input type="hidden" name="book_now_status" value="{{ Status::INACTIVE->value }}">
+                            <div class="custom-control custom-switch">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="book_now_status"
+                                    name="book_now_status"
+                                    value="{{ Status::ACTIVE->value }}"
+                                    {{ old('book_now_status', $resort->book_now_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'checked' : '' }}
+                                >
+                                <label class="custom-control-label" for="book_now_status">
+                                    <span id="book_now_status_text">
+                                        {{ old('book_now_status', $resort->book_now_status?->value ?? Status::ACTIVE->value) == Status::ACTIVE->value ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    @endif
+
                 </div>
+
             </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-3">
+                    {{ $resort->exists ? 'Update' : 'Save' }}
+                </button>
+                <a href="{{ route('admin.resorts.index', ['type' => $type]) }}"
+                    class="btn btn-secondary ml-3">
+                    Cancel
+                </a>
+            </div>
+
         </div>
         </form>
         
@@ -159,9 +321,23 @@
     </script>
 
     <script>
-        document.getElementById('status').addEventListener('change', function () {
-            document.getElementById('status-text').textContent =
-                this.checked ? 'Active' : 'Inactive';
+        [
+            'home_status',
+            'mega_menu_status',
+            'book_now_status'
+        ].forEach(function(id) {
+
+            const checkbox = document.getElementById(id);
+
+            if (!checkbox) return;
+
+            checkbox.addEventListener('change', function () {
+
+                document.getElementById(id + '_text').textContent =
+                    this.checked ? 'Active' : 'Inactive';
+
+            });
+
         });
     </script>
 @endpush

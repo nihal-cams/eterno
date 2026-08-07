@@ -50,18 +50,18 @@
 
 
 <!-- Resorts Section -->
-@if($resorts->count())
+@if($resortIntro || $resorts->count())
 <section class="resorts-section section-space" id="resortContainer">
     <div class="resorts-sticky-wrapper">
         <div class="container">
             <div class="mb-4 mb-md-5 reveal">
-                <div class="section-label">Discover Your Perfect Escape</div>
-                <h2>Explore Our Resorts</h2>
+                <div class="section-label">{{ $resortIntro->sub_title }}</div>
+                <h2>{{ $resortIntro->title }}</h2>
             </div>
             
             <div class="resort-tabs reveal-scale">
                 @foreach($resorts as $resort)
-                <button class="resort-tab {{ $loop->first ? 'active' : '' }}" data-target="resort-{{ $resort->id }}">{{ $resort->title }}</button>
+                <button class="resort-tab {{ $loop->first ? 'active' : '' }}" data-target="resort-{{ $resort->id }}">{{ $resort->name }}</button>
                 @endforeach
             </div>
 
@@ -72,15 +72,15 @@
                     <div class="row align-items-center g-5 ">
                         <div class="col-lg-6 order-2 order-lg-1 resort-content-mt">
                             <div class="resort-content">
-                                <h3>{{ $resort->name }} - {{ $resort->location }}</h3>
-                                <span class="subtitle">{{ $resort->title }}</span>
-                                <p>{{ $resort->description }}</p>
-                                <a href="{{ $resort->button_url }}" class="btn-custom btn-outline-custom">{{ $resort->button_text }}</a>
+                                <h3>{{ $resort->name }} - {{ $resort->home_place }}</h3>
+                                <span class="subtitle">{{ $resort->home_title }}</span>
+                                <p>{{ $resort->home_description }}</p>
+                                <a href="{{ $resort->home_button_url }}" class="btn-custom btn-outline-custom">{{ $resort->home_button_text }}</a>
                             </div>
                         </div>
                         <div class="col-lg-6 order-1 order-lg-2 resort-img-mt">
                             <div class="resort-image">
-                                <img src="{{ asset('uploads/resorts/'.$resort->image) }}" alt="{{ $resort->name }}" class="img-fluid">
+                                <img src="{{ asset('uploads/resorts/'.$resort->home_image) }}" alt="{{ $resort->name }}" class="img-fluid">
                                 <div class="swipe-indicator">
                                     <span>Swipe</span>
                                     <i class="bi bi-arrow-right-short"></i>

@@ -10,6 +10,7 @@ use App\Models\GalleryIntro;
 use App\Models\Offer;
 use App\Models\OfferIntro;
 use App\Models\Resort;
+use App\Models\ResortIntro;
 use App\Models\Testimonial;
 use App\Models\TestimonialIntro;
 use App\Models\VideoSection;
@@ -47,7 +48,10 @@ class FrontController extends Controller
         $welcome = WelcomeSection::where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::where('status', Status::ACTIVE)
+        $resortIntro = ResortIntro::where('status', Status::ACTIVE)
+            ->first();
+
+        $resorts = Resort::where('home_status', Status::ACTIVE)
             ->orderByDesc('id')
             ->get();
 
@@ -95,6 +99,7 @@ class FrontController extends Controller
             'bannerText',
             'banners',
             'welcome',
+            'resortIntro',
             'resorts',
             'video',
             'offerIntro',

@@ -84,8 +84,7 @@ class OfferController extends Controller
     public function create($type)
     {
         $offer = new Offer();
-        $resorts = Resort::where('status', Status::ACTIVE)
-        ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('id', 'DESC')
         ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));

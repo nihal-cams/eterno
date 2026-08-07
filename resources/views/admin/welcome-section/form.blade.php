@@ -22,7 +22,7 @@
                 <div class="row">
 
                     <div class="form-group col-md-6">
-                        <label><strong>Sub Title <span class="text-danger">*</span></strong></label>
+                        <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="sub_title"
                             class="form-control"

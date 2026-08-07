@@ -28,6 +28,9 @@ class WelcomeSectionController extends Controller
             'button_text' => ['nullable', 'string', 'max:255'],
             'button_url' => ['nullable', 'string', 'max:255'],
             'status' => ['required'],
+        ],
+        [
+            'sub_title.required' => 'The subtitle field is required.',
         ]);
 
         $leftFileName = $welcomeSection->left_image;

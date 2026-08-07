@@ -50,6 +50,9 @@ class OfferIntroController extends Controller
                 'max:2048',
             ],
             'status' => ['required'],
+        ],
+        [
+            'sub_title.required' => 'The subtitle field is required.',
         ]);
 
         $fileName = $offerIntro->banner_image;
