@@ -12,15 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('welcome_sections', function (Blueprint $table) {
+        Schema::create('resort_intros', function (Blueprint $table) {
             $table->id();
             $table->string('sub_title');
             $table->string('title');
-            $table->text('description');
-            $table->string('left_image');
-            $table->string('right_image');
-            $table->string('button_text');
-            $table->string('button_url');
+            $table->text('description')->nullable();
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('welcome_sections');
+        Schema::dropIfExists('resort_intros');
     }
 };

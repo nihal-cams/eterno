@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\PhilosophyController;
 use App\Http\Controllers\Admin\GalleryIntroController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\ResortIntroController;
 use App\Http\Controllers\Admin\TestimonialIntroController;
 
 /*
@@ -50,20 +51,38 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::resource('resorts', ResortController::class);
+    Route::prefix('resorts/{type}')
+        ->where(['type' => '1'])
+        ->group(function () {
+        Route::get('/create', [ResortController::class, 'create'])->name('resorts.create');
+        Route::post('/', [ResortController::class, 'store'])->name('resorts.store');
+        Route::delete('/{resort}', [ResortController::class, 'destroy'])->name('resorts.destroy');
+    });
+    Route::prefix('resorts/{type}')
+    ->where(['type' => '1|2|3|4'])
+    ->group(function () {
+        Route::get('/', [ResortController::class, 'index'])->name('resorts.index');
+        Route::get('/{resort}', [ResortController::class, 'show'])->name('resorts.show');
+        Route::get('/{resort}/edit', [ResortController::class, 'edit'])->name('resorts.edit');
+        Route::put('/{resort}', [ResortController::class, 'update'])->name('resorts.update');
+    });
+    Route::get('resort-intro', [ResortIntroController::class, 'edit'])
+            ->name('resort-intro.edit');
+    Route::put('resort-intro', [ResortIntroController::class, 'update'])
+            ->name('resort-intro.update');
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('gallery-categories', GalleryCategoryController::class);
-    Route::prefix('galleries/{type}')
-        ->where(['type' => '1|2|3'])
-        ->group(function () {
-            Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');
-            Route::get('/create', [GalleryController::class, 'create'])->name('galleries.create');
-            Route::post('/', [GalleryController::class, 'store'])->name('galleries.store');
-            Route::get('/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
-            Route::get('/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
-            Route::put('/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
-            Route::delete('/{gallery}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
-        });
+    Route::prefix('gallery/{type}')
+    ->where(['type' => '1|2|3'])
+    ->group(function () {
+        Route::get('/', [GalleryController::class, 'index'])->name('galleries.index');
+        Route::get('/create', [GalleryController::class, 'create'])->name('galleries.create');
+        Route::post('/', [GalleryController::class, 'store'])->name('galleries.store');
+        Route::get('/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
+        Route::get('/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
+        Route::put('/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
+        Route::delete('/{gallery}', [GalleryController::class, 'destroy'])->name('galleries.destroy');
+    });
     Route::prefix('offers/{type}')
         ->where(['type' => '1|2'])
         ->group(function () {
@@ -95,7 +114,6 @@ Route::middleware('auth')->group(function () {
         });
     Route::get('testimonial-intro', [TestimonialIntroController::class, 'edit'])
         ->name('testimonial-intro.edit');
-
     Route::put('testimonial-intro', [TestimonialIntroController::class, 'update'])
         ->name('testimonial-intro.update');
     Route::get('welcome-section', [WelcomeSectionController::class, 'edit'])

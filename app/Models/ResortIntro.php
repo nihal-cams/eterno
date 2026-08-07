@@ -5,16 +5,12 @@ namespace App\Models;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
-class WelcomeSection extends Model
+class ResortIntro extends Model
 {
     protected $fillable = [
         'sub_title',
         'title',
         'description',
-        'left_image',
-        'right_image',
-        'button_text',
-        'button_url',
         'status',
     ];
 

@@ -68,7 +68,14 @@
 
             <!-- Nav Item - Tables -->
 
+            <li class="nav-item {{ request()->is('admin/resorts/1*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.resorts.index', 1) }}"> <i class="fa fa-building"></i>
+                    <span>Resorts</span>
+                </a>
+            </li>
+
             @php
+<<<<<<< HEAD
                 $homeMenuOpen =
                     request()->is('admin/banners/1/1*') ||
                     request()->is('admin/banners/2*') ||
@@ -83,6 +90,22 @@
                     request()->is('admin/galleries/1*') ||
                     request()->is('admin/testimonial-intro*') ||
                     request()->is('admin/testimonials*');
+=======
+                $homeMenuOpen = request()->is('admin/banners/1/1*') ||
+                                request()->is('admin/banners/2*') ||
+                                request()->is('admin/welcome-section*') ||
+                                request()->is('admin/resort-intro*') ||
+                                request()->is('admin/resorts/2*') ||
+                                request()->is('admin/experiences/1*') ||
+                                request()->is('admin/experience-items/1*') ||
+                                request()->is('admin/video-section*') ||
+                                request()->is('admin/offer-intro/1*') ||
+                                request()->is('admin/offers/1*') ||
+                                request()->is('admin/gallery-intro/1*') ||
+                                request()->is('admin/gallery/1*') ||
+                                request()->is('admin/testimonial-intro*') ||
+                                request()->is('admin/testimonials*');
+>>>>>>> front-04-08
             @endphp
 
             <li class="nav-item {{ $homeMenuOpen ? 'active' : '' }}">
@@ -131,10 +154,34 @@
                             Welcome
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/resorts*') ? 'active' : '' }}"
-                            href="{{ route('admin.resorts.index') }}">
-                            Resorts
+                        @php
+                            $homeResortMenuOpen =
+                                request()->is('admin/resort-intro*') ||
+                                request()->is('admin/resorts/2*');
+                        @endphp
+
+                        <a class="collapse-item {{ $homeResortMenuOpen ? 'active' : '' }}"
+                            href="#" data-toggle="collapse" data-target="#collapseHomeResorts"
+                            aria-expanded="{{ $homeResortMenuOpen ? 'true' : 'false' }}"
+                            aria-controls="collapseHomeResorts">
+                            Manage Resorts
                         </a>
+
+                        <div id="collapseHomeResorts"
+                            class="collapse {{ $homeResortMenuOpen ? 'show' : '' }}">
+
+                            <div class="bg-light py-2 collapse-inner rounded">
+                                <a class="collapse-item {{ request()->is('admin/resort-intro*') ? 'active' : '' }}"
+                                    href="{{ route('admin.resort-intro.edit') }}">
+                                    Intro
+                                </a>
+                                
+                                <a class="collapse-item {{ request()->is('admin/resorts/2*') ? 'active' : '' }}"
+                                    href="{{ route('admin.resorts.index', 2) }}">
+                                    Resorts
+                                </a>
+                            </div>
+                        </div>
 
                         <a class="collapse-item {{ request()->is('admin/video-section*') ? 'active' : '' }}"
                             href="{{ route('admin.video-section.edit') }}">
@@ -209,7 +256,12 @@
 
                         @php
                             $homeGalleryMenuOpen =
+<<<<<<< HEAD
                                 request()->is('admin/gallery-intro/1*') || request()->is('admin/galleries/1*');
+=======
+                                request()->is('admin/gallery-intro/1*') ||
+                                request()->is('admin/gallery/1*');
+>>>>>>> front-04-08
                         @endphp
 
                         <a class="collapse-item {{ $homeGalleryMenuOpen ? 'active' : '' }}" href="#"
@@ -226,10 +278,15 @@
                                     href="{{ route('admin.gallery-intro.edit', 1) }}">
                                     Intro
                                 </a>
+<<<<<<< HEAD
 
                                 <a class="collapse-item {{ request()->is('admin/galleries/1*') ? 'active' : '' }}"
+=======
+                                
+                                <a class="collapse-item {{ request()->is('admin/gallery/1*') ? 'active' : '' }}"
+>>>>>>> front-04-08
                                     href="{{ route('admin.galleries.index', 1) }}">
-                                    Galleries
+                                    Gallery
                                 </a>
                             </div>
                         </div>
@@ -266,6 +323,12 @@
                 </div>
             </li>
 
+            <li class="nav-item {{ request()->is('admin/resorts/3*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.resorts.index', 3) }}"> <i class="fa fa-building"></i>
+                    <span>Resorts (Mega Menu)</span>
+                </a>
+            </li>
+
             @php
                 $offerMenuOpen = request()->is('admin/offer-intro/2*') || request()->is('admin/offers/2*');
             @endphp
@@ -297,10 +360,14 @@
             </li>
 
             @php
+<<<<<<< HEAD
                 $galleryMenuOpen =
                     request()->is('admin/gallery-intro/2*') ||
                     request()->is('admin/gallery-categories*') ||
                     request()->is('admin/galleries/2*');
+=======
+                $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/gallery/2*');
+>>>>>>> front-04-08
             @endphp
 
             <li class="nav-item {{ $galleryMenuOpen ? 'active' : '' }}">
@@ -326,7 +393,7 @@
                             Category
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/galleries/2*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ request()->is('admin/gallery/2*') ? 'active' : '' }}"
                             href="{{ route('admin.galleries.index', 2) }}">
                             Gallery
                         </a>
@@ -373,7 +440,7 @@
 
 
             <li
-                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/galleries/3*') ? 'active' : '' }}">
+                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'active' : '' }}">
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseExperience">
@@ -382,7 +449,7 @@
                 </a>
 
                 <div id="collapseExperience"
-                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/galleries/3*') ? 'show' : '' }}"
+                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'show' : '' }}"
                     data-parent="#accordionSidebar">
 
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -396,7 +463,7 @@
                             Experience Items
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/galleries/3*') ? 'active' : '' }}"
+                        <a class="collapse-item {{ request()->is('admin/gallery/3*') ? 'active' : '' }}"
                             href="{{ route('admin.galleries.index', 3) }}">
                             Gallery
                         </a>
@@ -404,6 +471,12 @@
 
                 </div>
 
+            </li>
+
+            <li class="nav-item {{ request()->is('admin/resorts/4*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.resorts.index', 4) }}"> <i class="fa fa-building"></i>
+                    <span>Resorts (Book Now)</span>
+                </a>
             </li>
 
             {{--  <li class="nav-item {{ request()->is('admin/contact-page*') ? 'active' : '' }}">

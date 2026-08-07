@@ -427,8 +427,13 @@
 
                 <button type="submit" class="btn btn-primary">
 
+<<<<<<< HEAD
                     <i class="fa fa-save"></i>
                     Update About
+=======
+                        <i class="fa fa-save"></i>
+                        Update
+>>>>>>> front-04-08
 
                 </button>
 

@@ -17,6 +17,7 @@ class WelcomeSectionSeeder extends Seeder
         WelcomeSection::updateOrCreate(
             ['id' => 1],
             [
+                'sub_title' => 'WELCOME',
                 'title' => 'Eterno',
                 'description' => 'At Eterno Hotels & Resorts, we believe that every destination has a story waiting to be experienced. Our properties are thoughtfully designed to blend luxury with the natural beauty of their surroundings, offering guests immersive stays that create lasting memories.',
                 'left_image'  => 'home-welcome-left.jpg',

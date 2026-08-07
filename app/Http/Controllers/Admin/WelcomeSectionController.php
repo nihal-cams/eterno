@@ -20,6 +20,7 @@ class WelcomeSectionController extends Controller
         $welcomeSection = WelcomeSection::firstOrFail();
 
         $validated = $request->validate([
+            'sub_title' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'left_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
@@ -27,6 +28,9 @@ class WelcomeSectionController extends Controller
             'button_text' => ['nullable', 'string', 'max:255'],
             'button_url' => ['nullable', 'string', 'max:255'],
             'status' => ['required'],
+        ],
+        [
+            'sub_title.required' => 'The subtitle field is required.',
         ]);
 
         $leftFileName = $welcomeSection->left_image;

@@ -22,11 +22,11 @@
                 <div class="row">
                 @if($type === '1')
                     <div class="form-group col-md-6">
-                        <label><strong>Sub Title <span class="text-danger">*</span></strong></label>
+                        <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="sub_title"
                             class="form-control"
-                            placeholder="Special Offers"
+                            placeholder="SPECIAL OFFERS"
                             value="{{ old('sub_title', $offerIntro->sub_title) }}">
                         @error('sub_title')
                             <small class="text-danger">{{ $message }}</small>
