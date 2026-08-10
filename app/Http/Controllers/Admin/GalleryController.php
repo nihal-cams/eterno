@@ -20,7 +20,7 @@ class GalleryController extends Controller
     {
         if($request->ajax()){
         
-            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
+            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'sort_order', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->addColumn('resort_name', function (Gallery $gallery) {
@@ -102,10 +102,10 @@ class GalleryController extends Controller
     {
         $gallery = new Gallery();
         
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
         ->pluck('name', 'id');
         
-        $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
+        $galleryCategories = GalleryCategory::orderBy('sort_order', 'ASC')
         ->pluck('name', 'id');
         
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
@@ -126,6 +126,7 @@ class GalleryController extends Controller
                 'exists:gallery_categories,id',
             ],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ],
         [
@@ -161,8 +162,7 @@ class GalleryController extends Controller
      */
     public function edit($type, Gallery $gallery)
     {
-        $resorts = Resort::where('status', Status::ACTIVE)
-            ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
@@ -186,6 +186,7 @@ class GalleryController extends Controller
                 'exists:gallery_categories,id',
             ],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('gallery_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedInteger('sort_order')->default(1);
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });

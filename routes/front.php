@@ -17,23 +17,25 @@ use App\Http\Controllers\FrontController;
 
 Route::get('/', [FrontController::class, 'home'])->name('home');
 
-Route::get('/about-us', [FrontController::class, 'aboutUs'])
+Route::get('about-us', [FrontController::class, 'aboutUs'])
     ->name('about-us');
 
-Route::get('/experience', [FrontController::class, 'experience'])
-    ->name('experience');
+Route::get('experiences', [FrontController::class, 'experiences'])
+    ->name('experiences');
 
-Route::get('/contact', [FrontController::class, 'contact'])
+Route::get('contact', [FrontController::class, 'contact'])
     ->name('contact');
 
 
-Route::post('/contact/enquiry', [FrontController::class, 'store'])
+Route::post('contact/enquiry', [FrontController::class, 'store'])
     ->name('contact.enquiry.store');
 
 Route::post('/newsletter/subscribe', [FrontController::class, 'subscribe'])
     ->name('newsletter.subscribe');
-Route::get('gallery.php', [FrontController::class, 'gallery'])->name('gallery');
-Route::get('offers.php', [FrontController::class, 'offers'])->name('offers');
+
+Route::get('gallery', [FrontController::class, 'gallery'])->name('gallery');
+
+Route::get('offers', [FrontController::class, 'offers'])->name('offers');
 
 
 // View::Composer(['partials.header','partials.footer'], function($view){

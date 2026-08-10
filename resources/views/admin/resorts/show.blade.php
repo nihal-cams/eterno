@@ -14,6 +14,16 @@
                 <div class="col-md-9">{{ $resort->name }}</div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-md-3 font-weight-bold">URL:</div>
+                <div class="col-md-9">{{ $resort->url }}</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 font-weight-bold">Sort Order:</div>
+                <div class="col-md-9">{{ $resort->sort_order }}</div>
+            </div>
+
             {{-- Type 1 --}}
             @if($type === '1')
 

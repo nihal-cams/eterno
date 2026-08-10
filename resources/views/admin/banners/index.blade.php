@@ -30,6 +30,7 @@
                         <thead>
                             <tr>
                                 <th>Image</th>
+                                <th>Sort Order</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -119,6 +120,7 @@
 
          columns: [
             { data: 'image', name: 'image' },
+            { data: 'sort_order', name: 'sort_order' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 

@@ -22,7 +22,7 @@ class GalleryIntroSeeder extends Seeder
                 'description' => null,
                 'banner_title' => 'Every Picture Tells a Story',
                 'banner_description' => 'Explore breathtaking moments from our resorts through carefully curated imagery',
-                'banner_image'  => 'gallery-banner.jpg',
+                'banner_image'  => 'default/gallery-banner.jpg',
                 'status' => Status::ACTIVE->value,
             ]
         );

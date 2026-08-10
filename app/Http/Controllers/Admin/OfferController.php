@@ -19,7 +19,7 @@ class OfferController extends Controller
     {
         if($request->ajax()){
         
-            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
+            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'sort_order', 'created_at')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->addColumn('resort_name', function (Offer $offer) {
@@ -84,7 +84,7 @@ class OfferController extends Controller
     public function create($type)
     {
         $offer = new Offer();
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
         ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));
@@ -111,6 +111,7 @@ class OfferController extends Controller
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -142,7 +143,7 @@ class OfferController extends Controller
      */
     public function edit($type, Offer $offer)
     {
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));
@@ -169,6 +170,7 @@ class OfferController extends Controller
             'button_text' => ['required', 'string', 'max:255'],
             'button_url' => ['required', 'url'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ],
         [

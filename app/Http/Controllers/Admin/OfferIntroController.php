@@ -61,7 +61,7 @@ class OfferIntroController extends Controller
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/offer-intros'), $fileName);
             
-            if ($offerIntro->banner_image && $offerIntro->banner_image !== 'offer-banner.jpg' && file_exists(public_path('uploads/offer-intros/' . $offerIntro->banner_image))) {
+            if ($offerIntro->banner_image && $offerIntro->banner_image !== 'default/offer-banner.jpg' && file_exists(public_path('uploads/offer-intros/' . $offerIntro->banner_image))) {
                 unlink(public_path('uploads/offer-intros/' . $offerIntro->banner_image));
             }
         }

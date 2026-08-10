@@ -18,7 +18,7 @@ class GalleryCategoryController extends Controller
     {
         if($request->ajax()){
         
-            $query = GalleryCategory::select('id', 'name', 'status', 'created_at')->orderBy('id','DESC');
+            $query = GalleryCategory::select('id', 'name', 'sort_order', 'status', 'created_at')->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->editColumn('status', function (GalleryCategory $galleryCategory) {
@@ -71,6 +71,7 @@ class GalleryCategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -102,6 +103,7 @@ class GalleryCategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 

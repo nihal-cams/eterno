@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('button_text');
             $table->string('button_url');
+            $table->unsignedInteger('sort_order')->default(1);
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });

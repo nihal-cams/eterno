@@ -12,12 +12,13 @@ class Resort extends Model
     
     protected $fillable = [
         'name',
+        'url',
+        'sort_order',
         'home_place',
         'home_title',
         'home_description',
         'home_image',
         'home_button_text',
-        'home_button_url',
         'home_status',
         'home_updated_at',
         'mega_menu_sub_title',

@@ -61,7 +61,7 @@ class GalleryIntroController extends Controller
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/gallery-intros'), $fileName);
             
-            if ($galleryIntro->banner_image && $galleryIntro->banner_image !== 'gallery-banner.jpg' && file_exists(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image))) {
+            if ($galleryIntro->banner_image && $galleryIntro->banner_image !== 'default/gallery-banner.jpg' && file_exists(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image))) {
                 unlink(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image));
             }
         }

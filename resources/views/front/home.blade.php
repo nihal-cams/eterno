@@ -51,47 +51,65 @@
 
 <!-- Resorts Section -->
 @if($resortIntro || $resorts->count())
-<section class="resorts-section section-space" id="resortContainer">
-    <div class="resorts-sticky-wrapper">
-        <div class="container">
-            <div class="mb-4 mb-md-5 reveal">
-                <div class="section-label">{{ $resortIntro->sub_title }}</div>
-                <h2>{{ $resortIntro->title }}</h2>
-            </div>
-            
-            <div class="resort-tabs reveal-scale">
-                @foreach($resorts as $resort)
-                <button class="resort-tab {{ $loop->first ? 'active' : '' }}" data-target="resort-{{ $resort->id }}">{{ $resort->name }}</button>
-                @endforeach
-            </div>
+<section class="pinned-section section-space-bottom" id="pinnedSection">
+    <div class="container pinned-container">
 
-            <!-- Wrapper for swipeable panels on mobile/tablet -->
-            <div class="resort-panels-wrapper">
-                @foreach($resorts as $resort)
-                <div class="resort-panel {{ $loop->first ? 'active' : '' }}" id="resort-{{ $resort->id }}">
-                    <div class="row align-items-center g-5 ">
-                        <div class="col-lg-6 order-2 order-lg-1 resort-content-mt">
-                            <div class="resort-content">
-                                <h3>{{ $resort->name }} - {{ $resort->home_place }}</h3>
-                                <span class="subtitle">{{ $resort->home_title }}</span>
-                                <p>{{ $resort->home_description }}</p>
-                                <a href="{{ $resort->home_button_url }}" class="btn-custom btn-outline-custom">{{ $resort->home_button_text }}</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 order-1 order-lg-2 resort-img-mt">
-                            <div class="resort-image">
-                                <img src="{{ asset('uploads/resorts/'.$resort->home_image) }}" alt="{{ $resort->name }}" class="img-fluid">
-                                <div class="swipe-indicator">
-                                    <span>Swipe</span>
-                                    <i class="bi bi-arrow-right-short"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- TOP CENTER SECTION HEADING -->
+        @if($resortIntro)
+        <div class="row">
+            <div class="col-12">
+                <div class="resort-header">
+                    <span class="section-label">{{ $resortIntro->sub_title }}</span>
+                    <h2 class="section-title">{{ $resortIntro->title }}</h2>
                 </div>
-                @endforeach
             </div>
         </div>
+        @endif
+
+        <!-- CONTENT ROW -->
+        @if($resorts->count())
+        <div class="row align-items-center g-4 g-lg-5">
+
+            <!-- Left Column: Navigation Tabs -->
+            <div class="col-lg-4 col-xl-5">
+                <div class="tab-nav" id="tabNav">
+                    @foreach($resorts as $index => $resort)
+                    <button
+                        class="tab-nav-btn {{ $index === 0 ? 'active' : '' }}"
+                        data-index="{{ $index }}">
+                        {{ $resort->name }}
+                    </button>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Right Column: Moving Track Window -->
+            <div class="col-lg-8 col-xl-7">
+                <div class="resort-window" id="resortWindow">
+                    <div class="resort-track" id="resortTrack">
+
+                        @foreach($resorts as $index => $resort)
+                        <div class="resort-item {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
+                            <div class="property-card">
+                                <div class="property-card-img-wrapper">
+                                    <img src="{{ asset('uploads/resorts/'.$resort->home_image) }}" class="img-fluid" alt="{{ $resort->name }}">
+                                    <div class="property-overlay">
+                                        <a href="{{ $resort->url ?? '#' }}" class="btn-explore">{{ $resort->home_button_text }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h5>{{ $resort->name }} - {{ $resort->home_place }}</h5>
+                                <p>{{ $resort->home_description }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @endif
     </div>
 </section>
 @endif

@@ -74,6 +74,7 @@
                 </a>
             </li>
 
+
             @php
                 $homeMenuOpen = request()->is('admin/banners/1/1*') ||
                                 request()->is('admin/banners/2*') ||
@@ -189,7 +190,7 @@
                             href="#" data-toggle="collapse" data-target="#collapseExperiences"
                             aria-expanded="{{ request()->is('admin/experiences/1*') || request()->is('admin/experience-items/1*') ? 'true' : 'false' }}"
                             aria-controls="collapseExperiences">
-                            Experiences
+                            Manage Experiences
                         </a>
 
                         <div id="collapseExperiences"
@@ -199,12 +200,12 @@
 
                                 <a class="collapse-item {{ request()->is('admin/experiences/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.experiences.edit', 1) }}">
-                                    Experience
+                                    Intro
                                 </a>
 
                                 <a class="collapse-item {{ request()->is('admin/experience-items/1*') ? 'active' : '' }}"
                                     href="{{ route('admin.experience-items.index', 1) }}">
-                                    Experience Items
+                                    Experiences
                                 </a>
 
                             </div>
@@ -297,11 +298,47 @@
                 </div>
             </li>
 
+            <li
+                class="nav-item {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'active' : '' }}">
+                <a class="nav-link {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? '' : 'collapsed' }}"
+                    href="#" data-toggle="collapse" data-target="#collapseAbout"
+                    aria-expanded="{{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'true' : 'false' }}"
+                    aria-controls="collapseAbout">
+                    <i class="fa fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+
+                <div id="collapseAbout"
+                    class="collapse {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'show' : '' }}"
+                    data-parent="#accordionSidebar">
+
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('admin/about') ? 'active' : '' }}"
+                            href="{{ route('admin.about.edit') }}">
+                            Banner / About / CTA
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/philosophies*') ? 'active' : '' }}"
+                            href="{{ route('admin.philosophies.index') }}">
+                            Philosophy
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/core-values*') ? 'active' : '' }}"
+                            href="{{ route('admin.core-values.index') }}">
+                            Core Values
+                        </a>
+                    </div>
+
+                </div>
+
+            </li>
+
             <li class="nav-item {{ request()->is('admin/resorts/3*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.resorts.index', 3) }}"> <i class="fa fa-building"></i>
                     <span>Resorts (Mega Menu)</span>
                 </a>
             </li>
+
 
             @php
                 $offerMenuOpen = request()->is('admin/offer-intro/2*') || request()->is('admin/offers/2*');
@@ -332,6 +369,42 @@
                     </div>
                 </div>
             </li>
+
+
+            <li
+                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'active' : '' }}">
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseExperience">
+                    <i class="fa fa-map"></i>
+                    <span>Manage Experiences</span>
+                </a>
+
+                <div id="collapseExperience"
+                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'show' : '' }}"
+                    data-parent="#accordionSidebar">
+
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ request()->is('admin/experiences/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.experiences.edit', 2) }}">
+                            Intro
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/experience-items/2*') ? 'active' : '' }}"
+                            href="{{ route('admin.experience-items.index', 2) }}">
+                            Experiences
+                        </a>
+
+                        <a class="collapse-item {{ request()->is('admin/gallery/3*') ? 'active' : '' }}"
+                            href="{{ route('admin.galleries.index', 3) }}">
+                            Gallery
+                        </a>
+                    </div>
+
+                </div>
+
+            </li>
+
 
             @php
                 $galleryMenuOpen = request()->is('admin/gallery-intro/2*') || request()->is('admin/gallery-categories*') || request()->is('admin/gallery/2*');
@@ -369,76 +442,37 @@
             </li>
 
 
-
             <li
-                class="nav-item {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'active' : '' }}">
-                <a class="nav-link {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? '' : 'collapsed' }}"
-                    href="#" data-toggle="collapse" data-target="#collapseAbout"
-                    aria-expanded="{{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'true' : 'false' }}"
-                    aria-controls="collapseAbout">
-                    <i class="fa fa-info-circle"></i>
-                    <span>About</span>
+                class="nav-item {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'active' : '' }}">
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contactMenu"
+                    aria-expanded="{{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'true' : 'false' }}">
+
+                    <i class="fa fa-envelope"></i>
+                    <span>Manage Contact</span>
+
                 </a>
 
-                <div id="collapseAbout"
-                    class="collapse {{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'show' : '' }}"
-                    data-parent="#accordionSidebar">
+                <div id="contactMenu"
+                    class="collapse {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'show' : '' }}">
 
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/about') ? 'active' : '' }}"
-                            href="{{ route('admin.about.edit') }}">
-                            Banner / About / CTA
+                        <a class="collapse-item {{ request()->is('admin/contact') ? 'active' : '' }}"
+                            href="{{ route('admin.contact-page.edit') }}">
+                            Page
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/philosophies*') ? 'active' : '' }}"
-                            href="{{ route('admin.philosophies.index') }}">
-                            Philosophy
+                        <a class="collapse-item {{ request()->is('admin/contact-enquiry*') ? 'active' : '' }}"
+                            href="{{ route('admin.contact-enquiry.index') }}">
+                            Enquiries
                         </a>
 
-                        <a class="collapse-item {{ request()->is('admin/core-values*') ? 'active' : '' }}"
-                            href="{{ route('admin.core-values.index') }}">
-                            Core Values
-                        </a>
                     </div>
 
                 </div>
 
             </li>
 
-
-            <li
-                class="nav-item {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'active' : '' }}">
-
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseExperience">
-                    <i class="fa fa-map"></i>
-                    <span>Experiences</span>
-                </a>
-
-                <div id="collapseExperience"
-                    class="collapse {{ request()->is('admin/experiences/2*') || request()->is('admin/experience-items/2*') || request()->is('admin/gallery/3*') ? 'show' : '' }}"
-                    data-parent="#accordionSidebar">
-
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/experiences/2*') ? 'active' : '' }}"
-                            href="{{ route('admin.experiences.edit', 2) }}">
-                            Experience Page
-                        </a>
-
-                        <a class="collapse-item {{ request()->is('admin/experience-items/2*') ? 'active' : '' }}"
-                            href="{{ route('admin.experience-items.index', 2) }}">
-                            Experience Items
-                        </a>
-
-                        <a class="collapse-item {{ request()->is('admin/gallery/3*') ? 'active' : '' }}"
-                            href="{{ route('admin.galleries.index', 3) }}">
-                            Gallery
-                        </a>
-                    </div>
-
-                </div>
-
-            </li>
 
             <li class="nav-item {{ request()->is('admin/resorts/4*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.resorts.index', 4) }}"> <i class="fa fa-building"></i>
@@ -451,40 +485,6 @@
                     <span>Contact</span>
                 </a>
             </li>  --}}
-
-
-            <li
-                class="nav-item {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'active' : '' }}">
-
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contactMenu"
-                    aria-expanded="{{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'true' : 'false' }}">
-
-                    <i class="fa fa-envelope"></i>
-                    <span>Contact</span>
-
-                </a>
-
-                <div id="contactMenu"
-                    class="collapse {{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'show' : '' }}">
-
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item {{ request()->is('admin/contact') ? 'active' : '' }}"
-                            href="{{ route('admin.contact-page.edit') }}">
-                            Contact Page
-                        </a>
-
-                        <a class="collapse-item {{ request()->is('admin/contact-enquiry*') ? 'active' : '' }}"
-                            href="{{ route('admin.contact-enquiry.index') }}">
-                            Contact enquiries
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </li>
-
-
 
 
             {{-- Settings --}}

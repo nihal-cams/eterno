@@ -22,7 +22,7 @@ class OfferIntroSeeder extends Seeder
                 'description' => null,
                 'banner_title' => 'Exclusive Offers Await',
                 'banner_description' => 'Discover limited-time offers designed to make your getaway even more memorable',
-                'banner_image'  => 'offer-banner.jpg',
+                'banner_image'  => 'default/offer-banner.jpg',
                 'status' => Status::ACTIVE->value,
             ]
         );

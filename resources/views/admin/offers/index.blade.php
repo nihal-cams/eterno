@@ -31,6 +31,7 @@
                             <tr>
                                 <th>Image</th>
                                 @if($type === '2') <th>Title</th> @endif
+                                <th>Sort Order</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -121,6 +122,7 @@
          columns: [
             { data: 'image', name: 'image' },
             @if($type === '2') { data: 'title', name: 'title' }, @endif
+            { data: 'sort_order', name: 'sort_order' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 

@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('resorts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('url')->nullable();
+            $table->unsignedInteger('sort_order')->default(1);
             $table->string('home_place')->nullable();
             $table->string('home_title')->nullable();
             $table->text('home_description')->nullable();
             $table->string('home_image')->nullable();
             $table->string('home_button_text')->nullable();
-            $table->string('home_button_url')->nullable();
             $table->string('home_status')->default(Status::INACTIVE->value);
             $table->timestamp('home_updated_at')->nullable();
             $table->string('mega_menu_sub_title')->nullable();

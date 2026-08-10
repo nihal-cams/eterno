@@ -32,7 +32,7 @@ class VideoSectionController extends Controller
             $imageFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/video-sections'), $imageFileName);
             
-            if ($videoSection->thumbnail_image && $videoSection->thumbnail_image !== 'home-video-thumbnail.jpg' && file_exists(public_path('uploads/video-sections/' . $videoSection->thumbnail_image))) {
+            if ($videoSection->thumbnail_image && $videoSection->thumbnail_image !== 'default/home-video-thumbnail.jpg' && file_exists(public_path('uploads/video-sections/' . $videoSection->thumbnail_image))) {
                 unlink(public_path('uploads/video-sections/' . $videoSection->thumbnail_image));
             }
         }
@@ -44,7 +44,7 @@ class VideoSectionController extends Controller
             $videoFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/video-sections'), $videoFileName);
             
-            if ($videoSection->video && $videoSection->video !== 'home-video.mp4' && file_exists(public_path('uploads/video-sections/' . $videoSection->video))) {
+            if ($videoSection->video && $videoSection->video !== 'default/home-video.mp4' && file_exists(public_path('uploads/video-sections/' . $videoSection->video))) {
                 unlink(public_path('uploads/video-sections/' . $videoSection->video));
             }
         }

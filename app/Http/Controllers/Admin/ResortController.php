@@ -18,7 +18,7 @@ class ResortController extends Controller
     {
         if($request->ajax()){
         
-            $query = Resort::select('name', 'home_title', 'mega_menu_title', 'home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'created_at', 'id')->orderBy('id','DESC');
+            $query = Resort::select('name', 'url', 'home_title', 'mega_menu_title', 'home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'sort_order', 'created_at', 'id')->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->editColumn('home_image', function (Resort $resort) {
@@ -116,6 +116,8 @@ class ResortController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'url'],
+            'sort_order' => ['required', 'integer', 'min:1'],
         ]);
 
         $now = now();
@@ -156,6 +158,16 @@ class ResortController extends Controller
                 $type == 1 ? 'required' : 'nullable',
                 'string',
                 'max:255',
+            ],
+
+            'url' => [
+                $type == 1 ? 'required' : 'nullable',
+                'url',
+            ],
+
+            'sort_order' => [
+                $type == 1 ? 'required' : 'nullable',
+                'integer', 'min:1'
             ],
 
             // Type 2

@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     // ==========================
     // 2. Scroll Reveal Animation
     // ==========================
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlides = document.querySelectorAll('.hero-slide');
     if (heroSlides.length > 0) {
         let currentSlide = 0;
-        const slideInterval = 5000; // 5 seconds per slide
+        const slideInterval = 5000;
 
         function nextSlide() {
             heroSlides[currentSlide].classList.remove('active');
@@ -85,150 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // ==========================
-    // 5. Advanced Resort Tabs & Scroll (GSAP)
-    // ==========================
-    const resortSection = document.querySelector('.resorts-section');
-    const tabBar = document.querySelector('.resort-tabs');
-    const resortTabs = document.querySelectorAll('.resort-tab');
-    const resortPanels = document.querySelectorAll('.resort-panel');
-
-    if (resortSection && resortTabs.length > 0 && resortPanels.length > 0) {
-        const totalTabs = resortTabs.length;
-        let currentIndex = 0;
-        let stInstance = null;
-        let programmaticTarget = null; // Fixed: declared variable to prevent implicit global
-
-        function switchTab(index) {
-            if (index < 0 || index >= totalTabs) return;
-
-            resortTabs.forEach((tab, i) => {
-                tab.classList.toggle("active", i === index);
-            });
-
-            resortPanels.forEach((panel, i) => {
-                panel.classList.toggle("active", i === index);
-            });
-
-            currentIndex = index;
-        }
-
-        function initDesktopScroll() {
-            if (window.innerWidth < 992) return;
-            if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-
-            gsap.registerPlugin(ScrollTrigger);
-
-            stInstance = ScrollTrigger.create({
-                trigger: resortSection,
-                start: "top top",
-                end: "+=" + ((totalTabs - 1) * 40) + "%",
-                pin: true,
-                scrub: 0,
-                snap: {
-                    snapTo: value => Math.round(value * (totalTabs - 1)) / (totalTabs - 1),
-                    duration: { min: 0.15, max: 0.25 },
-                    ease: "power1.inOut"
-                },
-                onUpdate(self) {
-                    // Prevent intermediate tab switching during programmatic scroll
-                    if (programmaticTarget !== null) return;
-
-                    const index = Math.round(self.progress * (totalTabs - 1));
-                    switchTab(index);
-                }
-            });
-
-            resortTabs.forEach((tab, index) => {
-                tab.addEventListener("click", function (e) {
-                    e.preventDefault();
-
-                    if (!stInstance) {
-                        switchTab(index);
-                        return;
-                    }
-
-                    programmaticTarget = index;
-                    switchTab(index);
-
-                    const progress = index / (totalTabs - 1);
-                    const targetScroll = stInstance.start + ((stInstance.end - stInstance.start) * progress);
-
-                    // Note: Requires GSAP ScrollToPlugin, or use gsap.to(window, { scrollTo: ... })
-                    gsap.to(window, {
-                        scrollTo: targetScroll,
-                        duration: 0.5,
-                        ease: "power2.out",
-                        onComplete() {
-                            programmaticTarget = null;
-                        }
-                    });
-                });
-            });
-        }
-
-        function initMobileSwipe() {
-            let startX = 0;
-            let startY = 0;
-
-            resortSection.addEventListener("touchstart", function (e) {
-                if (window.innerWidth >= 992) return;
-                if (e.target.closest(".resort-tabs")) return;
-
-                startX = e.changedTouches[0].clientX;
-                startY = e.changedTouches[0].clientY;
-            }, { passive: true });
-
-            resortSection.addEventListener("touchend", function (e) {
-                if (window.innerWidth >= 992) return;
-
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                const dx = startX - endX;
-                const dy = startY - endY;
-
-                if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
-
-                if (dx > 0) {
-                    // Next tab (Loop)
-                    let nextIndex = currentIndex + 1;
-                    if (nextIndex >= totalTabs) nextIndex = 0;
-                    switchTab(nextIndex);
-                } else {
-                    // Previous tab (Loop)
-                    let prevIndex = currentIndex - 1;
-                    if (prevIndex < 0) prevIndex = totalTabs - 1;
-                    switchTab(prevIndex);
-                }
-            }, { passive: true });
-
-            // Mobile Tab Click
-            resortTabs.forEach((tab, index) => {
-                tab.addEventListener("click", function () {
-                    if (window.innerWidth >= 992) return;
-                    switchTab(index);
-                });
-            });
-        }
-
-        function init() {
-            if (stInstance) {
-                stInstance.kill();
-                stInstance = null;
-            }
-            switchTab(currentIndex);
-            initDesktopScroll();
-        }
-
-        init();
-        initMobileSwipe();
-
-        window.addEventListener("resize", function () {
-            init();
-        });
-    }
-
 
     // ==========================
     // 6. Home Page Gallery Slider
@@ -448,51 +305,55 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (toggleIcon) toggleIcon.textContent = '+';
                 } else {
                     item.classList.add('active');
-                    if (toggleIcon) toggleIcon.textContent = '−';
+                    if (toggleIcon) toggleIcon.textContent = 'âˆ’';
                 }
             });
         });
     }
-// ==========================
-// 12. Mega Menu Resort Preview
-// ==========================
-const megaItems = document.querySelectorAll(".mega-resort-list a");
-const megaImage = document.getElementById("megaImage");
-const megaTitle = document.getElementById("megaTitle");
-const megaSubtitle = document.getElementById("megaSubtitle");
-const megaDescription = document.getElementById("megaDescription");
 
-if (
-    megaItems.length &&
-    megaImage &&
-    megaTitle &&
-    megaSubtitle &&
-    megaDescription
-) {
-    megaItems.forEach(item => {
-        item.addEventListener("mouseenter", function () {
-            megaItems.forEach(link => link.classList.remove("active"));
-            this.classList.add("active");
+    // ==========================
+    // 12. Mega Menu Resort Preview
+    // ==========================
+    const megaItems = document.querySelectorAll(".mega-resort-list a");
+    const megaImage = document.getElementById("megaImage");
+    const megaTitle = document.getElementById("megaTitle");
+    const megaSubtitle = document.getElementById("megaSubtitle");
+    const megaDescription = document.getElementById("megaDescription");
 
-            megaImage.src = this.dataset.image || "";
-            megaTitle.innerHTML = this.dataset.title || "";
-            megaSubtitle.innerHTML = this.dataset.subtitle || "";
-            megaDescription.innerHTML = this.dataset.description || "";
+    if (megaItems.length && megaImage && megaTitle && megaSubtitle && megaDescription) {
+        megaItems.forEach(item => {
+            item.addEventListener("mouseenter", function () {
+                megaItems.forEach(link => link.classList.remove("active"));
+                this.classList.add("active");
+
+                megaImage.src = this.dataset.image || "";
+                megaTitle.innerHTML = this.dataset.title || "";
+                megaSubtitle.innerHTML = this.dataset.subtitle || "";
+                megaDescription.innerHTML = this.dataset.description || "";
+            });
         });
-    });
-}
+    }
 
-// Mobile Mega Menu Toggle
-const megaTrigger = document.getElementById("megaTrigger");
+    const megaTrigger = document.getElementById("megaTrigger");
+    if (megaTrigger) {
+        megaTrigger.addEventListener("click", function (e) {
+            if (window.innerWidth <= 991) {
+                e.preventDefault();
+                this.parentElement.classList.toggle("show");
+            }
+        });
+    }
 
-if (megaTrigger) {
-    megaTrigger.addEventListener("click", function (e) {
-        if (window.innerWidth <= 991) {
-            e.preventDefault();
-            this.parentElement.classList.toggle("show");
-        }
-    });
-}
+    const megaDropdown = document.querySelector(".mega-dropdown");
+    if (megaDropdown) {
+        window.addEventListener("scroll", () => {
+            megaDropdown.classList.add("hide-mega");
+            clearTimeout(window.scrollTimer);
+            window.scrollTimer = setTimeout(() => {
+                megaDropdown.classList.remove("hide-mega");
+            }, 150);
+        });
+    }
 
     // ==========================
     // 13. Smooth Scrolling (Lenis)
@@ -510,7 +371,169 @@ if (megaTrigger) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
-
         requestAnimationFrame(raf);
+    }
+
+    // ==========================
+    // 14. Resort Pinned Scroll & Tab Navigation (GSAP)
+    // ==========================
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        const pinnedSection = document.getElementById("pinnedSection");
+        const navButtons = document.querySelectorAll(".tab-nav-btn");
+        const resortItems = document.querySelectorAll(".resort-item");
+        const resortTrack = document.getElementById("resortTrack");
+        const resortWindow = document.getElementById("resortWindow");
+
+        if (pinnedSection && resortTrack && resortItems.length > 0) {
+            const totalItems = resortItems.length;
+            let currentResortIndex = -1;
+            let scrollTriggerInstance = null;
+            let mobileObserver = null;
+
+            function updateActiveResort(index) {
+                if (index === currentResortIndex) return;
+
+                navButtons.forEach((btn, idx) => {
+                    btn.classList.toggle("active", idx === index);
+                    if (idx === index && window.innerWidth < 992) {
+                        const navContainer = document.getElementById("tabNav");
+                        if (navContainer) {
+                            const btnOffsetLeft = btn.offsetLeft;
+                            const containerPadding = parseFloat(getComputedStyle(navContainer).paddingLeft) || 0;
+                            navContainer.scrollTo({
+                                left: btnOffsetLeft - containerPadding,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+
+                resortItems.forEach((item, idx) => {
+                    item.classList.toggle("active", idx === index);
+                });
+
+                currentResortIndex = index;
+            }
+
+            function getItemCenterOffsetY(index) {
+                const targetItem = resortItems[index];
+                if (!targetItem) return 0;
+                return -(targetItem.offsetTop + (targetItem.offsetHeight / 2));
+            }
+
+            function initDesktopPinnedScroll() {
+                gsap.set(resortTrack, { y: getItemCenterOffsetY(0) });
+
+                const screenWidth = window.innerWidth;
+
+                // Small Laptops & Mid-screens (991px to 1440px)-il snap disable aakkunnu
+                const enableSnap = screenWidth > 1440;
+
+                // 991px to 1440px nidayil fast scroll kittan Multiplier kuraykkunnu (e.g., 0.4 instead of 0.5/1)
+                // Smaller multiplier = Faster scroll speed
+                let scrollDistanceMultiplier = 0.5;
+                if (screenWidth >= 991 && screenWidth <= 1440) {
+                    scrollDistanceMultiplier = 0.2; // Speed kootan vendi multiplier kurachu
+                }
+
+                scrollTriggerInstance = ScrollTrigger.create({
+                    trigger: pinnedSection,
+                    start: "top top",
+                    end: () => `+=${window.innerHeight * (totalItems - scrollDistanceMultiplier)}`,
+                    pin: true,
+                    scrub: 0.3, // Scrub responsiveness kootan duration 0.6-il ninnu 0.3 aakki
+                    snap: enableSnap ? {
+                        snapTo: 1 / (totalItems - 1),
+                        duration: { min: 0.25, max: 0.5 },
+                        delay: 0.05,
+                        ease: "power2.inOut"
+                    } : false,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const rawIndex = progress * (totalItems - 1);
+                        const activeIndex = Math.min(Math.round(rawIndex), totalItems - 1);
+
+                        updateActiveResort(activeIndex);
+
+                        const firstOffset = getItemCenterOffsetY(0);
+                        const lastOffset = getItemCenterOffsetY(totalItems - 1);
+                        const currentOffset = gsap.utils.interpolate(firstOffset, lastOffset, progress);
+
+                        gsap.to(resortTrack, {
+                            y: currentOffset,
+                            duration: 0.1,
+                            overwrite: "auto",
+                            ease: "none"
+                        });
+                    }
+                });
+            }
+
+            function initMobileSwipe() {
+                if (!resortWindow) return;
+                mobileObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const activeIndex = parseInt(entry.target.getAttribute("data-index"));
+                            if (!isNaN(activeIndex)) updateActiveResort(activeIndex);
+                        }
+                    });
+                }, { root: resortWindow, threshold: 0.6 });
+
+                resortItems.forEach((item) => mobileObserver.observe(item));
+            }
+
+            navButtons.forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    const targetIndex = parseInt(e.currentTarget.getAttribute("data-index"));
+                    if (isNaN(targetIndex)) return;
+
+                    if (window.innerWidth >= 992 && scrollTriggerInstance) {
+                        const totalScrollDistance = scrollTriggerInstance.end - scrollTriggerInstance.start;
+                        const targetScrollPos = scrollTriggerInstance.start + (totalScrollDistance * (targetIndex / (totalItems - 1)));
+                        gsap.to(window, { scrollTo: targetScrollPos, duration: 0.5, ease: "power2.out" });
+                    } else if (resortWindow) {
+                        const targetSlide = resortItems[targetIndex];
+                        if (targetSlide) {
+                            resortWindow.scrollTo({ left: targetSlide.offsetLeft, behavior: "smooth" });
+                        }
+                    }
+                });
+            });
+
+            function handleBreakpoint() {
+                if (window.innerWidth >= 992) {
+                    if (mobileObserver) { mobileObserver.disconnect(); mobileObserver = null; }
+
+                    if (scrollTriggerInstance) {
+                        scrollTriggerInstance.kill();
+                        scrollTriggerInstance = null;
+                    }
+                    initDesktopPinnedScroll();
+                } else {
+                    if (scrollTriggerInstance) {
+                        scrollTriggerInstance.kill();
+                        scrollTriggerInstance = null;
+                        gsap.set(resortTrack, { clearProps: "all" });
+                    }
+                    if (!mobileObserver) initMobileSwipe();
+                }
+            }
+
+            handleBreakpoint();
+
+            let resizeTimer;
+            window.addEventListener("resize", () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    handleBreakpoint();
+                    if (window.innerWidth >= 992) {
+                        gsap.set(resortTrack, { y: getItemCenterOffsetY(currentResortIndex < 0 ? 0 : currentResortIndex) });
+                    }
+                }, 100);
+            });
+        }
     }
 });

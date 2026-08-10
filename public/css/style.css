@@ -1,7 +1,6 @@
 /* ==========================================================================
    1. VARIABLES & BASE STYLES
    ========================================================================== */
-
 :root {
     --color-primary: #8e734b;
     --color-primary-dark: #5c4f40;
@@ -14,6 +13,7 @@
     --off-white: #f8f6ef;
     --font-heading: 'Libre Baskerville', serif;
     --font-body: 'Inter', sans-serif;
+
     /* Typography */
     --fs-h1: clamp(1.6rem, 1.2rem + 3vw, 4.375rem);
     --fs-h2: clamp(1.4rem, 1.12rem + 1.6vw, 3rem);
@@ -93,7 +93,6 @@ h3 {
 /* ==========================================================================
    2. UTILITIES & TYPOGRAPHY
    ========================================================================== */
-
 .color-primary {
     color: var(--color-primary) !important;
 }
@@ -139,10 +138,7 @@ h3 {
 /* ==========================================================================
    3. GLOBAL COMPONENTS
    ========================================================================== */
-
-
 /* Buttons */
-
 .btn-custom {
     padding: 14px 36px;
     border-radius: 25px;
@@ -187,12 +183,8 @@ h3 {
     border: 1px solid #fff;
 }
 
-
 /* Scroll Reveal Animations */
-
-
 /* Scroll Reveal Animations */
-
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -265,10 +257,7 @@ h3 {
 /* ==========================================================================
    4. NAVIGATION & MODALS
    ========================================================================== */
-
-
 /* Navbar */
-
 .navbar {
     padding: 1rem 0;
     transition: all 0.3s ease;
@@ -371,9 +360,7 @@ h3 {
     padding-top: 0 !important;
 }
 
-
 /* Mobile navbar when menu is opened */
-
 .navbar.menu-open {
     background: #fff;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -395,9 +382,7 @@ h3 {
     color: var(--color-primary);
 }
 
-
 /* mobile toggler css start here */
-
 .navbar-toggler {
     border: none;
     background: transparent;
@@ -407,7 +392,6 @@ h3 {
 
 
 /* Default = hamburger */
-
 .navbar-toggler-icon {
     background-image: none;
     position: relative;
@@ -418,9 +402,7 @@ h3 {
     transition: 0.3s;
 }
 
-
 /* create 3 lines */
-
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
     content: "";
@@ -440,9 +422,7 @@ h3 {
     top: 7px;
 }
 
-
-/* OPEN STATE → turn into X */
-
+/* OPEN STATE â†’ turn into X */
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -457,9 +437,7 @@ h3 {
     top: 0;
 }
 
-
 /* Default */
-
 .navbar .navbar-toggler-icon,
 .navbar .navbar-toggler-icon::before,
 .navbar .navbar-toggler-icon::after {
@@ -467,9 +445,7 @@ h3 {
     transition: all .3s ease;
 }
 
-
 /* Sticky */
-
 .navbar.scrolled .navbar-toggler-icon,
 .navbar.scrolled .navbar-toggler-icon::before,
 .navbar.scrolled .navbar-toggler-icon::after,
@@ -479,18 +455,14 @@ h3 {
     background: var(--color-primary);
 }
 
-
 /* Keep the X visible */
-
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
-
 
 /* ==========================================================================
    1. VARIABLES & BASE STYLES
    ========================================================================== */
-
 :root {
     --color-primary: #8e734b;
     --color-primary-dark: #5c4f40;
@@ -503,6 +475,7 @@ h3 {
     --off-white: #f8f6ef;
     --font-heading: 'Libre Baskerville', serif;
     --font-body: 'Inter', sans-serif;
+
     /* Typography */
     --fs-h1: clamp(1.6rem, 1.2rem + 3vw, 4.375rem);
     --fs-h2: clamp(1.4rem, 1.12rem + 1.6vw, 3rem);
@@ -582,7 +555,6 @@ h3 {
 /* ==========================================================================
    2. UTILITIES & TYPOGRAPHY
    ========================================================================== */
-
 .color-primary {
     color: var(--color-primary) !important;
 }
@@ -628,10 +600,7 @@ h3 {
 /* ==========================================================================
    3. GLOBAL COMPONENTS
    ========================================================================== */
-
-
 /* Buttons */
-
 .btn-custom {
     padding: 14px 36px;
     border-radius: 25px;
@@ -676,12 +645,8 @@ h3 {
     border: 1px solid #fff;
 }
 
-
 /* Scroll Reveal Animations */
-
-
 /* Scroll Reveal Animations */
-
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -754,10 +719,7 @@ h3 {
 /* ==========================================================================
    4. NAVIGATION & MODALS
    ========================================================================== */
-
-
 /* Navbar */
-
 .navbar {
     padding: 1rem 0;
     transition: all 0.3s ease;
@@ -860,9 +822,7 @@ h3 {
     padding-top: 0 !important;
 }
 
-
 /* Mobile navbar when menu is opened */
-
 .navbar.menu-open {
     background: #fff;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -884,9 +844,7 @@ h3 {
     color: var(--color-primary);
 }
 
-
 /* mobile toggler css start here */
-
 .navbar-toggler {
     border: none;
     background: transparent;
@@ -896,7 +854,6 @@ h3 {
 
 
 /* Default = hamburger */
-
 .navbar-toggler-icon {
     background-image: none;
     position: relative;
@@ -907,9 +864,7 @@ h3 {
     transition: 0.3s;
 }
 
-
 /* create 3 lines */
-
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
     content: "";
@@ -929,9 +884,7 @@ h3 {
     top: 7px;
 }
 
-
-/* OPEN STATE → turn into X */
-
+/* OPEN STATE â†’ turn into X */
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -946,9 +899,7 @@ h3 {
     top: 0;
 }
 
-
 /* Default */
-
 .navbar .navbar-toggler-icon,
 .navbar .navbar-toggler-icon::before,
 .navbar .navbar-toggler-icon::after {
@@ -956,9 +907,7 @@ h3 {
     transition: all .3s ease;
 }
 
-
 /* Sticky */
-
 .navbar.scrolled .navbar-toggler-icon,
 .navbar.scrolled .navbar-toggler-icon::before,
 .navbar.scrolled .navbar-toggler-icon::after,
@@ -968,9 +917,7 @@ h3 {
     background: var(--color-primary);
 }
 
-
 /* Keep the X visible */
-
 .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background: transparent;
 }
@@ -980,6 +927,7 @@ h3 {
 
 .mega-dropdown {
     position: static;
+
 }
 
 .mega-menu {
@@ -996,6 +944,7 @@ h3 {
     transform: none;
     transition: opacity .2s ease, visibility .2s ease;
     transform-origin: top;
+
     z-index: 999;
 }
 
@@ -1008,6 +957,7 @@ h3 {
     left: 0;
     top: -55px;
     z-index: 1000;
+
 }
 
 .navbar.scrolled .mega-menu::after {
@@ -1026,9 +976,14 @@ h3 {
 
 
 @media (min-width: 992px) {
+
+
     .mega-dropdown>.nav-link {
         position: relative;
     }
+
+
+
     .mega-dropdown:hover .mega-menu {
         opacity: 1;
         visibility: visible;
@@ -1037,26 +992,35 @@ h3 {
 }
 
 .mega-resort-list {
+
     list-style: none;
     padding: 0;
     margin: 0;
+
 }
 
 .mega-resort-list li {
+
     margin-bottom: 30px;
+
 }
 
 .mega-resort-list a {
+
     color: #fff;
     text-decoration: none;
     font-size: 26px;
     font-family: var(--font-heading);
+
     display: inline-block;
     position: relative;
+
     transition: .3s;
+
 }
 
 .mega-resort-list a::after {
+
     content: "";
     position: absolute;
     left: 0;
@@ -1065,48 +1029,61 @@ h3 {
     height: 2px;
     background: var(--color-primary);
     transition: .3s;
+
 }
 
 .mega-resort-list a:hover,
 .mega-resort-list a.active {
+
     color: var(--color-primary);
+
 }
 
 .mega-resort-list a:hover::after,
 .mega-resort-list a.active::after {
+
     width: 100%;
+
 }
 
 .mega-image img {
+
     width: 100%;
     height: 330px;
     object-fit: cover;
     object-position: center;
+
 }
 
 .mega-content {
+
     color: #fff;
+
 }
 
 .mega-content h2 {
+
     font-family: var(--font-heading);
     margin-bottom: 10px;
+
 }
 
 .mega-content h5 {
+
     color: var(--color-primary);
     margin-bottom: 25px;
+
 }
 
 .mega-content p {
+
     line-height: 1.8;
     color: var(--color-white);
     margin-bottom: 0px;
+
 }
 
-
 /* Book Now Modal */
-
 .book-modal-overlay {
     position: fixed;
     top: 0;
@@ -1219,14 +1196,10 @@ h3 {
 /* ==========================================================================
    5. PAGE: HOME
    ========================================================================== */
-
-
 /* Hero Section */
-
 .hero-section {
     position: relative;
     height: 100vh;
-    min-height: 560px;
     display: flex;
     align-items: end;
     color: var(--color-white);
@@ -1279,9 +1252,7 @@ h3 {
     color: #fff;
 }
 
-
 /* Welcome Section */
-
 .welcome-section {
     padding: 120px 0 0 0;
     background-color: var(--color-white);
@@ -1346,188 +1317,370 @@ h3 {
 }
 
 
+
 /* ==========================================================
    Resorts Section
 ========================================================== */
+/* Centered Header Styles */
+.resort-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15%;
+    width: 100%;
+}
 
-.resorts-section {
+.resort-header .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+}
+
+.resort-header .section-title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin: 0;
+}
+
+/* ==========================================================================
+           3. PINNED SECTION (DESKTOP DEFAULT)
+           ========================================================================== */
+.pinned-section {
+    position: relative;
     background-color: var(--color-white);
+    overflow: hidden;
 }
 
-@media (min-width: 992px) {
-    .resorts-section {
-        position: relative;
-    }
-}
-
-.resort-tabs {
+.pinned-container {
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
-    margin-bottom: 50px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e5e5e5;
-    /* Horizontal Scroll */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    padding-top: 2rem;
+    /* padding-bottom: 2rem; */
 }
 
-.resort-tabs::-webkit-scrollbar {
-    display: none;
+/* Left Navigation */
+.tab-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 10;
 }
 
-.resort-tab {
+.tab-nav-btn {
     background: none;
     border: none;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: rgba(61, 53, 46, 0.28);
+    transition: color 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
     cursor: pointer;
-    color: var(--color-primary);
-    font-size: 16px;
-    font-weight: 500;
-    padding-bottom: 15px;
-    margin-bottom: -16px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
+    padding: 0.25rem 0;
+    outline: none;
     white-space: nowrap;
-    flex-shrink: 0;
 }
 
-.resort-tab.active {
+.tab-nav-btn:hover {
+    color: var(--color-primary-dark);
+}
+
+.tab-nav-btn.active {
     color: var(--color-text);
-    border-bottom-color: var(--color-primary);
+    transform: translateX(10px);
 }
 
-.resort-content h3 {
-    margin-bottom: 0.5rem;
-}
-
-.resort-content .subtitle {
-    display: block;
-    margin-bottom: 2rem;
-    color: var(--color-primary);
-    font-size: 16px;
-}
-
-.resort-content p {
-    margin-bottom: 3rem;
-    color: var(--color-text-light);
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.resort-image {
+/* Right Window Container for Vertical Scrolling Stack */
+.resort-window {
+    position: relative;
+    height: 68vh;
+    /* Adjusted to fit nicely under top header */
+    width: 100%;
     overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
 }
 
-.resort-image img {
+/* Moving Track */
+.resort-track {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    will-change: transform;
+}
+
+/* Individual Resort Item */
+.resort-item {
+    opacity: 0.35;
+    transform: scale(0.92);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.resort-item.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.property-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    background: var(--color-cream);
+}
+
+.property-card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+}
+
+.property-card-img-wrapper img {
     width: 100%;
     height: auto;
     object-fit: cover;
+    object-position: center;
 }
 
-.resort-panel {
-    display: none;
-    animation: fadeIn 0.5s ease;
-    touch-action: pan-y;
+.property-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.resort-panel.active {
-    display: block;
+.property-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+.btn-explore {
+    color: #fff;
+    border: none;
+    font-weight: 400;
+    padding: 0.65rem 1.6rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #fff;
+}
+
+.btn-explore:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+.property-card:hover .property-card-img {
+    transform: scale(1.05);
+}
+
+.resort-item:hover .property-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.panel-description {
+    padding-top: 1.25rem;
+}
+
+.panel-description h4 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+}
+
+.panel-description p {
+    color: #555e6d;
+    font-size: 0.95rem;
+    max-width: 620px;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+           4. MOBILE & TABLET RESPONSIVE OVERRIDES (< 992px)
+           ========================================================================== */
+@media (max-width: 1199px) {
+    .resort-header {
+        margin-bottom: 2.5rem;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 9%;
+        width: 100%;
     }
-    to {
+}
+
+
+@media (max-width: 991.98px) {
+    .pinned-container {
+        height: auto;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        justify-content: flex-start;
+    }
+
+    .resort-header {
+        margin-bottom: 1.75rem;
+    }
+
+    /* Horizontal Scrollable Tabs */
+    .tab-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e2e8f0;
+        scrollbar-width: none;
+    }
+
+    .tab-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-nav-btn {
+        font-size: 16px;
+        padding: 0.5rem 0.25rem;
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        flex-shrink: 0;
+        /* ðŸ‘ˆ à´‡à´¤àµ à´¨à´¿àµ¼à´¬à´¨àµà´§à´®à´¾à´¯àµà´‚ à´‰à´£àµà´Ÿà´¾à´¯à´¿à´°à´¿à´•àµà´•à´£à´‚ */
+    }
+
+    .tab-nav-btn.active {
+        transform: none;
+        color: var(--color-primary);
+        border-bottom-color: var(--color-primary);
+    }
+
+    /* Horizontal Scroll Snap Window */
+    .resort-window {
+        height: auto;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-top: 1rem;
+    }
+
+    .resort-window::-webkit-scrollbar {
+        display: none;
+    }
+
+    .resort-track {
+        position: relative;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+    }
+
+    .resort-item {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        opacity: 1;
+        transform: none;
+        padding: 0 0.25rem;
+    }
+
+
+
+    .property-overlay {
         opacity: 1;
         transform: translateY(0);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
     }
-}
 
-
-/* Mobile */
-
-@media (max-width: 767.98px) {
-    .resort-tabs {
-        justify-content: flex-start;
-        gap: 20px;
-        overflow-y: hidden;
-        flex-wrap: nowrap;
+    .resort-header {
+        position: inherit;
     }
-}
 
-
-/* Tablet */
-
-@media (max-width: 991px) {
-    .resort-tabs {
-        justify-content: flex-start;
-        gap: 24px;
+    .property-card-img-wrapper {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
     }
+
 }
 
-.resort-image {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
+@media (max-width: 991.98px) {
+    .tab-nav-btn {
+        font-size: 14px;
+        padding: 0.5rem 0.25rem;
+        border-bottom: 2px solid transparent;
+    }
+
+    .tab-nav {
+        gap: 1rem;
+    }
+
 }
 
-.swipe-indicator {
-    position: absolute;
-    left: 50%;
-    bottom: 16px;
-    transform: translateX(-50%);
-    display: none;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 50px;
-    backdrop-filter: blur(6px);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 200;
-    pointer-events: none;
-    white-space: nowrap;
-    opacity: 85%;
-    border: 1px solid #ccc;
-}
-
-
-/* Mobile only */
-
-@media (max-width: 991px) {
-    .swipe-indicator {
+@media (min-width: 991px) and (max-width: 1440px) {
+    .resort-item {
         display: flex;
+        background-color: #f5f1e8;
+        border-radius: 10px;
     }
-}
 
-.swipe-indicator i {
-    animation: swipeHint 1.2s ease-in-out infinite;
-}
+    .property-card-img-wrapper {
+        height: auto;
+    }
 
-@keyframes swipeHint {
-    0% {
-        transform: translateX(-6px);
-        opacity: .5;
+    .panel-description {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
-    50% {
-        transform: translateX(6px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-6px);
-        opacity: .5;
+
+    .property-card {
+        border-radius: 10px;
     }
 }
 
 
 /* Experiences Section */
-
 .experience-main-card {
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -1537,6 +1690,7 @@ h3 {
     display: flex;
     flex-direction: column;
 }
+
 
 .experience-main-card p {
     font-size: 18px;
@@ -1586,16 +1740,11 @@ h3 {
     margin-bottom: 0;
 }
 
-
 /* Video Section */
-
 .video-section {
     position: relative;
     height: 740px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('../images/home-video-bg.jpg') center/cover no-repeat fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1648,9 +1797,7 @@ h3 {
     backdrop-filter: blur(5px) !important;
 }
 
-
 /* Offers Section */
-
 .offer-card {
     position: relative;
     overflow: hidden;
@@ -1669,9 +1816,7 @@ h3 {
     left: 38px;
 }
 
-
 /* Gallery Section (Home) */
-
 .gallery-section {
     background-color: var(--color-white);
     overflow: hidden;
@@ -1732,9 +1877,7 @@ h3 {
     margin-top: 100px;
 }
 
-
 /* Testimonials Section */
-
 .testimonials-section {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/testimonial-bg-1.jpg) center / cover no-repeat;
     position: relative;
@@ -1810,6 +1953,8 @@ h3 {
     object-fit: cover;
 }
 
+
+
 .author-name {
     font-size: 18px;
     color: var(--color-primary);
@@ -1855,9 +2000,7 @@ h3 {
     will-change: transform;
 }
 
-
 /* Newsletter Section */
-
 .newsletter-section {
     padding: 60px 0;
     background-color: var(--color-cream);
@@ -1896,10 +2039,7 @@ h3 {
 /* ==========================================================================
    6. PAGE: ABOUT US
    ========================================================================== */
-
-
 /* Hero Banner */
-
 .hero-banner {
     position: relative;
     width: 100%;
@@ -1921,10 +2061,10 @@ h3 {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/offer-hero-bg.jpg) center/cover no-repeat;
 }
 
-
-/* .contact-banner {
+.contact-banner {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(../images/contact-hero-bg.jpg) center/cover no-repeat;
-} */
+}
+
 
 .hero-banner::before {
     content: '';
@@ -1980,9 +2120,7 @@ h3 {
     color: var(--color-white);
 }
 
-
 /* Intro Section */
-
 .intro-section {
     max-width: 1320px;
     margin: 80px auto;
@@ -2010,9 +2148,7 @@ h3 {
     flex: 1;
 }
 
-
 /* Philosophy Section */
-
 .philosophy-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -2054,9 +2190,7 @@ h3 {
     color: var(--color-text);
 }
 
-
 /* Core Values Section */
-
 .core-values-section {
     max-width: 1320px;
     margin: 0 auto 80px;
@@ -2142,9 +2276,7 @@ h3 {
     line-height: 1.65;
 }
 
-
 /* CTA Section */
-
 .cta-section {
     position: relative;
     width: 100%;
@@ -2218,9 +2350,7 @@ h3 {
     transform: translateY(-2px);
 }
 
-
 /* SVG Mountain Edge */
-
 .mountain-edge {
     display: block;
     width: 100%;
@@ -2238,14 +2368,11 @@ h3 {
 /* ==========================================================================
    7. PAGE: GALLERY
    ========================================================================== */
-
 .gallery-section-space {
     padding: clamp(3.125rem, 2.2rem + 2vw, 4.375rem) 0 clamp(7.5rem, 5rem + 6vw, 12.5rem);
 }
 
-
 /* Resort Selector */
-
 .resort-selector {
     margin-bottom: 70px;
     max-width: 600px;
@@ -2276,9 +2403,7 @@ h3 {
     box-shadow: 0 0 0 0.2rem rgba(142, 115, 75, 0.25);
 }
 
-
 /* Category Filter */
-
 .category-filter {
     display: flex;
     flex-wrap: wrap;
@@ -2306,9 +2431,7 @@ h3 {
     color: var(--color-white);
 }
 
-
 /* Gallery Grid */
-
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2344,9 +2467,7 @@ h3 {
     display: none;
 }
 
-
 /* Lightbox */
-
 .lightbox {
     display: none;
     position: fixed;
@@ -2443,7 +2564,6 @@ h3 {
 /* ==========================================================================
    8. PAGE: CONTACT
    ========================================================================== */
-
 .contact-section {
     padding: 100px 0px 200px 0px;
 }
@@ -2542,9 +2662,7 @@ textarea.form-control-custom {
     resize: vertical;
 }
 
-
 /* Contact Info Styles */
-
 .contact-info-section {
     margin-bottom: 80px;
 }
@@ -2607,9 +2725,7 @@ textarea.form-control-custom {
     color: var(--color-primary);
 }
 
-
 /* Map Styles */
-
 .map-section {
     margin-top: 60px;
 }
@@ -2631,7 +2747,6 @@ textarea.form-control-custom {
 /* ==========================================================================
    9. PAGE: EXPERIENCES
    ========================================================================== */
-
 .exp-list {
     list-style: inside;
     padding: 0;
@@ -2688,9 +2803,7 @@ textarea.form-control-custom {
     margin-left: -30px;
 }
 
-
 /* Mountain Background */
-
 .mountain-bg {
     position: relative;
     overflow: visible;
@@ -2707,9 +2820,7 @@ textarea.form-control-custom {
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 3%, rgba(255, 237, 212, 0) 29%), url(../images/exp-bg.png) center bottom / cover no-repeat;
 }
 
-
 /* Experience Gallery Section */
-
 .img-gallery {
     padding-bottom: clamp(80px, 18vw, 250px);
 }
@@ -2742,7 +2853,6 @@ textarea.form-control-custom {
 /* ==========================================================================
    10. PAGE: OFFERS
    ========================================================================== */
-
 .offer-resort-select-wrapper {
     max-width: 520px;
     margin: 0 auto 60px;
@@ -2776,9 +2886,7 @@ textarea.form-control-custom {
     padding: 10px;
 }
 
-
 /* Package Cards */
-
 .package-col {
     margin-bottom: 54px;
     transition: all 0.4s ease;
@@ -2830,9 +2938,7 @@ textarea.form-control-custom {
     font-size: 13.5px;
 }
 
-
 /* No Results & Filter Info */
-
 .no-results {
     text-align: center;
     padding: 80px 20px;
@@ -2874,7 +2980,6 @@ textarea.form-control-custom {
 /* ==========================================================================
    11. FOOTER
    ========================================================================== */
-
 .footer {
     background-color: var(--color-cream);
     color: var(--color-primary);
@@ -3091,6 +3196,7 @@ textarea.form-control-custom {
     transition: color 0.3s ease;
 }
 
+
 .hidden-input-field {
     opacity: 0;
     position: absolute;
@@ -3134,7 +3240,6 @@ textarea.form-control-custom {
 /* ==========================================================================
    12. GLOBAL OVERFLOW FIXES
    ========================================================================== */
-
 html,
 body {
     overflow-x: hidden !important;
@@ -3172,43 +3277,46 @@ section {
    13. RESPONSIVE STYLES
    ========================================================================== */
 
-
 /* Large Desktops */
-
 @media (max-width: 1399px) {
     .welcome-img-left {
         left: -46%;
     }
+
     .welcome-img-right {
         right: -46%;
     }
+
     .welcome-img-left,
     .welcome-img-right {
         max-width: 327px;
     }
+
     .mega-image img {
         height: auto;
     }
+
     .mega-resort-list a {
         font-size: 20px;
     }
+
     .mega-content h3 {
         font-size: var(--fs-h4);
         margin-bottom: 1rem;
     }
 }
 
-
 /* Laptops / Small Desktops */
-
 @media (max-width: 1199px) {
     .mb-180 {
         margin-bottom: 140px;
     }
+
     .nav-link {
         font-size: 14px;
         margin: 0 12px;
     }
+
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -3220,6 +3328,7 @@ section {
         max-width: 300px;
         margin: 0 auto;
     }
+
     .welcome-card {
         padding: 60px 30px !important;
         min-height: auto;
@@ -3227,28 +3336,35 @@ section {
         gap: 30px;
         max-width: 88%;
     }
+
     .footer-bottom {
         justify-content: center;
     }
+
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
+
     .img-height {
         height: 450px;
     }
+
     .exp-section .row:nth-child(odd) .exp-card {
         margin-left: 0px;
     }
+
     .exp-section .row:nth-child(even) .exp-card {
         margin-right: 0px;
     }
+
     .exp-img-wrapper {
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
+
     .exp-card {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
@@ -3257,142 +3373,232 @@ section {
     }
 }
 
-
 /* Tablets (Landscape) & Small Laptops */
-
 @media (max-width: 991px) {
     .mb-180 {
         margin-bottom: 100px;
     }
+
+
     .nav-link {
         padding-bottom: 0px;
         margin-bottom: 10px;
         display: inline-block;
     }
+
     .nav-link {
         font-size: 16px;
     }
+
     .hero-content h1 {
         font-size: 2.5rem;
     }
+
     .welcome-card {
         padding: 60px 180px;
         min-height: 420px;
     }
+
     .welcome-img-left,
     .welcome-img-right {
         width: 180px;
     }
+
     .welcome-img-left img,
     .welcome-img-right img {
         height: 280px;
     }
+
     .welcome-img-left {
         left: -30px;
     }
+
     .welcome-img-right {
         right: -30px;
     }
+
     .welcome-content h2 {
         font-size: 2.5rem;
     }
+
     .experience-main-card {
         margin-bottom: 20px;
     }
+
     .resort-content p {
         margin-bottom: 22px;
     }
+
     .resort-content .subtitle {
         margin-bottom: 18px;
     }
+
     .resort-content-mt {
         margin-top: 26px;
     }
+
     .resort-img-mt {
         margin-top: 10px;
     }
+
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 300px;
     }
+
     .testimonials-section {
         padding-bottom: 135px !important;
     }
+
     .footer-logo-area {
         padding-right: 0;
         margin-bottom: 10px;
     }
+
     .footer-main-row {
         --bs-gutter-x: 1.5rem;
     }
+
     /* Merged from 992px */
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .contact-image-wrapper {
         min-height: 400px;
         margin-bottom: 30px;
     }
+
     .contact-info-col:not(:last-child)::after {
         display: none;
     }
+
     .exp-card-left,
     .exp-card-right {
         margin: 20px 0 0 0;
     }
+
     .img-height {
         height: 350px;
     }
+
     .hero-title {
         font-size: 1.8rem;
     }
+
     .section-title {
         font-size: 1.5rem;
     }
+
     .mountain-bg::before {
         top: -66px;
         bottom: 111px;
     }
+
+
+    /* mobile menu and megamenu css here */
+    .mega-menu {
+
+        position: relative;
+        z-index: 9999;
+        left: auto;
+        top: auto;
+        width: 100%;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        background: transparent;
+        padding: 0;
+        display: none;
+
+    }
+
+    .mega-dropdown.show .mega-menu {
+
+        display: block;
+
+    }
+
+    .mega-image,
+    .mega-content {
+
+        display: none;
+
+    }
+
+    .mega-resort-list li {
+
+        margin: 0;
+
+    }
+
+    .mega-resort-list a {
+
+        display: block;
+        padding: 12px 20px;
+        font-size: 16px;
+        color: var(--color-primary);
+        font-family: var(--font-body);
+        position: relative;
+        z-index: 10000;
+        pointer-events: auto;
+
+    }
+
+    .mega-resort-list a::after {
+
+        display: none;
+
+    }
+
+    .nav-link {
+        font-size: 16px !important;
+    }
 }
 
-
 /* Tablets (Portrait) */
-
 @media (max-width: 900px) {
     .intro-section {
         flex-direction: column;
     }
+
     .intro-image img {
         height: 100%;
     }
+
     .philosophy-cards {
         grid-template-columns: 1fr;
     }
+
     .core-values-content {
         flex-direction: column;
     }
+
     .core-values-image img {
         height: 350px;
     }
+
     .hero-content h1 {
         font-size: 2.2rem;
     }
 }
 
-
 /* Mobile Devices (Large) */
-
 @media (max-width: 767px) {
     .mb-180 {
         margin-bottom: 70px;
     }
+
     .section-space {
         padding-bottom: 62px;
         padding-top: 62px;
     }
+
     .section-space-bottom {
         padding-bottom: 62px;
     }
+
     .welcome-card {
         max-width: 100%;
         padding: 40px 20px !important;
@@ -3400,9 +3606,11 @@ section {
         flex-direction: column;
         gap: 30px;
     }
+
     .welcome-section {
         padding: 40px 0 0 0;
     }
+
     .welcome-img-left,
     .welcome-img-right {
         position: relative;
@@ -3413,243 +3621,324 @@ section {
         width: 100%;
         max-width: 300px;
     }
+
     .welcome-img-left img,
     .welcome-img-right img {
         height: 220px;
     }
+
     .welcome-content h2 {
         font-size: 2.2rem;
     }
+
     .experience-main-card p {
         font-size: 16px;
     }
+
     .experience-main-card h3 {
         margin-bottom: 15px;
     }
+
     .experience-main-card {
         padding: 40px 20px;
     }
+
     .experience-main-card p {
         margin-bottom: 27px;
     }
+
     .experience-main-card {
         margin-bottom: 0px;
     }
+
     .experience-card {
         padding: 20px;
     }
+
     .offer-card a {
         position: absolute;
         bottom: 40px;
         left: 30px;
     }
+
     .hero-content h1 {
         font-size: 2rem;
     }
+
     .hero-content {
         padding-bottom: 50px;
     }
+
     .navbar .navbar-brand img {
         max-width: 110px;
     }
+
     .resort-tabs {
         gap: 20px;
     }
+
     .resort-tab {
         padding-bottom: 6px;
         margin-bottom: -3px;
     }
+
     .newsletter-form {
         flex-direction: column;
     }
+
     .footer-bottom {
         flex-direction: column;
         text-align: center;
     }
+
     .testimonial-slide {
         width: 300px;
     }
+
     .testimonial-slider-wrapper::before,
     .testimonial-slider-wrapper::after {
         width: 40px;
     }
+
     .gallery-slide-tall,
     .gallery-slide-short {
         width: 260px;
     }
+
     .gallery-slide-short {
         margin-top: 20px;
     }
+
+    /* mega-menu-css */
+    .mega-menu-dropdown {
+        min-width: 320px;
+        padding: 12px;
+    }
+
+    .mega-menu-item img {
+        height: 70px;
+    }
+
+    .mega-menu-item span {
+        font-size: 0.7rem;
+    }
+
     .book-modal {
         padding: 30px 20px;
     }
+
     .book-modal h3 {
         font-size: 1.4rem;
     }
+
     .book-modal-item img {
         height: 160px;
     }
+
     .testimonial-slide {
         max-width: 100%;
         width: 85vw;
     }
+
     .testimonial-slide .testimonial-card-offset {
         display: none !important;
     }
+
     .testimonial-card {
         margin-bottom: 0;
     }
+
     /* Merged from 768px */
     .contact-form-section {
         padding: 30px 20px;
     }
+
     .contact-header {
         margin-bottom: 50px;
     }
+
     .contact-section {
         padding-top: 80px;
         padding-bottom: 80px;
     }
+
     .contact-image-wrapper {
         min-height: 300px;
     }
+
     .contact-info-item {
         border-bottom: 1px solid #e0d5c7;
         padding-bottom: 30px;
         margin-bottom: 30px;
     }
+
     .contact-info-col:last-child .contact-info-item {
         border-bottom: none;
         margin-bottom: 0;
     }
+
     /* Merged from Experience page 767px */
     .hero-section {
         padding: 50px 0 40px;
     }
+
     .hero-title {
         font-size: 1.5rem;
     }
+
     .video-section {
         position: relative;
         height: 500px;
     }
+
     .exp-section {
         padding: 20px 0;
     }
+
     .exp-card {
         padding: 30px 25px;
     }
+
     .img-height {
         height: 280px;
     }
+
     .newsletter-form input {
         width: 100%;
     }
+
     .newsletter-form .btn-custom {
         width: 100%;
         text-align: center;
     }
+
     .footer-logo-img img {
         max-width: 120px;
     }
+
+    .mountain-bg::before {
+        content: none;
+    }
 }
 
-
 /* Mobile Devices (Small) */
-
 @media (max-width: 600px) {
+
     .book-modal-item img {
         height: 140px;
     }
+
     .book-modal-overlay {
         height: auto;
     }
+
     .book-modal-grid {
         flex-direction: column;
         gap: 15px;
     }
+
     .hero-banner {
         height: 380px;
     }
+
     .hero-content h1 {
         font-size: 1.8rem;
     }
+
     .breadcrumb {
         right: 20px;
         bottom: 15px;
     }
+
     .intro-section {
         margin: 50px auto;
     }
+
     .cta-section {
         padding: 80px 20px;
     }
+
     .video-section {
         position: relative;
         height: 400px;
     }
+
     .offer-card a {
         position: absolute;
         bottom: 20px;
         left: 22px;
     }
+
     .section-label {
         font-size: 14px;
     }
+
     h2 {
         line-height: 1.4;
     }
+
     .hero-content p {
         font-size: 16px;
     }
+
     .btn-custom {
         padding: 10px 26px;
         font-size: 15px;
     }
+
     .subhead {
         margin-bottom: 1.8rem;
     }
 }
 
-
 /* Mobile Devices (Extra Small) */
-
 @media (max-width: 575px) {
     .mb-180 {
         margin-bottom: 50px;
     }
+
     .gallery-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
     }
+
     .category-filter {
         gap: 8px;
     }
+
     .category-btn {
         padding: 8px 16px;
         font-size: 13px;
     }
+
     .lightbox-nav {
         font-size: 35px;
         padding: 10px;
     }
+
     .lightbox-prev {
         left: 5px;
     }
+
     .lightbox-next {
         right: 5px;
     }
+
     .img-height {
         height: 240px;
     }
+
     .exp-card {
         padding: 25px 20px;
     }
+
     .experience-main-card {
         padding: 30px 20px;
     }
+
     .experience-icon {
         margin-bottom: 2rem;
     }
-}
 
+
+}

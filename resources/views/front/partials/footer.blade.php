@@ -76,9 +76,9 @@
                         <h5 class="footer-heading">Quick Links</h5>
                         <ul class="footer-links">
                             <li> <a href="{{ url('/') }}"> Home </a> </li>
-                            <li> <a href="{{ url('/about') }}"> About Us </a> </li>
+                            <li> <a href="{{ url('/about-us') }}"> About Us </a> </li>
                             <li> <a href="{{ url('/offers') }}"> Offers </a> </li>
-                            <li> <a href="{{ url('/experience') }}"> Experiences </a> </li>
+                            <li> <a href="{{ url('/experiences') }}"> Experiences </a> </li>
                             <li> <a href="{{ url('/gallery') }}"> Gallery </a> </li>
                             <li> <a href="{{ url('/contact') }}"> Contact </a> </li>
                         </ul>
@@ -94,7 +94,7 @@
                         <h5 class="footer-heading">Our Resorts</h5>
                         <ul class="footer-links">
                             @forelse ($resorts as $resort)
-                                <li> <a href="{{ $resort->button_url }}"> {{ $resort->name }} </a>
+                                <li> <a href="{{ $resort->url }}"> {{ $resort->name }} </a>
                                 </li>
                             @empty
                                 <li> <span>No resorts available</span> </li>
@@ -238,7 +238,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="js/main.js?v=9"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

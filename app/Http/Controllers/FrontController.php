@@ -60,7 +60,7 @@ class FrontController extends Controller
 
         $banners = Banner::where('type', 2)
             ->where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->get();
         
         $welcome = WelcomeSection::where('status', Status::ACTIVE)
@@ -69,8 +69,7 @@ class FrontController extends Controller
         $resortIntro = ResortIntro::where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::where('home_status', Status::ACTIVE)
-            ->orderByDesc('id')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->get();
 
         $video = VideoSection::where('status', Status::ACTIVE)
@@ -82,7 +81,7 @@ class FrontController extends Controller
         
         $offers = Offer::where('type', 1)
             ->where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->take(2)
             ->get();
         
@@ -97,7 +96,7 @@ class FrontController extends Controller
         $galleries = Gallery::with('resort')
             ->where('type', 1)
             ->where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->take(5)
             ->get();
 
@@ -109,7 +108,7 @@ class FrontController extends Controller
             ->first();
         
         $testimonials = Testimonial::where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->take(8)
             ->get();
 
@@ -137,7 +136,7 @@ class FrontController extends Controller
             'testimonials',
             'galleryType2Count',
             'homeexperiencepage',
-            'homeexperiences'
+            'homeexperiences',
         ));
     }
 
@@ -147,16 +146,16 @@ class FrontController extends Controller
             ->where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::orderByDesc('id')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->get();
 
         $categories = GalleryCategory::where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->get();
 
         $galleries = Gallery::with('galleryCategory')
             ->where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->get();
 
         return view('front.gallery', compact(
@@ -173,11 +172,11 @@ class FrontController extends Controller
             ->where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::orderByDesc('id')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->get();
 
         $offers = Offer::where('status', Status::ACTIVE)
-            ->orderByDesc('id')
+            ->orderBy('sort_order', 'ASC')
             ->get();
 
         return view('front.offers', compact(
@@ -206,7 +205,7 @@ class FrontController extends Controller
 
 
 
-    public function experience()
+    public function experiences()
     {
 
         $experiencepage = ExperiencePage::first();
@@ -217,10 +216,11 @@ class FrontController extends Controller
 
         $experiencegallaries = Gallery::where('status', 'active')
             ->where('type', 3)
+            ->orderBy('sort_order', 'ASC')
             ->get();
 
 
-        return view('front.experience', compact('experiencepage', 'experiences', 'experiencegallaries'));
+        return view('front.experiences', compact('experiencepage', 'experiences', 'experiencegallaries'));
     }
 
 

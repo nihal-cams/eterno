@@ -31,7 +31,7 @@
                     {{-- TYPE 1 : Resort Name --}}
                     {{-- ===================================================== --}}
                     <div class="form-group col-md-6">
-                        <label><strong>Name {{ $type === '1' ? '*' : '' }}</strong></label>
+                        <label><strong>Name <span class="text-danger">{{ $type === '1' ? '*' : '' }}</span></strong></label>
 
                         <input type="text"
                             name="name"
@@ -40,6 +40,32 @@
                             {{ $type !== '1' ? 'readonly' : '' }}>
 
                         @error('name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label><strong>URL <span class="text-danger">{{ $type === '1' ? '*' : '' }}</span></strong></label>
+
+                        <input type="text"
+                            name="url"
+                            class="form-control"
+                            value="{{ old('url', $resort->url) }}"
+                            {{ $type !== '1' ? 'readonly' : '' }}>
+
+                        @error('url')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label><strong>Sort Order <span class="text-danger">{{ $type === '1' ? '*' : '' }}</span></strong></label>
+                        <input type="number"
+                            name="sort_order"
+                            class="form-control"
+                            value="{{ old('sort_order', $resort->sort_order) }}"
+                            {{ $type !== '1' ? 'readonly' : '' }}>
+                        @error('sort_order')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -97,19 +123,6 @@
                                 value="{{ old('home_button_text', $resort->home_button_text) }}">
 
                             @error('home_button_text')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label><strong>Button URL <span class="text-danger">*</span></strong></label>
-
-                            <input type="url"
-                                name="home_button_url"
-                                class="form-control"
-                                value="{{ old('home_button_url', $resort->home_button_url) }}">
-
-                            @error('home_button_url')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

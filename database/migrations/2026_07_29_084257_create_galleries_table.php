@@ -22,6 +22,7 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('gallery_categories');
             $table->string('image');
+            $table->unsignedInteger('sort_order')->default(1);
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });
