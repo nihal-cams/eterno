@@ -1744,7 +1744,10 @@ h3 {
 .video-section {
     position: relative;
     height: 740px;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('../images/home-video-bg.jpg') center/cover no-repeat fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
