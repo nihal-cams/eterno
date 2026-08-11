@@ -69,7 +69,7 @@
             <!-- Nav Item - Tables -->
 
             <li class="nav-item {{ request()->is('admin/resorts/1*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.resorts.index', 1) }}"> <i class="fa fa-building"></i>
+                <a class="nav-link" href="{{ route('admin.resorts.index', 1) }}"> <i class="fas fa-building"></i>
                     <span>Resorts</span>
                 </a>
             </li>
@@ -97,7 +97,7 @@
                     data-target="#collapseHome" aria-expanded="{{ $homeMenuOpen ? 'true' : 'false' }}"
                     aria-controls="collapseHome">
 
-                    <i class="fa fa-home"></i>
+                    <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
 
@@ -304,7 +304,7 @@
                     href="#" data-toggle="collapse" data-target="#collapseAbout"
                     aria-expanded="{{ request()->is('admin/about*') || request()->is('admin/philosophies*') || request()->is('admin/core-values*') ? 'true' : 'false' }}"
                     aria-controls="collapseAbout">
-                    <i class="fa fa-info-circle"></i>
+                    <i class="fas fa-info-circle"></i>
                     <span>About</span>
                 </a>
 
@@ -334,7 +334,7 @@
             </li>
 
             <li class="nav-item {{ request()->is('admin/resorts/3*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.resorts.index', 3) }}"> <i class="fa fa-building"></i>
+                <a class="nav-link" href="{{ route('admin.resorts.index', 3) }}"> <i class="fas fa-building"></i>
                     <span>Resorts (Mega Menu)</span>
                 </a>
             </li>
@@ -349,7 +349,7 @@
                     data-target="#collapseOffer" aria-expanded="{{ $offerMenuOpen ? 'true' : 'false' }}"
                     aria-controls="collapseOffer">
 
-                    <i class="fa fa-tag"></i>
+                    <i class="fas fa-tag"></i>
                     <span>Manage Offers</span>
                 </a>
 
@@ -376,7 +376,7 @@
 
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseExperience">
-                    <i class="fa fa-map"></i>
+                    <i class="fas fa-map"></i>
                     <span>Manage Experiences</span>
                 </a>
 
@@ -415,7 +415,7 @@
                     data-target="#collapseGallery" aria-expanded="{{ $galleryMenuOpen ? 'true' : 'false' }}"
                     aria-controls="collapseGallery">
 
-                    <i class="fa fa-image"></i>
+                    <i class="fas fa-image"></i>
                     <span>Manage Gallery</span>
                 </a>
 
@@ -448,7 +448,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#contactMenu"
                     aria-expanded="{{ request()->is('admin/contact*') || request()->is('admin/contact-enquiry*') ? 'true' : 'false' }}">
 
-                    <i class="fa fa-envelope"></i>
+                    <i class="fas fa-envelope"></i>
                     <span>Manage Contact</span>
 
                 </a>
@@ -475,13 +475,13 @@
 
 
             <li class="nav-item {{ request()->is('admin/resorts/4*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.resorts.index', 4) }}"> <i class="fa fa-building"></i>
+                <a class="nav-link" href="{{ route('admin.resorts.index', 4) }}"> <i class="fas fa-building"></i>
                     <span>Resorts (Book Now)</span>
                 </a>
             </li>
 
             {{--  <li class="nav-item {{ request()->is('admin/contact-page*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.contact-page.edit') }}"> <i class="fa fa-envelope"></i>
+                <a class="nav-link" href="{{ route('admin.contact-page.edit') }}"> <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a>
             </li>  --}}
@@ -493,7 +493,7 @@
                 <a class="nav-link {{ request()->routeIs('admin.settings.edit') ? '' : 'collapsed' }}"
                     href="{{ route('admin.settings.edit') }}">
 
-                    <i class="fa fa-cog"></i>
+                    <i class="fas fa-cog"></i>
                     <span>Settings</span>
 
                 </a>
@@ -506,7 +506,7 @@
 
                     <i class="fas fa-envelope"></i>
 
-                    <span>Newsletter Enquiries</span>
+                    <span>Newsletter Subscribers</span>
 
                 </a>
 
@@ -543,7 +543,7 @@
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
+                            <i class="fas fa-bars"></i>
                         </button>
                     </form>
 

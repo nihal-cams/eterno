@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', ($banner->id ? 'Edit ' : 'Add ') . 'Banner')
+@section('title', ($banner->id ? 'Edit ' : 'Add ') . ($type === '1' ? 'Banner Intro' : 'Banner'))
 @section("content")
 
 @use(App\Enums\Status)
@@ -9,7 +9,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $banner->id ? 'Edit ' : 'Add ' }} Banner
+            {{ $banner->id ? 'Edit ' : 'Add ' }} {{ $type === '1' ? 'Banner Intro' : 'Banner' }}
         </h1>
         
         <form method="POST" action="{{ $banner->id ? route('admin.banners.update', ['type' => $type, 'banner' => $banner]) : route('admin.banners.store', ['type' => $type]) }}" enctype="multipart/form-data">

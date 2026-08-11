@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactEnquiry;
+use App\Models\Experience;
+use App\Models\Gallery;
+use App\Models\Newsletter;
+use App\Models\Offer;
 use App\Models\Resort;
 use Illuminate\Http\Request;
 
@@ -26,7 +31,12 @@ class HomeController extends Controller
     public function index()
     {
         $resortCount = Resort::count();
+        $offerCount = Offer::where('type', 2)->count();
+        $experienceCount = Experience::where('type', 2)->count();
+        $galleryCount = Gallery::where('type', 2)->count();
+        $contactEnqCount = ContactEnquiry::count();
+        $newsletterSubCount = Newsletter::count();
 
-        return view('admin.home')->with(['resortCount'=>$resortCount]);
+        return view('admin.home', compact('resortCount', 'offerCount', 'experienceCount', 'galleryCount', 'contactEnqCount', 'newsletterSubCount'));
     }
 }
