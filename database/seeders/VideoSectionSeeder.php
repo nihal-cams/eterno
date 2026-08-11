@@ -18,7 +18,7 @@ class VideoSectionSeeder extends Seeder
             ['id' => 1],
             [
                 'title' => 'An Invitation to a New World',
-                'thumbnail_image'  => 'home-video-thumbnail.jpg',
+                'thumbnail_image'  => 'default/home-video-thumbnail.jpg',
                 'video' => 'default/home-video.mp4',
                 'status' => Status::ACTIVE->value,
             ]
