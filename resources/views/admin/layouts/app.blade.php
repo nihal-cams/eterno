@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="TNM Online Solutions">
+    <meta name="author" content="CAMS">
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="{{ config('app.name', 'Laravel') }}">
     <meta name="description" content="">
