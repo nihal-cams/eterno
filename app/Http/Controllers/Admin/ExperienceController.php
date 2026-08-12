@@ -137,9 +137,34 @@ class ExperienceController extends Controller
 
             'experience_list' => 'required',
 
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp',
+            // 'image' => 'required|image|mimes:jpg,jpeg,png,webp',
+            'image' => [
+                'required',
+                // 'image',
+                'mimes:jpg,jpeg,png,webp,svg',
 
-            'layout' => 'required|in:left,right',
+                Rule::when(
+                    $type == 1,
+                    [
+                        'max:50',
+                        Rule::dimensions()
+                            ->width(48)
+                            ->height(48),
+                    ]
+                ),
+
+                Rule::when(
+                    $type == 2,
+                    [
+                        'max:200',
+                        Rule::dimensions()
+                            ->width(746)
+                            ->height(798),
+                    ]
+                ),
+            ],
+
+            'layout' => 'nullable|in:left,right',
 
             'sort_order' => 'required|integer',
 
@@ -191,17 +216,13 @@ class ExperienceController extends Controller
         );
     }
 
-
-
-
-
     public function update(Request $request, $type, $id)
     {
         $experience = Experience::findOrFail($id);
 
         $validated = $request->validate([
 
-            'subtitle' => 'nullable|max:255',
+            'subtitle' => 'required|max:255',
 
             'title' => 'required|max:255',
 
@@ -209,9 +230,34 @@ class ExperienceController extends Controller
 
             'experience_list' => 'nullable',
 
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            // 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'image' => [
+                'required',
+                // 'image',
+                'mimes:jpg,jpeg,png,webp,svg',
 
-            'layout' => 'required|in:left,right',
+                Rule::when(
+                    $type == 1,
+                    [
+                        'max:50',
+                        Rule::dimensions()
+                            ->width(48)
+                            ->height(48),
+                    ]
+                ),
+
+                Rule::when(
+                    $type == 2,
+                    [
+                        'max:200',
+                        Rule::dimensions()
+                            ->width(746)
+                            ->height(798),
+                    ]
+                ),
+            ],
+
+            'layout' => 'nullable|in:left,right',
 
             'sort_order' => 'required|integer',
 

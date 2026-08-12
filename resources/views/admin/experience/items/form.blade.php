@@ -31,23 +31,6 @@
 
         </div>
 
-        {{--  @if ($errors->any())
-
-            <div class="alert alert-danger">
-
-                <ul class="mb-0">
-
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-
-                </ul>
-
-            </div>
-
-        @endif  --}}
-
-
         <div class="card shadow mb-4">
 
             <div class="card-body">
@@ -89,7 +72,7 @@
                                 <label>Title <span class="text-danger">*</span></label>
 
                                 <input type="text" name="title" class="form-control"
-                                    value="{{ old('title', $experience->title) }}" required>
+                                    value="{{ old('title', $experience->title) }}">
 
                                 @error('title')
                                     <small class="text-danger">{{ $message }}</small>
@@ -143,9 +126,14 @@
                             <label>
                                 <strong>
                                     Image
-                                    @if ($type == 2)
-                                        <span class="text-danger">*</span>
+
+                                    @if ($type == 1)
+                                        (Recommended dimensions: 48 × 48 px) & Maximum file size: 50 KB
+                                    @elseif ($type == 2)
+                                        (Recommended dimensions: 746 × 798 px) & Maximum file size: 200 KB
                                     @endif
+                                    <span class="text-danger">*</span>
+
                                 </strong>
                             </label>
 
@@ -180,7 +168,7 @@
                         </div>
 
                         @if ($type == 2)
-                            <div class="col-md-6">
+                            {{--  <div class="col-md-6">
 
                                 <div class="form-group">
 
@@ -206,13 +194,7 @@
 
                                 </div>
 
-                            </div>
-                        @endif
-
-                    </div>
-
-                    @if ($type == 2)
-                        <div class="row">
+                            </div>  --}}
 
                             <div class="col-md-6">
 
@@ -230,6 +212,14 @@
                                 </div>
 
                             </div>
+                        @endif
+
+                    </div>
+
+                    @if ($type == 2)
+                        <div class="row">
+
+
 
                             <div class="form-group col-md-6">
 

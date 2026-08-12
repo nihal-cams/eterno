@@ -112,6 +112,10 @@
                                     Icon Image
                                 </strong>
                             </label>
+
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>48 × 48 px & Maximum file size: 50 KB</strong>
+                            </small>
                             <div class="custom-file mb-3">
                                 <input type="file" class="custom-file-input" id="icon_image" name="icon_image"
                                     accept="image/*"

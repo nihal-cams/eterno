@@ -44,10 +44,11 @@ class GalleryIntroController extends Controller
                 'string',
             ],
             'banner_image' => [
-                'nullable',
+                'required',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
-                'max:2048',
+                'max:200',
+                'dimensions:width=1920,height=700',
             ],
             'status' => ['required'],
         ]);
@@ -57,7 +58,7 @@ class GalleryIntroController extends Controller
             $file = $request->file('banner_image');
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/gallery-intros'), $fileName);
-            
+
             if ($galleryIntro->banner_image && $galleryIntro->banner_image !== 'gallery-banner.jpg' && file_exists(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image))) {
                 unlink(public_path('uploads/gallery-intros/' . $galleryIntro->banner_image));
             }

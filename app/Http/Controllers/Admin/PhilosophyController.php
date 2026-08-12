@@ -148,7 +148,14 @@ class PhilosophyController extends Controller
             'description' => ['required'],
 
             // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg'],
-            'icon_image' => 'required|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
+            // 'icon_image' => 'required|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
+
+            'icon_image' => [
+                'required',
+                'mimes:jpg,jpeg,png,gif,webp,svg',
+                'max:50',
+                'dimensions:width=48,height=48',
+            ],
 
             'sort_order' => ['required', 'integer'],
 
@@ -209,7 +216,14 @@ class PhilosophyController extends Controller
             'description' => ['required'],
 
             // 'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg'],
-            'icon_image' => 'nullable|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
+            // 'icon_image' => 'nullable|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
+
+            'icon_image' => [
+                'required',
+                'mimes:jpg,jpeg,png,gif,webp,svg',
+                'max:50',
+                'dimensions:width=48,height=48',
+            ],
 
             'sort_order' => ['required', 'integer'],
 

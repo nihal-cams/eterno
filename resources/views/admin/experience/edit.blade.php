@@ -73,57 +73,60 @@
                                 </div>
 
                             </div>
-
                             <div class="form-group col-md-6">
 
                                 <label>
                                     <strong>Banner Image</strong>
                                 </label>
 
+                                <div class="text-muted mb-2" style="font-size: 13px;">
+                                    Required resolution: <strong>1920 × 700 px</strong>
+                                    &nbsp; | &nbsp;
+                                    Maximum file size: <strong>200 KB</strong>
+                                </div>
+
                                 <div class="custom-file mb-3">
 
                                     <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
-                                        accept="image/*"
-                                        onchange="
-                        document.getElementById('uploaded_img').src =
-                        window.URL.createObjectURL(this.files[0]);
-
-                        document.getElementById('banner-image-label').innerHTML =
-                        this.files[0].name;
-                    ">
+                                        accept="image/*">
 
                                     <label class="custom-file-label" id="banner-image-label" for="banner_image">
-                                        {{ $experiencePage->banner_image ?: 'Choose file' }}
+
+                                        <span id="banner-file-name">
+                                            {{ $experiencePage->banner_image ? basename($experiencePage->banner_image) : 'Choose file' }}
+                                        </span>
+
+                                        <img id="banner_image_preview"
+                                            src="{{ $experiencePage->banner_image ? asset($experiencePage->banner_image) : asset('img/upload_image.png') }}"
+                                            class="file-input-preview" alt="Banner Image">
+
                                     </label>
 
                                 </div>
 
-                                <img id="uploaded_img"
-                                    src="{{ $experiencePage->banner_image ? asset($experiencePage->banner_image) : asset('img/upload_image.png') }}"
-                                    width="150" height="100" alt="Banner Image">
-
                                 @error('banner_image')
-                                    <small class="text-danger">
+                                    <small class="text-danger d-block">
                                         {{ $message }}
                                     </small>
                                 @enderror
 
                             </div>
 
-                            <div class="col-md-12">
 
-                                <div class="form-group">
+                        </div>
 
-                                    <label>
-                                        Banner Description
-                                    </label>
+                        <div class="col-md-12">
 
-                                    <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $experiencePage->banner_description) }}</textarea>
-                                    @error('banner_description')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                            <div class="form-group">
 
+                                <label>
+                                    Banner Description
+                                </label>
+
+                                <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $experiencePage->banner_description) }}</textarea>
+                                @error('banner_description')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
                         </div>
@@ -265,6 +268,35 @@
 
 
 @push('style')
+    <style>
+        .custom-file {
+            position: relative;
+        }
+
+        .custom-file-label {
+            padding-right: 60px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .file-input-preview {
+            position: absolute;
+            right: 85px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 32px;
+
+            object-fit: cover;
+            border-radius: 2px;
+
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endpush
@@ -296,6 +328,33 @@
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+
+    <script>
+        $(".custom-file-input").on("change", function() {
+
+            var file = this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            // Update file name
+            $(this)
+                .siblings(".custom-file-label")
+                .find("#banner-file-name")
+                .text(file.name);
+
+            // Update preview
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $("#banner_image_preview").attr("src", e.target.result);
+            };
+
+            reader.readAsDataURL(file);
         });
     </script>
 @endpush

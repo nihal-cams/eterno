@@ -18,7 +18,7 @@
 
             <div class="card-body">
 
-                @if ($errors->any())
+                {{--  @if ($errors->any())
 
                     <div class="alert alert-danger">
 
@@ -32,7 +32,7 @@
 
                     </div>
 
-                @endif
+                @endif  --}}
 
                 <form action="{{ route('admin.contact-page.update') }}" method="POST" enctype="multipart/form-data">
 
@@ -67,29 +67,36 @@
                         <div class="form-group col-md-6">
 
                             <label>
-                                <strong>
-                                    Banner Image
-                                </strong>
+                                <strong>Banner Image</strong>
                             </label>
+
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>1920 × 700 px & Maximum file size: 200 KB</strong>
+                            </small>
 
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
                                     accept="image/*"
                                     onchange="
-        this.closest('.form-group').querySelector('#uploaded_img').src =
-        window.URL.createObjectURL(this.files[0]);
-    ">
+                    previewImage(
+                        this,
+                        'banner_image_preview'
+                    );
+               ">
 
                                 <label class="custom-file-label" id="banner-image-label" for="banner_image">
-                                    {{ $page->banner_image ?: 'Choose file' }}
+
+                                    {{ $page->banner_image ? $page->banner_image : 'Choose file' }}
+
                                 </label>
 
-                            </div>
+                                {{-- Thumbnail inside file input --}}
+                                <img id="banner_image_preview"
+                                    src="{{ $page->banner_image ? asset($page->banner_image) : asset('img/upload_image.png') }}"
+                                    class="file-input-preview">
 
-                            <img id="uploaded_img"
-                                src="{{ $page->banner_image ? asset($page->banner_image) : asset('img/upload_image.png') }}"
-                                width="150" height="100">
+                            </div>
 
                             @error('banner_image')
                                 <small class="text-danger">
@@ -98,7 +105,6 @@
                             @enderror
 
                         </div>
-
                         <div class="col-md-12">
 
                             <div class="form-group">
@@ -203,7 +209,7 @@
 
                         </div>
 
-
+                        {{--
                         <div class="form-group col-md-6">
 
                             <label>
@@ -212,6 +218,10 @@
                                 </strong>
                             </label>
 
+
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>700 × 800 px</strong>
+                            </small>
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="form_image" name="form_image"
@@ -239,8 +249,49 @@
                                 </small>
                             @enderror
 
-                        </div>
+                        </div>  --}}
 
+                        <div class="form-group col-md-6">
+
+                            <label>
+                                <strong>Form Image</strong>
+                            </label>
+
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>700 × 800 px & Maximum file size: 200 KB</strong>
+                            </small>
+
+                            <div class="custom-file mb-3">
+
+                                <input type="file" class="custom-file-input" id="form_image" name="form_image"
+                                    accept="image/*"
+                                    onchange="
+                    previewImage(
+                        this,
+                        'form_image_preview'
+                    );
+               ">
+
+                                <label class="custom-file-label" id="form-image-label" for="form_image">
+
+                                    {{ $page->form_image ? $page->form_image : 'Choose file' }}
+
+                                </label>
+
+                                {{-- Thumbnail inside file input --}}
+                                <img id="form_image_preview"
+                                    src="{{ $page->form_image ? asset($page->form_image) : asset('img/upload_image.png') }}"
+                                    class="file-input-preview">
+
+                            </div>
+
+                            @error('form_image')
+                                <small class="text-danger">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+
+                        </div>
 
 
 
@@ -361,6 +412,35 @@
 @endsection
 
 @push('style')
+    <style>
+        .custom-file {
+            position: relative;
+        }
+
+        .custom-file-label {
+            padding-right: 55px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .file-input-preview {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 40px;
+            height: 32px;
+
+            object-fit: cover;
+
+            border-radius: 2px;
+            z-index: 10;
+
+            pointer-events: none;
+        }
+    </style>
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endpush

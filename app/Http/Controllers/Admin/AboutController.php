@@ -43,20 +43,41 @@ class AboutController extends Controller
 
             // Banner
             'banner_title' => ['required', 'string', 'max:255'],
-            'banner_description' => ['nullable'],
-            'banner_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'banner_description' => ['required'],
+            // 'banner_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'banner_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+                'dimensions:width=1920,height=700',
+            ],
 
             // About
             'intro_title' => ['required', 'string', 'max:255'],
             'intro_description' => ['nullable'],
-            'intro_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            // 'intro_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'intro_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+                'dimensions:width=700,height=800',
+            ],
 
             // CTA
-            'cta_title' => ['nullable', 'string', 'max:255'],
-            'cta_description' => ['nullable'],
-            'cta_button_text' => ['nullable', 'string', 'max:255'],
-            'cta_button_link' => ['nullable'],
-            'cta_background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'cta_title' => ['required', 'string', 'max:255'],
+            'cta_description' => ['required'],
+            'cta_button_text' => ['required', 'string', 'max:255'],
+            'cta_button_link' => ['required'],
+            // 'cta_background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
+            'cta_background_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+                'dimensions:width=1920,height=900',
+            ],
 
             // Status
             // 'status' => ['required', Rule::enum(AboutStatus::class)],

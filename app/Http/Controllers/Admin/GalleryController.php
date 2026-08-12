@@ -18,66 +18,66 @@ class GalleryController extends Controller
      */
     public function index(Request $request, DataTables $dataTables, $type)
     {
-        if($request->ajax()){
-        
-            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
-     
-            return $dataTables->eloquent($query)
-            ->addColumn('resort_name', function (Gallery $gallery) {
-                return $gallery->resort?->name;
-            })
-            ->filterColumn('resort_name', function ($query, $keyword) {
-                $query->whereHas('resort', function ($q) use ($keyword) {
-                    $q->where('name', 'like', "%{$keyword}%");
-                });
-            })
-            ->orderColumn('resort_name', function ($query, $order) {
-                $query->orderBy(
-                    Resort::select('name')
-                        ->whereColumn('resorts.id', 'galleries.resort_id')
-                        ->limit(1),
-                    $order
-                );
-            })
-            ->addColumn('gallery_category_name', function (Gallery $gallery) {
-                return $gallery->galleryCategory?->name;
-            })
-            ->filterColumn('gallery_category_name', function ($query, $keyword) {
-                $query->whereHas('galleryCategory', function ($q) use ($keyword) {
-                    $q->where('name', 'like', "%{$keyword}%");
-                });
-            })
-            ->orderColumn('gallery_category_name', function ($query, $order) {
-                $query->orderBy(
-                    GalleryCategory::select('name')
-                        ->whereColumn('gallery_categories.id', 'galleries.gallery_category_id')
-                        ->limit(1),
-                    $order
-                );
-            })
-            ->editColumn('image', function (Gallery $gallery) {
-                $image_url = $gallery->image 
-                    ? asset('uploads/galleries/' . $gallery->image) 
-                    : asset('img/blank-pic.png');
-                return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
-            })
-            ->editColumn('status', function (Gallery $gallery) {
-                $class = match ($gallery->status) {
-                    Status::ACTIVE => 'success',
-                    Status::INACTIVE => 'danger',
-                };
+        if ($request->ajax()) {
 
-                return '<span class="badge badge-' . $class . '">'
-                    . $gallery->status->label()
-                    . '</span>';
-            })
-            ->addColumn('actions', function (Gallery $gallery) use ($type) {
-                return
-                    '<a href="' . route('admin.galleries.show', ['type' => $type, 'gallery' => $gallery]) . '" 
+            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
+
+            return $dataTables->eloquent($query)
+                ->addColumn('resort_name', function (Gallery $gallery) {
+                    return $gallery->resort?->name;
+                })
+                ->filterColumn('resort_name', function ($query, $keyword) {
+                    $query->whereHas('resort', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    });
+                })
+                ->orderColumn('resort_name', function ($query, $order) {
+                    $query->orderBy(
+                        Resort::select('name')
+                            ->whereColumn('resorts.id', 'galleries.resort_id')
+                            ->limit(1),
+                        $order
+                    );
+                })
+                ->addColumn('gallery_category_name', function (Gallery $gallery) {
+                    return $gallery->galleryCategory?->name;
+                })
+                ->filterColumn('gallery_category_name', function ($query, $keyword) {
+                    $query->whereHas('galleryCategory', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    });
+                })
+                ->orderColumn('gallery_category_name', function ($query, $order) {
+                    $query->orderBy(
+                        GalleryCategory::select('name')
+                            ->whereColumn('gallery_categories.id', 'galleries.gallery_category_id')
+                            ->limit(1),
+                        $order
+                    );
+                })
+                ->editColumn('image', function (Gallery $gallery) {
+                    $image_url = $gallery->image
+                        ? asset('uploads/galleries/' . $gallery->image)
+                        : asset('img/blank-pic.png');
+                    return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
+                })
+                ->editColumn('status', function (Gallery $gallery) {
+                    $class = match ($gallery->status) {
+                        Status::ACTIVE => 'success',
+                        Status::INACTIVE => 'danger',
+                    };
+
+                    return '<span class="badge badge-' . $class . '">'
+                        . $gallery->status->label()
+                        . '</span>';
+                })
+                ->addColumn('actions', function (Gallery $gallery) use ($type) {
+                    return
+                        '<a href="' . route('admin.galleries.show', ['type' => $type, 'gallery' => $gallery]) . '"
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
-                    </a> 
-                    <a href="' . route('admin.galleries.edit', ['type' => $type, 'gallery' => $gallery]) . '" 
+                    </a>
+                    <a href="' . route('admin.galleries.edit', ['type' => $type, 'gallery' => $gallery]) . '"
                         class="btn btn-sm" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -88,9 +88,9 @@ class GalleryController extends Controller
                         title="Delete">
                         <i class="fa fa-trash"></i>
                     </a>';
-            })      
-           ->rawColumns(['image', 'status', 'actions'])
-           ->make(true);
+                })
+                ->rawColumns(['image', 'status', 'actions'])
+                ->make(true);
         }
         return view('admin.galleries.index', compact('type'));
     }
@@ -101,13 +101,13 @@ class GalleryController extends Controller
     public function create($type)
     {
         $gallery = new Gallery();
-        
+
         $resorts = Resort::orderBy('id', 'DESC')
-        ->pluck('name', 'id');
-        
+            ->pluck('name', 'id');
+
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
-        ->pluck('name', 'id');
-        
+            ->pluck('name', 'id');
+
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
     }
 
@@ -116,22 +116,54 @@ class GalleryController extends Controller
      */
     public function store(Request $request, $type)
     {
-        $validated = $request->validate([
-            'resort_id' => [
-                $type == 2 ? 'required' : 'nullable',
-                'exists:resorts,id',
+        $validated = $request->validate(
+            [
+                'resort_id' => [
+                    $type == 2 ? 'required' : 'nullable',
+                    'exists:resorts,id',
+                ],
+                'gallery_category_id' => [
+                    $type == 2 ? 'required' : 'nullable',
+                    'exists:gallery_categories,id',
+                ],
+                // 'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+                'image' => [
+                    'required',
+                    'image',
+                    'mimes:jpg,jpeg,png,webp',
+                    'max:200',
+
+                    // Type 1: 370 × 546
+                    Rule::when(
+                        $type == 1,
+                        Rule::dimensions()
+                            ->width(370)
+                            ->height(546)
+                    ),
+
+                    // Type 2: 1024 × 1024
+                    Rule::when(
+                        $type == 2,
+                        Rule::dimensions()
+                            ->width(1000)
+                            ->height(750)
+                    ),
+
+                    // Type 3: 294 × 294
+                    Rule::when(
+                        $type == 3,
+                        Rule::dimensions()
+                            ->width(294)
+                            ->height(294)
+                    ),
+                ],
+                'status' => ['required', Rule::enum(Status::class)],
             ],
-            'gallery_category_id' => [
-                $type == 2 ? 'required' : 'nullable',
-                'exists:gallery_categories,id',
-            ],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(Status::class)],
-        ],
-        [
-            'resort_id.required' => ['The resort field is required.'],
-            'gallery_category_id.required' => ['The category field is required.'],
-        ]);
+            [
+                'resort_id.required' => ['The resort field is required.'],
+                'gallery_category_id.required' => ['The category field is required.'],
+            ]
+        );
 
         $fileName = null;
         if ($request->hasFile('image')) {
@@ -167,7 +199,7 @@ class GalleryController extends Controller
 
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
             ->pluck('name', 'id');
-        
+
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
     }
 
@@ -185,7 +217,37 @@ class GalleryController extends Controller
                 $type == 2 ? 'required' : 'nullable',
                 'exists:gallery_categories,id',
             ],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            // 'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+
+                // Type 1: 370 × 546
+                Rule::when(
+                    $type == 1,
+                    Rule::dimensions()
+                        ->width(370)
+                        ->height(546)
+                ),
+
+                // Type 2: 1024 × 1024
+                Rule::when(
+                    $type == 2,
+                    Rule::dimensions()
+                        ->width(1000)
+                        ->height(750)
+                ),
+
+                // Type 3: 294 × 294
+                Rule::when(
+                    $type == 3,
+                    Rule::dimensions()
+                        ->width(294)
+                        ->height(294)
+                ),
+            ],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -194,7 +256,7 @@ class GalleryController extends Controller
             $file = $request->file('image');
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/galleries'), $fileName);
-            
+
             if ($gallery->image && file_exists(public_path('uploads/galleries/' . $gallery->image))) {
                 unlink(public_path('uploads/galleries/' . $gallery->image));
             }
@@ -215,6 +277,6 @@ class GalleryController extends Controller
     {
         $gallery->delete();
 
-        return response()->json(['status'=>'success', 'message'=>'Data deleted successfully!']);
+        return response()->json(['status' => 'success', 'message' => 'Data deleted successfully!']);
     }
 }

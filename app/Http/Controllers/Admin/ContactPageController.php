@@ -35,21 +35,39 @@ class ContactPageController extends Controller
 
         $data = $request->validate([
 
-            'banner_title' => 'nullable|max:255',
+            'banner_title' => 'required|max:255',
             'banner_description' => 'nullable',
 
-            'section_subtitle' => 'nullable|max:255',
-            'section_title' => 'nullable|max:255',
-            'section_description' => 'nullable',
+            'section_subtitle' => 'required|max:255',
+            'section_title' => 'required|max:255',
+            'section_description' => 'required',
 
-            'form_title' => 'nullable|max:255',
+            'form_title' => 'required|max:255',
             'form_description' => 'nullable',
 
-            'phone' => 'nullable|max:255',
-            'email' => 'nullable|email',
-            'address' => 'nullable',
+            'phone' => 'required|max:255',
+            'email' => 'required|email',
+            'address' => 'required',
 
-            'map_iframe' => 'nullable',
+            // Banner image - EXACTLY 1920 x 700
+            'banner_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+                'dimensions:width=1920,height=700',
+            ],
+
+            // Form image - EXACTLY 700 x 800
+            'form_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+                'dimensions:width=700,height=800',
+            ],
+
+            'map_iframe' => 'required',
 
         ]);
 

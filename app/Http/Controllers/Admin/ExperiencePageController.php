@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ExperiencePage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ExperiencePageController extends Controller
 {
@@ -53,6 +54,16 @@ class ExperiencePageController extends Controller
             'intro_subtitle' => 'nullable|max:255',
             'intro_title' => 'required|max:255',
             'intro_description' => 'nullable',
+            'banner_image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+
+                Rule::dimensions()
+                    ->width(1920)
+                    ->height(700),
+            ],
         ];
 
         if ($type == 1) {

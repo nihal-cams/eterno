@@ -43,11 +43,18 @@ class OfferIntroController extends Controller
                 $type == 2 ? 'required' : 'nullable',
                 'string',
             ],
+            // 'banner_image' => [
+            //     'nullable',
+            //     'image',
+            //     'mimes:jpg,jpeg,png,webp',
+            //     'max:2048',
+            // ],
             'banner_image' => [
-                'nullable',
+                'required',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
-                'max:2048',
+                'max:200',
+                'dimensions:width=1920,height=700',
             ],
             'status' => ['required'],
         ]);
@@ -57,7 +64,7 @@ class OfferIntroController extends Controller
             $file = $request->file('banner_image');
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/offer-intros'), $fileName);
-            
+
             if ($offerIntro->banner_image && $offerIntro->banner_image !== 'offer-banner.jpg' && file_exists(public_path('uploads/offer-intros/' . $offerIntro->banner_image))) {
                 unlink(public_path('uploads/offer-intros/' . $offerIntro->banner_image));
             }

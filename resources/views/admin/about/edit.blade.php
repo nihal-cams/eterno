@@ -90,6 +90,10 @@
                                 </strong>
                             </label>
 
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>1920 × 700 px & Maximum file size: 200 KB</strong>
+                            </small>
+
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="banner_image" name="banner_image"
@@ -189,6 +193,10 @@
                                     Intro Image
                                 </strong>
                             </label>
+
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>700 × 800 px & Maximum file size: 200 KB</strong>
+                            </small>
 
                             <div class="custom-file mb-3">
 
@@ -328,6 +336,10 @@
                                 </strong>
                             </label>
 
+                            <small class="d-block text-muted mb-2">
+                                Required resolution: <strong>1920 × 900 px & Maximum file size: 200 KB</strong>
+                            </small>
+
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="cta_background_image"
@@ -452,10 +464,10 @@
 
     <style>
         /*
-                    |--------------------------------------------------------------------------
-                    | File Input Preview
-                    |--------------------------------------------------------------------------
-                    */
+                                |--------------------------------------------------------------------------
+                                | File Input Preview
+                                |--------------------------------------------------------------------------
+                                */
 
         .custom-file {
             position: relative;

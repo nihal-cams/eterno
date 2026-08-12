@@ -17,50 +17,50 @@ class OfferController extends Controller
      */
     public function index(Request $request, DataTables $dataTables, $type)
     {
-        if($request->ajax()){
-        
-            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->where('type', $type)->orderBy('id','DESC');
-     
-            return $dataTables->eloquent($query)
-            ->addColumn('resort_name', function (Offer $offer) {
-                return $offer->resort?->name;
-            })
-            ->filterColumn('resort_name', function ($query, $keyword) {
-                $query->whereHas('resort', function ($q) use ($keyword) {
-                    $q->where('name', 'like', "%{$keyword}%");
-                });
-            })
-            ->orderColumn('resort_name', function ($query, $order) {
-                $query->orderBy(
-                    Resort::select('name')
-                        ->whereColumn('resorts.id', 'offers.resort_id')
-                        ->limit(1),
-                    $order
-                );
-            })
-            ->editColumn('image', function (Offer $offer) {
-                $image_url = $offer->image 
-                    ? asset('uploads/offers/' . $offer->image) 
-                    : asset('img/blank-pic.png');
-                return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
-            })
-            ->editColumn('status', function (Offer $offer) {
-                $class = match ($offer->status) {
-                    Status::ACTIVE => 'success',
-                    Status::INACTIVE => 'danger',
-                };
+        if ($request->ajax()) {
 
-                return '<span class="badge badge-' . $class . '">'
-                    . $offer->status->label()
-                    . '</span>';
-            })
-            ->addColumn('actions', function (Offer $offer) use($type) {
-                return
-                    '<a href="' . route('admin.offers.show', ['type' => $type, 'offer' => $offer]) . '" 
+            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
+
+            return $dataTables->eloquent($query)
+                ->addColumn('resort_name', function (Offer $offer) {
+                    return $offer->resort?->name;
+                })
+                ->filterColumn('resort_name', function ($query, $keyword) {
+                    $query->whereHas('resort', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    });
+                })
+                ->orderColumn('resort_name', function ($query, $order) {
+                    $query->orderBy(
+                        Resort::select('name')
+                            ->whereColumn('resorts.id', 'offers.resort_id')
+                            ->limit(1),
+                        $order
+                    );
+                })
+                ->editColumn('image', function (Offer $offer) {
+                    $image_url = $offer->image
+                        ? asset('uploads/offers/' . $offer->image)
+                        : asset('img/blank-pic.png');
+                    return '<img src="' . $image_url . '" width="100" height="90" class="img-thumbnail" />';
+                })
+                ->editColumn('status', function (Offer $offer) {
+                    $class = match ($offer->status) {
+                        Status::ACTIVE => 'success',
+                        Status::INACTIVE => 'danger',
+                    };
+
+                    return '<span class="badge badge-' . $class . '">'
+                        . $offer->status->label()
+                        . '</span>';
+                })
+                ->addColumn('actions', function (Offer $offer) use ($type) {
+                    return
+                        '<a href="' . route('admin.offers.show', ['type' => $type, 'offer' => $offer]) . '"
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
-                    </a> 
-                    <a href="' . route('admin.offers.edit', ['type' => $type, 'offer' => $offer]) . '" 
+                    </a>
+                    <a href="' . route('admin.offers.edit', ['type' => $type, 'offer' => $offer]) . '"
                         class="btn btn-sm" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -71,9 +71,9 @@ class OfferController extends Controller
                         title="Delete">
                         <i class="fa fa-trash"></i>
                     </a>';
-            })      
-           ->rawColumns(['image', 'status', 'actions'])
-           ->make(true);
+                })
+                ->rawColumns(['image', 'status', 'actions'])
+                ->make(true);
         }
         return view('admin.offers.index', compact('type'));
     }
@@ -85,8 +85,8 @@ class OfferController extends Controller
     {
         $offer = new Offer();
         $resorts = Resort::where('status', Status::ACTIVE)
-        ->orderBy('id', 'DESC')
-        ->pluck('name', 'id');
+            ->orderBy('id', 'DESC')
+            ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));
     }
@@ -111,7 +111,27 @@ class OfferController extends Controller
             ],
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            // 'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:200',
+
+                Rule::when(
+                    $type == 1,
+                    Rule::dimensions()
+                        ->width(648)
+                        ->height(592)
+                ),
+
+                Rule::when(
+                    $type == 2,
+                    Rule::dimensions()
+                        ->width(800)
+                        ->height(533)
+                ),
+            ],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -154,27 +174,49 @@ class OfferController extends Controller
      */
     public function update(Request $request, $type, Offer $offer)
     {
-        $validated = $request->validate([
-            'resort_id' => [
-                $type == 2 ? 'required' : 'nullable',
-                'exists:resorts,id',
+        $validated = $request->validate(
+            [
+                'resort_id' => [
+                    $type == 2 ? 'required' : 'nullable',
+                    'exists:resorts,id',
+                ],
+                'title' => [
+                    $type == 2 ? 'required' : 'nullable',
+                    'string',
+                    'max:255',
+                ],
+                'description' => [
+                    $type == 2 ? 'required' : 'nullable',
+                ],
+                'button_text' => ['required', 'string', 'max:255'],
+                'button_url' => ['required', 'url'],
+                // 'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+                'image' => [
+                    'required',
+                    'image',
+                    'mimes:jpg,jpeg,png,webp',
+                    'max:200',
+
+                    Rule::when(
+                        $type == 1,
+                        Rule::dimensions()
+                            ->width(648)
+                            ->height(592)
+                    ),
+
+                    Rule::when(
+                        $type == 2,
+                        Rule::dimensions()
+                            ->width(800)
+                            ->height(533)
+                    ),
+                ],
+                'status' => ['required', Rule::enum(Status::class)],
             ],
-            'title' => [
-                $type == 2 ? 'required' : 'nullable',
-                'string',
-                'max:255',
-            ],
-            'description' => [
-                $type == 2 ? 'required' : 'nullable',
-            ],
-            'button_text' => ['required', 'string', 'max:255'],
-            'button_url' => ['required', 'url'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'status' => ['required', Rule::enum(Status::class)],
-        ],
-        [
-            'resort_id.required' => ['The resort field is required.'],
-        ]);
+            [
+                'resort_id.required' => ['The resort field is required.'],
+            ]
+        );
 
 
         $fileName = $offer->image;
@@ -182,7 +224,7 @@ class OfferController extends Controller
             $file = $request->file('image');
             $fileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/offers'), $fileName);
-            
+
             if ($offer->image && file_exists(public_path('uploads/offers/' . $offer->image))) {
                 unlink(public_path('uploads/offers/' . $offer->image));
             }
@@ -203,6 +245,6 @@ class OfferController extends Controller
     {
         $offer->delete();
 
-        return response()->json(['status'=>'success', 'message'=>'Data deleted successfully!']);
+        return response()->json(['status' => 'success', 'message' => 'Data deleted successfully!']);
     }
 }
