@@ -69,7 +69,8 @@ class FrontController extends Controller
         $resortIntro = ResortIntro::where('status', Status::ACTIVE)
             ->first();
 
-        $resorts = Resort::orderBy('sort_order', 'ASC')
+        $resorts = Resort::where('home_status', Status::ACTIVE)
+            ->orderBy('sort_order', 'ASC')
             ->get();
 
         $video = VideoSection::where('status', Status::ACTIVE)
