@@ -359,7 +359,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('admin/offer-intro/2*') ? 'active' : '' }}"
                             href="{{ route('admin.offer-intro.edit', 2) }}">
-                            Banner
+                            Intro
                         </a>
 
                         <a class="collapse-item {{ request()->is('admin/offers/2*') ? 'active' : '' }}"
@@ -425,7 +425,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ request()->is('admin/gallery-intro/2*') ? 'active' : '' }}"
                             href="{{ route('admin.gallery-intro.edit', 2) }}">
-                            Banner
+                            Intro
                         </a>
 
                         <a class="collapse-item {{ request()->is('admin/gallery-categories*') ? 'active' : '' }}"
