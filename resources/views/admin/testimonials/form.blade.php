@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Customer Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Customer Image (Recommended dimensions: 100 × 100 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"

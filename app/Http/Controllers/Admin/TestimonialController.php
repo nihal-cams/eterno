@@ -101,7 +101,7 @@ class TestimonialController extends Controller
             'customer_place' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'customer_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'customer_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=100,height=100', 'max:30'],
             'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ],
@@ -153,7 +153,7 @@ class TestimonialController extends Controller
             'customer_place' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'customer_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'customer_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=100,height=100', 'max:30'],
             'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);

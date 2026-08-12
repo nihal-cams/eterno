@@ -21,7 +21,7 @@ class VideoSectionController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:400'],
             'video' => ['nullable', 'file', 'mimes:mp4,mov,avi,webm', 'max:20480'],
             'status' => ['required'],
         ]);

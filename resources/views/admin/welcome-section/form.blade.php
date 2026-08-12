@@ -55,7 +55,7 @@
                     </div>
                     
                     <div class="form-group col-md-6">
-                        <label><strong>Left Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Left Image (Recommended dimensions: 413 × 503 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Right Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Right Image (Recommended dimensions: 413 × 503 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"

@@ -33,7 +33,7 @@
                     </div>
                     
                     <div class="form-group col-md-6">
-                        <label><strong>Thumbnail Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Thumbnail Image (Recommended dimensions: 1920 × 1020 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"

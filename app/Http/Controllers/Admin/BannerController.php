@@ -78,7 +78,7 @@ class BannerController extends Controller
         $validated = $request->validate([
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => [$type === '2' ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => [$type === '2' ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:2048'],
             'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
@@ -146,7 +146,7 @@ class BannerController extends Controller
                 $type === '1' ? 'nullable' : 'required',
                 'integer', 'min:1'
             ],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
