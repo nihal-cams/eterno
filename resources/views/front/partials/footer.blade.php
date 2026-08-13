@@ -29,21 +29,21 @@
                         @csrf
                         <input id="username" type="text" class="hidden-input-field" name="username" value=""
                             autocomplete="off" tabindex="-1" aria-hidden="true">
-                        <div class="newsletter-input-wrapper">
-                            {{-- Email --}}
-                            <input type="email" name="email" id="newsletterEmail" placeholder="Email Address"
-                                autocomplete="email">
 
-                            {{-- Subscribe Button --}}
-                            <button type="submit" id="newsletterSubmit" class="btn-custom btn-primary-custom">
-                                Subscribe
-                            </button>
+                        {{-- Email --}}
+                        <input type="email" name="email" id="newsletterEmail" placeholder="Email Address"
+                            autocomplete="email">
 
-                            {{-- Email Validation Error --}}
-                            <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
-                            </div>
+                        {{-- Subscribe Button --}}
+                        <button type="submit" id="newsletterSubmit" class="btn-custom btn-primary-custom">
+                            Subscribe
+                        </button>
 
+                        {{-- Email Validation Error --}}
+                        <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
                         </div>
+
+
 
                     </form>
 
