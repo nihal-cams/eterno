@@ -80,12 +80,12 @@ class ContactPageController extends Controller
                 $image->getClientOriginalExtension();
 
             $image->move(
-                public_path('img/contact'),
+                public_path('uploads/contact'),
                 $imageName
             );
 
             $data['banner_image'] =
-                'img/contact/' . $imageName;
+                'uploads/contact/' . $imageName;
         }
 
 
@@ -97,12 +97,12 @@ class ContactPageController extends Controller
                 $image->getClientOriginalExtension();
 
             $image->move(
-                public_path('img/contact'),
+                public_path('uploads/contact'),
                 $imageName
             );
 
             $data['form_image'] =
-                'img/contact/' . $imageName;
+                'uploads/contact/' . $imageName;
         }
 
 

@@ -181,12 +181,12 @@ class ExperienceController extends Controller
                 $image->getClientOriginalExtension();
 
             $image->move(
-                public_path('img/experience/items'),
+                public_path('uploads/experience/items'),
                 $imageName
             );
 
             $validated['image'] =
-                'img/experience/items/' . $imageName;
+                'uploads/experience/items/' . $imageName;
         }
 
         $validated['type'] = $type;
@@ -282,12 +282,12 @@ class ExperienceController extends Controller
                 $image->getClientOriginalExtension();
 
             $image->move(
-                public_path('img/experience/items'),
+                public_path('uploads/experience/items'),
                 $imageName
             );
 
             $validated['image'] =
-                'img/experience/items/' . $imageName;
+                'uploads/experience/items/' . $imageName;
         }
 
         $experience->update($validated);

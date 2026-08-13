@@ -97,12 +97,12 @@ class ExperiencePageController extends Controller
                 $image->getClientOriginalExtension();
 
             $image->move(
-                public_path('img/experience'),
+                public_path('uploads/experience'),
                 $imageName
             );
 
             $data['banner_image'] =
-                'img/experience/' . $imageName;
+                'uploads/experience/' . $imageName;
         }
 
         $experiencePage->update($data);
