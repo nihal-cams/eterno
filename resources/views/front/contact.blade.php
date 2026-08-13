@@ -16,7 +16,7 @@
             @endif
         </div>
         <div class="breadcrumb">
-            <a href="/">Home</a><span>&rsaquo;</span>Contact
+            <a href="{{ route('home') }}">Home</a><span>&rsaquo;</span>Contact
         </div>
     </section>
 
