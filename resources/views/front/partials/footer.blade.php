@@ -41,7 +41,7 @@
                         </button>
                     </form>
                     {{-- Email Validation Error --}}
-                    <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
+                    <div id="newsletterEmailError" class="newsletterEmailError mx-3" style="display: none;">
                     </div>
 
                 </div>
