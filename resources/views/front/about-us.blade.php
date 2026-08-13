@@ -16,7 +16,7 @@
         </div>
 
         <div class="breadcrumb">
-            <a href="{{ url('/') }}">Home</a>
+            <a href="{{ route('home') }}">Home</a>
             <span>&rsaquo;</span>
             About Us
         </div>
