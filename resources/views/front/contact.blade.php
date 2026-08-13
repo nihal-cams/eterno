@@ -132,13 +132,6 @@
                             <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
                                 @csrf
 
-                                {{-- Honeypot --}}
-                                <div class="honeypot-field" aria-hidden="true">
-                                    <label for="username">Username</label>
-                                    <input type="text" id="username" name="username" value="" tabindex="-1"
-                                        autocomplete="off">
-                                </div>
-
                                 <!-- Name -->
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control-custom" placeholder="Your Name"
@@ -147,6 +140,12 @@
                                     <div class="field-error" data-error-for="name"></div>
                                 </div>
 
+                                {{-- Honeypot --}}
+                                <div class="honeypot-field" aria-hidden="true">
+                                    <label for="username-contact">Username</label>
+                                    <input type="text" id="username-contact" name="username" value="" tabindex="-1"
+                                        autocomplete="off">
+                                </div>
 
                                 <!-- Email -->
                                 <div class="form-group">

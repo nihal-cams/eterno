@@ -27,25 +27,22 @@
                 <div class="col-lg-6 reveal-right">
                     <form id="newsletterForm" class="newsletter-form">
                         @csrf
-                        <input id="username" type="text" class="hidden-input-field" name="username" value=""
-                            autocomplete="off" tabindex="-1" aria-hidden="true">
 
                         {{-- Email --}}
                         <input type="email" name="email" id="newsletterEmail" placeholder="Email Address"
                             autocomplete="email">
+                        
+                        <input id="username" type="text" class="hidden-input-field" name="username" value=""
+                            autocomplete="off" tabindex="-1" aria-hidden="true">
 
                         {{-- Subscribe Button --}}
                         <button type="submit" id="newsletterSubmit" class="btn-custom btn-primary-custom">
                             Subscribe
                         </button>
-
-                        {{-- Email Validation Error --}}
-                        <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
-                        </div>
-
-
-
                     </form>
+                    {{-- Email Validation Error --}}
+                    <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
+                    </div>
 
                 </div>
 
