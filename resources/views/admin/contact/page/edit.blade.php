@@ -66,9 +66,7 @@
 
                         <div class="form-group col-md-6">
 
-                            <label>
-                                <strong>Banner Image (1920 × 700 px, max 200 KB)</strong>
-                            </label>
+                            <label><strong>Banner Image (1920 × 700 px, max 200 KB) <span class="text-danger">*</span></strong></label>
 
                             <div class="custom-file mb-3">
 
@@ -105,7 +103,7 @@
 
                             <div class="form-group">
 
-                                <label><strong>Banner Description <span class="text-danger">*</span></strong></label>
+                                <label><strong>Banner Description <span class="text-danger"></span></strong></label>
 
                                 <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $page->banner_description) }}</textarea>
                                 @error('banner_description')
@@ -245,13 +243,7 @@
 
                         <div class="form-group col-md-6">
 
-                            <label>
-                                <strong>Form Image</strong>
-                            </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>700 × 800 px & Maximum file size: 200 KB</strong>
-                            </small>
+                            <label><strong>Form Image (700 × 800 px, max 200 KB) <span class="text-danger">*</span></strong></label>
 
                             <div class="custom-file mb-3">
 
@@ -291,7 +283,7 @@
 
                             <div class="form-group">
 
-                                <label><strong>Form Description <span class="text-danger">*</span></strong></label>
+                                <label><strong>Form Description <span class="text-danger"></span></strong></label>
 
                                 <textarea name="form_description" rows="4" class="form-control">{{ old('form_description', $page->form_description) }}</textarea>
                                 @error('form_description')
