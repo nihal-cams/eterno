@@ -31,7 +31,7 @@
                         {{-- Email --}}
                         <input type="email" name="email" id="newsletterEmail" placeholder="Email Address"
                             autocomplete="email">
-                        
+
                         <input id="username" type="text" class="hidden-input-field" name="username" value=""
                             autocomplete="off" tabindex="-1" aria-hidden="true">
 
@@ -208,7 +208,7 @@
             </p>
 
             {{-- Google reCAPTCHA Notice --}}
-            <div class="recaptcha-notice">
+            {{--  <div class="recaptcha-notice">
                 This site is protected by reCAPTCHA and the Google
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                     Privacy Policy
@@ -218,7 +218,7 @@
                     Terms of Service
                 </a>
                 apply.
-            </div>
+            </div>  --}}
 
             <div class="footer-legal">
                 <a href="#">Terms & Conditions</a>
