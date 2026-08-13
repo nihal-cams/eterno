@@ -39,13 +39,15 @@
                             Subscribe
                         </button>
 
-                        {{-- Email Validation Error --}}
-                        <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
-                        </div>
+
 
 
 
                     </form>
+
+                    {{-- Email Validation Error --}}
+                    <div id="newsletterEmailError" class="newsletterEmailError" style="display: none;">
+                    </div>
 
                 </div>
 
@@ -211,7 +213,7 @@
             </p>
 
             {{-- Google reCAPTCHA Notice --}}
-            <div class="recaptcha-notice">
+            {{--  <div class="recaptcha-notice">
                 This site is protected by reCAPTCHA and the Google
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                     Privacy Policy
@@ -221,7 +223,7 @@
                     Terms of Service
                 </a>
                 apply.
-            </div>
+            </div>  --}}
 
             <div class="footer-legal">
                 <a href="#">Terms & Conditions</a>

@@ -345,9 +345,9 @@
         }
 
         /* Hide Google reCAPTCHA floating badge */
-        .grecaptcha-badge {
+        {{--  .grecaptcha-badge {
             visibility: hidden !important;
-        }
+        }  --}}
     </style>
 @endpush
 
