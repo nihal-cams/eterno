@@ -49,7 +49,7 @@
 
                                 <th>Title</th>
 
-                                <th width="12%">Layout</th>
+                                {{--  <th width="12%">Layout</th>  --}}
 
                                 <th width="10%">Order</th>
 
@@ -194,10 +194,10 @@
                         name: 'title'
                     },
 
-                    {
+                    {{--  {
                         data: 'layout',
                         name: 'layout'
-                    },
+                    },  --}}
 
                     {
                         data: 'sort_order',

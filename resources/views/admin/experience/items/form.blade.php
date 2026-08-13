@@ -150,7 +150,7 @@
             ">
 
                                 <label class="custom-file-label" id="image-label" for="image">
-                                    {{ $experience->image ?: 'Choose file' }}
+                                    {{ $experience->image ? basename($experience->image) : 'Choose file' }}
                                 </label>
 
                             </div>

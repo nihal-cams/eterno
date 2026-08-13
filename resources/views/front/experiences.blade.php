@@ -52,7 +52,8 @@
                     <div class="col-xl-7
                     {{ $index % 2 == 1 ? 'order-1 order-xl-2' : '' }}">
                         <div class="exp-img-wrapper img-height">
-                            <img src="{{ asset($experience->image) }}" alt="{{ $experience->subtitle }}">
+                            <img src="{{ asset('uploads/experience/items/' . $experience->image) }}"
+                                alt="{{ $experience->subtitle }}">
                         </div>
                     </div>
 

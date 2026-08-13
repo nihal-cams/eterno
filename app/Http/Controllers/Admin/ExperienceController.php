@@ -42,13 +42,13 @@ class ExperienceController extends Controller
                 ->editColumn('image', function (Experience $experience) {
 
                     $image_url = $experience->image
-                        ? asset($experience->image)
+                        ? asset('uploads/experience/items/' . $experience->image)
                         : asset('img/blank-pic.png');
 
                     return '<img src="' . $image_url . '"
-                width="100"
-                height="90"
-                class="img-thumbnail" />';
+        width="100"
+        height="90"
+        class="img-thumbnail" />';
                 })
 
                 ->editColumn('status', function (Experience $experience) {
@@ -185,8 +185,9 @@ class ExperienceController extends Controller
                 $imageName
             );
 
-            $validated['image'] =
-                'uploads/experience/items/' . $imageName;
+            // $validated['image'] =
+            //     'uploads/experience/items/' . $imageName;
+            $validated['image'] = $imageName;
         }
 
         $validated['type'] = $type;
@@ -286,8 +287,7 @@ class ExperienceController extends Controller
                 $imageName
             );
 
-            $validated['image'] =
-                'uploads/experience/items/' . $imageName;
+            $validated['image'] = $imageName;
         }
 
         $experience->update($validated);
