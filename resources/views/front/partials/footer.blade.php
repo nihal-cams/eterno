@@ -58,7 +58,7 @@
             <div class="col-xl-3 col-lg-4 col-md-6 footer-col">
                 <div class="footer-logo-area">
                     <div class="footer-logo-img">
-                        <img src="images/footer-logo.png" alt="">
+                        <img src="{{ asset('images/footer-logo.png') }}" alt="eterno">
                     </div>
                     <div class="footer-address">
                         <strong>Conglomerate of</strong>

@@ -27,7 +27,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css?v=4') }}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
-            style="background: #fff;">
+            style="background: #8e734b;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
@@ -612,7 +612,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>© {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.</span>
+                        <span>Â© {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.</span>
                     </div>
                 </div>
             </footer>
@@ -637,7 +637,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">Ã—</span>
                     </button>
                 </div>
                 <div class="modal-body">Are you sure you want to logout?</div>
