@@ -18,7 +18,7 @@ class BannerController extends Controller
     {
         if($request->ajax()){
         
-            $query = Banner::select('title', 'image', 'status', 'created_at', 'id')->where('type', $type)->orderBy('id','DESC');
+            $query = Banner::select('title', 'image', 'sort_order', 'status', 'created_at', 'id')->where('type', $type)->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->editColumn('image', function (Banner $banner) {
@@ -78,7 +78,8 @@ class BannerController extends Controller
         $validated = $request->validate([
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'image' => [$type === '2' ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => [$type === '2' ? 'required' : 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:2048'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -141,7 +142,11 @@ class BannerController extends Controller
                 $type === '1' ? 'required' : 'nullable',
                 'string'
             ],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'sort_order' => [
+                $type === '1' ? 'nullable' : 'required',
+                'integer', 'min:1'
+            ],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:2048'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 

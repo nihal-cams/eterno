@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Customer Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Customer Image (Recommended dimensions: 100 × 100 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"
@@ -100,7 +100,18 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-6">
+                        <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
+                        <input type="number"
+                            name="sort_order"
+                            class="form-control"
+                            value="{{ old('sort_order', $testimonial->sort_order) }}">
+                        @error('sort_order')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <label><strong>Status</strong></label>
                         <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
                         <div class="custom-control custom-switch">

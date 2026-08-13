@@ -15,6 +15,7 @@ class Offer extends Model
         'image',
         'button_text',
         'button_url',
+        'sort_order',
         'status',
     ];
 

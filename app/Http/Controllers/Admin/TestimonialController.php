@@ -19,7 +19,7 @@ class TestimonialController extends Controller
     {
         if($request->ajax()){
         
-            $query = Testimonial::with('resort')->select('id', 'resort_id', 'customer_name', 'customer_image', 'title', 'status', 'created_at')->orderBy('id','DESC');
+            $query = Testimonial::with('resort')->select('id', 'resort_id', 'customer_name', 'customer_image', 'title', 'status', 'sort_order', 'created_at')->orderBy('id','DESC');
      
             return $dataTables->eloquent($query)
             ->addColumn('resort_name', function (Testimonial $testimonial) {
@@ -84,8 +84,7 @@ class TestimonialController extends Controller
     public function create()
     {
         $testimonial = new Testimonial();
-        $resorts = Resort::where('status', Status::ACTIVE)
-        ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
         ->pluck('name', 'id');
 
         return view('admin.testimonials.form', compact('testimonial', 'resorts'));
@@ -102,7 +101,8 @@ class TestimonialController extends Controller
             'customer_place' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'customer_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'customer_image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=100,height=100', 'max:30'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ],
         [
@@ -136,7 +136,7 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
         ->pluck('name', 'id');
 
         return view('admin.testimonials.form', compact('testimonial', 'resorts'));
@@ -153,7 +153,8 @@ class TestimonialController extends Controller
             'customer_place' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'customer_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'customer_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=100,height=100', 'max:30'],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 

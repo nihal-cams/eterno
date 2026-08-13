@@ -21,7 +21,7 @@ class VideoSectionController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=1920,height=1080', 'max:400'],
             'video' => ['nullable', 'file', 'mimes:mp4,mov,avi,webm', 'max:20480'],
             'status' => ['required'],
         ]);
@@ -32,7 +32,7 @@ class VideoSectionController extends Controller
             $imageFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/video-sections'), $imageFileName);
             
-            if ($videoSection->thumbnail_image && $videoSection->thumbnail_image !== 'home-video-thumbnail.jpg' && file_exists(public_path('uploads/video-sections/' . $videoSection->thumbnail_image))) {
+            if ($videoSection->thumbnail_image && $videoSection->thumbnail_image !== 'default/home-video-thumbnail.jpg' && file_exists(public_path('uploads/video-sections/' . $videoSection->thumbnail_image))) {
                 unlink(public_path('uploads/video-sections/' . $videoSection->thumbnail_image));
             }
         }
@@ -44,7 +44,7 @@ class VideoSectionController extends Controller
             $videoFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/video-sections'), $videoFileName);
             
-            if ($videoSection->video && $videoSection->video !== 'home-video.mp4' && file_exists(public_path('uploads/video-sections/' . $videoSection->video))) {
+            if ($videoSection->video && $videoSection->video !== 'default/home-video.mp4' && file_exists(public_path('uploads/video-sections/' . $videoSection->video))) {
                 unlink(public_path('uploads/video-sections/' . $videoSection->video));
             }
         }

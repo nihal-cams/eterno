@@ -34,6 +34,7 @@
                                 <th>Category</th>
                             @endif
                                 <th>Image</th>
+                                <th>Sort Order</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -127,6 +128,7 @@
             { data: 'gallery_category_name', name: 'gallery_category_name' },
             @endif
             { data: 'image', name: 'image' },
+            { data: 'sort_order', name: 'sort_order' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 

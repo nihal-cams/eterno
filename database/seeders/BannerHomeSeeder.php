@@ -21,6 +21,7 @@ class BannerHomeSeeder extends Seeder
                 'title' => 'An Invitation to the new world',
                 'description' => 'Eterno Hotels & Resorts brings together exceptional destinations where nature, comfort and unforgettable experiences come together.',
                 'image' => null,
+                'sort_order' => 1,
                 'status' => Status::ACTIVE->value,
             ]
         );

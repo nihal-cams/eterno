@@ -1,5 +1,5 @@
 @extends("admin.layouts.app")
-@section('title', ($banner->id ? 'Edit ' : 'Add ') . 'Banner')
+@section('title', ($banner->id ? 'Edit ' : 'Add ') . ($type === '1' ? 'Banner Intro' : 'Banner'))
 @section("content")
 
 @use(App\Enums\Status)
@@ -9,7 +9,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">
-            {{ $banner->id ? 'Edit ' : 'Add ' }} Banner
+            {{ $banner->id ? 'Edit ' : 'Add ' }} {{ $type === '1' ? 'Banner Intro' : 'Banner' }}
         </h1>
         
         <form method="POST" action="{{ $banner->id ? route('admin.banners.update', ['type' => $type, 'banner' => $banner]) : route('admin.banners.store', ['type' => $type]) }}" enctype="multipart/form-data">
@@ -43,7 +43,7 @@
                     </div>
                 @else
                     <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Image (Recommended dimensions: 1920 × 1080 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"
@@ -61,8 +61,19 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+
+                    <div class="form-group col-md-3">
+                        <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
+                        <input type="number"
+                            name="sort_order"
+                            class="form-control"
+                            value="{{ old('sort_order', $banner->sort_order) }}">
+                        @error('sort_order')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 @endif
-                    <div class="form-group col-6">
+                    <div class="form-group col-md-3">
                         <label><strong>Status</strong></label>
                         <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
                         <div class="custom-control custom-switch">

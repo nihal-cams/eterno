@@ -8,7 +8,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-        @if($type !== '1')
+        @if($type === '1')
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Title:</div>
                 <div class="col-md-9">{{ $banner->title }}</div>
@@ -20,7 +20,7 @@
                     {!! nl2br(e($banner->description)) !!}
                 </div>
             </div>
-        @endif
+        @else
         
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Image:</div>
@@ -35,6 +35,12 @@
                     @endif
                 </div>
             </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 font-weight-bold">Sort Order:</div>
+                <div class="col-md-9">{{ $banner->sort_order }}</div>
+            </div>
+        @endif
 
             <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Status:</div>

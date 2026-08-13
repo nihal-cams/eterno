@@ -22,6 +22,18 @@
                 <div class="row">
 
                     <div class="form-group col-md-6">
+                        <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
+                        <input type="text"
+                            name="sub_title"
+                            class="form-control"
+                            placeholder="WELCOME"
+                            value="{{ old('sub_title', $welcomeSection->sub_title) }}">
+                        @error('sub_title')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <label><strong>Title <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="title"
@@ -43,7 +55,7 @@
                     </div>
                     
                     <div class="form-group col-md-6">
-                        <label><strong>Left Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Left Image (Recommended dimensions: 413 × 503 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"
@@ -63,7 +75,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label><strong>Right Image (Recommended dimensions: 800 × 800 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Right Image (Recommended dimensions: 413 × 503 px) <span class="text-danger">*</strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"

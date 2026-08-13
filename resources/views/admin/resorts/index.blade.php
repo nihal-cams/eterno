@@ -11,9 +11,11 @@
                 Resorts
             </h1>
             </div>
+            @if($type === '1')
             <div class="col-6 text-right">
-                <a href="{{route('admin.resorts.create')}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
+                <a href="{{route('admin.resorts.create', ['type' => $type])}}" class="btn btn-primary" ><i class="fa fa-plus"></i> Add</a>
             </div>
+            @endif
         </div>
         <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
         <!--    For more information about DataTables, please visit the <a target="_blank"-->
@@ -29,10 +31,12 @@
                     <table class="table table-bordered" id="resort-table" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Image</th>
                                 <th>Name</th>
-                                <th>Location</th>
-                                <th>Status</th>
+                                <th>URL</th>
+                                @if($type !== '1') <th>Image</th> @endif
+                                @if ($type !== '4' && $type !== '1') <th>Title</th> @endif
+                                <th>Sort Order</th>
+                                @if($type !== '1') <th>Status</th> @endif
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -117,16 +121,44 @@
          processing: true,
          serverSide: true,
 
-         ajax: '{{ route("admin.resorts.index") }}',
-
-         columns: [
-            { data: 'image', name: 'image' },
-            { data: 'name', name: 'name' },
-            { data: 'location', name: 'location' },
-            { data: 'status', name: 'status' },
-            { data: 'actions', orderable: false}
-
-         ],
+         ajax: '{{ route("admin.resorts.index", ["type" => $type]) }}',
+        @if($type === '2')
+            columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'url', name: 'url' },
+                    { data: 'home_image', name: 'home_image' },
+                    { data: 'home_title', name: 'home_title' },
+                    { data: 'sort_order', name: 'sort_order' },
+                    { data: 'home_status', name: 'home_status' },
+                    { data: 'actions', orderable: false}
+                ],
+        @elseif ($type === '3')
+            columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'url', name: 'url' },
+                    { data: 'mega_menu_image', name: 'mega_menu_image' },
+                    { data: 'mega_menu_title', name: 'mega_menu_title' },
+                    { data: 'sort_order', name: 'sort_order' },
+                    { data: 'mega_menu_status', name: 'mega_menu_status' },
+                    { data: 'actions', orderable: false}
+                ],
+        @elseif ($type === '4')
+            columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'url', name: 'url' },
+                    { data: 'book_now_image', name: 'book_now_image' },
+                    { data: 'sort_order', name: 'sort_order' },
+                    { data: 'book_now_status', name: 'book_now_status' },
+                    { data: 'actions', orderable: false}
+                ],
+        @else
+            columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'url', name: 'url' },
+                    { data: 'sort_order', name: 'sort_order' },
+                    { data: 'actions', orderable: false}
+                ],
+        @endif
          order: [[ 0, "desc" ]]
 
      });
@@ -148,7 +180,11 @@
                     },
                     error: function (xhr) {
                         $('#delete-resort-modal').modal('hide');
-                        toastr.error('Something went wrong.', 'Error');
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            toastr.error(xhr.responseJSON.message);
+                        } else {
+                            toastr.error('Something went wrong.');
+                        }
                     }
               });
    		 });

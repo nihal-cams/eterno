@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             BannerHomeSeeder::class,
             WelcomeSectionSeeder::class,
             VideoSectionSeeder::class,
+            ResortIntroHomeSeeder::class,
             OfferIntroHomeSeeder::class,
             OfferIntroSeeder::class,
             GalleryIntroHomeSeeder::class,

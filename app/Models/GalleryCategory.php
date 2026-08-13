@@ -9,6 +9,7 @@ class GalleryCategory extends Model
 {
     protected $fillable = [
         'name',
+        'sort_order',
         'status',
     ];
 

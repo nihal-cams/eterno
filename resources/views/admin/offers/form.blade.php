@@ -107,7 +107,16 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-md-6">
+                            <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
+                            <input type="number" name="sort_order" class="form-control"
+                                value="{{ old('sort_order', $offer->sort_order) }}">
+                            @error('sort_order')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
                             <label><strong>Status</strong></label>
                             <input type="hidden" name="status" value="{{ Status::INACTIVE->value }}">
                             <div class="custom-control custom-switch">
@@ -120,8 +129,10 @@
                                     </span>
                                 </label>
                             </div>
-                        </div>
 
+
+
+                        </div>
                     </div>
                 </div>
 
@@ -140,7 +151,7 @@
 
 
     </div>
-    <!-- /.container-fluid -->
+
 @endsection
 
 @push('style')

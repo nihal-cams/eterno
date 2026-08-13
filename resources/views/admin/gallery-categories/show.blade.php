@@ -15,6 +15,11 @@
             </div>
 
             <div class="row mb-3">
+                <div class="col-md-3 font-weight-bold">Sort Order:</div>
+                <div class="col-md-9">{{ $galleryCategory->sort_order }}</div>
+            </div>
+
+            <div class="row mb-3">
                 <div class="col-md-3 font-weight-bold">Status:</div>
                 <div class="col-md-9">
                     @php

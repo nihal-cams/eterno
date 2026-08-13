@@ -12,6 +12,7 @@ class Banner extends Model
         'title',
         'description',
         'image',
+        'sort_order',
         'status',
     ];
 

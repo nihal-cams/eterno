@@ -20,7 +20,7 @@ class GalleryController extends Controller
     {
         if ($request->ajax()) {
 
-            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'status', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
+            $query = Gallery::with(['resort', 'galleryCategory'])->select('id', 'resort_id', 'gallery_category_id', 'image', 'sort_order', 'status', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
 
             return $dataTables->eloquent($query)
                 ->addColumn('resort_name', function (Gallery $gallery) {
@@ -74,20 +74,20 @@ class GalleryController extends Controller
                 ->addColumn('actions', function (Gallery $gallery) use ($type) {
                     return
                         '<a href="' . route('admin.galleries.show', ['type' => $type, 'gallery' => $gallery]) . '"
-                        class="btn btn-sm" title="View">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a href="' . route('admin.galleries.edit', ['type' => $type, 'gallery' => $gallery]) . '"
-                        class="btn btn-sm" title="Edit">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a data-toggle="modal"
-                        href="#delete-gallery-modal"
-                        data-href="' . route('admin.galleries.destroy', ['type' => $type, 'gallery' => $gallery]) . '"
-                        class="btn btn-sm gallery-delete"
-                        title="Delete">
-                        <i class="fa fa-trash"></i>
-                    </a>';
+                    class="btn btn-sm" title="View">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="' . route('admin.galleries.edit', ['type' => $type, 'gallery' => $gallery]) . '"
+                    class="btn btn-sm" title="Edit">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a data-toggle="modal"
+                    href="#delete-gallery-modal"
+                    data-href="' . route('admin.galleries.destroy', ['type' => $type, 'gallery' => $gallery]) . '"
+                    class="btn btn-sm gallery-delete"
+                    title="Delete">
+                    <i class="fa fa-trash"></i>
+                </a>';
                 })
                 ->rawColumns(['image', 'status', 'actions'])
                 ->make(true);
@@ -102,10 +102,10 @@ class GalleryController extends Controller
     {
         $gallery = new Gallery();
 
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
-        $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
+        $galleryCategories = GalleryCategory::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
@@ -122,11 +122,12 @@ class GalleryController extends Controller
                     $type == 2 ? 'required' : 'nullable',
                     'exists:resorts,id',
                 ],
+
                 'gallery_category_id' => [
                     $type == 2 ? 'required' : 'nullable',
                     'exists:gallery_categories,id',
                 ],
-                // 'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+
                 'image' => [
                     'required',
                     'image',
@@ -141,7 +142,7 @@ class GalleryController extends Controller
                             ->height(546)
                     ),
 
-                    // Type 2: 1024 × 1024
+                    // Type 2: 1000 × 750
                     Rule::when(
                         $type == 2,
                         Rule::dimensions()
@@ -157,11 +158,21 @@ class GalleryController extends Controller
                             ->height(294)
                     ),
                 ],
-                'status' => ['required', Rule::enum(Status::class)],
+
+                'sort_order' => [
+                    'required',
+                    'integer',
+                    'min:1',
+                ],
+
+                'status' => [
+                    'required',
+                    Rule::enum(Status::class),
+                ],
             ],
             [
-                'resort_id.required' => ['The resort field is required.'],
-                'gallery_category_id.required' => ['The category field is required.'],
+                'resort_id.required' => 'The resort field is required.',
+                'gallery_category_id.required' => 'The category field is required.',
             ]
         );
 
@@ -193,8 +204,7 @@ class GalleryController extends Controller
      */
     public function edit($type, Gallery $gallery)
     {
-        $resorts = Resort::where('status', Status::ACTIVE)
-            ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
@@ -217,7 +227,6 @@ class GalleryController extends Controller
                 $type == 2 ? 'required' : 'nullable',
                 'exists:gallery_categories,id',
             ],
-            // 'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'image' => [
                 'nullable',
                 'image',
@@ -248,6 +257,7 @@ class GalleryController extends Controller
                         ->height(294)
                 ),
             ],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 

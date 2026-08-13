@@ -20,13 +20,17 @@ class WelcomeSectionController extends Controller
         $welcomeSection = WelcomeSection::firstOrFail();
 
         $validated = $request->validate([
+            'sub_title' => ['required', 'string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'left_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'right_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'button_text' => ['nullable', 'string', 'max:255'],
-            'button_url' => ['nullable', 'string', 'max:255'],
+            'left_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=413,height=503', 'max:400'],
+            'right_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'dimensions:width=413,height=503', 'max:400'],
+            'button_text' => ['required', 'string', 'max:255'],
+            'button_url' => ['required', 'url'],
             'status' => ['required'],
+        ],
+        [
+            'sub_title.required' => 'The subtitle field is required.',
         ]);
 
         $leftFileName = $welcomeSection->left_image;
@@ -35,7 +39,7 @@ class WelcomeSectionController extends Controller
             $leftFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/welcome-sections'), $leftFileName);
             
-            if ($welcomeSection->left_image && $welcomeSection->left_image !== 'home-welcome-left.jpg' && file_exists(public_path('uploads/welcome-sections/' . $welcomeSection->left_image))) {
+            if ($welcomeSection->left_image && $welcomeSection->left_image !== 'default/home-welcome-left.jpg' && file_exists(public_path('uploads/welcome-sections/' . $welcomeSection->left_image))) {
                 unlink(public_path('uploads/welcome-sections/' . $welcomeSection->left_image));
             }
         }
@@ -47,7 +51,7 @@ class WelcomeSectionController extends Controller
             $rightFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/welcome-sections'), $rightFileName);
             
-            if ($welcomeSection->right_image && $welcomeSection->right_image !== 'home-welcome-right.jpg' && file_exists(public_path('uploads/welcome-sections/' . $welcomeSection->right_image))) {
+            if ($welcomeSection->right_image && $welcomeSection->right_image !== 'default/home-welcome-right.jpg' && file_exists(public_path('uploads/welcome-sections/' . $welcomeSection->right_image))) {
                 unlink(public_path('uploads/welcome-sections/' . $welcomeSection->right_image));
             }
         }

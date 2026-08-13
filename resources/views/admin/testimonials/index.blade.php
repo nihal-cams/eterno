@@ -33,6 +33,7 @@
                                 <th>Title</th>
                                 <th>Customer Image</th>
                                 <th>Customer Name</th>
+                                <th>Sort Order</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -125,6 +126,7 @@
             { data: 'title', name: 'title' },
             { data: 'customer_image', name: 'customer_image' },
             { data: 'customer_name', name: 'customer_name' },
+            { data: 'sort_order', name: 'sort_order' },
             { data: 'status', name: 'status' },
             { data: 'actions', orderable: false}
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->unsignedInteger('sort_order')->default(1);
             $table->string('status')->default(Status::ACTIVE->value);
             $table->timestamps();
         });

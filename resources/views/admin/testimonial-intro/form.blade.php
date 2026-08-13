@@ -21,11 +21,11 @@
                 <!-- <h3 class="font-size-lg text-dark font-weight-bold mb-3">Testimonial Intro</h3> -->
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label><strong>Sub Title <span class="text-danger">*</span></strong></label>
+                        <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
                         <input type="text"
                             name="sub_title"
                             class="form-control"
-                            placeholder="Special Testimonials"
+                            placeholder="TESTIMONIALS"
                             value="{{ old('sub_title', $testimonialIntro->sub_title) }}">
                         @error('sub_title')
                             <small class="text-danger">{{ $message }}</small>

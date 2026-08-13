@@ -12,6 +12,7 @@ class Gallery extends Model
         'resort_id',
         'gallery_category_id',
         'image',
+        'sort_order',
         'status',
     ];
 

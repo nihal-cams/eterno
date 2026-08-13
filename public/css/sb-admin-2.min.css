@@ -10698,7 +10698,7 @@ a:focus {
     .sidebar .nav-item .nav-link span {
         font-size: 16px;
         display: inline;
-        color: #0e0e0e;
+        /* color: #0e0e0e; */
         opacity: 1;
         font-weight: 700;
     }
@@ -10872,12 +10872,12 @@ a:focus {
 }
 
 .sidebar-dark .nav-item .nav-link:active,.sidebar-dark .nav-item .nav-link:focus,.sidebar-dark .nav-item .nav-link:hover {
-    color: #0e0e0e;
+    color: #fff;
     background: #8e734b;
 }
 
 .sidebar-dark .nav-item .nav-link:active i,.sidebar-dark .nav-item .nav-link:focus i,.sidebar-dark .nav-item .nav-link:hover i {
-    color: #0e0e0e;
+    color: #fff;
 }
 
 .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {

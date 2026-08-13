@@ -19,7 +19,7 @@ class OfferController extends Controller
     {
         if ($request->ajax()) {
 
-            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
+            $query = Offer::with('resort')->select('id', 'resort_id', 'image', 'title', 'status', 'sort_order', 'created_at')->where('type', $type)->orderBy('id', 'DESC');
 
             return $dataTables->eloquent($query)
                 ->addColumn('resort_name', function (Offer $offer) {
@@ -57,20 +57,20 @@ class OfferController extends Controller
                 ->addColumn('actions', function (Offer $offer) use ($type) {
                     return
                         '<a href="' . route('admin.offers.show', ['type' => $type, 'offer' => $offer]) . '"
-                        class="btn btn-sm" title="View">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a href="' . route('admin.offers.edit', ['type' => $type, 'offer' => $offer]) . '"
-                        class="btn btn-sm" title="Edit">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a data-toggle="modal"
-                        href="#delete-offer-modal"
-                        data-href="' . route('admin.offers.destroy', ['type' => $type, 'offer' => $offer]) . '"
-                        class="btn btn-sm offer-delete"
-                        title="Delete">
-                        <i class="fa fa-trash"></i>
-                    </a>';
+                    class="btn btn-sm" title="View">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="' . route('admin.offers.edit', ['type' => $type, 'offer' => $offer]) . '"
+                    class="btn btn-sm" title="Edit">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a data-toggle="modal"
+                    href="#delete-offer-modal"
+                    data-href="' . route('admin.offers.destroy', ['type' => $type, 'offer' => $offer]) . '"
+                    class="btn btn-sm offer-delete"
+                    title="Delete">
+                    <i class="fa fa-trash"></i>
+                </a>';
                 })
                 ->rawColumns(['image', 'status', 'actions'])
                 ->make(true);
@@ -84,8 +84,7 @@ class OfferController extends Controller
     public function create($type)
     {
         $offer = new Offer();
-        $resorts = Resort::where('status', Status::ACTIVE)
-            ->orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));
@@ -111,7 +110,6 @@ class OfferController extends Controller
             ],
             'button_text' => ['required', 'string'],
             'button_url' => ['required', 'url'],
-            // 'image' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'image' => [
                 'required',
                 'image',
@@ -132,6 +130,7 @@ class OfferController extends Controller
                         ->height(533)
                 ),
             ],
+            'sort_order' => ['required', 'integer', 'min:1'],
             'status' => ['required', Rule::enum(Status::class)],
         ]);
 
@@ -163,7 +162,7 @@ class OfferController extends Controller
      */
     public function edit($type, Offer $offer)
     {
-        $resorts = Resort::orderBy('id', 'DESC')
+        $resorts = Resort::orderBy('sort_order', 'ASC')
             ->pluck('name', 'id');
 
         return view('admin.offers.form', compact('type', 'offer', 'resorts'));
@@ -211,6 +210,7 @@ class OfferController extends Controller
                             ->height(533)
                     ),
                 ],
+                'sort_order' => ['required', 'integer', 'min:1'],
                 'status' => ['required', Rule::enum(Status::class)],
             ],
             [
