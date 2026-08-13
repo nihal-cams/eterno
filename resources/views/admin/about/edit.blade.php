@@ -65,9 +65,7 @@
                         {{-- Banner Title --}}
                         <div class="col-md-6">
 
-                            <label for="banner_title">
-                                Banner Title
-                            </label>
+                            <label><strong>Banner Title <span class="text-danger">*</span></strong></label>
 
                             <input type="text" name="banner_title" id="banner_title" class="form-control"
                                 value="{{ old('banner_title', $about->banner_title) }}">
@@ -86,13 +84,9 @@
 
                             <label for="banner_image">
                                 <strong>
-                                    Banner Image
+                                    Banner Image (1920 × 700 px, max 200 KB)
                                 </strong>
                             </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>1920 × 700 px & Maximum file size: 200 KB</strong>
-                            </small>
 
                             <div class="custom-file mb-3">
 
@@ -127,9 +121,7 @@
                         {{-- Banner Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label for="banner_description">
-                                Description
-                            </label>
+                            <label><strong>Banner Description <span class="text-danger">*</span></strong></label>
 
                             <textarea name="banner_description" id="banner_description" rows="5" class="form-control">{{ old('banner_description', $about->banner_description) }}</textarea>
 
@@ -169,9 +161,7 @@
                         {{-- Intro Title --}}
                         <div class="col-md-6">
 
-                            <label for="intro_title">
-                                Title
-                            </label>
+                            <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                             <input type="text" name="intro_title" id="intro_title" class="form-control"
                                 value="{{ old('intro_title', $about->intro_title) }}">
@@ -190,13 +180,9 @@
 
                             <label for="intro_image">
                                 <strong>
-                                    Intro Image
+                                    Intro Image (700 × 800 px, max 200 KB)
                                 </strong>
                             </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>700 × 800 px & Maximum file size: 200 KB</strong>
-                            </small>
 
                             <div class="custom-file mb-3">
 
@@ -231,9 +217,7 @@
                         {{-- Intro Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label for="intro_description">
-                                Description
-                            </label>
+                            <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                             <textarea name="intro_description" id="intro_description" rows="6" class="form-control">{{ old('intro_description', $about->intro_description) }}</textarea>
 
@@ -273,9 +257,7 @@
                         {{-- CTA Title --}}
                         <div class="col-md-6">
 
-                            <label for="cta_title">
-                                CTA Title
-                            </label>
+                            <label><strong>CTA Title <span class="text-danger">*</span></strong></label>
 
                             <input type="text" name="cta_title" id="cta_title" class="form-control"
                                 value="{{ old('cta_title', $about->cta_title) }}">
@@ -292,9 +274,7 @@
                         {{-- CTA Button Text --}}
                         <div class="col-md-6">
 
-                            <label for="cta_button_text">
-                                Button Text
-                            </label>
+                            <label><strong>Button Text <span class="text-danger">*</span></strong></label>
 
                             <input type="text" name="cta_button_text" id="cta_button_text" class="form-control"
                                 value="{{ old('cta_button_text', $about->cta_button_text) }}">
@@ -311,9 +291,7 @@
                         {{-- CTA Button Link --}}
                         <div class="col-md-6 mt-3">
 
-                            <label for="cta_button_link">
-                                Button Link
-                            </label>
+                            <label><strong>Button Link <span class="text-danger">*</span></strong></label>
 
                             <input type="text" name="cta_button_link" id="cta_button_link" class="form-control"
                                 value="{{ old('cta_button_link', $about->cta_button_link) }}">
@@ -332,13 +310,9 @@
 
                             <label for="cta_background_image">
                                 <strong>
-                                    CTA Background Image
+                                    CTA Background Image (1920 × 900 px, max 200 KB)
                                 </strong>
                             </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>1920 × 900 px & Maximum file size: 200 KB</strong>
-                            </small>
 
                             <div class="custom-file mb-3">
 
@@ -373,9 +347,7 @@
                         {{-- CTA Description --}}
                         <div class="col-md-12 mt-3">
 
-                            <label for="cta_description">
-                                Description
-                            </label>
+                            <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                             <textarea name="cta_description" id="cta_description" rows="5" class="form-control">{{ old('cta_description', $about->cta_description) }}</textarea>
 
@@ -393,9 +365,7 @@
 
                             <div class="form-group">
 
-                                <label for="status">
-                                    Status
-                                </label>
+                                <label><strong>Status <span class="text-danger"></span></strong></label>
 
                                 <select name="status" id="status" class="form-control">
 

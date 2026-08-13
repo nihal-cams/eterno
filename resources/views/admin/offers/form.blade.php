@@ -64,9 +64,9 @@
                                     Image
 
                                     @if ($type == 1)
-                                        (Recommended dimensions: 648 × 592 px) & Maximum file size: 200 KB
+                                        (648 × 592 px, max 200 KB)
                                     @elseif ($type == 2)
-                                        (Recommended dimensions: 800 × 533 px) & Maximum file size: 200 KB
+                                        (800 × 533 px, max 200 KB)
                                     @endif
 
                                     <span class="text-danger">*</span>

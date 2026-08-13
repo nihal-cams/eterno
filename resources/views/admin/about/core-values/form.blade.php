@@ -47,11 +47,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Title
-
-                                </label>
+                                <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $coreValue->title) }}">
@@ -69,11 +65,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Sort Order
-
-                                </label>
+                                <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
 
                                 <input type="number" name="sort_order" class="form-control"
                                     value="{{ old('sort_order', $coreValue->sort_order ?? 0) }}">
@@ -91,11 +83,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Description
-
-                                </label>
+                                <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="description" rows="5" class="form-control">{{ old('description', $coreValue->description) }}</textarea>
                                 @error('description')

@@ -51,7 +51,7 @@
 
                             <div class="form-group">
 
-                                <label>Banner Title</label>
+                                <label><strong>Banner Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="banner_title" class="form-control"
                                     value="{{ old('banner_title', $page->banner_title) }}">
@@ -67,12 +67,8 @@
                         <div class="form-group col-md-6">
 
                             <label>
-                                <strong>Banner Image</strong>
+                                <strong>Banner Image (1920 × 700 px, max 200 KB)</strong>
                             </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>1920 × 700 px & Maximum file size: 200 KB</strong>
-                            </small>
 
                             <div class="custom-file mb-3">
 
@@ -109,7 +105,7 @@
 
                             <div class="form-group">
 
-                                <label>Banner Description</label>
+                                <label><strong>Banner Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $page->banner_description) }}</textarea>
                                 @error('banner_description')
@@ -135,7 +131,7 @@
 
                             <div class="form-group">
 
-                                <label>Subtitle</label>
+                                <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="section_subtitle" class="form-control"
                                     value="{{ old('section_subtitle', $page->section_subtitle) }}">
@@ -152,7 +148,7 @@
 
                             <div class="form-group">
 
-                                <label>Title</label>
+                                <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="section_title" class="form-control"
                                     value="{{ old('section_title', $page->section_title) }}">
@@ -170,7 +166,7 @@
 
                             <div class="form-group">
 
-                                <label>Description</label>
+                                <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="section_description" rows="5" class="form-control">{{ old('section_description', $page->section_description) }}</textarea>
                                 @error('section_description')
@@ -196,7 +192,7 @@
 
                             <div class="form-group">
 
-                                <label>Form Title</label>
+                                <label><strong>Form Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="form_title" class="form-control"
                                     value="{{ old('form_title', $page->form_title) }}">
@@ -214,14 +210,10 @@
 
                             <label>
                                 <strong>
-                                    Form Image
+                                    Form Image (700 × 800 px, max 200 KB)
                                 </strong>
                             </label>
 
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>700 × 800 px</strong>
-                            </small>
                             <div class="custom-file mb-3">
 
                                 <input type="file" class="custom-file-input" id="form_image" name="form_image"
@@ -299,7 +291,7 @@
 
                             <div class="form-group">
 
-                                <label>Form Description</label>
+                                <label><strong>Form Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="form_description" rows="4" class="form-control">{{ old('form_description', $page->form_description) }}</textarea>
                                 @error('form_description')
@@ -325,7 +317,7 @@
 
                             <div class="form-group">
 
-                                <label>Phone</label>
+                                <label><strong>Phone <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="phone" class="form-control"
                                     value="{{ old('phone', $page->phone) }}">
@@ -342,9 +334,9 @@
 
                             <div class="form-group">
 
-                                <label>Email</label>
+                                <label><strong>Email <span class="text-danger">*</span></strong></label>
 
-                                <input type="email" name="email" class="form-control"
+                                <input type="text" name="email" class="form-control"
                                     value="{{ old('email', $page->email) }}">
                                 @error('email')
                                     <small class="text-danger">{{ $message }}</small>
@@ -357,7 +349,7 @@
 
                             <div class="form-group">
 
-                                <label>Address</label>
+                                <label><strong>Address <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="address" rows="3" class="form-control">{{ old('address', $page->address) }}</textarea>
                                 @error('address')
@@ -379,7 +371,7 @@
 
                     <div class="form-group">
 
-                        <label>Google Map Embed Code</label>
+                        <label><strong>Google Map Embed Code <span class="text-danger">*</span></strong></label>
 
                         <textarea name="map_iframe" rows="6" class="form-control">{{ old('map_iframe', $page->map_iframe) }}</textarea>
                         @error('map_iframe')

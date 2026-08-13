@@ -51,7 +51,7 @@ class ContactPageController extends Controller
 
             // Banner image - EXACTLY 1920 x 700
             'banner_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',
@@ -60,7 +60,7 @@ class ContactPageController extends Controller
 
             // Form image - EXACTLY 700 x 800
             'form_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',

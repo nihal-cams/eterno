@@ -59,9 +59,7 @@
 
                                 <div class="form-group">
 
-                                    <label>
-                                        Banner Title <span class="text-danger">*</span>
-                                    </label>
+                                    <label><strong>Banner Title <span class="text-danger">*</span></strong></label>
 
                                     <input type="text" name="banner_title" class="form-control"
                                         value="{{ old('banner_title', $experiencePage->banner_title) }}">
@@ -75,15 +73,7 @@
                             </div>
                             <div class="form-group col-md-6">
 
-                                <label>
-                                    <strong>Banner Image</strong>
-                                </label>
-
-                                <div class="text-muted mb-2" style="font-size: 13px;">
-                                    Required resolution: <strong>1920 × 700 px</strong>
-                                    &nbsp; | &nbsp;
-                                    Maximum file size: <strong>200 KB</strong>
-                                </div>
+                                <label><strong>Banner Image (1920 × 700 px, max 200 KB) <span class="text-danger">*</span></strong></label>
 
                                 <div class="custom-file mb-3">
 
@@ -119,9 +109,7 @@
 
                             <div class="form-group">
 
-                                <label>
-                                    Banner Description
-                                </label>
+                                <label><strong>Banner Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="banner_description" rows="4" class="form-control">{{ old('banner_description', $experiencePage->banner_description) }}</textarea>
                                 @error('banner_description')
@@ -146,11 +134,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Subtitle
-
-                                </label>
+                                <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="intro_subtitle" class="form-control"
                                     value="{{ old('intro_subtitle', $experiencePage->intro_subtitle) }}">
@@ -167,11 +151,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Title
-
-                                </label>
+                                <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="intro_title" class="form-control"
                                     value="{{ old('intro_title', $experiencePage->intro_title) }}">
@@ -188,11 +168,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Description
-
-                                </label>
+                                <label><strong>Banner Description <span class="text-danger"></span></strong></label>
 
                                 <textarea name="intro_description" rows="5" class="form-control">{{ old('intro_description', $experiencePage->intro_description) }}</textarea>
                                 @error('intro_description')
@@ -207,11 +183,7 @@
 
                                 <div class="form-group">
 
-                                    <label>
-
-                                        Button Text
-
-                                    </label>
+                                    <label><strong>Button Text <span class="text-danger">*</span></strong></label>
 
                                     <input type="text" name="button_text" class="form-control"
                                         value="{{ old('button_text', $experiencePage->button_text) }}">
@@ -228,11 +200,7 @@
 
                                 <div class="form-group">
 
-                                    <label>
-
-                                        Button URL
-
-                                    </label>
+                                    <label><strong>Button URL <span class="text-danger">*</span></strong></label>
 
                                     <input type="text" name="button_url" class="form-control"
                                         value="{{ old('button_url', $experiencePage->button_url) }}">

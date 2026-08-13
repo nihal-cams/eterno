@@ -55,7 +55,7 @@ class ExperiencePageController extends Controller
             'intro_title' => 'required|max:255',
             'intro_description' => 'nullable',
             'banner_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',

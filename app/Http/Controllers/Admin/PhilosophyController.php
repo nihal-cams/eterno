@@ -219,7 +219,7 @@ class PhilosophyController extends Controller
             // 'icon_image' => 'nullable|mimes:jpg,jpeg,png,gif,webp,svg|max:2048',
 
             'icon_image' => [
-                'required',
+                'nullable',
                 'mimes:jpg,jpeg,png,gif,webp,svg',
                 'max:50',
                 'dimensions:width=48,height=48',

@@ -46,7 +46,7 @@ class AboutController extends Controller
             'banner_description' => ['required'],
             // 'banner_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
             'banner_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',
@@ -58,7 +58,7 @@ class AboutController extends Controller
             'intro_description' => ['nullable'],
             // 'intro_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
             'intro_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',
@@ -72,7 +72,7 @@ class AboutController extends Controller
             'cta_button_link' => ['required'],
             // 'cta_background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp'],
             'cta_background_image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',

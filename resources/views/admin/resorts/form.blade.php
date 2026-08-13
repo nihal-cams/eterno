@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label><strong>Image (Recommended dimensions: 660 × 487 px) <span class="text-danger">*</strong></label>
+                            <label><strong>Image (660 × 487 px, max 500 KB) <span class="text-danger">*</strong></label>
                             <div class="custom-file mb-3">
                                 <input type="file"
                                     class="custom-file-input"
@@ -212,7 +212,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label><strong>Image (Recommended dimensions: 500 × 462 px) <span class="text-danger">*</strong></label>
+                            <label><strong>Image (500 × 462 px, max 200 KB) <span class="text-danger">*</strong></label>
                             <div class="custom-file mb-3">
                                 <input type="file"
                                     class="custom-file-input"
@@ -257,7 +257,7 @@
                     @elseif($type === '4')
 
                         <div class="form-group col-md-6">
-                            <label><strong>Image (Recommended dimensions: 400 × 267 px) <span class="text-danger">*</strong></label>
+                            <label><strong>Image (400 × 267 px, max 100 KB) <span class="text-danger">*</strong></label>
                             <div class="custom-file mb-3">
                                 <input type="file"
                                     class="custom-file-input"

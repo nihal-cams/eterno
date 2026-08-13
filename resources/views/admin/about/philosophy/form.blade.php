@@ -47,11 +47,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Title
-
-                                </label>
+                                <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $philosophy->title) }}">
@@ -68,11 +64,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Sort Order
-
-                                </label>
+                                <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
 
                                 <input type="number" name="sort_order" class="form-control"
                                     value="{{ old('sort_order', $philosophy->sort_order ?? 0) }}">
@@ -89,11 +81,7 @@
 
                             <div class="form-group">
 
-                                <label>
-
-                                    Description
-
-                                </label>
+                                <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                                 <textarea name="description" rows="5" class="form-control">{{ old('description', $philosophy->description) }}</textarea>
 
@@ -109,13 +97,9 @@
 
                             <label>
                                 <strong>
-                                    Icon Image
+                                    Icon Image (48 × 48 px, max 50 KB)
                                 </strong>
                             </label>
-
-                            <small class="d-block text-muted mb-2">
-                                Required resolution: <strong>48 × 48 px & Maximum file size: 50 KB</strong>
-                            </small>
                             <div class="custom-file mb-3">
                                 <input type="file" class="custom-file-input" id="icon_image" name="icon_image"
                                     accept="image/*"

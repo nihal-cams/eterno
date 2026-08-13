@@ -50,11 +50,11 @@
                     <div class="row">
                         {{-- Email 1 --}}
                         <div class="form-group col-md-6"> <label> <strong>Email 1</strong>
-                            </label> <input type="email" name="email_1" class="form-control"
+                            </label> <input type="text" name="email_1" class="form-control"
                                 value="{{ old('email_1', $settings->email_1) }}"
                                 placeholder="sales@eternohotelsresorts.com"> </div>
                         {{-- Email 2 --}}
-                        <div class="form-group col-md-6"> <label> <strong>Email 2</strong> </label> <input type="email"
+                        <div class="form-group col-md-6"> <label> <strong>Email 2</strong> </label> <input type="text"
                                 name="email_2" class="form-control" value="{{ old('email_2', $settings->email_2) }}"
                                 placeholder="reservation@eternohotelsresorts.com"> </div>
                     </div>
@@ -74,22 +74,22 @@
                     <div class="row">
                         {{-- X / Twitter --}}
                         <div class="form-group col-md-6"> <label> <strong>X /
-                                    Twitter URL</strong> </label> <input type="url" name="twitter_url"
+                                    Twitter URL</strong> </label> <input type="text" name="twitter_url"
                                 class="form-control" value="{{ old('twitter_url', $settings->twitter_url) }}"
                                 placeholder="https://x.com/yourusername"> </div>
                         {{-- YouTube --}}
                         <div class="form-group col-md-6"> <label> <strong>YouTube URL</strong> </label> <input
-                                type="url" name="youtube_url" class="form-control"
+                                type="text" name="youtube_url" class="form-control"
                                 value="{{ old('youtube_url', $settings->youtube_url) }}"
                                 placeholder="https://youtube.com/@yourchannel"> </div>
                         {{-- Instagram --}}
                         <div class="form-group col-md-6"> <label> <strong>Instagram URL</strong> </label> <input
-                                type="url" name="instagram_url" class="form-control"
+                                type="text" name="instagram_url" class="form-control"
                                 value="{{ old('instagram_url', $settings->instagram_url) }}"
                                 placeholder="https://instagram.com/yourusername"> </div>
                         {{-- Facebook --}}
                         <div class="form-group col-md-6"> <label> <strong>Facebook URL</strong> </label> <input
-                                type="url" name="facebook_url" class="form-control"
+                                type="text" name="facebook_url" class="form-control"
                                 value="{{ old('facebook_url', $settings->facebook_url) }}"
                                 placeholder="https://facebook.com/yourpage"> </div>
                     </div>

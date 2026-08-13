@@ -51,7 +51,7 @@
 
                                 <div class="form-group">
 
-                                    <label>Subtitle</label>
+                                    <label><strong>Subtitle <span class="text-danger">*</span></strong></label>
 
                                     <input type="text" name="subtitle" class="form-control"
                                         value="{{ old('subtitle', $experience->subtitle) }}">
@@ -69,7 +69,7 @@
 
                             <div class="form-group">
 
-                                <label>Title <span class="text-danger">*</span></label>
+                                <label><strong>Title <span class="text-danger">*</span></strong></label>
 
                                 <input type="text" name="title" class="form-control"
                                     value="{{ old('title', $experience->title) }}">
@@ -86,7 +86,7 @@
 
                     <div class="form-group">
 
-                        <label>Description</label>
+                        <label><strong>Description <span class="text-danger">*</span></strong></label>
 
                         <textarea name="description" rows="5" class="form-control">{{ old('description', $experience->description) }}</textarea>
                         @error('description')
@@ -128,9 +128,9 @@
                                     Image
 
                                     @if ($type == 1)
-                                        (Recommended dimensions: 48 × 48 px) & Maximum file size: 50 KB
+                                        (48 × 48 px, max 50 KB)
                                     @elseif ($type == 2)
-                                        (Recommended dimensions: 746 × 798 px) & Maximum file size: 200 KB
+                                        (746 × 798 px, max 200 KB)
                                     @endif
                                     <span class="text-danger">*</span>
 
@@ -200,7 +200,7 @@
 
                                 <div class="form-group">
 
-                                    <label>Sort Order</label>
+                                    <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
 
                                     <input type="number" name="sort_order" class="form-control"
                                         value="{{ old('sort_order', $experience->sort_order ?? 0) }}">

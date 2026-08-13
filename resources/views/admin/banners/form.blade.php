@@ -43,7 +43,7 @@
                     </div>
                 @else
                     <div class="form-group col-md-6">
-                        <label><strong>Image (Recommended dimensions: 1920 × 1080 px) <span class="text-danger">*</strong></label>
+                        <label><strong>Image (1920 × 1080 px, max 2 MB) <span class="text-danger">*</span></strong></label>
                         <div class="custom-file mb-3">
                             <input type="file"
                                 class="custom-file-input"

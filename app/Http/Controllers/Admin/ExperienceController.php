@@ -232,7 +232,7 @@ class ExperienceController extends Controller
 
             // 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'image' => [
-                'required',
+                'nullable',
                 // 'image',
                 'mimes:jpg,jpeg,png,webp,svg',
 
