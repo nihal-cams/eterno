@@ -129,15 +129,32 @@ class ExperienceController extends Controller
 
         $validated = $request->validate([
 
-            'subtitle' => 'required|max:255',
+            // 'subtitle' => 'nullable|max:255',
+            'subtitle' => [
+                'string',
+                'max:255',
+
+                Rule::when(
+                    (int) $type === 2,
+                    ['required']
+                ),
+            ],
 
             'title' => 'required|max:255',
 
             'description' => 'required',
 
-            'experience_list' => 'required',
+            // 'experience_list' => 'nullable',
+            'experience_list' => [
 
-            // 'image' => 'required|image|mimes:jpg,jpeg,png,webp',
+
+                Rule::when(
+                    (int) $type === 2,
+                    ['required']
+                ),
+            ],
+
+
             'image' => [
                 'required',
                 // 'image',
