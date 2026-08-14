@@ -180,7 +180,7 @@
 
                             <label for="intro_image">
                                 <strong>
-                                    Intro Image (700 × 800 px, max 200 KB)
+                                    Intro Image (800 × 535 px, max 200 KB)
                                 </strong>
                             </label>
 
@@ -409,8 +409,8 @@
 
                 <button type="submit" class="btn btn-primary">
 
-                        <i class="fa fa-save"></i>
-                        Update
+                    <i class="fa fa-save"></i>
+                    Update
 
                 </button>
 
@@ -434,10 +434,10 @@
 
     <style>
         /*
-                                |--------------------------------------------------------------------------
-                                | File Input Preview
-                                |--------------------------------------------------------------------------
-                                */
+                                    |--------------------------------------------------------------------------
+                                    | File Input Preview
+                                    |--------------------------------------------------------------------------
+                                    */
 
         .custom-file {
             position: relative;

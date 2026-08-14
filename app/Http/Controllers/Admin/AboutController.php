@@ -62,7 +62,7 @@ class AboutController extends Controller
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:200',
-                'dimensions:width=700,height=800',
+                'dimensions:width=800,height=535',
             ],
 
             // CTA
