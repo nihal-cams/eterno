@@ -237,10 +237,11 @@
 
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
-
+@stack('scripts')
 
 @push('styles')
     <style>
@@ -521,10 +522,6 @@
         });
     </script>
 @endpush
-
-@stack('scripts')
-
-
 
 </body>
 
