@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\AboutStatus;
 use App\Enums\ExperienceStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Experience;
@@ -240,13 +239,28 @@ class ExperienceController extends Controller
 
         $validated = $request->validate([
 
-            'subtitle' => 'required|max:255',
+            'subtitle' => [
+                'string',
+                'max:255',
+
+                Rule::when(
+                    (int) $type === 2,
+                    ['required']
+                ),
+            ],
 
             'title' => 'required|max:255',
 
             'description' => 'required',
 
-            'experience_list' => 'nullable',
+            'experience_list' => [
+
+
+                Rule::when(
+                    (int) $type === 2,
+                    ['required']
+                ),
+            ],
 
             // 'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'image' => [

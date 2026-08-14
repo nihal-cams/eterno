@@ -16,61 +16,61 @@ class ResortController extends Controller
      */
     public function index(Request $request, DataTables $dataTables, $type)
     {
-        if($request->ajax()){
-        
-            $query = Resort::select('name', 'url', 'home_title', 'mega_menu_title', 'home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'sort_order', 'created_at', 'id')->orderBy('id','DESC');
-     
+        if ($request->ajax()) {
+
+            $query = Resort::select('name', 'url', 'home_title', 'mega_menu_title', 'home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'sort_order', 'created_at', 'id')->orderBy('id', 'DESC');
+
             return $dataTables->eloquent($query)
-            ->editColumn('home_image', function (Resort $resort) {
-                if (!$resort->home_image) {
-                    return '';
-                }
-                return '<img src="' . asset('uploads/resorts/' . $resort->home_image) . '" width="100" height="90" class="img-thumbnail" />';
-            })
-            ->editColumn('mega_menu_image', function (Resort $resort) {
-                if (!$resort->mega_menu_image) {
-                    return '';
-                }
-                return '<img src="' . asset('uploads/resorts/' . $resort->mega_menu_image) . '" width="100" height="90" class="img-thumbnail" />';
-            })
-            ->editColumn('book_now_image', function (Resort $resort) {
-                if (!$resort->book_now_image) {
-                    return '';
-                }
-                return '<img src="' . asset('uploads/resorts/' . $resort->book_now_image) . '" width="100" height="90" class="img-thumbnail" />';
-            })
-            ->editColumn('home_status', function (Resort $resort) {
-                $class = match ($resort->home_status) {
-                    Status::ACTIVE => 'success',
-                    Status::INACTIVE => 'danger',
-                };
+                ->editColumn('home_image', function (Resort $resort) {
+                    if (!$resort->home_image) {
+                        return '';
+                    }
+                    return '<img src="' . asset('uploads/resorts/' . $resort->home_image) . '" width="100" height="90" class="img-thumbnail" />';
+                })
+                ->editColumn('mega_menu_image', function (Resort $resort) {
+                    if (!$resort->mega_menu_image) {
+                        return '';
+                    }
+                    return '<img src="' . asset('uploads/resorts/' . $resort->mega_menu_image) . '" width="100" height="90" class="img-thumbnail" />';
+                })
+                ->editColumn('book_now_image', function (Resort $resort) {
+                    if (!$resort->book_now_image) {
+                        return '';
+                    }
+                    return '<img src="' . asset('uploads/resorts/' . $resort->book_now_image) . '" width="100" height="90" class="img-thumbnail" />';
+                })
+                ->editColumn('home_status', function (Resort $resort) {
+                    $class = match ($resort->home_status) {
+                        Status::ACTIVE => 'success',
+                        Status::INACTIVE => 'danger',
+                    };
 
-                return '<span class="badge badge-' . $class . '">'
-                    . $resort->home_status->label()
-                    . '</span>';
-            })
-            ->editColumn('mega_menu_status', function (Resort $resort) {
-                $class = match ($resort->mega_menu_status) {
-                    Status::ACTIVE => 'success',
-                    Status::INACTIVE => 'danger',
-                };
+                    return '<span class="badge badge-' . $class . '">'
+                        . $resort->home_status->label()
+                        . '</span>';
+                })
+                ->editColumn('mega_menu_status', function (Resort $resort) {
+                    $class = match ($resort->mega_menu_status) {
+                        Status::ACTIVE => 'success',
+                        Status::INACTIVE => 'danger',
+                    };
 
-                return '<span class="badge badge-' . $class . '">'
-                    . $resort->mega_menu_status->label()
-                    . '</span>';
-            })
-            ->editColumn('book_now_status', function (Resort $resort) {
-                $class = match ($resort->book_now_status) {
-                    Status::ACTIVE => 'success',
-                    Status::INACTIVE => 'danger',
-                };
+                    return '<span class="badge badge-' . $class . '">'
+                        . $resort->mega_menu_status->label()
+                        . '</span>';
+                })
+                ->editColumn('book_now_status', function (Resort $resort) {
+                    $class = match ($resort->book_now_status) {
+                        Status::ACTIVE => 'success',
+                        Status::INACTIVE => 'danger',
+                    };
 
-                return '<span class="badge badge-' . $class . '">'
-                    . $resort->book_now_status->label()
-                    . '</span>';
-            })
-            ->addColumn('actions', function (Resort $resort) use ($type) {
-                $actions = '
+                    return '<span class="badge badge-' . $class . '">'
+                        . $resort->book_now_status->label()
+                        . '</span>';
+                })
+                ->addColumn('actions', function (Resort $resort) use ($type) {
+                    $actions = '
                     <a href="' . route('admin.resorts.show', ['type' => $type, 'resort' => $resort]) . '"
                         class="btn btn-sm" title="View">
                         <i class="fa fa-eye"></i>
@@ -81,8 +81,8 @@ class ResortController extends Controller
                         <i class="fa fa-edit"></i>
                     </a>';
 
-                if ($type === '1') {
-                    $actions .= '
+                    if ($type === '1') {
+                        $actions .= '
                         <a data-toggle="modal"
                             href="#delete-resort-modal"
                             data-href="' . route('admin.resorts.destroy', ['type' => $type, 'resort' => $resort]) . '"
@@ -90,12 +90,12 @@ class ResortController extends Controller
                             title="Delete">
                             <i class="fa fa-trash"></i>
                         </a>';
-                }
+                    }
 
-                return $actions;
-            })      
-           ->rawColumns(['home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'actions'])
-           ->make(true);
+                    return $actions;
+                })
+                ->rawColumns(['home_image', 'mega_menu_image', 'book_now_image', 'home_status', 'mega_menu_status', 'book_now_status', 'actions'])
+                ->make(true);
         }
         return view('admin.resorts.index', compact('type'));
     }
@@ -155,43 +155,44 @@ class ResortController extends Controller
         $validated = $request->validate([
             // Type 1
             'name' => [
-                $type == 1 ? 'required' : 'nullable',
+                $type === 1 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
 
             'url' => [
-                $type == 1 ? 'required' : 'nullable',
+                $type === 1 ? 'required' : 'nullable',
                 'url',
             ],
 
             'sort_order' => [
-                $type == 1 ? 'required' : 'nullable',
-                'integer', 'min:1'
+                $type === 1 ? 'required' : 'nullable',
+                'integer',
+                'min:1'
             ],
 
             // Type 2
             'home_place' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_title' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_description' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 'string',
             ],
             'home_button_text' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_button_url' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 'url',
             ],
             'home_image' => [
@@ -202,23 +203,23 @@ class ResortController extends Controller
                 'max:500',
             ],
             'home_status' => [
-                $type == 2 ? 'required' : 'nullable',
+                $type === 2 ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
             // Type 3
             'mega_menu_sub_title' => [
-                $type == 3 ? 'required' : 'nullable',
+                $type === 3 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_title' => [
-                $type == 3 ? 'required' : 'nullable',
+                $type === 3 ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_description' => [
-                $type == 3 ? 'required' : 'nullable',
+                $type === 3 ? 'required' : 'nullable',
                 'string',
             ],
             'mega_menu_image' => [
@@ -229,7 +230,7 @@ class ResortController extends Controller
                 'max:200',
             ],
             'mega_menu_status' => [
-                $type == 3 ? 'required' : 'nullable',
+                $type === 3 ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
@@ -242,7 +243,7 @@ class ResortController extends Controller
                 'max:100',
             ],
             'book_now_status' => [
-                $type == 4 ? 'required' : 'nullable',
+                $type === 4 ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
         ], [
@@ -305,7 +306,7 @@ class ResortController extends Controller
             $file = $request->file('home_image');
             $homeFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/resorts'), $homeFileName);
-            
+
             if ($resort->home_image && file_exists(public_path('uploads/resorts/' . $resort->home_image))) {
                 unlink(public_path('uploads/resorts/' . $resort->home_image));
             }
@@ -318,7 +319,7 @@ class ResortController extends Controller
             $file = $request->file('mega_menu_image');
             $megaMenuFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/resorts'), $megaMenuFileName);
-            
+
             if ($resort->mega_menu_image && file_exists(public_path('uploads/resorts/' . $resort->mega_menu_image))) {
                 unlink(public_path('uploads/resorts/' . $resort->mega_menu_image));
             }
@@ -331,7 +332,7 @@ class ResortController extends Controller
             $file = $request->file('book_now_image');
             $bookNowFileName = time() . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/resorts'), $bookNowFileName);
-            
+
             if ($resort->book_now_image && file_exists(public_path('uploads/resorts/' . $resort->book_now_image))) {
                 unlink(public_path('uploads/resorts/' . $resort->book_now_image));
             }
@@ -364,7 +365,7 @@ class ResortController extends Controller
     {
         if (
             $resort->testimonials()->where('status', Status::ACTIVE->value)->exists() ||
-            $resort->galleries()->where('status', Status::ACTIVE->value)->exists() || 
+            $resort->galleries()->where('status', Status::ACTIVE->value)->exists() ||
             $resort->offers()->where('status', Status::ACTIVE->value)->exists() ||
             $resort->home_status === Status::ACTIVE ||
             $resort->mega_menu_status === Status::ACTIVE ||
@@ -375,9 +376,9 @@ class ResortController extends Controller
                 'message' => 'Unable to delete this resort because it contains active associated data.',
             ], 422);
         }
-        
+
         $resort->delete();
 
-        return response()->json(['status'=>'success', 'message'=>'Data deleted successfully!']);
+        return response()->json(['status' => 'success', 'message' => 'Data deleted successfully!']);
     }
 }
