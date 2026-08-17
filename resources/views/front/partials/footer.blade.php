@@ -1,6 +1,6 @@
 <div class="element-main position-relative">
     <div class="element-bg">
-        <img src="images/bg-element.png" alt="" class="img-fluid">
+        <img src="{{ asset('images/bg-element.png') }}" alt="" class="img-fluid">
     </div>
 </div>
 
