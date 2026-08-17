@@ -29,10 +29,10 @@
                     <div class="section-label"> {{ $page->section_subtitle }} </div>
                 @endif
                 {{--  <div class="section-label">Let's Start Your Journey</div>  --}}
-
+                {{--
                 @if ($page?->section_title)
                     <h3 class="subhead-v2"> {{ $page->section_title }} </h3>
-                @endif
+                @endif  --}}
                 @if ($page?->section_description)
                     <div class="subhead-v2"> {!! nl2br(e($page->section_description)) !!} </div>
                 @endif
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6 col-lg-5">
                         <div class="contact-form-section text-center">
-                            <div class="section-label">Contact Us to Get More Details</div>
+                            {{--  <div class="section-label">Contact Us to Get More Details</div>  --}}
                             {{--  <h3>Let's Start Your Journey</h3>  --}}
                             {{--  <p class="subhead">Whether you're planning a relaxing getaway or simply have a question,
                                 we're here to make
@@ -143,8 +143,8 @@
                                 {{-- Honeypot --}}
                                 <div class="honeypot-field" aria-hidden="true">
                                     <label for="username-contact">Username</label>
-                                    <input type="text" id="username-contact" name="username" value="" tabindex="-1"
-                                        autocomplete="off">
+                                    <input type="text" id="username-contact" name="username" value=""
+                                        tabindex="-1" autocomplete="off">
                                 </div>
 
                                 <!-- Email -->
@@ -299,7 +299,7 @@
             <div class="map-section">
                 <div class="map-container">
                     <iframe src="{{ $page->map_iframe }}" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
+                        referrerpolicy="strict-origin-when-cross-origin">
                     </iframe>
                 </div>
             </div>
