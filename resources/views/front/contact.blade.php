@@ -28,18 +28,11 @@
                 @if ($page?->section_subtitle)
                     <div class="section-label"> {{ $page->section_subtitle }} </div>
                 @endif
-                {{--  <div class="section-label">Let's Start Your Journey</div>  --}}
-                {{--
-                @if ($page?->section_title)
-                    <h3 class="subhead-v2"> {{ $page->section_title }} </h3>
-                @endif  --}}
+
                 @if ($page?->section_description)
-                    <div class="subhead-v2"> {!! nl2br(e($page->section_description)) !!} </div>
+                    <h3 class="subhead-v2">{!! nl2br(e($page->section_description)) !!}</h3>
                 @endif
 
-                {{--  <h3 class="subhead-v2">Warmth, care and attention to detail are at the heart of everything we do. We strive
-                    to make every
-                    guest feel welcomed, valued and at home.</h3>  --}}
             </div>
 
             <!-- Contact Form and Image -->
@@ -58,76 +51,16 @@
                     </div>
                     <div class="col-md-6 col-lg-5">
                         <div class="contact-form-section text-center">
-                            {{--  <div class="section-label">Contact Us to Get More Details</div>  --}}
-                            {{--  <h3>Let's Start Your Journey</h3>  --}}
-                            {{--  <p class="subhead">Whether you're planning a relaxing getaway or simply have a question,
-                                we're here to make
-                                every step of your journey effortless.</p>  --}}
 
                             @if ($page?->form_title)
                                 <div class="section-label"> {{ $page->form_title }} </div>
                             @endif
+                            @if ($page?->section_subtitle)
+                                <h3>{{ $page->section_subtitle }}</h3>
+                            @endif
                             @if ($page?->form_description)
                                 <p class="subhead"> {!! nl2br(e($page->form_description)) !!} </p>
                             @endif
-
-
-
-
-                            {{--  <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
-                                @csrf
-
-                                <!-- Name -->
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control-custom" placeholder="Your Name"
-                                        value="{{ old('name') }}" required>
-                                </div>
-
-                                <!-- Email -->
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control-custom" placeholder="Email"
-                                        value="{{ old('email') }}" required>
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="form-group">
-                                    <input type="tel" name="phone" class="form-control-custom"
-                                        placeholder="Phone Number" value="{{ old('phone') }}" required>
-                                </div>
-
-                                <!-- Resort -->
-                                <div class="form-group">
-                                    <select name="resort" class="form-control-custom" required>
-                                        <option value="" disabled {{ old('resort') ? '' : 'selected' }}>
-                                            Interested Resort
-                                        </option>
-
-                                        @foreach ($resorts as $resort)
-                                            <option value="{{ $resort->name }}"
-                                                {{ old('resort') == $resort->name ? 'selected' : '' }}>
-                                                {{ $resort->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <!-- Message -->
-                                <div class="form-group">
-                                    <textarea name="message" class="form-control-custom" placeholder="Your Message" required>{{ old('message') }}</textarea>
-                                </div>
-
-                                <!-- Submit -->
-                                <button type="submit" id="submitBtn" class="btn btn-primary-custom btn-custom w-100">
-                                    <span id="submitText">Send Your Message</span>
-                                    <span id="submitLoader" style="display: none;">
-                                        Sending...
-                                    </span>
-                                </button>
-
-
-                            </form>  --}}
-
-
 
                             <form id="contactForm" action="{{ route('contact.enquiry.store') }}" method="POST">
                                 @csrf

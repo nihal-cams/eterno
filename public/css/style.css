@@ -2277,28 +2277,51 @@ h3 {
 }
 
 .accordion-header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 22px 0;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .accordion-header h4 {
     font-size: var(--fs-h4);
     color: var(--color-primary);
     font-weight: 500;
+    margin: 0;
+    flex: 1;
+    pointer-events: none;
 }
 
-.accordion-toggle {
-    font-size: 2.5rem;
+.accordion-toggle-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--color-primary);
+    font-size: 2.5rem;
     font-weight: 300;
-    transition: transform 0.3s;
+    line-height: 24px;
+    pointer-events: none;
 }
 
-.accordion-item.active .accordion-toggle {
-    transform: rotate(180deg);
+.accordion-toggle-icon::before {
+    content: "+";
+}
+
+.accordion-item.active .accordion-toggle-icon::before {
+    content: "\2212";
 }
 
 .accordion-body {
@@ -2308,13 +2331,14 @@ h3 {
 }
 
 .accordion-item.active .accordion-body {
-    max-height: 200px;
+    max-height: 500px;
     padding-top: 14px;
 }
 
 .accordion-body p {
     color: var(--text-muted);
     line-height: 1.65;
+    margin: 0;
 }
 
 

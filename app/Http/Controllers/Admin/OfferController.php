@@ -191,7 +191,7 @@ class OfferController extends Controller
                 'button_url' => ['required', 'url'],
                 // 'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
                 'image' => [
-                    'required',
+                    'nullable',
                     'image',
                     'mimes:jpg,jpeg,png,webp',
                     'max:200',
