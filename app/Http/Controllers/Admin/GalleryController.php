@@ -106,6 +106,7 @@ class GalleryController extends Controller
             ->pluck('name', 'id');
 
         $galleryCategories = GalleryCategory::orderBy('sort_order', 'ASC')
+            ->where('status', Status::ACTIVE)
             ->pluck('name', 'id');
 
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));
@@ -208,6 +209,7 @@ class GalleryController extends Controller
             ->pluck('name', 'id');
 
         $galleryCategories = GalleryCategory::orderBy('id', 'DESC')
+            ->where('status', Status::ACTIVE)
             ->pluck('name', 'id');
 
         return view('admin.galleries.form', compact('type', 'gallery', 'resorts', 'galleryCategories'));

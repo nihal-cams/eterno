@@ -151,6 +151,7 @@ class FrontController extends Controller
 
         $categories = GalleryCategory::where('status', Status::ACTIVE)
             ->orderBy('sort_order', 'ASC')
+            ->where('status', Status::ACTIVE)
             ->get();
 
         $galleries = Gallery::with('galleryCategory')
