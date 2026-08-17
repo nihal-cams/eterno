@@ -296,13 +296,15 @@
             </div>
 
             <!-- Map Section -->
-            <div class="map-section">
-                <div class="map-container">
-                    <iframe src="{{ $page->map_iframe }}" allowfullscreen="" loading="lazy"
-                        referrerpolicy="strict-origin-when-cross-origin">
-                    </iframe>
+            @if ($page?->map_iframe)
+                <div class="map-section">
+                    <div class="map-container">
+                        <iframe src="{{ $page->map_iframe }}" allowfullscreen="" loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
