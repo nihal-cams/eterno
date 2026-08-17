@@ -34,29 +34,35 @@
                         {{-- Phone 1 --}}
                         <div class="form-group col-md-4"> <label> <strong>Phone Number 1</strong>
                             </label> <input type="text" name="phone_1" class="form-control"
-                                value="{{ old('phone_1', $settings->phone_1) }}" placeholder="+91 97 442 27 000"> </div>
+                                value="{{ old('phone_1', $settings->phone_1) }}" placeholder=""> </div>
 
                         {{-- Phone 2 --}}
                         <div class="form-group col-md-4"> <label> <strong>Phone Number 2</strong>
                             </label> <input type="text" name="phone_2" class="form-control"
-                                value="{{ old('phone_2', $settings->phone_2) }}" placeholder="+91 96 563 62 644"> </div>
+                                value="{{ old('phone_2', $settings->phone_2) }}" placeholder="Enter your phone number">
+                        </div>
 
                         {{-- Phone 3 --}}
                         <div class="form-group col-md-4"> <label> <strong>Phone Number 3</strong>
                             </label> <input type="text" name="phone_3" class="form-control"
-                                value="{{ old('phone_3', $settings->phone_3) }}" placeholder="+91 48 65 285 101"> </div>
+                                value="{{ old('phone_3', $settings->phone_3) }}" placeholder="Enter your phone number">
+                        </div>
                     </div>
                     {{-- Email Addresses --}}
                     <div class="row">
                         {{-- Email 1 --}}
-                        <div class="form-group col-md-6"> <label> <strong>Email 1</strong>
-                            </label> <input type="text" name="email_1" class="form-control"
-                                value="{{ old('email_1', $settings->email_1) }}"
-                                placeholder="sales@eternohotelsresorts.com"> </div>
+                        <div class="form-group col-md-6">
+                            <label> <strong>Email 1</strong>
+                            </label>
+                            <input type="email" name="email_1" class="form-control"
+                                value="{{ old('email_1', $settings->email_1) }}" placeholder="Enter your email id">
+                        </div>
                         {{-- Email 2 --}}
-                        <div class="form-group col-md-6"> <label> <strong>Email 2</strong> </label> <input type="text"
-                                name="email_2" class="form-control" value="{{ old('email_2', $settings->email_2) }}"
-                                placeholder="reservation@eternohotelsresorts.com"> </div>
+                        <div class="form-group col-md-6">
+                            <label> <strong>Email 2</strong> </label>
+                            <input type="email" name="email_2" class="form-control"
+                                value="{{ old('email_2', $settings->email_2) }}" placeholder="Enter your email id">
+                        </div>
                     </div>
                     {{-- Address --}}
                     <div class="row">

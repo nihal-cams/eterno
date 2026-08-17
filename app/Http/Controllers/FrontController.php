@@ -62,7 +62,7 @@ class FrontController extends Controller
             ->where('status', Status::ACTIVE)
             ->orderBy('sort_order', 'ASC')
             ->get();
-        
+
         $welcome = WelcomeSection::where('status', Status::ACTIVE)
             ->first();
 
@@ -79,21 +79,21 @@ class FrontController extends Controller
         $offerIntro = OfferIntro::where('type', 1)
             ->where('status', Status::ACTIVE)
             ->first();
-        
+
         $offers = Offer::where('type', 1)
             ->where('status', Status::ACTIVE)
             ->orderBy('sort_order', 'ASC')
             ->take(2)
             ->get();
-        
+
         $offersType2Count = Offer::where('type', 2)
             ->where('status', Status::ACTIVE)
             ->count();
-        
+
         $galleryIntro = GalleryIntro::where('type', 1)
             ->where('status', Status::ACTIVE)
             ->first();
-        
+
         $galleries = Gallery::where('type', 1)
             ->where('status', Status::ACTIVE)
             ->orderBy('sort_order', 'ASC')
@@ -106,7 +106,7 @@ class FrontController extends Controller
 
         $testimonialIntro = TestimonialIntro::where('status', Status::ACTIVE)
             ->first();
-        
+
         $testimonials = Testimonial::where('status', Status::ACTIVE)
             ->orderBy('sort_order', 'ASC')
             ->take(8)

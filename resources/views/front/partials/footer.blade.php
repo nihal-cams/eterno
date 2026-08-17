@@ -25,7 +25,9 @@
                     </form>
                 </div>  --}}
                 <div class="col-lg-6 reveal-right">
-                    <form id="newsletterForm" class="newsletter-form">
+                    <form id="newsletterForm" class="newsletter-form" action="{{ route('newsletter.subscribe') }}"
+                        method="POST">
+
                         @csrf
 
                         {{-- Email --}}
@@ -144,60 +146,45 @@
                                 {{-- Reservation Email --}}
                                 @if (!empty($contactpage->email_2))
                                     <li> <i class="bi bi-envelope"></i> <a href="mailto:{{ $contactpage->email_2 }}">
-                                            {{ $contactpage->email_2 }} </a>
+                                        </a>
                                     </li>
                                 @endif
                             </ul>
 
-                            <div class="footer-follow">
+                            {{--  <div class="footer-follow">
                                 <span>Follow Us</span>
 
                                 <div class="footer-social">
-                                    {{-- X / Twitter --}}
+
                                     @if (!empty($contactpage->twitter_url))
                                         <a href="{{ $contactpage->twitter_url }}" target="_blank" rel="noopener"
                                             aria-label="X">
                                             <i class="bi bi-twitter-x"></i> </a>
                                     @endif
-                                    {{-- YouTube --}}
+
                                     @if (!empty($contactpage->youtube_url))
                                         <a href="{{ $contactpage->youtube_url }}" target="_blank" rel="noopener"
                                             aria-label="YouTube"> <i class="bi bi-youtube"></i> </a>
                                     @endif
-                                    {{-- Instagram --}}
+
                                     @if (!empty($contactpage->instagram_url))
                                         <a href="{{ $contactpage->instagram_url }}" target="_blank" rel="noopener"
                                             aria-label="Instagram"> <i class="bi bi-instagram"></i> </a>
                                     @endif
-                                    {{-- Facebook --}}
+
                                     @if (!empty($contactpage->facebook_url))
                                         <a href="{{ $contactpage->facebook_url }}" target="_blank" rel="noopener"
                                             aria-label="Facebook"> <i class="bi bi-facebook"></i> </a>
                                     @endif
                                 </div>
-                            </div>
+                            </div>  --}}
                         @endif
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-        {{--  <div class="footer-bottom">
-            <p>©2026. All rights reserved. Kavumkal Dream Destination Pvt. Ltd. <span class="footer-divider">|</span>
-                Designed By <a href="https://camstech.com/" class="color-primary text-decoration-none" target="_blank">
-                    CAMS</a>
-            </p>
-            <div class="footer-legal">
-                <a href="#">Terms & Conditions</a>
-                <span class="footer-divider">|</span>
-                <a href="#">Privacy Policy</a>
-            </div>
-        </div>  --}}
-
         <div class="footer-bottom">
-
             <p>
                 ©2026. All rights reserved. Kavumkal Dream Destination Pvt. Ltd.
                 <span class="footer-divider">|</span>
@@ -206,19 +193,6 @@
                     CAMS
                 </a>
             </p>
-
-            {{-- Google reCAPTCHA Notice --}}
-            {{--  <div class="recaptcha-notice">
-                This site is protected by reCAPTCHA and the Google
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
-                    Privacy Policy
-                </a>
-                and
-                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
-                    Terms of Service
-                </a>
-                apply.
-            </div>  --}}
 
             <div class="footer-legal">
                 <a href="#">Terms & Conditions</a>
@@ -241,7 +215,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 
-@stack('scripts')
+
 
 @push('styles')
     <style>
@@ -260,8 +234,6 @@
         }
     </style>
 @endpush
-
-
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -523,6 +495,8 @@
     </script>
 @endpush
 
+
+@stack('scripts')
 </body>
 
 </html>
