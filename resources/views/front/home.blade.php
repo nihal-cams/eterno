@@ -251,11 +251,19 @@
                 </div>
             @endif
 
+
             @if ($galleries->count())
                 <div class="gallery-slider-wrapper reveal">
                     <div class="gallery-track">
+                        {{-- First Set --}}
                         @foreach ($galleries as $gallery)
                             <div class="gallery-slide {{ $loop->odd ? 'gallery-slide-tall' : 'gallery-slide-short' }}">
+                                <img src="{{ asset('uploads/galleries/' . $gallery->image) }}" alt="Gallery Image">
+                            </div>
+                        @endforeach
+                        {{-- Second Set for seamless loop --}}
+                        @foreach ($galleries as $gallery)
+                            <div class="gallery-slide {{ $loop->even ? 'gallery-slide-tall' : 'gallery-slide-short' }}">
                                 <img src="{{ asset('uploads/galleries/' . $gallery->image) }}" alt="Gallery Image">
                             </div>
                         @endforeach
@@ -273,6 +281,77 @@
 
     <!-- Testimonials Section -->
     @if ($testimonialIntro || $testimonials->count())
+        <section class="testimonials-section section-space">
+            @if ($testimonialIntro)
+                <div class=" container">
+                    <div class="text-center reveal d-flex flex-column align-items-center reveal">
+                        <div class="section-label">{{ $testimonialIntro->sub_title }}</div>
+                        <h2 class="mb-3">{{ $testimonialIntro->title }}</h2>
+                        <p class="subhead max-910 text-center">
+                            {{ $testimonialIntro->description }}
+                        </p>
+                    </div>
+                </div>
+            @endif
+
+            @if ($testimonials->count())
+                @php
+                    $tagClasses = ['tag-green', 'tag-brown', 'tag-blue'];
+                    $tagIndex = 0;
+                @endphp
+                <div class="testimonial-slider-wrapper reveal">
+                    <div class="testimonial-track">
+                        {{-- First Set --}}
+                        @foreach ($testimonials->chunk(2) as $column)
+                            <div class="testimonial-slide">
+                                @foreach ($column as $testimonial)
+                                    <div class="testimonial-card {{ !$loop->first ? 'testimonial-card-offset' : '' }}">
+                                        <span
+                                            class="testimonial-tag {{ $tagClasses[$tagIndex % count($tagClasses)] }}">{{ $testimonial->resort?->name }}</span>
+                                        <h5>"{{ $testimonial->title }}"</h5>
+                                        <p>"{{ $testimonial->content }}"</p>
+                                        <div class="testimonial-author">
+                                            <img src="{{ asset('uploads/testimonials/' . $testimonial->customer_image) }}"
+                                                alt="{{ $testimonial->customer_name }}" class="author-img">
+                                            <span class="author-name">— {{ $testimonial->customer_name }},
+                                                {{ $testimonial->customer_place }}</span>
+                                        </div>
+                                    </div>
+                                    @php $tagIndex++; @endphp
+                                @endforeach
+                            </div>
+                        @endforeach
+
+                        {{-- Second Set for seamless loop --}}
+                        @php
+                            $tagIndex = 0; // Reset index for matching colors
+                        @endphp
+                        @foreach ($testimonials->chunk(2) as $column)
+                            <div class="testimonial-slide">
+                                @foreach ($column as $testimonial)
+                                    <div class="testimonial-card {{ !$loop->first ? 'testimonial-card-offset' : '' }}">
+                                        <span
+                                            class="testimonial-tag {{ $tagClasses[$tagIndex % count($tagClasses)] }}">{{ $testimonial->resort?->name }}</span>
+                                        <h5>"{{ $testimonial->title }}"</h5>
+                                        <p>"{{ $testimonial->content }}"</p>
+                                        <div class="testimonial-author">
+                                            <img src="{{ asset('uploads/testimonials/' . $testimonial->customer_image) }}"
+                                                alt="{{ $testimonial->customer_name }}" class="author-img">
+                                            <span class="author-name">— {{ $testimonial->customer_name }},
+                                                {{ $testimonial->customer_place }}</span>
+                                        </div>
+                                    </div>
+                                    @php $tagIndex++; @endphp
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </section>
+    @endif
+
+    {{--  @if ($testimonialIntro || $testimonials->count())
         <section class="testimonials-section section-space">
             @if ($testimonialIntro)
                 <div class=" container">
@@ -316,5 +395,5 @@
                 </div>
             @endif
         </section>
-    @endif
+    @endif  --}}
 @endsection

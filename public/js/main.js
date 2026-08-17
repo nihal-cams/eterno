@@ -296,16 +296,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (acc !== item) {
                         acc.classList.remove('active');
                         const otherToggle = acc.querySelector('.accordion-toggle');
-                        if (otherToggle) otherToggle.textContent = '+';
+                        if (otherToggle) otherToggle.innerHTML = '+';
                     }
                 });
 
                 if (item.classList.contains('active')) {
                     item.classList.remove('active');
-                    if (toggleIcon) toggleIcon.textContent = '+';
+                    if (toggleIcon) toggleIcon.innerHTML = '+';
                 } else {
                     item.classList.add('active');
-                    if (toggleIcon) toggleIcon.textContent = 'âˆ’';
+                    if (toggleIcon) toggleIcon.innerHTML = '&minus;';
                 }
             });
         });
