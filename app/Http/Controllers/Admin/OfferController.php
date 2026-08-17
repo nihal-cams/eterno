@@ -109,7 +109,7 @@ class OfferController extends Controller
                 $type == 2 ? 'required' : 'nullable',
             ],
             'button_text' => ['required', 'string'],
-            'button_url' => ['required', 'url'],
+            'button_url' => ['nullable', 'url'],
             'image' => [
                 'required',
                 'image',
@@ -188,7 +188,7 @@ class OfferController extends Controller
                     $type == 2 ? 'required' : 'nullable',
                 ],
                 'button_text' => ['required', 'string', 'max:255'],
-                'button_url' => ['required', 'url'],
+                'button_url' => ['nullable', 'url'],
                 // 'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
                 'image' => [
                     'nullable',
