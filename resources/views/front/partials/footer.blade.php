@@ -146,6 +146,7 @@
                                 {{-- Reservation Email --}}
                                 @if (!empty($contactpage->email_2))
                                     <li> <i class="bi bi-envelope"></i> <a href="mailto:{{ $contactpage->email_2 }}">
+                                            {{ $contactpage->email_2 }}"
                                         </a>
                                     </li>
                                 @endif
