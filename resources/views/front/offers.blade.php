@@ -72,7 +72,7 @@
 
 
                         {{-- Offer Modal --}}
-                        {{-- Offer Modal --}}
+
                         <div class="modal fade" id="offerModal{{ $offer->id }}" tabindex="-1"
                             aria-labelledby="offerModalLabel{{ $offer->id }}" aria-hidden="true">
 
@@ -82,28 +82,24 @@
 
                                     {{-- Header --}}
                                     <div class="modal-header">
-
                                         <h5 class="modal-title" id="offerModalLabel{{ $offer->id }}">
                                             {{ $offer->title }}
                                         </h5>
 
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         </button>
-
                                     </div>
 
 
-                                    {{-- Scrollable Body --}}
+                                    {{-- SCROLLABLE CONTENT --}}
                                     <div class="modal-body offer-modal-body">
 
                                         @if ($offer->image)
                                             <div class="text-center mb-4">
                                                 <img src="{{ asset('uploads/offers/' . $offer->image) }}"
-                                                    alt="{{ $offer->title }}" class="img-fluid rounded"
-                                                    style="max-height: 300px;">
+                                                    alt="{{ $offer->title }}" class="img-fluid rounded" width="100%">
                                             </div>
                                         @endif
-
 
                                         <div class="offer-content">
 
@@ -138,28 +134,6 @@
                                                 beautiful surroundings and a memorable experience.
                                             </p>
 
-                                            <h5>Terms &amp; Conditions</h5>
-
-                                            <ul>
-                                                <li>Offer is subject to availability.</li>
-                                                <li>Advance reservation is required.</li>
-                                                <li>Blackout dates may apply.</li>
-                                                <li>This offer cannot be combined with other promotions.</li>
-                                                <li>Additional charges may apply for extra services.</li>
-                                                <li>Terms and conditions may change without prior notice.</li>
-                                            </ul>
-
-                                            <h5>Booking Information</h5>
-
-                                            <p>
-                                                Contact our reservations team for availability, pricing
-                                                and booking assistance.
-                                            </p>
-
-                                            <p>
-                                                <strong>Book your stay today</strong> and enjoy an
-                                                unforgettable resort experience with us.
-                                            </p>
 
                                         </div>
 
@@ -172,6 +146,7 @@
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Close
                                         </button>
+
 
                                     </div>
 
@@ -204,51 +179,200 @@
 
 @push('styles')
     <style>
-        /* Modal */
+        /* =========================================================
+                   OFFER MODAL
+                   ========================================================= */
+
         .offer-modal-content {
+
+            height: 90vh;
             max-height: 90vh;
+
             display: flex;
             flex-direction: column;
+
+            overflow: hidden;
         }
 
-        /* Only modal body scrolls */
+
+        /* =========================================================
+                   MODAL HEADER
+                   ========================================================= */
+
+        .offer-modal-content .modal-header {
+
+            flex: 0 0 auto;
+
+        }
+
+
+        /* =========================================================
+                   MODAL BODY - SCROLLABLE
+                   ========================================================= */
+
         .offer-modal-body {
+
+            flex: 1 1 auto;
+
+            min-height: 0;
+
             overflow-y: auto !important;
-            overflow-x: hidden;
-            max-height: calc(90vh - 130px);
+            overflow-x: hidden !important;
+
+            /*
+                     * Prevent scroll from being transferred
+                     * to the page behind the modal.
+                     */
+            overscroll-behavior: contain;
+
+            /*
+                     * Smooth scrolling on iOS.
+                     */
             -webkit-overflow-scrolling: touch;
+
+            /*
+                     * Make sure the body itself can receive
+                     * touch scrolling.
+                     */
+            touch-action: pan-y;
         }
 
-        /* Content */
-        .offer-content {
-            font-size: 16px;
-            line-height: 1.7;
+
+        /* =========================================================
+                   MODAL FOOTER
+                   ========================================================= */
+
+        .offer-modal-content .modal-footer {
+
+            flex: 0 0 auto;
+
         }
+
+
+        /* =========================================================
+                   PREVENT BACKGROUND PAGE SCROLL
+                   ========================================================= */
+
+        body.modal-open {
+
+            overflow: hidden !important;
+
+        }
+
+
+        /*
+                 * Additional class used by our JavaScript.
+                 */
+        html.modal-is-open,
+        body.modal-is-open {
+
+            overflow: hidden !important;
+
+            height: 100% !important;
+
+        }
+
+
+        /* =========================================================
+                   MODAL IMAGE
+                   ========================================================= */
+
+        .offer-modal-image {
+
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+
+        /* =========================================================
+                   OFFER CONTENT
+                   ========================================================= */
+
+        .offer-content {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* Headings */
 
         .offer-content h5 {
+
             margin-top: 25px;
+
             margin-bottom: 12px;
-            font-weight: 600;
+
         }
+
+
+        /* Paragraphs */
 
         .offer-content p {
+
             margin-bottom: 18px;
+
         }
+
+
+        /* Lists */
 
         .offer-content ul {
+
             padding-left: 25px;
+
             margin-bottom: 20px;
+
         }
+
+
+        /* List items */
 
         .offer-content li {
+
             margin-bottom: 8px;
+
         }
 
-        /* Close button */
-        .offer-modal-content .btn-close {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
+
+        /* =========================================================
+                   MOBILE
+                   ========================================================= */
+
+        @media (max-width: 767px) {
+
+            .offer-modal-content {
+
+                height: 90vh;
+
+                max-height: 90vh;
+
+            }
+
+
+            .offer-modal-body {
+
+                padding: 15px;
+
+                font-size: 15px;
+
+            }
+
+
+            .offer-content {
+
+                font-size: 15px;
+
+                line-height: 1.6;
+
+            }
+
         }
     </style>
 @endpush
@@ -309,5 +433,90 @@
 
             filterPackages();
         }
+    </script>
+
+    <script>
+        /* =========================================================
+               MODAL SCROLL FIX
+               ========================================================= */
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            /*
+             * When modal opens
+             */
+
+            document.querySelectorAll('.modal').forEach(function(modal) {
+
+                // Prevent scroll/wheel/touch events from bubbling up to Lenis on the window
+                ['wheel', 'touchmove'].forEach(function(eventType) {
+                    modal.addEventListener(eventType, function(e) {
+                        e.stopPropagation();
+                    }, { passive: true });
+                });
+
+                modal.addEventListener(
+                    'show.bs.modal',
+                    function() {
+                        if (window.lenis) {
+                            window.lenis.stop();
+                        }
+                        document.body.classList.add('modal-is-open');
+                        document.documentElement.classList.add('modal-is-open');
+                    }
+                );
+
+                modal.addEventListener(
+                    'shown.bs.modal',
+                    function() {
+
+                        /*
+                         * Make sure the modal body starts
+                         * at the top when opened.
+                         */
+
+                        const modalBody =
+                            modal.querySelector(
+                                '.offer-modal-body'
+                            );
+
+
+                        if (modalBody) {
+
+                            modalBody.scrollTop = 0;
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                 * When modal closes
+                 */
+
+                modal.addEventListener(
+                    'hidden.bs.modal',
+                    function() {
+
+                        document.body.classList.remove(
+                            'modal-is-open'
+                        );
+                        document.documentElement.classList.remove(
+                            'modal-is-open'
+                        );
+
+                        // Only restart Lenis if no other modals are open
+                        if (window.lenis && document.querySelectorAll('.modal.show').length === 0) {
+                            window.lenis.start();
+                        }
+
+                    }
+                );
+
+            });
+
+        });
     </script>
 @endpush

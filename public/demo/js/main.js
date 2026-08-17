@@ -560,12 +560,24 @@ document.addEventListener('DOMContentLoaded', () => {
             touchMultiplier: 1.5,
             infinite: false
         });
+        window.lenis = lenis;
 
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Prevent background page scrolling via Lenis when Bootstrap modals are open
+        document.addEventListener('show.bs.modal', () => {
+            lenis.stop();
+        });
+        document.addEventListener('hidden.bs.modal', () => {
+            // Only restart Lenis if no other modals are currently open
+            if (document.querySelectorAll('.modal.show').length === 0) {
+                lenis.start();
+            }
+        });
     }
 
     // ==========================
