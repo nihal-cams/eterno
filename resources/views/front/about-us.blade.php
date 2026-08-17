@@ -80,9 +80,7 @@
                         <button type="button" class="accordion-header">
                             <h4>{{ $value->title }}</h4>
 
-                            <span class="accordion-toggle">
-                                {!! $key === 0 ? '&minus;' : '+' !!}
-                            </span>
+                            <span class="accordion-toggle-icon"></span>
                         </button>
 
                         <div class="accordion-body">
@@ -200,7 +198,7 @@
 
         /* PLUS / MINUS */
 
-        .core-values-accordions .accordion-toggle {
+        .core-values-accordions .accordion-toggle-icon {
             width: 24px !important;
             height: 24px !important;
             min-width: 24px !important;
@@ -219,6 +217,14 @@
             line-height: 24px !important;
 
             pointer-events: none;
+        }
+
+        .core-values-accordions .accordion-toggle-icon::before {
+            content: "+";
+        }
+
+        .core-values-accordions .accordion-item.active .accordion-toggle-icon::before {
+            content: "\2212";
         }
 
 
@@ -271,7 +277,7 @@
                 padding: 20px 0 !important;
             }
 
-            .core-values-accordions .accordion-toggle {
+            .core-values-accordions .accordion-toggle-icon {
                 width: 22px !important;
                 height: 22px !important;
                 min-width: 22px !important;

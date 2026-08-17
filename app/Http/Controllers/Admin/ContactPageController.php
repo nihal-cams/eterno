@@ -67,7 +67,7 @@ class ContactPageController extends Controller
                 'dimensions:width=700,height=800',
             ],
 
-            'map_iframe' => 'required',
+            'map_iframe' => 'nullable',
 
         ]);
 
