@@ -142,5 +142,164 @@
 
     </section>
 @endsection
+{{-- ========================================================= --}}
+
+@push('styles')
+    <style>
+        .core-values-accordions {
+            width: 100%;
+        }
+
+        .core-values-accordions .accordion-item {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            height: auto !important;
+            overflow: visible !important;
+        }
 
 
+        /* HEADER */
+
+        .core-values-accordions .accordion-header {
+            width: 100% !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+
+            padding: 25px 0 !important;
+            margin: 0 !important;
+
+            background: transparent !important;
+            border: 0 !important;
+            outline: none !important;
+
+            cursor: pointer !important;
+
+            text-align: left !important;
+
+            appearance: none !important;
+            -webkit-appearance: none !important;
+        }
+
+
+        /* TITLE */
+
+        .core-values-accordions .accordion-header h4 {
+            margin: 0 !important;
+            padding: 0 !important;
+
+            flex: 1;
+
+            pointer-events: none;
+        }
+
+
+        /* PLUS / MINUS */
+
+        .core-values-accordions .accordion-toggle-icon {
+            width: 24px !important;
+            height: 24px !important;
+            min-width: 24px !important;
+
+            margin-left: 20px !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            color: #8b7350 !important;
+
+            font-size: 28px !important;
+            font-weight: 300 !important;
+
+            line-height: 24px !important;
+
+            pointer-events: none;
+        }
+
+        .core-values-accordions .accordion-toggle-icon::before {
+            content: "+";
+        }
+
+        .core-values-accordions .accordion-item.active .accordion-toggle-icon::before {
+            content: "\2212";
+        }
+
+
+        /* BODY CLOSED */
+
+        .core-values-accordions .accordion-body {
+            display: none !important;
+
+            width: 100% !important;
+
+            height: auto !important;
+            max-height: none !important;
+
+            padding: 0 0 25px 0 !important;
+            margin: 0 !important;
+
+            overflow: visible !important;
+        }
+
+
+        /* BODY OPEN */
+
+        .core-values-accordions .accordion-item.active .accordion-body {
+            display: block !important;
+
+            height: auto !important;
+            max-height: none !important;
+
+            overflow: visible !important;
+        }
+
+
+        /* DESCRIPTION */
+
+        .core-values-accordions .accordion-body p {
+            margin: 0 !important;
+
+            height: auto !important;
+            max-height: none !important;
+
+            overflow: visible !important;
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .accordion-item.active .accordion-body {
+            max-height: 200px;
+            padding-top: 14px;
+        }
+
+        .accordion-body p {
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 767px) {
+
+            .core-values-accordions .accordion-header {
+                padding: 20px 0 !important;
+            }
+
+            .core-values-accordions .accordion-toggle-icon {
+                width: 22px !important;
+                height: 22px !important;
+                min-width: 22px !important;
+
+                margin-left: 15px !important;
+
+                font-size: 25px !important;
+            }
+        }
+    </style>
+@endpush
