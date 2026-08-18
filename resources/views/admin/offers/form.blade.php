@@ -55,6 +55,8 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
+
                         @endif
 
                         <div class="form-group col-md-6">
@@ -99,15 +101,6 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label><strong>Button URL <span class="text-danger">*</span></strong></label>
-                            <input type="text" name="button_url" class="form-control"
-                                value="{{ old('button_url', $offer->button_url) }}">
-                            @error('button_url')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-md-6">
                             <label><strong>Sort Order <span class="text-danger">*</span></strong></label>
                             <input type="number" name="sort_order" class="form-control"
                                 value="{{ old('sort_order', $offer->sort_order) }}">
@@ -115,6 +108,31 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+
+                        @if ($type === '2')
+                            <div class="form-group col-md-6">
+                                <label>
+                                    <strong>Offer Content</strong>
+                                </label>
+                                <textarea name="content" id="offerContent" class="form-control" rows="10">{{ old('content', $offer->content) }}</textarea>
+
+                                @error('content')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        @endif
+                        @if ($type === '1')
+                            <div class="form-group col-md-6">
+                                <label><strong>Button URL <span class="text-danger">*</span></strong></label>
+                                <input type="text" name="button_url" class="form-control"
+                                    value="{{ old('button_url', $offer->button_url) }}">
+                                @error('button_url')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        @endif
+
+
 
                         <div class="form-group col-md-6">
                             <label><strong>Status</strong></label>
@@ -154,10 +172,39 @@
 
 @endsection
 
+
+
 @push('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css">
 @endpush
 
+
+
 @push('script')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#offerContent').summernote({
+                height: 300,
+                placeholder: 'Enter the full offer details...',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+        });
+    </script>
     <script type="text/javascript">
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {

@@ -56,12 +56,9 @@
                                 <p class="package-card-text">
                                     {{ Str::limit($offer->description, 100) }}
                                 </p>
-                                {{--  <a href="{{ $offer->button_url }}"
-                                        class="btn-custom btn-outline-custom"
-                                        target="_blank">
-                                        {{ $offer->button_text }}
-                                    </a>  --}}
-
+                                {{--  <a href="{{ $offer->button_url }}" class="btn-custom btn-outline-custom" target="_blank">
+                                    {{ $offer->button_text }}
+                                </a>  --}}
 
                                 <a href="javascript:void(0);" class="btn-custom btn-outline-custom" data-bs-toggle="modal"
                                     data-bs-target="#offerModal{{ $offer->id }}">
@@ -71,87 +68,62 @@
                         </div>
 
 
-                        {{-- Offer Modal --}}
-
+                        <!-- ========== OFFER DETAILS MODAL ========== -->
                         <div class="modal fade" id="offerModal{{ $offer->id }}" tabindex="-1"
-                            aria-labelledby="offerModalLabel{{ $offer->id }}" aria-hidden="true">
-
+                            aria-labelledby="offerDetailsModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <button type="button" class="modal-close-btn" data-bs-dismiss="modal"
+                                        aria-label="Close modal">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M18 6L6 18M6 6l12 12" />
+                                        </svg>
+                                    </button>
 
-                                <div class="modal-content offer-modal-content">
-
-                                    {{-- Header --}}
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="offerModalLabel{{ $offer->id }}">
-                                            {{ $offer->title }}
-                                        </h5>
-
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                        </button>
-                                    </div>
-
-
-                                    {{-- SCROLLABLE CONTENT --}}
-                                    <div class="modal-body offer-modal-body">
-
-                                        @if ($offer->image)
-                                            <div class="text-center mb-4">
-                                                <img src="{{ asset('uploads/offers/' . $offer->image) }}"
-                                                    alt="{{ $offer->title }}" class="img-fluid rounded" width="100%">
+                                    <div class="modal-body">
+                                        <div class="row g-0">
+                                            <div class="col-md-5">
+                                                <div class="modal-image-wrapper">
+                                                    <img id="modalImage"
+                                                        src="{{ asset('uploads/offers/' . $offer->image) }}" alt=""
+                                                        class="modal-image">
+                                                    {{--  <div class="modal-price-tag" id="modalPrice"></div>  --}}
+                                                </div>
                                             </div>
-                                        @endif
+                                            <div class="col-md-7">
+                                                <div class="modal-content-wrapper">
+                                                    <span class="modal-resort-label" id="modalResort"></span>
+                                                    <h3 class="modal-title" id="modalTitle"> {{ $offer->title }}</h3>
+                                                    <p class="modal-description" id="modalFullDesc">
+                                                        {{ $offer->description }}</p>
 
-                                        <div class="offer-content">
+                                                    <div class="modal-info-section">
+                                                        <h5 class="modal-info-title">
+                                                            <svg width="20" height="20" viewBox="0 0 24 24"
+                                                                fill="none" stroke="currentColor" stroke-width="2">
+                                                                <path
+                                                                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                                                            </svg>
+                                                            Offer Includes
+                                                        </h5>
+                                                        <p class="modal-info-text" id="modalTerms">
+                                                            {!! $offer->content !!}
 
-                                            <p>
-                                                Escape to a relaxing and memorable stay with our exclusive
-                                                resort offer. Enjoy comfortable accommodation, delicious
-                                                dining options and access to selected resort facilities
-                                                during your stay.
-                                            </p>
+                                                    </div>
 
-                                            <h5>Offer Includes</h5>
-
-                                            <ul>
-                                                <li>Comfortable accommodation in a premium room</li>
-                                                <li>Daily breakfast for all registered guests</li>
-                                                <li>Complimentary Wi-Fi access</li>
-                                                <li>Welcome drink on arrival</li>
-                                                <li>Access to selected resort facilities</li>
-                                            </ul>
-
-                                            <h5>Experience More</h5>
-
-                                            <p>
-                                                Whether you are travelling with family, friends or as a
-                                                couple, this package is designed to give you a comfortable
-                                                and enjoyable resort experience.
-                                            </p>
-
-                                            <p>
-                                                Relax, unwind and make the most of your stay with our
-                                                specially curated offer. Enjoy premium hospitality,
-                                                beautiful surroundings and a memorable experience.
-                                            </p>
-
-
+                                                    <div class="modal-actions">
+                                                        {{--  <a href="booking-enquiry.php"
+                                                            class="btn-custom btn-primary-custom">Book Now</a>  --}}
+                                                        <button type="button" class="btn-custom btn-outline-custom"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
-
-
-                                    {{-- Footer --}}
-                                    <div class="modal-footer">
-
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                            Close
-                                        </button>
-
-
-                                    </div>
-
                                 </div>
-
                             </div>
                         </div>
                     @endforeach
@@ -176,206 +148,6 @@
         </section>
     @endif
 @endsection
-
-@push('styles')
-    <style>
-        /* =========================================================
-                   OFFER MODAL
-                   ========================================================= */
-
-        .offer-modal-content {
-
-            height: 90vh;
-            max-height: 90vh;
-
-            display: flex;
-            flex-direction: column;
-
-            overflow: hidden;
-        }
-
-
-        /* =========================================================
-                   MODAL HEADER
-                   ========================================================= */
-
-        .offer-modal-content .modal-header {
-
-            flex: 0 0 auto;
-
-        }
-
-
-        /* =========================================================
-                   MODAL BODY - SCROLLABLE
-                   ========================================================= */
-
-        .offer-modal-body {
-
-            flex: 1 1 auto;
-
-            min-height: 0;
-
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-
-            /*
-                     * Prevent scroll from being transferred
-                     * to the page behind the modal.
-                     */
-            overscroll-behavior: contain;
-
-            /*
-                     * Smooth scrolling on iOS.
-                     */
-            -webkit-overflow-scrolling: touch;
-
-            /*
-                     * Make sure the body itself can receive
-                     * touch scrolling.
-                     */
-            touch-action: pan-y;
-        }
-
-
-        /* =========================================================
-                   MODAL FOOTER
-                   ========================================================= */
-
-        .offer-modal-content .modal-footer {
-
-            flex: 0 0 auto;
-
-        }
-
-
-        /* =========================================================
-                   PREVENT BACKGROUND PAGE SCROLL
-                   ========================================================= */
-
-        body.modal-open {
-
-            overflow: hidden !important;
-
-        }
-
-
-        /*
-                 * Additional class used by our JavaScript.
-                 */
-        html.modal-is-open,
-        body.modal-is-open {
-
-            overflow: hidden !important;
-
-            height: 100% !important;
-
-        }
-
-
-        /* =========================================================
-                   MODAL IMAGE
-                   ========================================================= */
-
-        .offer-modal-image {
-
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-
-        }
-
-
-        /* =========================================================
-                   OFFER CONTENT
-                   ========================================================= */
-
-        .offer-content {
-
-            font-size: 16px;
-
-            line-height: 1.7;
-
-        }
-
-
-        /* Headings */
-
-        .offer-content h5 {
-
-            margin-top: 25px;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        /* Paragraphs */
-
-        .offer-content p {
-
-            margin-bottom: 18px;
-
-        }
-
-
-        /* Lists */
-
-        .offer-content ul {
-
-            padding-left: 25px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        /* List items */
-
-        .offer-content li {
-
-            margin-bottom: 8px;
-
-        }
-
-
-        /* =========================================================
-                   MOBILE
-                   ========================================================= */
-
-        @media (max-width: 767px) {
-
-            .offer-modal-content {
-
-                height: 90vh;
-
-                max-height: 90vh;
-
-            }
-
-
-            .offer-modal-body {
-
-                padding: 15px;
-
-                font-size: 15px;
-
-            }
-
-
-            .offer-content {
-
-                font-size: 15px;
-
-                line-height: 1.6;
-
-            }
-
-        }
-    </style>
-@endpush
 
 @push('scripts')
     <script>
@@ -434,89 +206,367 @@
             filterPackages();
         }
     </script>
+@endpush
 
+@push('styles')
+    <style>
+        /* ======================offer Modal Styles=========================== */
+        .modal-content {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            color: var(--color-text);
+        }
+
+        .modal-close-btn:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-image-wrapper {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-price-tag {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(142, 115, 75, 0.4);
+        }
+
+        .modal-content-wrapper {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-resort-label {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-text);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-grey);
+            margin-bottom: 30px;
+        }
+
+        .modal-info-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: var(--bg-soft);
+            border-radius: 12px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .modal-info-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-info-title svg {
+            color: var(--color-primary);
+        }
+
+        .modal-info-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-grey);
+            margin: 0;
+        }
+
+        .modal-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 15px;
+            padding-top: 20px;
+        }
+
+        .modal-actions .btn-custom {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-image-wrapper {
+                min-height: 250px;
+            }
+
+            .modal-content-wrapper {
+                padding: 30px 20px;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-price-tag {
+                bottom: 15px;
+                left: 15px;
+                padding: 10px 18px;
+                font-size: 1rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-close-btn {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Package Card Hover Effect */
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--color-white);
+            border-radius: 12px;
+            overflow: hidden;
+            /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); */
+        }
+
+        .package-card:hover {
+            transform: translateY(-8px);
+            /* box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); */
+        }
+
+        .package-card-img-wrapper {
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .package-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover .package-card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .package-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--color-text);
+            margin: 20px 20px 10px;
+        }
+
+        .package-card-text {
+            padding: 0 20px 20px;
+            flex-grow: 1;
+            color: var(--text-grey);
+            line-height: 1.6;
+        }
+
+        .package-card .btn-custom {
+            margin: 0 20px 25px;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .no-results h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: var(--text-grey);
+        }
+
+        /* Filter Info */
+        .filter-info {
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            background-color: var(--bg-soft);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .filter-info strong {
+            color: var(--color-primary);
+        }
+
+        /* Resort Select */
+        .offer-resort-select-wrapper {
+            max-width: 400px;
+            margin: 0 auto 40px;
+        }
+
+        .offer-resort-select {
+            width: 100%;
+            padding: 14px 45px 14px 20px;
+            border: 1.5px solid var(--color-primary);
+            border-radius: 30px;
+            font-size: 15px;
+            color: var(--color-text);
+            background-color: var(--color-white);
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238e734b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            transition: all 0.3s ease;
+        }
+
+        .offer-resort-select:focus {
+            outline: none;
+            border-color: var(--color-primary-dark);
+            box-shadow: 0 0 0 3px rgba(142, 115, 75, 0.15);
+        }
+
+        /* ======================offer Modal Styles end=========================== */
+    </style>
+@endpush
+
+@push('scripts')
     <script>
-        /* =========================================================
-               MODAL SCROLL FIX
-               ========================================================= */
-
         document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements
+            const modal = new bootstrap.Modal(document.getElementById('offerDetailsModal'));
+            const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
 
+            // Modal content elements
+            const modalImage = document.getElementById('modalImage');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalResort = document.getElementById('modalResort');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalFullDesc = document.getElementById('modalFullDesc');
+            const modalValidity = document.getElementById('modalValidity');
+            const modalTerms = document.getElementById('modalTerms');
 
-            /*
-             * When modal opens
-             */
+            // Add click event to all View Details buttons
+            viewDetailsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.package-card');
 
-            document.querySelectorAll('.modal').forEach(function(modal) {
+                    // Populate modal with card data
+                    modalImage.src = card.dataset.image;
+                    modalImage.alt = card.dataset.title;
+                    modalPrice.textContent = card.dataset.price;
+                    modalResort.textContent = card.dataset.resort;
+                    modalTitle.textContent = card.dataset.title;
+                    modalFullDesc.textContent = card.dataset.fullDesc;
+                    modalValidity.textContent = card.dataset.validity;
+                    modalTerms.textContent = card.dataset.terms;
 
-                // Prevent scroll/wheel/touch events from bubbling up to Lenis on the window
-                ['wheel', 'touchmove'].forEach(function(eventType) {
-                    modal.addEventListener(eventType, function(e) {
-                        e.stopPropagation();
-                    }, { passive: true });
+                    // Show modal
+                    modal.show();
                 });
-
-                modal.addEventListener(
-                    'show.bs.modal',
-                    function() {
-                        if (window.lenis) {
-                            window.lenis.stop();
-                        }
-                        document.body.classList.add('modal-is-open');
-                        document.documentElement.classList.add('modal-is-open');
-                    }
-                );
-
-                modal.addEventListener(
-                    'shown.bs.modal',
-                    function() {
-
-                        /*
-                         * Make sure the modal body starts
-                         * at the top when opened.
-                         */
-
-                        const modalBody =
-                            modal.querySelector(
-                                '.offer-modal-body'
-                            );
-
-
-                        if (modalBody) {
-
-                            modalBody.scrollTop = 0;
-
-                        }
-
-                    }
-                );
-
-
-                /*
-                 * When modal closes
-                 */
-
-                modal.addEventListener(
-                    'hidden.bs.modal',
-                    function() {
-
-                        document.body.classList.remove(
-                            'modal-is-open'
-                        );
-                        document.documentElement.classList.remove(
-                            'modal-is-open'
-                        );
-
-                        // Only restart Lenis if no other modals are open
-                        if (window.lenis && document.querySelectorAll('.modal.show').length === 0) {
-                            window.lenis.start();
-                        }
-
-                    }
-                );
-
             });
 
+            // Resort filter functionality (existing)
+            const resortFilter = document.getElementById('resortFilter');
+            const packageCols = document.querySelectorAll('.package-col');
+            const filterInfo = document.getElementById('filterInfo');
+            const selectedResortName = document.getElementById('selectedResortName');
+            const noResults = document.getElementById('noResults');
+            const packageGrid = document.getElementById('packageGrid');
+
+            resortFilter.addEventListener('change', function() {
+                const selectedValue = this.value;
+                let visibleCount = 0;
+
+                // Update filter info text
+                if (selectedValue === 'all') {
+                    selectedResortName.textContent = 'All Resorts';
+                } else {
+                    const selectedOption = this.options[this.selectedIndex].text;
+                    selectedResortName.textContent = selectedOption;
+                }
+
+                // Filter packages
+                packageCols.forEach(col => {
+                    const resorts = col.dataset.resorts.split(',');
+
+                    if (selectedValue === 'all' || resorts.includes(selectedValue)) {
+                        col.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        col.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                    packageGrid.style.display = 'none';
+                } else {
+                    noResults.style.display = 'none';
+                    packageGrid.style.display = 'flex';
+                }
+            });
         });
     </script>
 @endpush

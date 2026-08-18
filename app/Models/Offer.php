@@ -12,6 +12,7 @@ class Offer extends Model
         'resort_id',
         'title',
         'description',
+        'content',
         'image',
         'button_text',
         'button_url',
