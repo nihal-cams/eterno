@@ -216,8 +216,8 @@
                                 <div class="offer-card mb-2">
                                     <img src="{{ asset('uploads/offers/' . $offer->image) }}" class="img-fluid w-100"
                                         alt="Offer">
-                                    <a href="{{ $offer->button_url }}"
-                                        class="btn-custom btn-custom-white">{{ $offer->button_text }}</a>
+                                    {{--  <a href="{{ $offer->button_url }}"
+                                        class="btn-custom btn-custom-white">{{ $offer->button_text }}</a>  --}}
                                 </div>
                             </div>
                         @endforeach
