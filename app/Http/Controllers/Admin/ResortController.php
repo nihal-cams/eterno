@@ -229,6 +229,10 @@ class ResortController extends Controller
                 'dimensions:width=500,height=462',
                 'max:200',
             ],
+            'mega_menu_url' => [
+                $type === 3 ? 'required' : 'nullable',
+                'url',
+            ],
             'mega_menu_status' => [
                 $type === 3 ? 'required' : 'nullable',
                 Rule::enum(Status::class)
@@ -241,6 +245,10 @@ class ResortController extends Controller
                 'mimes:jpg,jpeg,png,webp',
                 'dimensions:width=400,height=267',
                 'max:100',
+            ],
+            'book_now_url' => [
+                $type === 4 ? 'required' : 'nullable',
+                'url',
             ],
             'book_now_status' => [
                 $type === 4 ? 'required' : 'nullable',
@@ -270,7 +278,7 @@ class ResortController extends Controller
             'home_image.mimes' => 'The image must be a JPG, JPEG, PNG or WEBP file.',
             'home_image.dimensions' => 'The image field has invalid image dimensions.',
             'home_image.max' => 'The image field must not be greater than 500 kilobytes.',
-
+            
             'home_status.required' => 'The status field is required.',
 
             // Mega Menu
@@ -289,7 +297,10 @@ class ResortController extends Controller
             'mega_menu_image.mimes' => 'The image must be a JPG, JPEG, PNG or WEBP file.',
             'mega_menu_image.dimensions' => 'The image field has invalid image dimensions.',
             'mega_menu_image.max' => 'The image field must not be greater than 200 kilobytes.',
-
+            
+            'mega_menu_url.required' => 'The URL field is required.',
+            'mega_menu_url.url' => 'Please enter a valid URL.',
+            
             'mega_menu_status.required' => 'The status field is required.',
 
             // Book Now
@@ -298,6 +309,9 @@ class ResortController extends Controller
             'book_now_image.dimensions' => 'The image field has invalid image dimensions.',
             'book_now_image.max' => 'The image field must not be greater than 100 kilobytes.',
 
+            'book_now_url.required' => 'The URL field is required.',
+            'book_now_url.url' => 'Please enter a valid URL.',
+            
             'book_now_status.required' => 'The status field is required.',
         ]);
 
