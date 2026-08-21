@@ -14,12 +14,6 @@ use App\Http\Controllers\FrontController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::view('/', 'delete');
-
-Route::prefix('laravel-demo')
-    ->group(function () {
-
 Route::get('/', [FrontController::class, 'home'])->name('home');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])
@@ -42,7 +36,6 @@ Route::get('gallery', [FrontController::class, 'gallery'])->name('gallery');
 
 Route::get('offers', [FrontController::class, 'offers'])->name('offers');
 
-});
 // View::Composer(['partials.header','partials.footer'], function($view){
 //     $view->with([
 //         'settings'=>Setting::get(),
