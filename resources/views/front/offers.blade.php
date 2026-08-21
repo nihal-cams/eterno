@@ -31,7 +31,7 @@
             <div class="container">
 
                 <!-- Resort Select Dropdown -->
-                <div class="offer-resort-select-wrapper">
+                {{-- <div class="offer-resort-select-wrapper">
                     <select class="offer-resort-select" id="resortFilter" aria-label="Select your resort">
                         <option value="all">
                             All Resorts
@@ -42,7 +42,7 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <!-- Filter Info -->
                 <div class="filter-info" id="filterInfo">
