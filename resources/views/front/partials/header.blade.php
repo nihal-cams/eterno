@@ -5,18 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') {{ config('app.name', 'Laravel') }}</title>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXSFZXXWEC"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', 'G-KXSFZXXWEC');
-    </script>
 
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
@@ -30,6 +18,19 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @stack('styles')
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXSFZXXWEC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-KXSFZXXWEC');
+    </script>
+    
 </head>
 
 <body>
@@ -74,7 +75,7 @@
                                             <ul class="mega-resort-list">
                                                 @foreach ($megaMenuResorts as $key => $resort)
                                                     <li>
-                                                        <a href="{{ $resort->url }}"
+                                                        <a href="{{ $resort->mega_menu_url }}" target="_blank" rel="noopener noreferrer"
                                                             class="{{ $key === 0 ? 'active' : '' }}"
                                                             data-image="{{ asset('uploads/resorts/' . $resort->mega_menu_image) }}"
                                                             data-title="{{ $resort->mega_menu_title }}"
@@ -163,7 +164,7 @@
                 <p>Choose a resort to continue with your booking</p>
                 <div class="book-modal-grid">
                     @foreach ($bookNowResorts as $resort)
-                        <a href="{{ $resort->url ?? '#' }}" class="book-modal-item">
+                        <a href="{{ $resort->book_now_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="book-modal-item">
                             <img src="{{ asset('uploads/resorts/' . $resort->book_now_image) }}"
                                 alt="{{ $resort->name }}">
                             <span>{{ $resort->name }}</span>

@@ -155,44 +155,44 @@ class ResortController extends Controller
         $validated = $request->validate([
             // Type 1
             'name' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
 
             'url' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'url',
             ],
 
             'sort_order' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'integer',
                 'min:1'
             ],
 
             // Type 2
             'home_place' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_title' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_description' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
             ],
             'home_button_text' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_button_url' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'url',
             ],
             'home_image' => [
@@ -203,23 +203,23 @@ class ResortController extends Controller
                 'max:500',
             ],
             'home_status' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
             // Type 3
             'mega_menu_sub_title' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_title' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_description' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
             ],
             'mega_menu_image' => [
@@ -229,8 +229,12 @@ class ResortController extends Controller
                 'dimensions:width=500,height=462',
                 'max:200',
             ],
+            'mega_menu_url' => [
+                $type === '3' ? 'required' : 'nullable',
+                'url',
+            ],
             'mega_menu_status' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
@@ -242,8 +246,12 @@ class ResortController extends Controller
                 'dimensions:width=400,height=267',
                 'max:100',
             ],
+            'book_now_url' => [
+                $type === '4' ? 'required' : 'nullable',
+                'url',
+            ],
             'book_now_status' => [
-                $type === 4 ? 'required' : 'nullable',
+                $type === '4' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
         ], [
@@ -270,7 +278,7 @@ class ResortController extends Controller
             'home_image.mimes' => 'The image must be a JPG, JPEG, PNG or WEBP file.',
             'home_image.dimensions' => 'The image field has invalid image dimensions.',
             'home_image.max' => 'The image field must not be greater than 500 kilobytes.',
-
+            
             'home_status.required' => 'The status field is required.',
 
             // Mega Menu
@@ -289,7 +297,10 @@ class ResortController extends Controller
             'mega_menu_image.mimes' => 'The image must be a JPG, JPEG, PNG or WEBP file.',
             'mega_menu_image.dimensions' => 'The image field has invalid image dimensions.',
             'mega_menu_image.max' => 'The image field must not be greater than 200 kilobytes.',
-
+            
+            'mega_menu_url.required' => 'The URL field is required.',
+            'mega_menu_url.url' => 'Please enter a valid URL.',
+            
             'mega_menu_status.required' => 'The status field is required.',
 
             // Book Now
@@ -298,6 +309,9 @@ class ResortController extends Controller
             'book_now_image.dimensions' => 'The image field has invalid image dimensions.',
             'book_now_image.max' => 'The image field must not be greater than 100 kilobytes.',
 
+            'book_now_url.required' => 'The URL field is required.',
+            'book_now_url.url' => 'Please enter a valid URL.',
+            
             'book_now_status.required' => 'The status field is required.',
         ]);
 

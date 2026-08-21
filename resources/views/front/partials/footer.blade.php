@@ -93,7 +93,7 @@
                         <h5 class="footer-heading">Our Resorts</h5>
                         <ul class="footer-links">
                             @forelse ($resorts as $resort)
-                                <li> <a href="{{ $resort->url }}"> {{ $resort->name }} </a>
+                                <li> <a href="{{ $resort->url }}" target="_blank" rel="noopener noreferrer"> {{ $resort->name }} </a>
                                 </li>
                             @empty
                                 <li> <span>No resorts available</span> </li>
@@ -146,7 +146,7 @@
                                 {{-- Reservation Email --}}
                                 @if (!empty($contactpage->email_2))
                                     <li> <i class="bi bi-envelope"></i> <a href="mailto:{{ $contactpage->email_2 }}">
-                                            {{ $contactpage->email_2 }}"
+                                            {{ $contactpage->email_2 }}
                                         </a>
                                     </li>
                                 @endif

@@ -101,7 +101,7 @@
     <!-- ========== CTA SECTION ========== -->
     <div class="element-top position-relative ">
         <div class="element-bg-2">
-            <img src="images/element-bg-top.png" alt="" class="img-fluid">
+            <img src="{{ asset('images/element-bg-top.png') }}" alt="" class="img-fluid">
         </div>
     </div>
 

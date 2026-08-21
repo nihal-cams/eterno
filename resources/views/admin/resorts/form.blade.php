@@ -44,19 +44,20 @@
                         @enderror
                     </div>
 
+                    @if($type === '1')
                     <div class="form-group col-md-6">
-                        <label><strong>URL <span class="text-danger">{{ $type === '1' ? '*' : '' }}</span></strong></label>
+                        <label><strong>URL <span class="text-danger">*</span></strong></label>
 
                         <input type="text"
                             name="url"
                             class="form-control"
-                            value="{{ old('url', $resort->url) }}"
-                            {{ $type !== '1' ? 'readonly' : '' }}>
+                            value="{{ old('url', $resort->url) }}">
 
                         @error('url')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    @endif
 
                     <div class="form-group col-md-6">
                         <label><strong>Sort Order <span class="text-danger">{{ $type === '1' ? '*' : '' }}</span></strong></label>
@@ -115,19 +116,6 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label><strong>Button Text <span class="text-danger">*</span></strong></label>
-
-                            <input type="text"
-                                name="home_button_text"
-                                class="form-control"
-                                value="{{ old('home_button_text', $resort->home_button_text) }}">
-
-                            @error('home_button_text')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-md-6">
                             <label><strong>Image (660 × 487 px, max 500 KB) <span class="text-danger">*</strong></label>
                             <div class="custom-file mb-3">
                                 <input type="file"
@@ -143,6 +131,32 @@
                             <img id="uploaded_home_img" class="uploaded-img"
                                 src="{{ $resort->home_image ? asset('uploads/resorts/'.$resort->home_image) : asset('img/upload_image.png') }}">
                             @error('home_image')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Button Text <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="home_button_text"
+                                class="form-control"
+                                value="{{ old('home_button_text', $resort->home_button_text) }}">
+
+                            @error('home_button_text')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>Button URL <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="home_button_url"
+                                class="form-control"
+                                value="{{ old('home_button_url', $resort->home_button_url) }}">
+
+                            @error('home_button_url')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -232,6 +246,19 @@
                         </div>
 
                         <div class="form-group col-md-6">
+                            <label><strong>URL <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="mega_menu_url"
+                                class="form-control"
+                                value="{{ old('mega_menu_url', $resort->mega_menu_url) }}">
+
+                            @error('mega_menu_url')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
                             <label><strong>Status</strong></label>
                             <input type="hidden" name="mega_menu_status" value="{{ Status::INACTIVE->value }}">
                             <div class="custom-control custom-switch">
@@ -272,6 +299,19 @@
                             <img id="uploaded_book_now_img" class="uploaded-img"
                                 src="{{ $resort->book_now_image ? asset('uploads/resorts/'.$resort->book_now_image) : asset('img/upload_image.png') }}">
                             @error('book_now_image')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label><strong>URL <span class="text-danger">*</span></strong></label>
+
+                            <input type="text"
+                                name="book_now_url"
+                                class="form-control"
+                                value="{{ old('book_now_url', $resort->book_now_url) }}">
+
+                            @error('book_now_url')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>

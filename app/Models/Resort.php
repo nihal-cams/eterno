@@ -19,15 +19,18 @@ class Resort extends Model
         'home_description',
         'home_image',
         'home_button_text',
+        'home_button_url',
         'home_status',
         'home_updated_at',
         'mega_menu_sub_title',
         'mega_menu_title',
         'mega_menu_description',
         'mega_menu_image',
+        'mega_menu_url',
         'mega_menu_status',
         'mega_menu_updated_at',
         'book_now_image',
+        'book_now_url',
         'book_now_status',
         'book_now_updated_at'
     ];

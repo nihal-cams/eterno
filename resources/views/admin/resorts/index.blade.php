@@ -32,7 +32,6 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>URL</th>
                                 @if($type !== '1') <th>Image</th> @endif
                                 @if ($type !== '4' && $type !== '1') <th>Title</th> @endif
                                 <th>Sort Order</th>
@@ -125,7 +124,6 @@
         @if($type === '2')
             columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'url', name: 'url' },
                     { data: 'home_image', name: 'home_image' },
                     { data: 'home_title', name: 'home_title' },
                     { data: 'sort_order', name: 'sort_order' },
@@ -135,7 +133,6 @@
         @elseif ($type === '3')
             columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'url', name: 'url' },
                     { data: 'mega_menu_image', name: 'mega_menu_image' },
                     { data: 'mega_menu_title', name: 'mega_menu_title' },
                     { data: 'sort_order', name: 'sort_order' },
@@ -145,7 +142,6 @@
         @elseif ($type === '4')
             columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'url', name: 'url' },
                     { data: 'book_now_image', name: 'book_now_image' },
                     { data: 'sort_order', name: 'sort_order' },
                     { data: 'book_now_status', name: 'book_now_status' },
@@ -154,7 +150,6 @@
         @else
             columns: [
                     { data: 'name', name: 'name' },
-                    { data: 'url', name: 'url' },
                     { data: 'sort_order', name: 'sort_order' },
                     { data: 'actions', orderable: false}
                 ],
