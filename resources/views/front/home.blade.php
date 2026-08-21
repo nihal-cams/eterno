@@ -96,7 +96,7 @@
                                                     <img src="{{ asset('uploads/resorts/' . $resort->home_image) }}"
                                                         class="img-fluid" alt="{{ $resort->name }}">
                                                     <div class="property-overlay">
-                                                        <a href="{{ $resort->url ?? '#' }}"
+                                                        <a href="{{ $resort->home_button_url ?? '#' }}" target="_blank" rel="noopener noreferrer"
                                                             class="btn-explore">{{ $resort->home_button_text }}</a>
                                                     </div>
                                                 </div>

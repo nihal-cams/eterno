@@ -155,44 +155,44 @@ class ResortController extends Controller
         $validated = $request->validate([
             // Type 1
             'name' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
 
             'url' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'url',
             ],
 
             'sort_order' => [
-                $type === 1 ? 'required' : 'nullable',
+                $type === '1' ? 'required' : 'nullable',
                 'integer',
                 'min:1'
             ],
 
             // Type 2
             'home_place' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_title' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_description' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
             ],
             'home_button_text' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'home_button_url' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 'url',
             ],
             'home_image' => [
@@ -203,23 +203,23 @@ class ResortController extends Controller
                 'max:500',
             ],
             'home_status' => [
-                $type === 2 ? 'required' : 'nullable',
+                $type === '2' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
             // Type 3
             'mega_menu_sub_title' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_title' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
                 'max:255',
             ],
             'mega_menu_description' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'string',
             ],
             'mega_menu_image' => [
@@ -230,11 +230,11 @@ class ResortController extends Controller
                 'max:200',
             ],
             'mega_menu_url' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 'url',
             ],
             'mega_menu_status' => [
-                $type === 3 ? 'required' : 'nullable',
+                $type === '3' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
 
@@ -247,11 +247,11 @@ class ResortController extends Controller
                 'max:100',
             ],
             'book_now_url' => [
-                $type === 4 ? 'required' : 'nullable',
+                $type === '4' ? 'required' : 'nullable',
                 'url',
             ],
             'book_now_status' => [
-                $type === 4 ? 'required' : 'nullable',
+                $type === '4' ? 'required' : 'nullable',
                 Rule::enum(Status::class)
             ],
         ], [

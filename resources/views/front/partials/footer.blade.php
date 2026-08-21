@@ -93,7 +93,7 @@
                         <h5 class="footer-heading">Our Resorts</h5>
                         <ul class="footer-links">
                             @forelse ($resorts as $resort)
-                                <li> <a href="{{ $resort->url }}"> {{ $resort->name }} </a>
+                                <li> <a href="{{ $resort->url }}" target="_blank" rel="noopener noreferrer"> {{ $resort->name }} </a>
                                 </li>
                             @empty
                                 <li> <span>No resorts available</span> </li>

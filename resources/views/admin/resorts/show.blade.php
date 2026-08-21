@@ -15,7 +15,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-3 font-weight-bold">URL:</div>
+                <div class="col-md-3 font-weight-bold">Resort URL:</div>
                 <div class="col-md-9">{{ $resort->url }}</div>
             </div>
 
@@ -146,6 +146,15 @@
                 </div>
 
                 <div class="row mb-3">
+                    <div class="col-md-3 font-weight-bold">URL:</div>
+                    <div class="col-md-9">
+                        <a href="{{ $resort->mega_menu_url }}" target="_blank">
+                            {{ $resort->mega_menu_url }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <div class="col-md-3 font-weight-bold">Status:</div>
                     <div class="col-md-9">
                         @php
@@ -202,6 +211,15 @@
                         <span class="badge badge-{{ $class }}">
                             {{ $resort->book_now_status->label() }}
                         </span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 font-weight-bold">URL:</div>
+                    <div class="col-md-9">
+                        <a href="{{ $resort->book_now_url }}" target="_blank">
+                            {{ $resort->book_now_url }}
+                        </a>
                     </div>
                 </div>
 
