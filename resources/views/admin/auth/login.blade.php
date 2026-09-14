@@ -400,7 +400,8 @@
                 </p>
             </div>
 
-            <p class="auth-copyright">© {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.</p>
+            <p class="auth-copyright">© {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All Rights Reserved.
+            </p>
         </div>
 
         <!-- ══ RIGHT PANEL ═════════════════════════════════ -->
@@ -411,11 +412,11 @@
             <!-- Login form -->
             <form method="POST" action="{{ route('admin.login') }}">
                 @csrf
-                <!-- Email -->
+                <!-- Name -->
                 <div class="auth-field">
-                    <input id="email" type="text" class="auth-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email Address"
-                        autocomplete="email" autofocus>
-                    @error('email')
+                    <input id="name" type="text" class="auth-input @error('name') is-invalid @enderror"
+                        name="name" value="{{ old('name') }}" placeholder="Name" autocomplete="name" autofocus>
+                    @error('name')
                         <span class="auth-error" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -424,8 +425,8 @@
 
                 <!-- Password -->
                 <div class="auth-field">
-                    <input id="password" type="password" class="auth-input @error('password') is-invalid @enderror" name="password" placeholder="Password"
-                        autocomplete="current-password">
+                    <input id="password" type="password" class="auth-input @error('password') is-invalid @enderror"
+                        name="password" placeholder="Password" autocomplete="current-password">
                     @error('password')
                         <span class="auth-error" role="alert">
                             <strong>{{ $message }}</strong>
