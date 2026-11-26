@@ -60,7 +60,9 @@
                         <img src="{{ asset('images/footer-logo.png') }}" alt="eterno">
                     </div>
                     <div class="footer-address">
-                        <strong>Conglomerate of</strong>
+                        <!-- <span style="
+                            font-size: 17px;
+                        ">Conglomerate of</span><br> -->
                         @if ($contactpage && $contactpage->address_1)
                             {!! nl2br(e($contactpage->address_1)) !!}
                         @endif
@@ -93,7 +95,8 @@
                         <h5 class="footer-heading">Our Resorts</h5>
                         <ul class="footer-links">
                             @forelse ($resorts as $resort)
-                                <li> <a href="{{ $resort->url }}" target="_blank" rel="noopener noreferrer"> {{ $resort->name }} </a>
+                                <li> <a href="{{ $resort->url }}" target="_blank" rel="noopener noreferrer">
+                                        {{ $resort->name }} </a>
                                 </li>
                             @empty
                                 <li> <span>No resorts available</span> </li>
@@ -187,12 +190,13 @@
 
         <div class="footer-bottom">
             <p>
-                ©2026. All rights reserved. Kavumkal Dream Destination Pvt. Ltd.
-                {{--  <span class="footer-divider">|</span>
+                &copy; {{ date('Y') }}. All rights reserved. Kavumkal Dream Destination Pvt. Ltd.
+                {{-- <span class="footer-divider">|</span> --}}
                 Designed By
-                <a href="https://camstech.com/" class="color-primary text-decoration-none" target="_blank">
-                    CAMS
-                </a>  --}}
+                <a href="https://hawksdigital.com" class="color-primary text-decoration-none" target="_blank"
+                    rel="noopener noreferrer">
+                    Hawksdigital
+                </a>
             </p>
 
             <div class="footer-legal">
