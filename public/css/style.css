@@ -3906,3 +3906,95 @@ section {
         margin-bottom: 2rem;
     }
 }
+
+
+/* ===== Floating Brochure CTA (homepage) ===== */
+
+.brochure-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 28px;
+    z-index: 990;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brochure-fab-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 6px 20px rgba(61, 53, 46, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brochure-fab-label {
+    background: var(--color-primary-dark);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    padding: 8px 14px;
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.brochure-fab:hover .brochure-fab-label,
+.brochure-fab:focus-visible .brochure-fab-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.brochure-fab:hover .brochure-fab-icon,
+.brochure-fab:focus-visible .brochure-fab-icon {
+    background: var(--color-primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(61, 53, 46, 0.4);
+}
+
+.brochure-fab:focus-visible {
+    outline: none;
+}
+
+.brochure-fab:focus-visible .brochure-fab-icon {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+}
+
+
+/* Touch devices: no hover, so keep label hidden; icon alone is tappable */
+
+@media (max-width: 767.98px) {
+    .brochure-fab {
+        right: 16px;
+        bottom: 20px;
+    }
+    .brochure-fab-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.35rem;
+    }
+    .brochure-fab-label {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brochure-fab-icon,
+    .brochure-fab-label {
+        transition: none;
+    }
+}

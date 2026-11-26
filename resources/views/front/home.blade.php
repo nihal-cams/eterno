@@ -96,7 +96,8 @@
                                                     <img src="{{ asset('uploads/resorts/' . $resort->home_image) }}"
                                                         class="img-fluid" alt="{{ $resort->name }}">
                                                     <div class="property-overlay">
-                                                        <a href="{{ $resort->home_button_url ?? '#' }}" target="_blank" rel="noopener noreferrer"
+                                                        <a href="{{ $resort->home_button_url ?? '#' }}" target="_blank"
+                                                            rel="noopener noreferrer"
                                                             class="btn-explore">{{ $resort->home_button_text }}</a>
                                                     </div>
                                                 </div>
@@ -350,6 +351,13 @@
             @endif
         </section>
     @endif
+
+    <!-- Floating Brochure CTA (homepage only) -->
+    <a href="brochure/Eterno_Brochure_New.pdf" class="brochure-fab" target="_blank" rel="noopener"
+        aria-label="Eterno Brochure (opens PDF in a new tab)">
+        <span class="brochure-fab-label" aria-hidden="true">Eterno Brochure</span>
+        <span class="brochure-fab-icon"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i></span>
+    </a>
 
 
     {{--  @if ($testimonialIntro || $testimonials->count())
